@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "dataVersion": "cobbleverse-1.7.41b",
+  "sources": {
+    "cobbleverse": {
+      "projectId": "Jkb29YJU",
+      "versionId": "T9GJwPoJ",
+      "version": "1.7.41b",
+      "metadataUrl": "https://api.modrinth.com/v2/version/T9GJwPoJ",
+      "downloadUrl": "https://cdn.modrinth.com/data/Jkb29YJU/versions/T9GJwPoJ/COBBLEVERSE%201.7.41b.mrpack",
+      "size": 238928589,
+      "sha1": "eea9997a84cf0d0ddb2e088a1a6a8a2041c8e361",
+      "sha512": "d9669e1d99db2645c6540bcab60ac0454e97a1f7c466454651a386dc0fdbf6c7aa796e8cc747707377745adaf6e085da0d57af35a350220515544aa2ffb87f81"
+    },
+    "cobblemon": {
+      "projectId": "31496946",
+      "tag": "1.7.3",
+      "commit": "e6fda613",
+      "archiveUrl": "https://gitlab.com/cable-mc/cobblemon/-/archive/1.7.3/cobblemon-1.7.3.zip"
+    },
+    "showdown": {
+      "pokedexUrl": "https://play.pokemonshowdown.com/data/pokedex.json",
+      "movesUrl": "https://play.pokemonshowdown.com/data/moves.json",
+      "learnsetsUrl": "https://play.pokemonshowdown.com/data/learnsets.json",
+      "abilitiesUrl": "https://play.pokemonshowdown.com/data/abilities.json",
+      "itemsUrl": "https://play.pokemonshowdown.com/data/items.json"
+    },
+    "smogon": {
+      "setsIndexUrl": "https://data.pkmn.cc/sets/index.json",
+      "generationSetsUrls": [
+        "https://data.pkmn.cc/sets/gen9.json",
+        "https://data.pkmn.cc/sets/gen7.json"
+      ]
+    }
+  }
+}

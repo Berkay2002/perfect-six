@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "description": "Recommendation policy only. Contains no Pokemon, move, ability, or item facts.",
+  "setSourcePriority": [
+    "smogon-generation-9",
+    "deterministic-derived"
+  ],
+  "setValidation": {
+    "requireFourLegalMoves": true,
+    "requireLegalAbility": true,
+    "requireKnownItem": true,
+    "maximumEffortValueTotal": 510,
+    "maximumEffortValuePerStat": 252
+  },
+  "derivedSetRules": {
+    "preferSameTypeAttackBonus": true,
+    "preferHigherAttackingStat": true,
+    "requireDamagingMoves": 2,
+    "preferUtilityMove": true,
+    "avoidDuplicateMoveTypes": true
+  }
+}
