@@ -244,26 +244,78 @@ export function normalizeSpecies({
   rejected,
 }) {
   const sourceById = new Map();
+  const additions = [];
+  const fullDocuments = [];
 
   for (const document of [...cobblemonDocuments, ...overlayDocuments]) {
     const data = document.data;
     if (!data || typeof data !== "object") continue;
     if (document.kind === "species-addition") {
+      additions.push(document);
+      continue;
+    }
+    fullDocuments.push(document);
+  }
+
+  const definitions = new Map();
+  for (const document of fullDocuments) {
+    const data = document.data;
+    const baseId = toId(data.name || document.filename);
+    if (!baseId || !data.nationalPokedexNumber) continue;
+    definitions.set(baseId, {
+      data: structuredClone(data),
+      paths: [document.path],
+      authority: document.authority,
+    });
+  }
+
+  const rewrittenFields = new Map();
+  for (const document of additions) {
+    const patch = document.data;
+    const targetId = toId(String(patch.target || "").split(":").at(-1));
+    const definition = definitions.get(targetId);
+    if (!definition) {
       rejected.push({
         source: document.path,
-        reason:
-          "Species addition retained for provenance but not applied because target-patch semantics require runtime registry resolution.",
+        reason: `Species addition target "${patch.target}" does not resolve.`,
       });
       continue;
     }
-    const baseId = toId(data.name || document.filename);
-    if (!baseId || !data.nationalPokedexNumber) continue;
+    const fields = rewrittenFields.get(targetId) || new Set();
+    for (const [key, value] of Object.entries(patch)) {
+      if (key === "target") continue;
+      if (key === "forms" || key === "evolutions") {
+        const existing = Array.isArray(definition.data[key])
+          ? definition.data[key]
+          : [];
+        definition.data[key] = [
+          ...existing,
+          ...(Array.isArray(value) ? structuredClone(value) : []),
+        ];
+        continue;
+      }
+      if (!fields.has(key)) {
+        definition.data[key] = structuredClone(value);
+        fields.add(key);
+      } else {
+        rejected.push({
+          source: document.path,
+          reason: `Later species addition for "${targetId}" could not rewrite already-added field "${key}" under Cobblemon first-addition-wins semantics.`,
+        });
+      }
+    }
+    rewrittenFields.set(targetId, fields);
+    definition.paths.push(document.path);
+  }
+
+  for (const [baseId, definition] of definitions) {
+    const data = definition.data;
     sourceById.set(baseId, {
       data,
       baseId,
       baseName: data.name,
-      path: document.path,
-      authority: document.authority,
+      paths: definition.paths,
+      authority: definition.authority,
     });
     for (const form of data.forms || []) {
       const formId = `${baseId}${toId(form.name)}`;
@@ -279,8 +331,8 @@ export function normalizeSpecies({
         },
         baseId,
         baseName: data.name,
-        path: document.path,
-        authority: document.authority,
+        paths: definition.paths,
+        authority: definition.authority,
       });
     }
   }
@@ -306,6 +358,15 @@ export function normalizeSpecies({
     const evolutions = normalizeEvolutions(raw.evolutions);
     const sourceLearnset = normalizeLearnset(raw.moves);
     const fallbackLearnset = showdownLearnsetFor(id, showdownLearnsets);
+    const rawLabels = [...(raw.labels || []), ...(raw.aspects || [])].map(
+      String,
+    );
+    const regionalForm = rawLabels.some(
+      (label) =>
+        label.endsWith("_form") &&
+        rawLabels.includes(label.slice(0, -"_form".length)),
+    );
+    const battleOnly = Boolean(raw.battleOnly);
 
     records.push({
       id,
@@ -334,7 +395,15 @@ export function normalizeSpecies({
           ? toId(showdown.prevo)
           : null,
       finalEvolution: evolutions.length === 0 && !showdown.evos?.length,
-      battleOnly: Boolean(raw.battleOnly),
+      battleOnly,
+      formKind:
+        id === source.baseId
+          ? "base"
+          : battleOnly
+            ? "battle"
+            : regionalForm
+              ? "regional"
+              : "alternate",
       starter: Array.isArray(raw.labels) && raw.labels.includes("starter"),
       specialClasses: normalizeSpecialClasses([
         ...(raw.labels || []),
@@ -350,7 +419,7 @@ export function normalizeSpecies({
           ...(showdown.tags || []),
         ]),
       ].sort(),
-      sourcePaths: [source.path],
+      sourcePaths: source.paths,
     });
   }
 
@@ -371,6 +440,7 @@ export function normalizeSpecies({
     records.filter((record) => record.starter).map((record) => record.id),
   );
   for (const record of records) {
+    if (!["base", "regional"].includes(record.formKind)) continue;
     let cursor = record;
     const visited = new Set();
     while (cursor && !visited.has(cursor.id)) {
@@ -459,19 +529,49 @@ export function normalizeSmogonBuilds({
   const abilityIds = new Set(abilities.map((record) => record.id));
   const itemIds = new Set(items.map((record) => record.id));
   const builds = [];
-  const formats = Object.entries(rawSets).sort(([left], [right]) =>
-    left.localeCompare(right),
-  );
+  const looksLikeNamedSets = (value) =>
+    value &&
+    typeof value === "object" &&
+    Object.values(value).some(
+      (set) => set && typeof set === "object" && Array.isArray(set.moves),
+    );
+  const sourceFormat = sourceUrl.match(/\/(gen\d+)\.json$/)?.[1] || "smogon";
+  const groups = [];
+  function findSetGroups(value, path = []) {
+    if (!value || typeof value !== "object") return;
+    if (looksLikeNamedSets(value)) {
+      const speciesIndex = path.findLastIndex((segment) =>
+        speciesById.has(toId(segment)),
+      );
+      if (speciesIndex >= 0) {
+        const speciesId = toId(path[speciesIndex]);
+        const qualifiers = path.filter((_, index) => index !== speciesIndex);
+        groups.push({
+          speciesId,
+          format: [sourceFormat, ...qualifiers.map(toId)]
+            .filter(Boolean)
+            .join("-"),
+          namedSets: value,
+        });
+      }
+      return;
+    }
+    for (const [key, child] of Object.entries(value)) {
+      findSetGroups(child, [...path, key]);
+    }
+  }
+  findSetGroups(rawSets);
 
-  for (const [format, formatSpecies] of formats) {
-    if (!formatSpecies || typeof formatSpecies !== "object") continue;
-    for (const [speciesName, namedSets] of Object.entries(formatSpecies)) {
-      const speciesId = toId(speciesName);
-      const pokemon = speciesById.get(speciesId);
-      if (!pokemon || !namedSets || typeof namedSets !== "object") continue;
-      const legalMoves = new Set(pokemon.learnset.map((entry) => entry.moveId));
+  for (const { format, speciesId, namedSets } of groups.sort(
+    (left, right) =>
+      left.speciesId.localeCompare(right.speciesId) ||
+      left.format.localeCompare(right.format),
+  )) {
+    const pokemon = speciesById.get(speciesId);
+    if (!pokemon) continue;
+    const legalMoves = new Set(pokemon.learnset.map((entry) => entry.moveId));
 
-      for (const [setName, set] of Object.entries(namedSets)) {
+    for (const [setName, set] of Object.entries(namedSets)) {
         const chosenMoves = [];
         for (const slot of set.moves || []) {
           const legal = optionValues(slot)
@@ -526,11 +626,168 @@ export function normalizeSmogonBuilds({
           practicalSubstitute:
             "Generated later from next-best legal sourced move, ability, or item.",
         });
-      }
     }
   }
 
   return builds.sort((left, right) => left.id.localeCompare(right.id));
+}
+
+export function deriveMissingBuilds({
+  species,
+  moves,
+  abilities,
+  items,
+  importedBuilds,
+  rejected,
+}) {
+  const existing = new Set(importedBuilds.map((build) => build.speciesId));
+  const moveById = new Map(moves.map((move) => [move.id, move]));
+  const abilityById = new Map(abilities.map((ability) => [ability.id, ability]));
+  const itemById = new Map(items.map((item) => [item.id, item]));
+  const nonMegaBuilds = importedBuilds.filter(
+    (build) => !itemById.get(build.heldItemId)?.megaStone,
+  );
+
+  const modeForBuild = (build) => {
+    const physical = build.moves.filter(
+      (move) => move.category === "Physical",
+    ).length;
+    const special = build.moves.filter(
+      (move) => move.category === "Special",
+    ).length;
+    return physical > special ? "physical" : special > physical ? "special" : "mixed";
+  };
+  const cohorts = new Map();
+  for (const build of nonMegaBuilds) {
+    const mode = modeForBuild(build);
+    const current = cohorts.get(mode) || [];
+    current.push(build);
+    cohorts.set(mode, current);
+  }
+  const modal = (values, key = (value) => JSON.stringify(value)) => {
+    const counts = new Map();
+    for (const value of values) {
+      const id = key(value);
+      const entry = counts.get(id) || { value, count: 0 };
+      entry.count += 1;
+      counts.set(id, entry);
+    }
+    return [...counts.values()].sort(
+      (left, right) =>
+        right.count - left.count ||
+        key(left.value).localeCompare(key(right.value)),
+    )[0]?.value;
+  };
+
+  const derived = [];
+  for (const pokemon of species) {
+    if (
+      existing.has(pokemon.id) ||
+      !pokemon.finalEvolution ||
+      pokemon.battleOnly
+    ) {
+      continue;
+    }
+    const preferred =
+      pokemon.stats.attack > pokemon.stats.specialAttack * 1.1
+        ? "physical"
+        : pokemon.stats.specialAttack > pokemon.stats.attack * 1.1
+          ? "special"
+          : "mixed";
+    const legalMoves = pokemon.learnset
+      .map((entry) => moveById.get(entry.moveId))
+      .filter(Boolean);
+    const scored = legalMoves
+      .map((move) => {
+        const damaging = move.category !== "Status";
+        const preferredCategory =
+          preferred === "mixed" ||
+          move.category.toLowerCase() === preferred;
+        const accuracy = move.accuracy === null ? 0.85 : move.accuracy / 100;
+        const sourceUtility = [
+          move.effect.healingFraction,
+          move.effect.status,
+          move.effect.volatileStatus,
+          move.effect.sideCondition,
+          move.effect.selfSwitch,
+          move.effect.boosts,
+          move.effect.weather,
+          move.effect.terrain,
+        ].filter(Boolean).length;
+        const score =
+          (damaging ? (move.power || 0) * accuracy : 22 + sourceUtility * 12) +
+          (pokemon.types.includes(move.type) ? 24 : 0) +
+          (preferredCategory ? 18 : 0) +
+          (move.priority > 0 ? 8 : 0);
+        return { move, score };
+      })
+      .sort(
+        (left, right) =>
+          right.score - left.score || left.move.id.localeCompare(right.move.id),
+      );
+    const selected = [];
+    const utility = scored.find((entry) => entry.move.category === "Status");
+    if (utility) selected.push(utility.move);
+    for (const entry of scored) {
+      if (selected.some((move) => move.id === entry.move.id)) continue;
+      selected.push(entry.move);
+      if (selected.length === 4) break;
+    }
+    const legalAbilities = pokemon.abilities
+      .map((id) => abilityById.get(id))
+      .filter(Boolean)
+      .sort(
+        (left, right) =>
+          (right.rating ?? 0) - (left.rating ?? 0) ||
+          left.id.localeCompare(right.id),
+      );
+    const cohort = cohorts.get(preferred) || nonMegaBuilds;
+    const pattern = modal(cohort, (build) =>
+      JSON.stringify({
+        item: build.heldItemId,
+        nature: build.nature,
+        evs: build.evs,
+      }),
+    );
+    const heldItem = pattern ? itemById.get(pattern.heldItemId) : null;
+    if (
+      selected.length !== 4 ||
+      legalAbilities.length === 0 ||
+      !pattern ||
+      !heldItem
+    ) {
+      rejected.push({
+        speciesId: pokemon.id,
+        source: "derived-policy",
+        reason:
+          "Could not derive complete build from sourced legal moves, abilities, and validated set patterns.",
+      });
+      continue;
+    }
+    const substitute = scored.find(
+      (entry) => !selected.some((move) => move.id === entry.move.id),
+    )?.move;
+    derived.push({
+      id: `${pokemon.id}:derived:source-backed`,
+      speciesId: pokemon.id,
+      source: {
+        kind: "derived",
+        format: "source-backed",
+        url: "docs/data/README.md",
+      },
+      abilityId: legalAbilities[0].id,
+      ability: legalAbilities[0].name,
+      nature: pattern.nature,
+      heldItemId: heldItem.id,
+      heldItem: heldItem.name,
+      evs: pattern.evs,
+      moves: selected.map(toMoveBuild),
+      practicalSubstitute: substitute
+        ? `${substitute.name} is next-ranked legal sourced move.`
+        : "No fifth legal sourced move ranked.",
+    });
+  }
+  return derived.sort((left, right) => left.id.localeCompare(right.id));
 }
 
 export function validateCatalog({ species, moves, abilities, items, builds }) {

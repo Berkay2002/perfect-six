@@ -202,3 +202,71 @@ test("curated sets are rejected when a move is not in sourced learnset", () => {
     [],
   );
 });
+
+test("species additions rewrite fields but append forms and evolutions", () => {
+  const rejected = [];
+  const species = normalizeSpecies({
+    cobblemonDocuments: [
+      {
+        authority: "species-legality",
+        kind: "species",
+        path: "fixture://base.json",
+        filename: "base",
+        data: {
+          nationalPokedexNumber: 10,
+          name: "Base",
+          primaryType: "normal",
+          abilities: ["plain"],
+          baseStats: {
+            hp: 50,
+            attack: 50,
+            defence: 50,
+            special_attack: 50,
+            special_defence: 50,
+            speed: 50,
+          },
+          moves: ["1:leafhit"],
+          evolutions: [],
+        },
+      },
+    ],
+    overlayDocuments: [
+      {
+        authority: "pack-legality",
+        kind: "species-addition",
+        path: "fixture://addition.json",
+        filename: "addition",
+        data: {
+          target: "cobblemon:base",
+          primaryType: "water",
+          forms: [
+            {
+              name: "Mega",
+              primaryType: "grass",
+              baseStats: {
+                hp: 50,
+                attack: 90,
+                defence: 70,
+                special_attack: 90,
+                special_defence: 70,
+                speed: 90,
+              },
+            },
+          ],
+          evolutions: [
+            { result: "other", variant: "level_up", requirements: [] },
+          ],
+        },
+      },
+    ],
+    showdownPokedex: {},
+    showdownLearnsets: {},
+    rejected,
+  });
+  assert.equal(species.find((record) => record.id === "base").types[0], "Water");
+  assert.ok(species.some((record) => record.id === "basemega"));
+  assert.equal(
+    species.find((record) => record.id === "base").evolutions[0].targetId,
+    "other",
+  );
+});

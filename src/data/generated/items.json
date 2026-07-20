@@ -1,0 +1,5249 @@
+[
+  {
+    "id": "abilityshield",
+    "name": "Ability Shield",
+    "description": "Holder's Ability cannot be changed, suppressed, or ignored by any effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "abomasite",
+    "name": "Abomasite",
+    "description": "If held by an Abomasnow, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "absolite",
+    "name": "Absolite",
+    "description": "If held by an Absol, this item allows it to Mega Evolve into Mega Absol in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "absolitez",
+    "name": "Absolite Z",
+    "description": "If held by an Absol, this item allows it to Mega Evolve into Mega Absol Z in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "absorbbulb",
+    "name": "Absorb Bulb",
+    "description": "Raises holder's Sp. Atk by 1 stage if hit by a Water-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "adamantcrystal",
+    "name": "Adamant Crystal",
+    "description": "If held by a Dialga, its Steel- and Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "adamantorb",
+    "name": "Adamant Orb",
+    "description": "If held by a Dialga, its Steel- and Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "adrenalineorb",
+    "name": "Adrenaline Orb",
+    "description": "Raises holder's Speed by 1 stage if it gets affected by Intimidate. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "aerodactylite",
+    "name": "Aerodactylite",
+    "description": "If held by an Aerodactyl, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "aggronite",
+    "name": "Aggronite",
+    "description": "If held by an Aggron, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "aguavberry",
+    "name": "Aguav Berry",
+    "description": "Restores 1/3 max HP at 1/4 max HP or less; confuses if -SpD Nature. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "airballoon",
+    "name": "Air Balloon",
+    "description": "Holder is immune to Ground-type attacks. Pops when holder is hit.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "alakazite",
+    "name": "Alakazite",
+    "description": "If held by an Alakazam, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "aloraichiumz",
+    "name": "Aloraichium Z",
+    "description": "If held by an Alolan Raichu with Thunderbolt, it can use Stoked Sparksurfer.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "altarianite",
+    "name": "Altarianite",
+    "description": "If held by an Altaria, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ampharosite",
+    "name": "Ampharosite",
+    "description": "If held by an Ampharos, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "apicotberry",
+    "name": "Apicot Berry",
+    "description": "Raises holder's Sp. Def by 1 stage when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "armorfossil",
+    "name": "Armor Fossil",
+    "description": "Can be revived into Shieldon.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "aspearberry",
+    "name": "Aspear Berry",
+    "description": "Holder is cured if it is frozen. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "assaultvest",
+    "name": "Assault Vest",
+    "description": "Holder's Sp. Def is 1.5x, but it can only select damaging moves.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "audinite",
+    "name": "Audinite",
+    "description": "If held by an Audino, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "auspiciousarmor",
+    "name": "Auspicious Armor",
+    "description": "Evolves Charcadet into Armarouge when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "babiriberry",
+    "name": "Babiri Berry",
+    "description": "Halves damage taken from a supereffective Steel-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "banettite",
+    "name": "Banettite",
+    "description": "If held by a Banette, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "barbaracite",
+    "name": "Barbaracite",
+    "description": "If held by a Barbaracle, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "baxcalibrite",
+    "name": "Baxcalibrite",
+    "description": "If held by a Baxcalibur, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "beastball",
+    "name": "Beast Ball",
+    "description": "A special Poke Ball designed to catch Ultra Beasts.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "beedrillite",
+    "name": "Beedrillite",
+    "description": "If held by a Beedrill, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "belueberry",
+    "name": "Belue Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "berry",
+    "name": "Berry",
+    "description": "(Gen 2) Restores 10 HP when at 1/2 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "berryjuice",
+    "name": "Berry Juice",
+    "description": "Restores 20 HP when at 1/2 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "berrysweet",
+    "name": "Berry Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "berserkgene",
+    "name": "Berserk Gene",
+    "description": "(Gen 2) On switch-in, raises holder's Attack by 2 and confuses it. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "bignugget",
+    "name": "Big Nugget",
+    "description": "A big nugget of pure gold that gives off a lustrous gleam.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "bigroot",
+    "name": "Big Root",
+    "description": "Holder gains 1.3x HP from draining/Aqua Ring/Ingrain/Leech Seed/Strength Sap.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "bindingband",
+    "name": "Binding Band",
+    "description": "Holder's partial-trapping moves deal 1/6 max HP per turn instead of 1/8.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "bitterberry",
+    "name": "Bitter Berry",
+    "description": "(Gen 2) Holder is cured if it is confused. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blackbelt",
+    "name": "Black Belt",
+    "description": "Holder's Fighting-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blackglasses",
+    "name": "Black Glasses",
+    "description": "Holder's Dark-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blacksludge",
+    "name": "Black Sludge",
+    "description": "Each turn, if holder is a Poison type, restores 1/16 max HP; loses 1/8 if not.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blastoisinite",
+    "name": "Blastoisinite",
+    "description": "If held by a Blastoise, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blazikenite",
+    "name": "Blazikenite",
+    "description": "If held by a Blaziken, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blueorb",
+    "name": "Blue Orb",
+    "description": "If held by a Kyogre, this item triggers its Primal Reversion in battle.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blukberry",
+    "name": "Bluk Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "blunderpolicy",
+    "name": "Blunder Policy",
+    "description": "If the holder misses due to accuracy, its Speed is raised by 2 stages. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "boosterenergy",
+    "name": "Booster Energy",
+    "description": "Activates the Protosynthesis or Quark Drive Abilities. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "bottlecap",
+    "name": "Bottle Cap",
+    "description": "Used for Hyper Training. One of a Pokemon's stats is calculated with an IV of 31.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "brightpowder",
+    "name": "Bright Powder",
+    "description": "The accuracy of attacks against the holder is 0.9x.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "buggem",
+    "name": "Bug Gem",
+    "description": "Holder's first successful Bug-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "buginiumz",
+    "name": "Buginium Z",
+    "description": "If holder has a Bug move, this item allows it to use a Bug Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "bugmemory",
+    "name": "Bug Memory",
+    "description": "Holder's Multi-Attack is Bug type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "burndrive",
+    "name": "Burn Drive",
+    "description": "Holder's Techno Blast is Fire type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "burntberry",
+    "name": "Burnt Berry",
+    "description": "(Gen 2) Holder is cured if it is frozen. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cameruptite",
+    "name": "Cameruptite",
+    "description": "If held by a Camerupt, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cellbattery",
+    "name": "Cell Battery",
+    "description": "Raises holder's Attack by 1 if hit by an Electric-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chandelurite",
+    "name": "Chandelurite",
+    "description": "If held by a Chandelure, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "charcoal",
+    "name": "Charcoal",
+    "description": "Holder's Fire-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "charizarditex",
+    "name": "Charizardite X",
+    "description": "If held by a Charizard, this item allows it to Mega Evolve into Mega Charizard X.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "charizarditey",
+    "name": "Charizardite Y",
+    "description": "If held by a Charizard, this item allows it to Mega Evolve into Mega Charizard Y.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chartiberry",
+    "name": "Charti Berry",
+    "description": "Halves damage taken from a supereffective Rock-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cheriberry",
+    "name": "Cheri Berry",
+    "description": "Holder cures itself if it is paralyzed. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cherishball",
+    "name": "Cherish Ball",
+    "description": "A rare Poke Ball that has been crafted to commemorate an occasion.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chesnaughtite",
+    "name": "Chesnaughtite",
+    "description": "If held by a Chesnaught, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chestoberry",
+    "name": "Chesto Berry",
+    "description": "Holder wakes up if it is asleep. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chilanberry",
+    "name": "Chilan Berry",
+    "description": "Halves damage taken from a Normal-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chilldrive",
+    "name": "Chill Drive",
+    "description": "Holder's Techno Blast is Ice type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chimechite",
+    "name": "Chimechite",
+    "description": "If held by a Chimecho, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chippedpot",
+    "name": "Chipped Pot",
+    "description": "Evolves Sinistea-Antique into Polteageist-Antique when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "choiceband",
+    "name": "Choice Band",
+    "description": "Holder's Attack is 1.5x, but it can only select the first move it executes.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "choicescarf",
+    "name": "Choice Scarf",
+    "description": "Holder's Speed is 1.5x, but it can only select the first move it executes.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "choicespecs",
+    "name": "Choice Specs",
+    "description": "Holder's Sp. Atk is 1.5x, but it can only select the first move it executes.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "chopleberry",
+    "name": "Chople Berry",
+    "description": "Halves damage taken from a supereffective Fighting-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "clawfossil",
+    "name": "Claw Fossil",
+    "description": "Can be revived into Anorith.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "clearamulet",
+    "name": "Clear Amulet",
+    "description": "Prevents other Pokemon from lowering the holder's stat stages.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "clefablite",
+    "name": "Clefablite",
+    "description": "If held by a Clefable, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cloversweet",
+    "name": "Clover Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cobaberry",
+    "name": "Coba Berry",
+    "description": "Halves damage taken from a supereffective Flying-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "colburberry",
+    "name": "Colbur Berry",
+    "description": "Halves damage taken from a supereffective Dark-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cornerstonemask",
+    "name": "Cornerstone Mask",
+    "description": "Ogerpon-Cornerstone: 1.2x power attacks; Terastallize to gain Embody Aspect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "cornnberry",
+    "name": "Cornn Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "coverfossil",
+    "name": "Cover Fossil",
+    "description": "Can be revived into Tirtouga.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "covertcloak",
+    "name": "Covert Cloak",
+    "description": "The holder is not affected by the secondary effect of another Pokemon's attack. Attacks with secondary effects that are prevented include those with a chance (even 100%) to paralyze, sleep, freeze, burn, poison, confuse, cause the holder to flinch, cause the holder's stat stages to be lowered, as well as Anchor Shot, Eerie Spell, Fling, Psychic Noise, Salt Cure, Spirit Shackle, Syrup Bomb, and Throat Chop. The effect of Sparkling Aria is prevented if the holder is the only target. Secondary effects added by King's Rock, Razor Fang, and the Poison Touch, Stench, and Toxic Chain Abilities are also prevented against the holder.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "crabominite",
+    "name": "Crabominite",
+    "description": "If held by a Crabominable, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "crackedpot",
+    "name": "Cracked Pot",
+    "description": "Evolves Sinistea into Polteageist when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "crucibellite",
+    "name": "Crucibellite",
+    "description": "If held by a Crucibelle, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "custapberry",
+    "name": "Custap Berry",
+    "description": "Holder moves first in its priority bracket when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "damprock",
+    "name": "Damp Rock",
+    "description": "Holder's use of Rain Dance lasts 8 turns instead of 5.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "darkgem",
+    "name": "Dark Gem",
+    "description": "Holder's first successful Dark-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "darkiniumz",
+    "name": "Darkinium Z",
+    "description": "If holder has a Dark move, this item allows it to use a Dark Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "darkmemory",
+    "name": "Dark Memory",
+    "description": "Holder's Multi-Attack is Dark type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "darkranite",
+    "name": "Darkranite",
+    "description": "If held by a Darkrai, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dawnstone",
+    "name": "Dawn Stone",
+    "description": "Evolves male Kirlia into Gallade and female Snorunt into Froslass when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "decidiumz",
+    "name": "Decidium Z",
+    "description": "If held by a Decidueye with Spirit Shackle, it can use Sinister Arrow Raid.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "deepseascale",
+    "name": "Deep Sea Scale",
+    "description": "If held by a Clamperl, its Sp. Def is doubled. Evolves Clamperl into Gorebyss when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "deepseatooth",
+    "name": "Deep Sea Tooth",
+    "description": "If held by a Clamperl, its Sp. Atk is doubled. Evolves Clamperl into Huntail when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "delphoxite",
+    "name": "Delphoxite",
+    "description": "If held by a Delphox, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "destinyknot",
+    "name": "Destiny Knot",
+    "description": "If holder becomes infatuated, the other Pokemon also becomes infatuated.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "diancite",
+    "name": "Diancite",
+    "description": "If held by a Diancie, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "diveball",
+    "name": "Dive Ball",
+    "description": "A Poke Ball that works especially well on Pokemon that live underwater.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "domefossil",
+    "name": "Dome Fossil",
+    "description": "Can be revived into Kabuto.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dousedrive",
+    "name": "Douse Drive",
+    "description": "Holder's Techno Blast is Water type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dracoplate",
+    "name": "Draco Plate",
+    "description": "Holder's Dragon-type attacks have 1.2x power. Judgment is Dragon type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragalgite",
+    "name": "Dragalgite",
+    "description": "If held by a Dragalge, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragonfang",
+    "name": "Dragon Fang",
+    "description": "Holder's Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragongem",
+    "name": "Dragon Gem",
+    "description": "Holder's first successful Dragon-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragoninite",
+    "name": "Dragoninite",
+    "description": "If held by a Dragonite, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragoniumz",
+    "name": "Dragonium Z",
+    "description": "If holder has a Dragon move, this item allows it to use a Dragon Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragonmemory",
+    "name": "Dragon Memory",
+    "description": "Holder's Multi-Attack is Dragon type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dragonscale",
+    "name": "Dragon Scale",
+    "description": "Evolves Seadra into Kingdra when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "drampanite",
+    "name": "Drampanite",
+    "description": "If held by a Drampa, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dreadplate",
+    "name": "Dread Plate",
+    "description": "Holder's Dark-type attacks have 1.2x power. Judgment is Dark type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dreamball",
+    "name": "Dream Ball",
+    "description": "A Poke Ball that makes it easier to catch wild Pokémon while they're asleep.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "dubiousdisc",
+    "name": "Dubious Disc",
+    "description": "Evolves Porygon2 into Porygon-Z when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "durinberry",
+    "name": "Durin Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "duskball",
+    "name": "Dusk Ball",
+    "description": "A Poke Ball that makes it easier to catch wild Pokemon at night or in caves.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "duskstone",
+    "name": "Dusk Stone",
+    "description": "Evolves Murkrow into Honchkrow, Misdreavus into Mismagius, Lampent into Chandelure, and Doublade into Aegislash when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "earthplate",
+    "name": "Earth Plate",
+    "description": "Holder's Ground-type attacks have 1.2x power. Judgment is Ground type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "eelektrossite",
+    "name": "Eelektrossite",
+    "description": "If held by an Eelektross, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "eeviumz",
+    "name": "Eevium Z",
+    "description": "If held by an Eevee with Last Resort, it can use Extreme Evoboost.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ejectbutton",
+    "name": "Eject Button",
+    "description": "If holder survives a hit, it immediately switches out to a chosen ally. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ejectpack",
+    "name": "Eject Pack",
+    "description": "If the holder's stat stages are lowered, it switches to a chosen ally. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "electirizer",
+    "name": "Electirizer",
+    "description": "Evolves Electabuzz into Electivire when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "electricgem",
+    "name": "Electric Gem",
+    "description": "Holder's first successful Electric-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "electricmemory",
+    "name": "Electric Memory",
+    "description": "Holder's Multi-Attack is Electric type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "electricseed",
+    "name": "Electric Seed",
+    "description": "If the terrain is Electric Terrain, raises holder's Defense by 1 stage. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "electriumz",
+    "name": "Electrium Z",
+    "description": "If holder has an Electric move, this item allows it to use an Electric Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "emboarite",
+    "name": "Emboarite",
+    "description": "If held by an Emboar, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "enigmaberry",
+    "name": "Enigma Berry",
+    "description": "Restores 1/4 max HP after holder is hit by a supereffective move. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "eviolite",
+    "name": "Eviolite",
+    "description": "If holder's species can evolve, its Defense and Sp. Def are 1.5x.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "excadrite",
+    "name": "Excadrite",
+    "description": "If held by an Excadrill, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "expertbelt",
+    "name": "Expert Belt",
+    "description": "Holder's attacks that are super effective against the target do 1.2x damage.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fairiumz",
+    "name": "Fairium Z",
+    "description": "If holder has a Fairy move, this item allows it to use a Fairy Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fairyfeather",
+    "name": "Fairy Feather",
+    "description": "Holder's Fairy-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fairygem",
+    "name": "Fairy Gem",
+    "description": "Holder's first successful Fairy-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fairymemory",
+    "name": "Fairy Memory",
+    "description": "Holder's Multi-Attack is Fairy type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "falinksite",
+    "name": "Falinksite",
+    "description": "If held by a Falinks, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fastball",
+    "name": "Fast Ball",
+    "description": "A Poke Ball that makes it easier to catch Pokemon which are quick to run away.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "feraligite",
+    "name": "Feraligite",
+    "description": "If held by a Feraligatr, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fightinggem",
+    "name": "Fighting Gem",
+    "description": "Holder's first successful Fighting-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fightingmemory",
+    "name": "Fighting Memory",
+    "description": "Holder's Multi-Attack is Fighting type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fightiniumz",
+    "name": "Fightinium Z",
+    "description": "If holder has a Fighting move, this item allows it to use a Fighting Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "figyberry",
+    "name": "Figy Berry",
+    "description": "Restores 1/3 max HP at 1/4 max HP or less; confuses if -Atk Nature. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "firegem",
+    "name": "Fire Gem",
+    "description": "Holder's first successful Fire-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "firememory",
+    "name": "Fire Memory",
+    "description": "Holder's Multi-Attack is Fire type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "firestone",
+    "name": "Fire Stone",
+    "description": "Evolves Vulpix into Ninetales, Growlithe into Arcanine, Eevee into Flareon, and Pansear into Simisear when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "firiumz",
+    "name": "Firium Z",
+    "description": "If holder has a Fire move, this item allows it to use a Fire Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fistplate",
+    "name": "Fist Plate",
+    "description": "Holder's Fighting-type attacks have 1.2x power. Judgment is Fighting type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "flameorb",
+    "name": "Flame Orb",
+    "description": "At the end of every turn, this item attempts to burn the holder.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "flameplate",
+    "name": "Flame Plate",
+    "description": "Holder's Fire-type attacks have 1.2x power. Judgment is Fire type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "floatstone",
+    "name": "Float Stone",
+    "description": "Holder's weight is halved.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "floettite",
+    "name": "Floettite",
+    "description": "If held by an Eternal Flower Floette, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "flowersweet",
+    "name": "Flower Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "flyinggem",
+    "name": "Flying Gem",
+    "description": "Holder's first successful Flying-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "flyingmemory",
+    "name": "Flying Memory",
+    "description": "Holder's Multi-Attack is Flying type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "flyiniumz",
+    "name": "Flyinium Z",
+    "description": "If holder has a Flying move, this item allows it to use a Flying Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "focusband",
+    "name": "Focus Band",
+    "description": "Holder has a 10% chance to survive an attack that would KO it with 1 HP.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "focussash",
+    "name": "Focus Sash",
+    "description": "If holder's HP is full, will survive an attack that would KO it with 1 HP. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fossilizedbird",
+    "name": "Fossilized Bird",
+    "description": "Can revive into Dracozolt with Fossilized Drake or Arctozolt with Fossilized Dino.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fossilizeddino",
+    "name": "Fossilized Dino",
+    "description": "Can revive into Arctovish with Fossilized Fish or Arctozolt with Fossilized Bird.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fossilizeddrake",
+    "name": "Fossilized Drake",
+    "description": "Can revive into Dracozolt with Fossilized Bird or Dracovish with Fossilized Fish.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fossilizedfish",
+    "name": "Fossilized Fish",
+    "description": "Can revive into Dracovish with Fossilized Drake or Arctovish with Fossilized Dino.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "friendball",
+    "name": "Friend Ball",
+    "description": "A Poke Ball that makes caught Pokemon more friendly.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "froslassite",
+    "name": "Froslassite",
+    "description": "If held by a Froslass, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "fullincense",
+    "name": "Full Incense",
+    "description": "Holder moves last in its priority bracket.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "galaricacuff",
+    "name": "Galarica Cuff",
+    "description": "Evolves Galarian Slowpoke into Galarian Slowbro when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "galaricawreath",
+    "name": "Galarica Wreath",
+    "description": "Evolves Galarian Slowpoke into Galarian Slowking when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "galladite",
+    "name": "Galladite",
+    "description": "If held by a Gallade, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ganlonberry",
+    "name": "Ganlon Berry",
+    "description": "Raises holder's Defense by 1 stage when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "garchompite",
+    "name": "Garchompite",
+    "description": "If held by a Garchomp, this item allows it to Mega Evolve into Mega Garchomp.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "garchompitez",
+    "name": "Garchompite Z",
+    "description": "If held by a Garchomp, this item allows it to Mega Evolve into Mega Garchomp Z.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "gardevoirite",
+    "name": "Gardevoirite",
+    "description": "If held by a Gardevoir, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "gengarite",
+    "name": "Gengarite",
+    "description": "If held by a Gengar, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ghostgem",
+    "name": "Ghost Gem",
+    "description": "Holder's first successful Ghost-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ghostiumz",
+    "name": "Ghostium Z",
+    "description": "If holder has a Ghost move, this item allows it to use a Ghost Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ghostmemory",
+    "name": "Ghost Memory",
+    "description": "Holder's Multi-Attack is Ghost type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "glalitite",
+    "name": "Glalitite",
+    "description": "If held by a Glalie, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "glimmoranite",
+    "name": "Glimmoranite",
+    "description": "If held by a Glimmora, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "goldberry",
+    "name": "Gold Berry",
+    "description": "(Gen 2) Restores 30 HP when at 1/2 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "goldbottlecap",
+    "name": "Gold Bottle Cap",
+    "description": "Used for Hyper Training. All of a Pokemon's stats are calculated with an IV of 31.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "golisopite",
+    "name": "Golisopite",
+    "description": "If held by a Golisopod, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "golurkite",
+    "name": "Golurkite",
+    "description": "If held by a Golurk, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "grassgem",
+    "name": "Grass Gem",
+    "description": "Holder's first successful Grass-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "grassiumz",
+    "name": "Grassium Z",
+    "description": "If holder has a Grass move, this item allows it to use a Grass Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "grassmemory",
+    "name": "Grass Memory",
+    "description": "Holder's Multi-Attack is Grass type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "grassyseed",
+    "name": "Grassy Seed",
+    "description": "If the terrain is Grassy Terrain, raises holder's Defense by 1 stage. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "greatball",
+    "name": "Great Ball",
+    "description": "A high-performance Ball that provides a higher catch rate than a Poke Ball.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "greninjite",
+    "name": "Greninjite",
+    "description": "If held by a Greninja, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "grepaberry",
+    "name": "Grepa Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "gripclaw",
+    "name": "Grip Claw",
+    "description": "Holder's partial-trapping moves always last 7 turns.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "griseouscore",
+    "name": "Griseous Core",
+    "description": "If held by a Giratina, its Ghost- and Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "griseousorb",
+    "name": "Griseous Orb",
+    "description": "If held by a Giratina, its Ghost- and Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "groundgem",
+    "name": "Ground Gem",
+    "description": "Holder's first successful Ground-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "groundiumz",
+    "name": "Groundium Z",
+    "description": "If holder has a Ground move, this item allows it to use a Ground Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "groundmemory",
+    "name": "Ground Memory",
+    "description": "Holder's Multi-Attack is Ground type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "gyaradosite",
+    "name": "Gyaradosite",
+    "description": "If held by a Gyarados, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "habanberry",
+    "name": "Haban Berry",
+    "description": "Halves damage taken from a supereffective Dragon-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "hardstone",
+    "name": "Hard Stone",
+    "description": "Holder's Rock-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "hawluchanite",
+    "name": "Hawluchanite",
+    "description": "If held by a Hawlucha, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "healball",
+    "name": "Heal Ball",
+    "description": "A remedial Poke Ball that restores the caught Pokemon's HP and status problem.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "hearthflamemask",
+    "name": "Hearthflame Mask",
+    "description": "Ogerpon-Hearthflame: 1.2x power attacks; Terastallize to gain Embody Aspect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "heatranite",
+    "name": "Heatranite",
+    "description": "If held by a Heatran, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "heatrock",
+    "name": "Heat Rock",
+    "description": "Holder's use of Sunny Day lasts 8 turns instead of 5.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "heavyball",
+    "name": "Heavy Ball",
+    "description": "A Poke Ball for catching very heavy Pokemon.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "heavydutyboots",
+    "name": "Heavy-Duty Boots",
+    "description": "When switching in, the holder is unaffected by hazards on its side of the field.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "helixfossil",
+    "name": "Helix Fossil",
+    "description": "Can be revived into Omanyte.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "heracronite",
+    "name": "Heracronite",
+    "description": "If held by a Heracross, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "hondewberry",
+    "name": "Hondew Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "houndoominite",
+    "name": "Houndoominite",
+    "description": "If held by a Houndoom, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "iapapaberry",
+    "name": "Iapapa Berry",
+    "description": "Restores 1/3 max HP at 1/4 max HP or less; confuses if -Def Nature. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "iceberry",
+    "name": "Ice Berry",
+    "description": "(Gen 2) Holder is cured if it is burned. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "icegem",
+    "name": "Ice Gem",
+    "description": "Holder's first successful Ice-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "icememory",
+    "name": "Ice Memory",
+    "description": "Holder's Multi-Attack is Ice type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "icestone",
+    "name": "Ice Stone",
+    "description": "Evolves Alolan Sandshrew into Alolan Sandslash, Alolan Vulpix into Alolan Ninetales, Eevee into Glaceon, and Galarian Darumaka into Galarian Darmanitan when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "icicleplate",
+    "name": "Icicle Plate",
+    "description": "Holder's Ice-type attacks have 1.2x power. Judgment is Ice type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "iciumz",
+    "name": "Icium Z",
+    "description": "If holder has an Ice move, this item allows it to use an Ice Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "icyrock",
+    "name": "Icy Rock",
+    "description": "Holder's use of Snowscape lasts 8 turns instead of 5.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "inciniumz",
+    "name": "Incinium Z",
+    "description": "If held by an Incineroar with Darkest Lariat, it can use Malicious Moonsault.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "insectplate",
+    "name": "Insect Plate",
+    "description": "Holder's Bug-type attacks have 1.2x power. Judgment is Bug type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ironball",
+    "name": "Iron Ball",
+    "description": "Holder is grounded, Speed halved. If Flying type, takes neutral Ground damage.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ironplate",
+    "name": "Iron Plate",
+    "description": "Holder's Steel-type attacks have 1.2x power. Judgment is Steel type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "jabocaberry",
+    "name": "Jaboca Berry",
+    "description": "If holder is hit by a physical move, attacker loses 1/8 of its max HP. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "jawfossil",
+    "name": "Jaw Fossil",
+    "description": "Can be revived into Tyrunt.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "kangaskhanite",
+    "name": "Kangaskhanite",
+    "description": "If held by a Kangaskhan, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "kasibberry",
+    "name": "Kasib Berry",
+    "description": "Halves damage taken from a supereffective Ghost-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "kebiaberry",
+    "name": "Kebia Berry",
+    "description": "Halves damage taken from a supereffective Poison-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "keeberry",
+    "name": "Kee Berry",
+    "description": "Raises holder's Defense by 1 stage after it is hit by a physical attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "kelpsyberry",
+    "name": "Kelpsy Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "kingsrock",
+    "name": "King's Rock",
+    "description": "Holder's attacks without a chance to make the target flinch gain a 10% chance to make the target flinch. Evolves Poliwhirl into Politoed and Slowpoke into Slowking when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "kommoniumz",
+    "name": "Kommonium Z",
+    "description": "If held by a Kommo-o with Clanging Scales, it can use Clangorous Soulblaze.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "laggingtail",
+    "name": "Lagging Tail",
+    "description": "Holder moves last in its priority bracket.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lansatberry",
+    "name": "Lansat Berry",
+    "description": "Holder gains the Focus Energy effect when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "latiasite",
+    "name": "Latiasite",
+    "description": "If held by a Latias, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "latiosite",
+    "name": "Latiosite",
+    "description": "If held by a Latios, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "laxincense",
+    "name": "Lax Incense",
+    "description": "The accuracy of attacks against the holder is 0.9x.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "leafstone",
+    "name": "Leaf Stone",
+    "description": "Evolves Gloom into Vileplume, Weepinbell into Victreebel, Exeggcute into Exeggutor or Alolan Exeggutor, Eevee into Leafeon, Nuzleaf into Shiftry, and Pansage into Simisage when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "leek",
+    "name": "Leek",
+    "description": "If held by a Farfetch’d or Sirfetch’d, its critical hit ratio is raised by 2 stages.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "leftovers",
+    "name": "Leftovers",
+    "description": "At the end of every turn, holder restores 1/16 of its max HP.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "leppaberry",
+    "name": "Leppa Berry",
+    "description": "Restores 10 PP to the first of the holder's moves to reach 0 PP. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "levelball",
+    "name": "Level Ball",
+    "description": "A Poke Ball for catching Pokemon that are a lower level than your own.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "liechiberry",
+    "name": "Liechi Berry",
+    "description": "Raises holder's Attack by 1 stage when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lifeorb",
+    "name": "Life Orb",
+    "description": "Holder's attacks do 1.3x damage, and it loses 1/10 its max HP after the attack.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lightball",
+    "name": "Light Ball",
+    "description": "If held by a Pikachu, its Attack and Sp. Atk are doubled.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lightclay",
+    "name": "Light Clay",
+    "description": "Holder's use of Aurora Veil, Light Screen, or Reflect lasts 8 turns instead of 5.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "loadeddice",
+    "name": "Loaded Dice",
+    "description": "The holder's moves that normally hit 2 to 5 times instead hit 4 or 5 times. If the first hit is successful, the holder's use of Triple Kick or Triple Axel hits 3 times, and Population Bomb hits 4 to 10 times, at random.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lopunnite",
+    "name": "Lopunnite",
+    "description": "If held by a Lopunny, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "loveball",
+    "name": "Love Ball",
+    "description": "Poke Ball for catching Pokemon that are the opposite gender of your Pokemon.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lovesweet",
+    "name": "Love Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lucarionite",
+    "name": "Lucarionite",
+    "description": "If held by a Lucario, this item allows it to Mega Evolve into Mega Lucario in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lucarionitez",
+    "name": "Lucarionite Z",
+    "description": "If held by a Lucario, this item allows it to Mega Evolve into Mega Lucario Z in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "luckypunch",
+    "name": "Lucky Punch",
+    "description": "If held by a Chansey, its critical hit ratio is raised by 2 stages.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lumberry",
+    "name": "Lum Berry",
+    "description": "Holder cures itself if it has a non-volatile status or is confused. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "luminousmoss",
+    "name": "Luminous Moss",
+    "description": "Raises holder's Sp. Def by 1 stage if hit by a Water-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lunaliumz",
+    "name": "Lunalium Z",
+    "description": "Lunala or Dawn Wings Necrozma with Moongeist Beam can use a special Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lureball",
+    "name": "Lure Ball",
+    "description": "A Poke Ball for catching Pokemon hooked by a Rod when fishing.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lustrousglobe",
+    "name": "Lustrous Globe",
+    "description": "If held by a Palkia, its Water- and Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lustrousorb",
+    "name": "Lustrous Orb",
+    "description": "If held by a Palkia, its Water- and Dragon-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "luxuryball",
+    "name": "Luxury Ball",
+    "description": "A comfortable Poke Ball that makes a caught wild Pokemon quickly grow friendly.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "lycaniumz",
+    "name": "Lycanium Z",
+    "description": "If held by a Lycanroc forme with Stone Edge, it can use Splintered Stormshards.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "machobrace",
+    "name": "Macho Brace",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "magearnite",
+    "name": "Magearnite",
+    "description": "If held by a Magearna, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "magmarizer",
+    "name": "Magmarizer",
+    "description": "Evolves Magmar into Magmortar when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "magnet",
+    "name": "Magnet",
+    "description": "Holder's Electric-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "magoberry",
+    "name": "Mago Berry",
+    "description": "Restores 1/3 max HP at 1/4 max HP or less; confuses if -Spe Nature. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "magostberry",
+    "name": "Magost Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mail",
+    "name": "Mail",
+    "description": "Cannot be given to or taken from a Pokemon, except by Covet/Knock Off/Thief.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "malamarite",
+    "name": "Malamarite",
+    "description": "If held by a Malamar, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "maliciousarmor",
+    "name": "Malicious Armor",
+    "description": "Evolves Charcadet into Ceruledge when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "manectite",
+    "name": "Manectite",
+    "description": "If held by a Manectric, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "marangaberry",
+    "name": "Maranga Berry",
+    "description": "Raises holder's Sp. Def by 1 stage after it is hit by a special attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "marshadiumz",
+    "name": "Marshadium Z",
+    "description": "If held by Marshadow with Spectral Thief, it can use Soul-Stealing 7-Star Strike.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "masterball",
+    "name": "Master Ball",
+    "description": "The best Ball with the ultimate performance. It will catch any wild Pokemon.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "masterpieceteacup",
+    "name": "Masterpiece Teacup",
+    "description": "Evolves Poltchageist-Artisan into Sinistcha-Masterpiece when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mawilite",
+    "name": "Mawilite",
+    "description": "If held by a Mawile, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "meadowplate",
+    "name": "Meadow Plate",
+    "description": "Holder's Grass-type attacks have 1.2x power. Judgment is Grass type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "medichamite",
+    "name": "Medichamite",
+    "description": "If held by a Medicham, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "meganiumite",
+    "name": "Meganiumite",
+    "description": "If held by a Meganium, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mentalherb",
+    "name": "Mental Herb",
+    "description": "Cures holder of Attract, Disable, Encore, Heal Block, Taunt, Torment. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "meowsticite",
+    "name": "Meowsticite",
+    "description": "If held by a Meowstic, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "metagrossite",
+    "name": "Metagrossite",
+    "description": "If held by a Metagross, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "metalalloy",
+    "name": "Metal Alloy",
+    "description": "Evolves Duraludon into Archaludon when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "metalcoat",
+    "name": "Metal Coat",
+    "description": "Holder's Steel-type attacks have 1.2x power. Evolves Onix into Steelix and Scyther into Scizor when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "metalpowder",
+    "name": "Metal Powder",
+    "description": "If held by a Ditto that hasn't Transformed, its Defense is doubled.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "metronome",
+    "name": "Metronome",
+    "description": "Damage of moves used on consecutive turns is increased. Max 2x after 5 turns.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mewniumz",
+    "name": "Mewnium Z",
+    "description": "If held by a Mew with Psychic, it can use Genesis Supernova.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mewtwonitex",
+    "name": "Mewtwonite X",
+    "description": "If held by a Mewtwo, this item allows it to Mega Evolve into Mega Mewtwo X in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mewtwonitey",
+    "name": "Mewtwonite Y",
+    "description": "If held by a Mewtwo, this item allows it to Mega Evolve into Mega Mewtwo Y in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "micleberry",
+    "name": "Micle Berry",
+    "description": "Holder's next move has 1.2x accuracy when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mimikiumz",
+    "name": "Mimikium Z",
+    "description": "If held by a Mimikyu with Play Rough, it can use Let's Snuggle Forever.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mindplate",
+    "name": "Mind Plate",
+    "description": "Holder's Psychic-type attacks have 1.2x power. Judgment is Psychic type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mintberry",
+    "name": "Mint Berry",
+    "description": "(Gen 2) Holder wakes up if it is asleep. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "miracleberry",
+    "name": "Miracle Berry",
+    "description": "(Gen 2) Holder cures itself if it is confused or has a status condition. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "miracleseed",
+    "name": "Miracle Seed",
+    "description": "Holder's Grass-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mirrorherb",
+    "name": "Mirror Herb",
+    "description": "When an opposing Pokemon raises a stat stage, the holder copies it. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mistyseed",
+    "name": "Misty Seed",
+    "description": "If the terrain is Misty Terrain, raises holder's Sp. Def by 1 stage. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "moonball",
+    "name": "Moon Ball",
+    "description": "A Poke Ball for catching Pokemon that evolve using the Moon Stone.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "moonstone",
+    "name": "Moon Stone",
+    "description": "Evolves Nidorina into Nidoqueen, Nidorino into Nidoking, Clefairy into Clefable, Jigglypuff into Wigglytuff, Skitty into Delcatty, and Munna into Musharna when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "muscleband",
+    "name": "Muscle Band",
+    "description": "Holder's physical attacks have 1.1x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mysteryberry",
+    "name": "Mystery Berry",
+    "description": "(Gen 2) Restores 5 PP to the first of the holder's moves to reach 0 PP. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "mysticwater",
+    "name": "Mystic Water",
+    "description": "Holder's Water-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "nanabberry",
+    "name": "Nanab Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "nestball",
+    "name": "Nest Ball",
+    "description": "A Poke Ball that works especially well on weaker Pokemon in the wild.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "netball",
+    "name": "Net Ball",
+    "description": "A Poke Ball that works especially well on Water- and Bug-type Pokemon.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "nevermeltice",
+    "name": "Never-Melt Ice",
+    "description": "Holder's Ice-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "nomelberry",
+    "name": "Nomel Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "normalgem",
+    "name": "Normal Gem",
+    "description": "Holder's first successful Normal-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "normaliumz",
+    "name": "Normalium Z",
+    "description": "If holder has a Normal move, this item allows it to use a Normal Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "occaberry",
+    "name": "Occa Berry",
+    "description": "Halves damage taken from a supereffective Fire-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "oddincense",
+    "name": "Odd Incense",
+    "description": "Holder's Psychic-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "oldamber",
+    "name": "Old Amber",
+    "description": "Can be revived into Aerodactyl.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "oranberry",
+    "name": "Oran Berry",
+    "description": "Restores 10 HP when at 1/2 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ovalstone",
+    "name": "Oval Stone",
+    "description": "Evolves Happiny into Chansey when held and leveled up during the day.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pamtreberry",
+    "name": "Pamtre Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "parkball",
+    "name": "Park Ball",
+    "description": "A special Poke Ball for the Pal Park.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "passhoberry",
+    "name": "Passho Berry",
+    "description": "Halves damage taken from a supereffective Water-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "payapaberry",
+    "name": "Payapa Berry",
+    "description": "Halves damage taken from a supereffective Psychic-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pechaberry",
+    "name": "Pecha Berry",
+    "description": "Holder is cured if it is poisoned. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "persimberry",
+    "name": "Persim Berry",
+    "description": "Holder is cured if it is confused. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "petayaberry",
+    "name": "Petaya Berry",
+    "description": "Raises holder's Sp. Atk by 1 stage when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pidgeotite",
+    "name": "Pidgeotite",
+    "description": "If held by a Pidgeot, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pikaniumz",
+    "name": "Pikanium Z",
+    "description": "If held by a Pikachu with Volt Tackle, it can use Catastropika.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pikashuniumz",
+    "name": "Pikashunium Z",
+    "description": "If held by cap Pikachu with Thunderbolt, it can use 10,000,000 Volt Thunderbolt.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pinapberry",
+    "name": "Pinap Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pinkbow",
+    "name": "Pink Bow",
+    "description": "(Gen 2) Holder's Normal-type attacks have 1.1x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pinsirite",
+    "name": "Pinsirite",
+    "description": "If held by a Pinsir, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pixieplate",
+    "name": "Pixie Plate",
+    "description": "Holder's Fairy-type attacks have 1.2x power. Judgment is Fairy type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "plumefossil",
+    "name": "Plume Fossil",
+    "description": "Can be revived into Archen.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "poisonbarb",
+    "name": "Poison Barb",
+    "description": "Holder's Poison-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "poisongem",
+    "name": "Poison Gem",
+    "description": "Holder's first successful Poison-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "poisoniumz",
+    "name": "Poisonium Z",
+    "description": "If holder has a Poison move, this item allows it to use a Poison Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "poisonmemory",
+    "name": "Poison Memory",
+    "description": "Holder's Multi-Attack is Poison type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pokeball",
+    "name": "Poke Ball",
+    "description": "A device for catching wild Pokemon. It is designed as a capsule system.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "polkadotbow",
+    "name": "Polkadot Bow",
+    "description": "(Gen 2) Holder's Normal-type attacks have 1.1x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pomegberry",
+    "name": "Pomeg Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "poweranklet",
+    "name": "Power Anklet",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "powerband",
+    "name": "Power Band",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "powerbelt",
+    "name": "Power Belt",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "powerbracer",
+    "name": "Power Bracer",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "powerherb",
+    "name": "Power Herb",
+    "description": "Holder's two-turn moves complete in one turn (except Sky Drop). Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "powerlens",
+    "name": "Power Lens",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "powerweight",
+    "name": "Power Weight",
+    "description": "Holder's Speed is halved. The Klutz Ability does not ignore this effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "premierball",
+    "name": "Premier Ball",
+    "description": "A rare Poke Ball that has been crafted to commemorate an event.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "prettyfeather",
+    "name": "Pretty Feather",
+    "description": "Though this feather is beautiful, it's just a regular feather and has no effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "primariumz",
+    "name": "Primarium Z",
+    "description": "If held by a Primarina with Sparkling Aria, it can use Oceanic Operetta.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "prismscale",
+    "name": "Prism Scale",
+    "description": "Evolves Feebas into Milotic when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "protectivepads",
+    "name": "Protective Pads",
+    "description": "Holder's moves are protected from adverse contact effects, except Pickpocket.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "protector",
+    "name": "Protector",
+    "description": "Evolves Rhydon into Rhyperior when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "przcureberry",
+    "name": "PRZ Cure Berry",
+    "description": "(Gen 2) Holder cures itself if it is paralyzed. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "psncureberry",
+    "name": "PSN Cure Berry",
+    "description": "(Gen 2) Holder is cured if it is poisoned. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "psychicgem",
+    "name": "Psychic Gem",
+    "description": "Holder's first successful Psychic-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "psychicmemory",
+    "name": "Psychic Memory",
+    "description": "Holder's Multi-Attack is Psychic type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "psychicseed",
+    "name": "Psychic Seed",
+    "description": "If the terrain is Psychic Terrain, raises holder's Sp. Def by 1 stage. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "psychiumz",
+    "name": "Psychium Z",
+    "description": "If holder has a Psychic move, this item allows it to use a Psychic Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "punchingglove",
+    "name": "Punching Glove",
+    "description": "Holder's punch-based attacks have 1.1x power and do not make contact.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "pyroarite",
+    "name": "Pyroarite",
+    "description": "If held by a Pyroar, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "qualotberry",
+    "name": "Qualot Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "quickball",
+    "name": "Quick Ball",
+    "description": "A Poke Ball that provides a better catch rate at the start of a wild encounter.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "quickclaw",
+    "name": "Quick Claw",
+    "description": "Each turn, holder has a 20% chance to move first in its priority bracket.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "quickpowder",
+    "name": "Quick Powder",
+    "description": "If held by a Ditto that hasn't Transformed, its Speed is doubled.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rabutaberry",
+    "name": "Rabuta Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "raichunitex",
+    "name": "Raichunite X",
+    "description": "If held by a Raichu, this item allows it to Mega Evolve into Mega Raichu X in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "raichunitey",
+    "name": "Raichunite Y",
+    "description": "If held by a Raichu, this item allows it to Mega Evolve into Mega Raichu Y in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rarebone",
+    "name": "Rare Bone",
+    "description": "No competitive use other than when used with Fling.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rawstberry",
+    "name": "Rawst Berry",
+    "description": "Holder is cured if it is burned. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "razorclaw",
+    "name": "Razor Claw",
+    "description": "Holder's critical hit ratio is raised by 1 stage. Evolves Sneasel into Weavile when held and leveled up during the night.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "razorfang",
+    "name": "Razor Fang",
+    "description": "Holder's attacks without a chance to make the target flinch gain a 10% chance to make the target flinch. Evolves Gligar into Gliscor when held and leveled up during the night.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "razzberry",
+    "name": "Razz Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "reapercloth",
+    "name": "Reaper Cloth",
+    "description": "Evolves Dusclops into Dusknoir when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "redcard",
+    "name": "Red Card",
+    "description": "If holder survives a hit, attacker is forced to switch to a random ally. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "redorb",
+    "name": "Red Orb",
+    "description": "If held by a Groudon, this item triggers its Primal Reversion in battle.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "repeatball",
+    "name": "Repeat Ball",
+    "description": "A Poke Ball that works well on Pokemon species that were previously caught.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ribbonsweet",
+    "name": "Ribbon Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rindoberry",
+    "name": "Rindo Berry",
+    "description": "Halves damage taken from a supereffective Grass-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ringtarget",
+    "name": "Ring Target",
+    "description": "The holder's type immunities granted solely by its typing are negated.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rockgem",
+    "name": "Rock Gem",
+    "description": "Holder's first successful Rock-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rockincense",
+    "name": "Rock Incense",
+    "description": "Holder's Rock-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rockiumz",
+    "name": "Rockium Z",
+    "description": "If holder has a Rock move, this item allows it to use a Rock Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rockmemory",
+    "name": "Rock Memory",
+    "description": "Holder's Multi-Attack is Rock type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rockyhelmet",
+    "name": "Rocky Helmet",
+    "description": "If holder is hit by a contact move, the attacker loses 1/6 of its max HP.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "roomservice",
+    "name": "Room Service",
+    "description": "If Trick Room is active, the holder's Speed is lowered by 1 stage. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rootfossil",
+    "name": "Root Fossil",
+    "description": "Can be revived into Lileep.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "roseincense",
+    "name": "Rose Incense",
+    "description": "Holder's Grass-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "roseliberry",
+    "name": "Roseli Berry",
+    "description": "Halves damage taken from a supereffective Fairy-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rowapberry",
+    "name": "Rowap Berry",
+    "description": "If holder is hit by a special move, attacker loses 1/8 of its max HP. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rustedshield",
+    "name": "Rusted Shield",
+    "description": "If held by a Zamazenta, this item changes its forme to Crowned Shield.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "rustedsword",
+    "name": "Rusted Sword",
+    "description": "If held by a Zacian, this item changes its forme to Crowned Sword.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sablenite",
+    "name": "Sablenite",
+    "description": "If held by a Sableye, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sachet",
+    "name": "Sachet",
+    "description": "Evolves Spritzee into Aromatisse when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "safariball",
+    "name": "Safari Ball",
+    "description": "A special Poke Ball that is used only in the Safari Zone and Great Marsh.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "safetygoggles",
+    "name": "Safety Goggles",
+    "description": "Holder is immune to powder moves and damage from Sandstorm or Hail.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sailfossil",
+    "name": "Sail Fossil",
+    "description": "Can be revived into Amaura.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "salacberry",
+    "name": "Salac Berry",
+    "description": "Raises holder's Speed by 1 stage when at 1/4 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "salamencite",
+    "name": "Salamencite",
+    "description": "If held by a Salamence, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sceptilite",
+    "name": "Sceptilite",
+    "description": "If held by a Sceptile, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "scizorite",
+    "name": "Scizorite",
+    "description": "If held by a Scizor, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "scolipite",
+    "name": "Scolipite",
+    "description": "If held by a Scolipede, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "scopelens",
+    "name": "Scope Lens",
+    "description": "Holder's critical hit ratio is raised by 1 stage.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "scovillainite",
+    "name": "Scovillainite",
+    "description": "If held by a Scovillain, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "scraftinite",
+    "name": "Scraftinite",
+    "description": "If held by a Scrafty, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "seaincense",
+    "name": "Sea Incense",
+    "description": "Holder's Water-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sharpbeak",
+    "name": "Sharp Beak",
+    "description": "Holder's Flying-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sharpedonite",
+    "name": "Sharpedonite",
+    "description": "If held by a Sharpedo, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "shedshell",
+    "name": "Shed Shell",
+    "description": "Holder cannot be prevented from choosing to switch out by any effect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "shellbell",
+    "name": "Shell Bell",
+    "description": "After an attack, holder gains 1/8 of the damage in HP dealt to other Pokemon.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "shinystone",
+    "name": "Shiny Stone",
+    "description": "Evolves Togetic into Togekiss, Roselia into Roserade, Minccino into Cinccino, and Floette into Florges when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "shockdrive",
+    "name": "Shock Drive",
+    "description": "Holder's Techno Blast is Electric type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "shucaberry",
+    "name": "Shuca Berry",
+    "description": "Halves damage taken from a supereffective Ground-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "silkscarf",
+    "name": "Silk Scarf",
+    "description": "Holder's Normal-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "silverpowder",
+    "name": "Silver Powder",
+    "description": "Holder's Bug-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sitrusberry",
+    "name": "Sitrus Berry",
+    "description": "Restores 1/4 max HP when at 1/2 max HP or less. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "skarmorite",
+    "name": "Skarmorite",
+    "description": "If held by a Skarmory, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "skullfossil",
+    "name": "Skull Fossil",
+    "description": "Can be revived into Cranidos.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "skyplate",
+    "name": "Sky Plate",
+    "description": "Holder's Flying-type attacks have 1.2x power. Judgment is Flying type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "slowbronite",
+    "name": "Slowbronite",
+    "description": "If held by a Slowbro, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "smoothrock",
+    "name": "Smooth Rock",
+    "description": "Holder's use of Sandstorm lasts 8 turns instead of 5.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "snorliumz",
+    "name": "Snorlium Z",
+    "description": "If held by a Snorlax with Giga Impact, it can use Pulverizing Pancake.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "snowball",
+    "name": "Snowball",
+    "description": "Raises holder's Attack by 1 if hit by an Ice-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "softsand",
+    "name": "Soft Sand",
+    "description": "Holder's Ground-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "solganiumz",
+    "name": "Solganium Z",
+    "description": "Solgaleo or Dusk Mane Necrozma with Sunsteel Strike can use a special Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "souldew",
+    "name": "Soul Dew",
+    "description": "If held by a Latias/Latios, its Dragon- and Psychic-type moves have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "spelltag",
+    "name": "Spell Tag",
+    "description": "Holder's Ghost-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "spelonberry",
+    "name": "Spelon Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "splashplate",
+    "name": "Splash Plate",
+    "description": "Holder's Water-type attacks have 1.2x power. Judgment is Water type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "spookyplate",
+    "name": "Spooky Plate",
+    "description": "Holder's Ghost-type attacks have 1.2x power. Judgment is Ghost type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sportball",
+    "name": "Sport Ball",
+    "description": "A special Poke Ball for the Bug-Catching Contest.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "staraptite",
+    "name": "Staraptite",
+    "description": "If held by a Staraptor, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "starfberry",
+    "name": "Starf Berry",
+    "description": "Raises a random stat by 2 when at 1/4 max HP or less (not acc/eva). Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "starminite",
+    "name": "Starminite",
+    "description": "If held by a Starmie, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "starsweet",
+    "name": "Star Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "steelgem",
+    "name": "Steel Gem",
+    "description": "Holder's first successful Steel-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "steeliumz",
+    "name": "Steelium Z",
+    "description": "If holder has a Steel move, this item allows it to use a Steel Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "steelixite",
+    "name": "Steelixite",
+    "description": "If held by a Steelix, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "steelmemory",
+    "name": "Steel Memory",
+    "description": "Holder's Multi-Attack is Steel type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "stick",
+    "name": "Stick",
+    "description": "If held by a Farfetch’d, its critical hit ratio is raised by 2 stages.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "stickybarb",
+    "name": "Sticky Barb",
+    "description": "Each turn, holder loses 1/8 max HP. An attacker making contact can receive it.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "stoneplate",
+    "name": "Stone Plate",
+    "description": "Holder's Rock-type attacks have 1.2x power. Judgment is Rock type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "strangeball",
+    "name": "Strange Ball",
+    "description": "Placeholder if caught in Poke Ball not in current game.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "strawberrysweet",
+    "name": "Strawberry Sweet",
+    "description": "Evolves Milcery into Alcremie when held and spun around.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sunstone",
+    "name": "Sun Stone",
+    "description": "Evolves Gloom into Bellossom, Sunkern into Sunflora, Cottonee into Whimsicott, Petilil into Lilligant, and Helioptile into Heliolisk when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "swampertite",
+    "name": "Swampertite",
+    "description": "If held by a Swampert, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "sweetapple",
+    "name": "Sweet Apple",
+    "description": "Evolves Applin into Appletun when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "syrupyapple",
+    "name": "Syrupy Apple",
+    "description": "Evolves Applin into Dipplin when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tamatoberry",
+    "name": "Tamato Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tangaberry",
+    "name": "Tanga Berry",
+    "description": "Halves damage taken from a supereffective Bug-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tapuniumz",
+    "name": "Tapunium Z",
+    "description": "If held by a Tapu with Nature's Madness, it can use Guardian of Alola.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tartapple",
+    "name": "Tart Apple",
+    "description": "Evolves Applin into Flapple when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tatsugirinite",
+    "name": "Tatsugirinite",
+    "description": "If held by a Tatsugiri, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "terrainextender",
+    "name": "Terrain Extender",
+    "description": "Holder's use of Electric/Grassy/Misty/Psychic Terrain lasts 8 turns instead of 5.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "thickclub",
+    "name": "Thick Club",
+    "description": "If held by a Cubone or a Marowak, its Attack is doubled.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "throatspray",
+    "name": "Throat Spray",
+    "description": "Raises holder's Special Attack by 1 stage after it uses a sound move. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "thunderstone",
+    "name": "Thunder Stone",
+    "description": "Evolves Pikachu into Raichu or Alolan Raichu, Eevee into Jolteon, Eelektrik into Eelektross, and Charjabug into Vikavolt when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "timerball",
+    "name": "Timer Ball",
+    "description": "A Poke Ball that becomes better the more turns there are in a battle.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "toxicorb",
+    "name": "Toxic Orb",
+    "description": "At the end of every turn, this item attempts to badly poison the holder.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "toxicplate",
+    "name": "Toxic Plate",
+    "description": "Holder's Poison-type attacks have 1.2x power. Judgment is Poison type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr00",
+    "name": "TR00",
+    "description": "Teaches certain Pokemon the move Swords Dance. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr01",
+    "name": "TR01",
+    "description": "Teaches certain Pokemon the move Body Slam. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr02",
+    "name": "TR02",
+    "description": "Teaches certain Pokemon the move Flamethrower. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr03",
+    "name": "TR03",
+    "description": "Teaches certain Pokemon the move Hydro Pump. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr04",
+    "name": "TR04",
+    "description": "Teaches certain Pokemon the move Surf. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr05",
+    "name": "TR05",
+    "description": "Teaches certain Pokemon the move Ice Beam. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr06",
+    "name": "TR06",
+    "description": "Teaches certain Pokemon the move Blizzard. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr07",
+    "name": "TR07",
+    "description": "Teaches certain Pokemon the move Low Kick. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr08",
+    "name": "TR08",
+    "description": "Teaches certain Pokemon the move Thunderbolt. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr09",
+    "name": "TR09",
+    "description": "Teaches certain Pokemon the move Thunder. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr10",
+    "name": "TR10",
+    "description": "Teaches certain Pokemon the move Earthquake. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr11",
+    "name": "TR11",
+    "description": "Teaches certain Pokemon the move Psychic. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr12",
+    "name": "TR12",
+    "description": "Teaches certain Pokemon the move Agility. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr13",
+    "name": "TR13",
+    "description": "Teaches certain Pokemon the move Focus Energy. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr14",
+    "name": "TR14",
+    "description": "Teaches certain Pokemon the move Metronome. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr15",
+    "name": "TR15",
+    "description": "Teaches certain Pokemon the move Fire Blast. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr16",
+    "name": "TR16",
+    "description": "Teaches certain Pokemon the move Waterfall. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr17",
+    "name": "TR17",
+    "description": "Teaches certain Pokemon the move Amnesia. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr18",
+    "name": "TR18",
+    "description": "Teaches certain Pokemon the move Leech Life. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr19",
+    "name": "TR19",
+    "description": "Teaches certain Pokemon the move Tri Attack. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr20",
+    "name": "TR20",
+    "description": "Teaches certain Pokemon the move Substitute. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr21",
+    "name": "TR21",
+    "description": "Teaches certain Pokemon the move Reversal. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr22",
+    "name": "TR22",
+    "description": "Teaches certain Pokemon the move Sludge Bomb. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr23",
+    "name": "TR23",
+    "description": "Teaches certain Pokemon the move Spikes. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr24",
+    "name": "TR24",
+    "description": "Teaches certain Pokemon the move Outrage. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr25",
+    "name": "TR25",
+    "description": "Teaches certain Pokemon the move Psyshock. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr26",
+    "name": "TR26",
+    "description": "Teaches certain Pokemon the move Endure. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr27",
+    "name": "TR27",
+    "description": "Teaches certain Pokemon the move Sleep Talk. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr28",
+    "name": "TR28",
+    "description": "Teaches certain Pokemon the move Megahorn. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr29",
+    "name": "TR29",
+    "description": "Teaches certain Pokemon the move Baton Pass. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr30",
+    "name": "TR30",
+    "description": "Teaches certain Pokemon the move Encore. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr31",
+    "name": "TR31",
+    "description": "Teaches certain Pokemon the move Iron Tail. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr32",
+    "name": "TR32",
+    "description": "Teaches certain Pokemon the move Crunch. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr33",
+    "name": "TR33",
+    "description": "Teaches certain Pokemon the move Shadow Ball. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr34",
+    "name": "TR34",
+    "description": "Teaches certain Pokemon the move Future Sight. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr35",
+    "name": "TR35",
+    "description": "Teaches certain Pokemon the move Uproar. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr36",
+    "name": "TR36",
+    "description": "Teaches certain Pokemon the move Heat Wave. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr37",
+    "name": "TR37",
+    "description": "Teaches certain Pokemon the move Taunt. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr38",
+    "name": "TR38",
+    "description": "Teaches certain Pokemon the move Trick. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr39",
+    "name": "TR39",
+    "description": "Teaches certain Pokemon the move Superpower. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr40",
+    "name": "TR40",
+    "description": "Teaches certain Pokemon the move Skill Swap. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr41",
+    "name": "TR41",
+    "description": "Teaches certain Pokemon the move Blaze Kick. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr42",
+    "name": "TR42",
+    "description": "Teaches certain Pokemon the move Hyper Voice. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr43",
+    "name": "TR43",
+    "description": "Teaches certain Pokemon the move Overheat. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr44",
+    "name": "TR44",
+    "description": "Teaches certain Pokemon the move Cosmic Power. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr45",
+    "name": "TR45",
+    "description": "Teaches certain Pokemon the move Muddy Water. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr46",
+    "name": "TR46",
+    "description": "Teaches certain Pokemon the move Iron Defense. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr47",
+    "name": "TR47",
+    "description": "Teaches certain Pokemon the move Dragon Claw. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr48",
+    "name": "TR48",
+    "description": "Teaches certain Pokemon the move Bulk Up. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr49",
+    "name": "TR49",
+    "description": "Teaches certain Pokemon the move Calm Mind. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr50",
+    "name": "TR50",
+    "description": "Teaches certain Pokemon the move Leaf Blade. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr51",
+    "name": "TR51",
+    "description": "Teaches certain Pokemon the move Dragon Dance. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr52",
+    "name": "TR52",
+    "description": "Teaches certain Pokemon the move Gyro Ball. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr53",
+    "name": "TR53",
+    "description": "Teaches certain Pokemon the move Close Combat. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr54",
+    "name": "TR54",
+    "description": "Teaches certain Pokemon the move Toxic Spikes. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr55",
+    "name": "TR55",
+    "description": "Teaches certain Pokemon the move Flare Blitz. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr56",
+    "name": "TR56",
+    "description": "Teaches certain Pokemon the move Aura Sphere. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr57",
+    "name": "TR57",
+    "description": "Teaches certain Pokemon the move Poison Jab. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr58",
+    "name": "TR58",
+    "description": "Teaches certain Pokemon the move Dark Pulse. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr59",
+    "name": "TR59",
+    "description": "Teaches certain Pokemon the move Seed Bomb. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr60",
+    "name": "TR60",
+    "description": "Teaches certain Pokemon the move X-Scissor. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr61",
+    "name": "TR61",
+    "description": "Teaches certain Pokemon the move Bug Buzz. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr62",
+    "name": "TR62",
+    "description": "Teaches certain Pokemon the move Dragon Pulse. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr63",
+    "name": "TR63",
+    "description": "Teaches certain Pokemon the move Power Gem. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr64",
+    "name": "TR64",
+    "description": "Teaches certain Pokemon the move Focus Blast. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr65",
+    "name": "TR65",
+    "description": "Teaches certain Pokemon the move Energy Ball. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr66",
+    "name": "TR66",
+    "description": "Teaches certain Pokemon the move Brave Bird. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr67",
+    "name": "TR67",
+    "description": "Teaches certain Pokemon the move Earth Power. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr68",
+    "name": "TR68",
+    "description": "Teaches certain Pokemon the move Nasty Plot. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr69",
+    "name": "TR69",
+    "description": "Teaches certain Pokemon the move Zen Headbutt. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr70",
+    "name": "TR70",
+    "description": "Teaches certain Pokemon the move Flash Cannon. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr71",
+    "name": "TR71",
+    "description": "Teaches certain Pokemon the move Leaf Storm. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr72",
+    "name": "TR72",
+    "description": "Teaches certain Pokemon the move Power Whip. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr73",
+    "name": "TR73",
+    "description": "Teaches certain Pokemon the move Gunk Shot. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr74",
+    "name": "TR74",
+    "description": "Teaches certain Pokemon the move Iron Head. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr75",
+    "name": "TR75",
+    "description": "Teaches certain Pokemon the move Stone Edge. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr76",
+    "name": "TR76",
+    "description": "Teaches certain Pokemon the move Stealth Rock. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr77",
+    "name": "TR77",
+    "description": "Teaches certain Pokemon the move Grass Knot. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr78",
+    "name": "TR78",
+    "description": "Teaches certain Pokemon the move Sludge Wave. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr79",
+    "name": "TR79",
+    "description": "Teaches certain Pokemon the move Heavy Slam. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr80",
+    "name": "TR80",
+    "description": "Teaches certain Pokemon the move Electro Ball. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr81",
+    "name": "TR81",
+    "description": "Teaches certain Pokemon the move Foul Play. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr82",
+    "name": "TR82",
+    "description": "Teaches certain Pokemon the move Stored Power. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr83",
+    "name": "TR83",
+    "description": "Teaches certain Pokemon the move Ally Switch. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr84",
+    "name": "TR84",
+    "description": "Teaches certain Pokemon the move Scald. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr85",
+    "name": "TR85",
+    "description": "Teaches certain Pokemon the move Work Up. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr86",
+    "name": "TR86",
+    "description": "Teaches certain Pokemon the move Wild Charge. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr87",
+    "name": "TR87",
+    "description": "Teaches certain Pokemon the move Drill Run. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr88",
+    "name": "TR88",
+    "description": "Teaches certain Pokemon the move Heat Crash. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr89",
+    "name": "TR89",
+    "description": "Teaches certain Pokemon the move Hurricane. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr90",
+    "name": "TR90",
+    "description": "Teaches certain Pokemon the move Play Rough. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr91",
+    "name": "TR91",
+    "description": "Teaches certain Pokemon the move Venom Drench. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr92",
+    "name": "TR92",
+    "description": "Teaches certain Pokemon the move Dazzling Gleam. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr93",
+    "name": "TR93",
+    "description": "Teaches certain Pokemon the move Darkest Lariat. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr94",
+    "name": "TR94",
+    "description": "Teaches certain Pokemon the move High Horsepower. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr95",
+    "name": "TR95",
+    "description": "Teaches certain Pokemon the move Throat Chop. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr96",
+    "name": "TR96",
+    "description": "Teaches certain Pokemon the move Pollen Puff. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr97",
+    "name": "TR97",
+    "description": "Teaches certain Pokemon the move Psychic Fangs. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr98",
+    "name": "TR98",
+    "description": "Teaches certain Pokemon the move Liquidation. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tr99",
+    "name": "TR99",
+    "description": "Teaches certain Pokemon the move Body Press. One use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "twistedspoon",
+    "name": "Twisted Spoon",
+    "description": "Holder's Psychic-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "tyranitarite",
+    "name": "Tyranitarite",
+    "description": "If held by a Tyranitar, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ultraball",
+    "name": "Ultra Ball",
+    "description": "An ultra-performance Ball that provides a higher catch rate than a Great Ball.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "ultranecroziumz",
+    "name": "Ultranecrozium Z",
+    "description": "Dusk Mane/Dawn Wings Necrozma: Ultra Burst, then Z-Move w/ Photon Geyser.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "unremarkableteacup",
+    "name": "Unremarkable Teacup",
+    "description": "Evolves Poltchageist into Sinistcha when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "upgrade",
+    "name": "Up-Grade",
+    "description": "Evolves Porygon into Porygon2 when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "utilityumbrella",
+    "name": "Utility Umbrella",
+    "description": "The holder ignores rain- and sun-based effects, including those of its Ability unless it is Orichalcum Pulse or Protosynthesis. Damage and accuracy calculations from attacks used by the holder are affected by rain and sun, but not attacks used against the holder.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "venusaurite",
+    "name": "Venusaurite",
+    "description": "If held by a Venusaur, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "victreebelite",
+    "name": "Victreebelite",
+    "description": "If held by a Victreebel, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "vilevial",
+    "name": "Vile Vial",
+    "description": "If held by a Venomicon, its Poison- and Flying-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "wacanberry",
+    "name": "Wacan Berry",
+    "description": "Halves damage taken from a supereffective Electric-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "watergem",
+    "name": "Water Gem",
+    "description": "Holder's first successful Water-type attack will have 1.3x power. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "wateriumz",
+    "name": "Waterium Z",
+    "description": "If holder has a Water move, this item allows it to use a Water Z-Move.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "watermemory",
+    "name": "Water Memory",
+    "description": "Holder's Multi-Attack is Water type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "waterstone",
+    "name": "Water Stone",
+    "description": "Evolves Poliwhirl into Poliwrath, Shellder into Cloyster, Staryu into Starmie, Eevee into Vaporeon, Lombre into Ludicolo, and Panpour into Simipour when used.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "watmelberry",
+    "name": "Watmel Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "waveincense",
+    "name": "Wave Incense",
+    "description": "Holder's Water-type attacks have 1.2x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "weaknesspolicy",
+    "name": "Weakness Policy",
+    "description": "If holder is hit super effectively, raises Attack, Sp. Atk by 2 stages. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "wellspringmask",
+    "name": "Wellspring Mask",
+    "description": "Ogerpon-Wellspring: 1.2x power attacks; Terastallize to gain Embody Aspect.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "wepearberry",
+    "name": "Wepear Berry",
+    "description": "Cannot be eaten by the holder. No effect when eaten with Bug Bite or Pluck.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "whippeddream",
+    "name": "Whipped Dream",
+    "description": "Evolves Swirlix into Slurpuff when traded.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "whiteherb",
+    "name": "White Herb",
+    "description": "Restores all lowered stat stages to 0 when one is less than 0. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "widelens",
+    "name": "Wide Lens",
+    "description": "The accuracy of attacks by the holder is 1.1x.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "wikiberry",
+    "name": "Wiki Berry",
+    "description": "Restores 1/3 max HP at 1/4 max HP or less; confuses if -SpA Nature. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "wiseglasses",
+    "name": "Wise Glasses",
+    "description": "Holder's special attacks have 1.1x power.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "yacheberry",
+    "name": "Yache Berry",
+    "description": "Halves damage taken from a supereffective Ice-type attack. Single use.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "zapplate",
+    "name": "Zap Plate",
+    "description": "Holder's Electric-type attacks have 1.2x power. Judgment is Electric type.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "zeraorite",
+    "name": "Zeraorite",
+    "description": "If held by a Zeraora, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "zoomlens",
+    "name": "Zoom Lens",
+    "description": "The accuracy of attacks by the holder is 1.2x if it moves after its target.",
+    "rating": null,
+    "megaStone": null,
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  },
+  {
+    "id": "zygardite",
+    "name": "Zygardite",
+    "description": "If held by a Zygarde in Complete Forme, this item allows it to Mega Evolve in battle.",
+    "rating": null,
+    "megaStone": "objectobject",
+    "megaEvolves": null,
+    "source": "https://play.pokemonshowdown.com/data/items.js"
+  }
+]

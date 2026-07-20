@@ -1,5 +1,7 @@
 import { createHash } from "node:crypto";
 import { createReadStream, createWriteStream } from "node:fs";
+import http from "node:http";
+import https from "node:https";
 import {
   access,
   mkdir,
@@ -10,15 +12,17 @@ import {
   writeFile,
 } from "node:fs/promises";
 import path from "node:path";
-import { Readable } from "node:stream";
 import { pipeline } from "node:stream/promises";
 import { fileURLToPath } from "node:url";
+import vm from "node:vm";
 
 import {
+  deriveMissingBuilds,
   normalizeNamedRecords,
   normalizeShowdownMoves,
   normalizeSmogonBuilds,
   normalizeSpecies,
+  toId,
   validateCatalog,
 } from "./lib/normalize.mjs";
 
@@ -59,19 +63,63 @@ async function download(url, destination, expected = {}) {
 
   const temporary = `${destination}.partial`;
   await rm(temporary, { force: true });
-  const response = await fetch(url, {
-    headers: { "User-Agent": "perfect-six-data-pipeline/1" },
-  });
-  if (!response.ok || !response.body) {
-    throw new Error(`Download failed (${response.status}) for ${url}`);
-  }
-  await pipeline(Readable.fromWeb(response.body), createWriteStream(temporary));
+  await downloadStream(url, temporary);
   if (!(await verifyExpected(temporary, expected))) {
     await rm(temporary, { force: true });
     throw new Error(`Checksum or size mismatch for ${url}`);
   }
   await rename(temporary, destination);
   return destination;
+}
+
+async function downloadStream(url, destination, redirects = 0) {
+  if (redirects > 5) throw new Error(`Too many redirects for ${url}`);
+  const protocol = url.startsWith("https:") ? https : http;
+  await new Promise((resolve, reject) => {
+    const request = protocol.get(
+      url,
+      {
+        headers: {
+          Accept: "application/octet-stream, application/zip, */*",
+          "User-Agent":
+            "Mozilla/5.0 (compatible; PerfectSixDataPipeline/1.0; +https://github.com/)",
+        },
+      },
+      async (response) => {
+        const status = response.statusCode ?? 0;
+        if (
+          status >= 300 &&
+          status < 400 &&
+          typeof response.headers.location === "string"
+        ) {
+          response.resume();
+          try {
+            await downloadStream(
+              new URL(response.headers.location, url).toString(),
+              destination,
+              redirects + 1,
+            );
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+          return;
+        }
+        if (status < 200 || status >= 300) {
+          response.resume();
+          reject(new Error(`Download failed (${status}) for ${url}`));
+          return;
+        }
+        try {
+          await pipeline(response, createWriteStream(destination));
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
+      },
+    );
+    request.on("error", reject);
+  });
 }
 
 async function verifyExpected(file, expected) {
@@ -102,6 +150,52 @@ async function fetchJson(url) {
     data: JSON.parse(raw),
     sha256: createHash("sha256").update(raw).digest("hex"),
   };
+}
+
+async function fetchText(url) {
+  const response = await fetch(url, {
+    headers: { "User-Agent": "perfect-six-data-pipeline/1" },
+  });
+  if (!response.ok) {
+    throw new Error(`Text request failed (${response.status}) for ${url}`);
+  }
+  const raw = await response.text();
+  return {
+    raw,
+    sha256: createHash("sha256").update(raw).digest("hex"),
+  };
+}
+
+function normalizeTypeChart(source) {
+  const rawChart = parseShowdownExport(source, "BattleTypeChart");
+  const multiplierByCode = { 0: 1, 1: 2, 2: 0.5, 3: 0 };
+  const chart = {};
+  for (const [defenderId, defender] of Object.entries(rawChart)) {
+    const defenderName =
+      defenderId.charAt(0).toUpperCase() + defenderId.slice(1);
+    for (const [attackerName, code] of Object.entries(
+      defender.damageTaken || {},
+    )) {
+      if (!/^[A-Z]/.test(attackerName)) continue;
+      chart[attackerName] ||= {};
+      chart[attackerName][defenderName] = multiplierByCode[code] ?? 1;
+    }
+  }
+  return chart;
+}
+
+function parseShowdownExport(source, exportName) {
+  const sandbox = { exports: Object.create(null) };
+  vm.runInNewContext(source, sandbox, {
+    filename: `pokemon-showdown-${exportName}.js`,
+    timeout: 1000,
+    contextCodeGeneration: { strings: false, wasm: false },
+  });
+  const exported = sandbox.exports[exportName];
+  if (!exported || typeof exported !== "object") {
+    throw new Error(`Pokemon Showdown data did not expose ${exportName}.`);
+  }
+  return exported;
 }
 
 async function openZip(fileOrBuffer) {
@@ -232,37 +326,108 @@ async function inspectPackDependencies(index) {
 }
 
 function deriveAvailability(species, spawnDocuments) {
-  const spawnText = spawnDocuments.map((document) => ({
+  function referencedSpecies(value, output = new Set()) {
+    if (Array.isArray(value)) {
+      for (const entry of value) referencedSpecies(entry, output);
+      return output;
+    }
+    if (!value || typeof value !== "object") return output;
+    for (const [key, entry] of Object.entries(value)) {
+      const normalizedKey = key.toLowerCase();
+      if (
+        typeof entry === "string" &&
+        ["pokemon", "species", "result"].includes(normalizedKey)
+      ) {
+        const identifier = entry.trim().split(/\s+/)[0].split(":").at(-1);
+        if (identifier) output.add(toId(identifier));
+      } else {
+        referencedSpecies(entry, output);
+      }
+    }
+    return output;
+  }
+  const spawnReferences = spawnDocuments.map((document) => ({
     path: document.path,
-    text: JSON.stringify(document.data).toLowerCase(),
+    species: referencedSpecies(document.data),
   }));
+  const byId = new Map(species.map((pokemon) => [pokemon.id, pokemon]));
+
   return species.map((pokemon) => {
-    const evidence = spawnText
-      .filter(({ text }) => text.includes(pokemon.id))
+    let cursor = pokemon;
+    let evolutionSteps = 0;
+    let matchedId = pokemon.id;
+    let matching = spawnReferences.filter(({ species: references }) =>
+      references.has(matchedId),
+    );
+    const visited = new Set();
+    while (
+      matching.length === 0 &&
+      cursor.preEvolutionId &&
+      !visited.has(cursor.id)
+    ) {
+      visited.add(cursor.id);
+      cursor = byId.get(cursor.preEvolutionId);
+      if (!cursor) break;
+      evolutionSteps += 1;
+      matchedId = cursor.id;
+      matching = spawnReferences.filter(({ species: references }) =>
+        references.has(matchedId),
+      );
+    }
+    const evidence = matching
       .slice(0, 5)
       .map(({ path: sourcePath }) => ({
-        kind: "spawn",
+        kind: evolutionSteps > 0 ? "evolution" : "spawn",
         sourcePath,
-        summary: "Species identifier appears in sourced spawn definition.",
+        summary:
+          evolutionSteps > 0
+            ? `Sourced ancestor "${matchedId}" appears in spawn definition; ${evolutionSteps} evolution step(s) required.`
+            : "Exact species identifier appears in sourced spawn definition.",
       }));
-    const score = evidence.length > 0 ? 70 : 35;
+    const starterEvidence = pokemon.starter
+      ? [
+          {
+            kind: "evolution",
+            sourcePath: pokemon.sourcePaths[0] || "species-data",
+            summary:
+              "Starter classification and evolution ancestry verified from species data.",
+          },
+        ]
+      : [];
+    const score =
+      starterEvidence.length > 0
+        ? 90
+        : evidence.length > 0
+          ? Math.max(45, 82 - evolutionSteps * 8)
+          : 25;
+    const difficulty =
+      score >= 82
+        ? "Easy"
+        : score >= 65
+          ? "Moderate"
+          : score >= 40
+            ? "Hard"
+            : "Late game";
+    const stage = score >= 82 ? "Early" : score >= 55 ? "Mid" : "Late";
     return {
       speciesId: pokemon.id,
-      difficulty: evidence.length > 0 ? "Moderate" : "Late game",
-      stage: evidence.length > 0 ? "Mid" : "Late",
+      difficulty,
+      stage,
       evolutionLine: pokemon.preEvolutionId
         ? `Evolves from ${pokemon.preEvolutionId}`
         : pokemon.evolutions.length
           ? `Evolves into ${pokemon.evolutions.map((entry) => entry.targetId).join(", ")}`
           : "Final evolution",
       guidance:
-        evidence.length > 0
+        starterEvidence.length > 0
+          ? "Obtain starter form through sourced starter path, then evolve."
+          : evidence.length > 0
           ? "See sourced spawn evidence."
           : "No verified spawn rule found in scanned snapshot.",
       score,
       evidence:
-        evidence.length > 0
-          ? evidence
+        starterEvidence.length > 0 || evidence.length > 0
+          ? [...starterEvidence, ...evidence]
           : [
               {
                 kind: "unknown",
@@ -351,6 +516,7 @@ const [
   learnsetsSource,
   abilitiesSource,
   itemsSource,
+  typeChartSource,
   smogon9Source,
   smogon7Source,
   cobblemonDirectory,
@@ -359,8 +525,9 @@ const [
   fetchJson(lock.sources.showdown.pokedexUrl),
   fetchJson(lock.sources.showdown.movesUrl),
   fetchJson(lock.sources.showdown.learnsetsUrl),
-  fetchJson(lock.sources.showdown.abilitiesUrl),
-  fetchJson(lock.sources.showdown.itemsUrl),
+  fetchText(lock.sources.showdown.abilitiesUrl),
+  fetchText(lock.sources.showdown.itemsUrl),
+  fetchText(lock.sources.showdown.typeChartUrl),
   fetchJson(lock.sources.smogon.generationSetsUrls[0]),
   fetchJson(lock.sources.smogon.generationSetsUrls[1]),
   openZip(cobblemonFile),
@@ -369,8 +536,12 @@ const [
 const pokedex = pokedexSource.data;
 const rawMoves = movesSource.data;
 const learnsets = learnsetsSource.data;
-const rawAbilities = abilitiesSource.data;
-const rawItems = itemsSource.data;
+const rawAbilities = parseShowdownExport(
+  abilitiesSource.raw,
+  "BattleAbilities",
+);
+const rawItems = parseShowdownExport(itemsSource.raw, "BattleItems");
+const typeChart = normalizeTypeChart(typeChartSource.raw);
 
 const cobblemonDocuments = await jsonDocumentsFromDirectory(
   cobblemonDirectory,
@@ -401,8 +572,8 @@ const items = normalizeNamedRecords(
   lock.sources.showdown.itemsUrl,
 );
 const species = normalizeSpecies({
-  cobblemonDocuments: cobblemonDocuments.filter(
-    (document) => document.kind === "species",
+  cobblemonDocuments: cobblemonDocuments.filter((document) =>
+    ["species", "species-addition"].includes(document.kind),
   ),
   overlayDocuments: packDocuments.filter((document) =>
     ["species", "species-addition"].includes(document.kind),
@@ -411,7 +582,7 @@ const species = normalizeSpecies({
   showdownLearnsets: learnsets,
   rejected,
 });
-const builds = [
+const importedBuilds = [
   ...normalizeSmogonBuilds({
     rawSets: smogon9Source.data,
     species,
@@ -431,6 +602,17 @@ const builds = [
     rejected,
   }),
 ].sort((left, right) => left.id.localeCompare(right.id));
+const builds = [
+  ...importedBuilds,
+  ...deriveMissingBuilds({
+    species,
+    moves,
+    abilities,
+    items,
+    importedBuilds,
+    rejected,
+  }),
+].sort((left, right) => left.id.localeCompare(right.id));
 const validationFailures = validateCatalog({
   species,
   moves,
@@ -446,7 +628,7 @@ if (validationFailures.length > 0) {
   );
 }
 
-const spawnDocuments = packDocuments.filter(
+const spawnDocuments = [...cobblemonDocuments, ...packDocuments].filter(
   (document) => document.kind === "spawn",
 );
 const availability = deriveAvailability(species, spawnDocuments);
@@ -501,6 +683,12 @@ const sources = [
       itemsSource.sha256,
     ],
     [
+      "Pokemon Showdown Type Chart",
+      lock.sources.showdown.typeChartUrl,
+      "mechanics",
+      typeChartSource.sha256,
+    ],
+    [
       "Smogon generation 9 sets",
       lock.sources.smogon.generationSetsUrls[0],
       "recommendation",
@@ -553,6 +741,7 @@ await Promise.all([
   writeGenerated("builds.json", builds),
   writeGenerated("roles.json", roles),
   writeGenerated("availability.json", availability),
+  writeGenerated("type-chart.json", typeChart),
   writeFile(
     path.join(reportRoot, "provenance.json"),
     stableJson({ manifest, scannedArchiveCount: mrpack.index.files.length }),

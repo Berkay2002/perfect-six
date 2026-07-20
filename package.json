@@ -6,19 +6,37 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "data:sync": "node scripts/sync-data.mjs",
+    "data:smoke": "node scripts/sync-data.mjs --skip-pack-dependencies",
+    "test:data": "node --test scripts/lib/normalize.test.mjs",
+    "test:unit": "vitest run",
+    "test": "npm run test:data && npm run test:unit",
+    "verify": "npm run typecheck && npm run lint && npm test && npm run build"
   },
   "dependencies": {
+    "@astryxdesign/cli": "^0.1.6",
+    "@astryxdesign/core": "^0.1.6",
+    "@astryxdesign/theme-neutral": "^0.1.6",
+    "lucide-react": "^1.25.0",
     "next": "16.2.10",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "unzipper": "^0.12.5"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@vitest/coverage-v8": "^4.1.10",
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
+  },
+  "overrides": {
+    "postcss": "8.5.20"
   }
 }

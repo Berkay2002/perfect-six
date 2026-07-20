@@ -119,6 +119,7 @@ export type SpeciesRecord = {
   preEvolutionId: SpeciesFormId | null;
   finalEvolution: boolean;
   battleOnly: boolean;
+  formKind: "base" | "regional" | "alternate" | "battle";
   starter: boolean;
   specialClasses: SpecialClass[];
   megaFormIds: SpeciesFormId[];
@@ -291,6 +292,7 @@ export type DataManifest = {
   starterCount: number;
   megaCapableCount: number;
   rejectedCount: number;
+  dependencyScan: "all-manifest-archives" | "overrides-only";
   sources: SourceReference[];
   rejected: Array<{
     speciesId?: SpeciesFormId;

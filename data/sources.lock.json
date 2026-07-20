@@ -16,14 +16,15 @@
       "projectId": "31496946",
       "tag": "1.7.3",
       "commit": "e6fda613",
-      "archiveUrl": "https://gitlab.com/cable-mc/cobblemon/-/archive/1.7.3/cobblemon-1.7.3.zip"
+      "archiveUrl": "https://gitlab.com/api/v4/projects/31496946/repository/archive.zip?sha=1.7.3"
     },
     "showdown": {
       "pokedexUrl": "https://play.pokemonshowdown.com/data/pokedex.json",
       "movesUrl": "https://play.pokemonshowdown.com/data/moves.json",
       "learnsetsUrl": "https://play.pokemonshowdown.com/data/learnsets.json",
-      "abilitiesUrl": "https://play.pokemonshowdown.com/data/abilities.json",
-      "itemsUrl": "https://play.pokemonshowdown.com/data/items.json"
+      "abilitiesUrl": "https://play.pokemonshowdown.com/data/abilities.js",
+      "itemsUrl": "https://play.pokemonshowdown.com/data/items.js",
+      "typeChartUrl": "https://play.pokemonshowdown.com/data/typechart.js"
     },
     "smogon": {
       "setsIndexUrl": "https://data.pkmn.cc/sets/index.json",
