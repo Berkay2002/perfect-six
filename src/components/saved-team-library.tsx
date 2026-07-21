@@ -1,5 +1,6 @@
 "use client";
 
+import { Badge } from "@astryxdesign/core/Badge";
 import { Button } from "@astryxdesign/core/Button";
 import { Card } from "@astryxdesign/core/Card";
 import { Dialog, DialogHeader } from "@astryxdesign/core/Dialog";
@@ -29,6 +30,7 @@ import NextLink from "next/link";
 import { useEffect, useMemo, useState } from "react";
 
 import { encodeSharePayload, makeSharePayload } from "@/lib/share";
+import { resultScoringState } from "@/lib/quality-presentation";
 import {
   deleteSavedTeam,
   duplicateSavedTeam,
@@ -145,6 +147,9 @@ export function SavedTeamLibrary() {
                   <HStack gap={2} vAlign="center">
                     <Pencil aria-hidden="true" />
                     <Heading level={2}>{team.name}</Heading>
+                    {resultScoringState(team.result) === "legacy" ? (
+                      <Badge variant="orange" label="Legacy scoring" />
+                    ) : null}
                   </HStack>
                   <HStack gap={4} wrap="wrap">
                     <VStack gap={0.5}>

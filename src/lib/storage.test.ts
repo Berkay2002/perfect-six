@@ -7,6 +7,8 @@ import {
   renameSavedTeam,
   saveTeam,
 } from "@/lib/storage";
+import { preV3SavedTeams } from "@/lib/fixtures/pre-v3-snapshots";
+import { resultScoringState } from "@/lib/quality-presentation";
 import type { GeneratorRequest, TeamResult } from "@/lib/types";
 
 function fakeStorage(initial = "[]") {
@@ -44,24 +46,11 @@ describe("saved team storage", () => {
   });
 
   it("keeps legacy engine snapshots readable", () => {
-    const legacy = JSON.stringify([
-      {
-        schemaVersion: 1,
-        id: "legacy",
-        name: "Legacy team",
-        createdAt: "2026-01-01T00:00:00.000Z",
-        updatedAt: "2026-01-01T00:00:00.000Z",
-        request: { schemaVersion: 1, engineVersion: 1, seed: "OLD" },
-        result: {
-          members: Array.from({ length: 6 }, (_, index) => ({ id: `${index}` })),
-          provenance: { engineVersion: 1 },
-        },
-      },
-    ]);
+    const exact = JSON.stringify(preV3SavedTeams);
+    const saved = readSavedTeams(fakeStorage(exact));
 
-    const [saved] = readSavedTeams(fakeStorage(legacy));
-    expect(saved.name).toBe("Legacy team");
-    expect(Number(saved.request.engineVersion)).toBe(1);
-    expect(Number(saved.result.provenance.engineVersion)).toBe(1);
+    expect(saved).toEqual([...preV3SavedTeams].reverse());
+    expect(saved.every((team) => resultScoringState(team.result) === "legacy")).toBe(true);
+    expect(JSON.stringify(preV3SavedTeams)).toBe(exact);
   });
 });

@@ -40,6 +40,10 @@ import speciesData from "@/data/generated/species.json";
 import { useTeamWorker } from "@/hooks/use-team-worker";
 import { randomDisplaySeed } from "@/lib/random";
 import {
+  alternativeQualitySummary,
+  battleQualityPresentation,
+} from "@/lib/quality-presentation";
+import {
   decodeSharePayload,
   encodeSharePayload,
   humanReadableTeam,
@@ -359,12 +363,8 @@ function AlternativeTray({
                       {alternative.label}
                     </Text>
                     <Heading level={3}>{alternative.replacement.name}</Heading>
-                    <Text
-                      type="supporting"
-                      color={alternative.scoreDelta >= 0 ? "accent" : "secondary"}
-                    >
-                      {alternative.scoreDelta >= 0 ? "+" : ""}
-                      {alternative.scoreDelta} team score
+                    <Text type="supporting" color="secondary">
+                      {alternativeQualitySummary(alternative.scoreDelta)}
                     </Text>
                   </VStack>
                 </HStack>
@@ -392,6 +392,9 @@ export function TeamGenerator() {
   const [alternativesBusy, setAlternativesBusy] = useState(false);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
+  const qualityPresentation = result
+    ? battleQualityPresentation(result)
+    : null;
 
   const runGenerate = useCallback(
     async (nextRequest: GeneratorRequest) => {
@@ -674,6 +677,16 @@ export function TeamGenerator() {
                 />
               ) : (
                 <VStack gap={4}>
+                  {qualityPresentation?.state === "legacy" ? (
+                    <Card variant="yellow" padding={3}>
+                      <VStack gap={1}>
+                        <Text type="label">{qualityPresentation.label}</Text>
+                        <Text type="supporting">
+                          {qualityPresentation.explanation}
+                        </Text>
+                      </VStack>
+                    </Card>
+                  ) : null}
                   <VStack gap={1}>
                     <Heading level={2}>Team score</Heading>
                     <Heading level={3} type="display-2">
@@ -700,76 +713,18 @@ export function TeamGenerator() {
                     label="Journey fit"
                     value={result.score.journeyFit}
                   />
-                  <Card variant="muted" padding={3}>
-                    <VStack gap={1}>
-                      <Text type="label">
-                        Ability quality
-                        {result.battleQuality
-                          ? ` ${result.battleQuality.ability.contribution >= 0 ? "+" : ""}${result.battleQuality.ability.contribution}`
-                          : " (legacy scoring)"}
-                      </Text>
-                      <Text type="supporting" color="secondary">
-                        {result.battleQuality?.ability.explanation ??
-                          "This saved team predates ability-quality explanations."}
-                      </Text>
-                    </VStack>
-                  </Card>
-                  <Card variant="muted" padding={3}>
-                    <VStack gap={1}>
-                      <Text type="label">
-                        Held-item fit
-                        {result.battleQuality?.item
-                          ? ` ${result.battleQuality.item.contribution >= 0 ? "+" : ""}${result.battleQuality.item.contribution}`
-                          : " (legacy scoring)"}
-                      </Text>
-                      <Text type="supporting" color="secondary">
-                        {result.battleQuality?.item?.explanation ??
-                          "This saved team predates held-item fit explanations."}
-                      </Text>
-                    </VStack>
-                  </Card>
-                  <Card variant="muted" padding={3}>
-                    <VStack gap={1}>
-                      <Text type="label">
-                        Move-package quality
-                        {result.battleQuality?.move
-                          ? ` ${result.battleQuality.move.score}/100 (${result.battleQuality.move.contribution >= 0 ? "+" : ""}${result.battleQuality.move.contribution})`
-                          : " (legacy scoring)"}
-                      </Text>
-                      <Text type="supporting" color="secondary">
-                        {result.battleQuality?.move?.explanation ??
-                          "This saved team predates move-package explanations."}
-                      </Text>
-                    </VStack>
-                  </Card>
-                  <Card variant="muted" padding={3}>
-                    <VStack gap={1}>
-                      <Text type="label">
-                        Team jobs
-                        {result.battleQuality?.team
-                          ? ` ${result.battleQuality.team.score}/100 (${result.battleQuality.team.contribution >= 0 ? "+" : ""}${result.battleQuality.team.contribution})`
-                          : " (legacy scoring)"}
-                      </Text>
-                      <Text type="supporting" color="secondary">
-                        {result.battleQuality?.team?.explanation ??
-                          "This saved team predates team-job and win-condition explanations."}
-                      </Text>
-                    </VStack>
-                  </Card>
-                  <Card variant="muted" padding={3}>
-                    <VStack gap={1}>
-                      <Text type="label">
-                        Speed and resilience
-                        {result.battleQuality?.plan
-                          ? ` ${result.battleQuality.plan.score}/100 (${result.battleQuality.plan.contribution >= 0 ? "+" : ""}${result.battleQuality.plan.contribution})`
-                          : " (legacy scoring)"}
-                      </Text>
-                      <Text type="supporting" color="secondary">
-                        {result.battleQuality?.plan?.explanation ??
-                          "This saved team predates speed-plan and resilience explanations."}
-                      </Text>
-                    </VStack>
-                  </Card>
+                  {qualityPresentation?.sections.map((section) => (
+                    <Card key={section.label} variant="muted" padding={3}>
+                      <VStack gap={1}>
+                        <Text type="label">
+                          {section.label} · {section.summary}
+                        </Text>
+                        <Text type="supporting" color="secondary">
+                          {section.explanation}
+                        </Text>
+                      </VStack>
+                    </Card>
+                  ))}
                   {result.warnings.map((warning) => (
                     <Card key={warning.code} variant="yellow" padding={3}>
                       <Text type="body">{warning.message}</Text>
