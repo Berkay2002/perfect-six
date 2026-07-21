@@ -2,6 +2,7 @@ import {
   movePackageQualityForBuild,
   usableSetupStatsForBuild,
 } from "@/engine/move";
+import { weatherPlanForTeam, type TeamWeatherPlan } from "@/engine/weather";
 import type {
   GeneratorRequest,
   AbilityRecord,
@@ -11,7 +12,6 @@ import type {
   SynergyInteraction,
   SynergyInteractionKind,
   TeamSynergyQuality,
-  Weather,
 } from "@/lib/types";
 
 const INTERACTION_KINDS: SynergyInteractionKind[] = [
@@ -30,23 +30,6 @@ type MemberFacts = {
   ability: AbilityRecord | undefined;
   movePackage: ReturnType<typeof movePackageQualityForBuild>;
 };
-
-function weatherTerms(weather: Exclude<Weather, "random">) {
-  if (weather === "rain") return ["rain"];
-  if (weather === "sun") return ["sun", "sunnyday"];
-  if (weather === "sand") return ["sand"];
-  return ["snow", "snowscape", "hail"];
-}
-
-function moveSetsWeather(
-  move: MoveRecord,
-  weather: Exclude<Weather, "random">,
-) {
-  const effect = `${move.effect.weather ?? ""} ${move.name}`
-    .toLowerCase()
-    .replaceAll(/[^a-z]/g, "");
-  return move.effect.weather !== null && weatherTerms(weather).some((term) => effect.includes(term));
-}
 
 function typeMultiplier(
   pokemon: PokemonRecord,
@@ -105,6 +88,7 @@ export function synergyQualityForTeam(
   team: PokemonRecord[],
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  weatherPlan: TeamWeatherPlan = weatherPlanForTeam(team, request, catalog),
 ): TeamSynergyQuality {
   const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
   const abilityById = new Map(
@@ -179,37 +163,25 @@ export function synergyQualityForTeam(
     );
   }
 
-  if (
-    request.style === "weather" &&
-    request.weather &&
-    request.weather !== "random"
-  ) {
-    const weather = request.weather;
-    const setters = members.filter(
-      (member) =>
-        member.moves.some((move) => moveSetsWeather(move, weather)) ||
-        member.ability?.capabilities.weatherSetters?.includes(weather),
+  if (weatherPlan.requestedWeather) {
+    const weather = weatherPlan.requestedWeather;
+    const setters = members.filter((member) =>
+      weatherPlan.setterMemberIds.includes(member.pokemon.id),
     );
     const beneficiaries = members.filter((member) =>
-      abilityById
-        .get(member.pokemon.build.abilityId)
-        ?.capabilities.weatherBenefits?.includes(weather),
+      weatherPlan.beneficiaryMemberIds.includes(member.pokemon.id),
     );
     const weatherPair = firstDistinct(setters, beneficiaries);
     if (weatherPair) {
       const [setter, beneficiary] = weatherPair;
-      const setterMoves = setter.moves
-        .filter((move) => moveSetsWeather(move, weather))
-        .map((move) => move.name);
-      const setterCapability =
-        setterMoves.length > 0
-          ? setterMoves.join("/")
-          : `sourced ${setter.ability?.name ?? setter.pokemon.build.ability}`;
+      const setterCapability = weatherPlan.setters
+        .find((source) => source.memberId === setter.pokemon.id)!
+        .capabilities.join("/");
       addInteraction(
         interactions,
         "weather support",
         weatherPair,
-        `${setter.pokemon.name}'s ${setterCapability} supplies ${weather} for ${beneficiary.pokemon.name}'s sourced ${beneficiary.pokemon.build.ability} weather capability.`,
+        `${setter.pokemon.name}'s sourced ${setterCapability} supplies ${weather} for ${beneficiary.pokemon.name}'s sourced ${beneficiary.pokemon.build.ability} weather capability.`,
       );
     }
   }

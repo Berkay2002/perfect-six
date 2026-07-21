@@ -42,6 +42,31 @@ export type StatBlock = {
   speed: number;
 };
 
+export type BattleStat = Exclude<keyof StatBlock, "hp">;
+
+export type NumericModifierCondition =
+  | { kind: "weather"; weather: Exclude<Weather, "random"> }
+  | { kind: "can-evolve" }
+  | { kind: "damaging-moves-only" }
+  | { kind: "choice-lock-compatible" };
+
+export type NumericMechanicsModifiers = {
+  statMultipliers: Array<{
+    stat: BattleStat;
+    multiplier: number;
+    conditions: NumericModifierCondition[];
+  }>;
+  damageTakenMultipliers: Array<{
+    category: "physical" | "special";
+    multiplier: number;
+    conditions: NumericModifierCondition[];
+  }>;
+};
+
+export type BattleMechanicsContext = {
+  activeWeather?: Exclude<Weather, "random">;
+};
+
 export type EVSpread = {
   hp: number;
   attack: number;
@@ -170,6 +195,7 @@ export type AbilityRecord = {
     weatherSetters?: Exclude<Weather, "random">[];
     weatherBenefits?: Exclude<Weather, "random">[];
   };
+  modifiers?: NumericMechanicsModifiers;
   source: string;
 };
 
@@ -337,6 +363,7 @@ export type ItemRecord = {
   megaStone: SpeciesFormId | null;
   megaEvolves: SpeciesFormId | null;
   capabilities: ItemCapabilities;
+  modifiers?: NumericMechanicsModifiers;
   source: string;
 };
 

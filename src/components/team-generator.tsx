@@ -3,6 +3,7 @@
 import { Badge } from "@astryxdesign/core/Badge";
 import { Button } from "@astryxdesign/core/Button";
 import { Card } from "@astryxdesign/core/Card";
+import { ClickableCard } from "@astryxdesign/core/ClickableCard";
 import { Collapsible } from "@astryxdesign/core/Collapsible";
 import { Divider } from "@astryxdesign/core/Divider";
 import { Grid } from "@astryxdesign/core/Grid";
@@ -34,6 +35,7 @@ import {
   Share2,
   Shuffle,
 } from "lucide-react";
+import type { ReactNode } from "react";
 import { useCallback, useEffect, useMemo, useState } from "react";
 
 import speciesData from "@/data/generated/species.json";
@@ -41,6 +43,7 @@ import { useTeamWorker } from "@/hooks/use-team-worker";
 import { randomDisplaySeed } from "@/lib/random";
 import {
   alternativeQualitySummary,
+  alternativeTradeoffPresentation,
   battleQualityPresentation,
 } from "@/lib/quality-presentation";
 import {
@@ -138,6 +141,65 @@ const availabilityOptions = [
   { value: "unrestricted", label: "Unrestricted" },
 ];
 
+const evStatLabels = {
+  hp: "HP",
+  attack: "Attack",
+  defense: "Defense",
+  specialAttack: "Sp. Atk",
+  specialDefense: "Sp. Def",
+  speed: "Speed",
+} satisfies Record<keyof TeamMember["build"]["evs"], string>;
+
+function formatEvSpread(evs: TeamMember["build"]["evs"]) {
+  return (
+    Object.entries(evs)
+      .filter(([, value]) => value > 0)
+      .map(
+        ([stat, value]) =>
+          `${value} ${evStatLabels[stat as keyof typeof evStatLabels]}`,
+      )
+      .join(" · ") || "Source set has no EV allocation"
+  );
+}
+
+function DetailFact({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <VStack gap={1}>
+      <Text type="supporting" color="secondary">
+        {label}
+      </Text>
+      <Text type="body" textWrap="pretty">
+        {children}
+      </Text>
+    </VStack>
+  );
+}
+
+function ExpandableText({ children }: { children: string }) {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <VStack gap={2}>
+      <Text
+        type="supporting"
+        color="secondary"
+        maxLines={isExpanded ? 0 : 3}
+        hasTruncateTooltip={false}
+        textWrap="pretty"
+      >
+        {children}
+      </Text>
+      <Button
+        label={isExpanded ? "Show less" : "Read more"}
+        variant="ghost"
+        size="sm"
+        onClick={() => setIsExpanded((current) => !current)}
+        aria-expanded={isExpanded}
+      />
+    </VStack>
+  );
+}
+
 function ScoreMetric({ label, value }: { label: string; value: number }) {
   return (
     <VStack gap={1}>
@@ -182,19 +244,33 @@ function MemberTile({
   member,
   selected,
   onSelect,
+  onAlternatives,
+  alternativesBusy,
 }: {
   member: TeamMember;
   selected: boolean;
   onSelect: () => void;
+  onAlternatives: () => void;
+  alternativesBusy: boolean;
 }) {
   return (
-    <button
+    <ClickableCard
+      label={`View ${member.name} details`}
       className={`${styles.memberTile} ${selected ? styles.memberTileSelected : ""}`}
-      type="button"
       onClick={onSelect}
-      aria-pressed={selected}
+      padding={0}
     >
       <PokemonArt member={member} compact />
+      <Button
+        className={styles.tileAlternativeAction}
+        label="Find alternatives"
+        aria-label={`Find alternatives for ${member.name}`}
+        variant="secondary"
+        size="sm"
+        icon={<Shuffle />}
+        isLoading={alternativesBusy}
+        onClick={onAlternatives}
+      />
       <span className={styles.tileOverlay}>
         <span className={styles.tileCopy}>
           <Text type="label" weight="bold" maxLines={1}>
@@ -211,7 +287,7 @@ function MemberTile({
           ))}
         </span>
       </span>
-    </button>
+    </ClickableCard>
   );
 }
 
@@ -227,7 +303,7 @@ function MemberDetail({
   return (
     <Card padding={4}>
       <VStack gap={4}>
-        <HStack gap={4} vAlign="center">
+        <HStack gap={4} vAlign="center" wrap="wrap">
           <PokemonArt member={member} />
           <VStack gap={1}>
             <HStack gap={2} vAlign="center">
@@ -255,32 +331,18 @@ function MemberDetail({
         <Grid columns={{ minWidth: 220, max: 2, repeat: "fit" }} gap={4}>
           <VStack gap={3}>
             <Heading level={3}>Ideal build</Heading>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Ability
-              </Text>{" "}
-              {member.build.ability}
-            </Text>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Held item
-              </Text>{" "}
-              {member.build.heldItem}
-            </Text>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Nature
-              </Text>{" "}
-              {member.build.nature}
-            </Text>
-            <Text type="supporting" color="secondary">
-              EVs:{" "}
-              {Object.entries(member.build.evs)
-                .filter(([, value]) => value > 0)
-                .map(([stat, value]) => `${value} ${stat}`)
-                .join(" · ") || "Source set has no EV allocation"}
-            </Text>
+            <Grid columns={{ minWidth: 120, max: 3, repeat: "fit" }} gap={3}>
+              <DetailFact label="Ability">{member.build.ability}</DetailFact>
+              <DetailFact label="Held item">{member.build.heldItem}</DetailFact>
+              <DetailFact label="Nature">{member.build.nature}</DetailFact>
+            </Grid>
+            <DetailFact label="EV spread">
+              {formatEvSpread(member.build.evs)}
+            </DetailFact>
             <VStack gap={2}>
+              <Text type="supporting" color="secondary">
+                Moves
+              </Text>
               {member.build.moves.map((move) => (
                 <HStack key={move.id} gap={2} vAlign="center">
                   <Badge
@@ -301,38 +363,86 @@ function MemberDetail({
           </VStack>
           <VStack gap={3}>
             <Heading level={3}>Field notes</Heading>
-            <Text type="body">{member.gamePlan}</Text>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Team jobs
-              </Text>{" "}
+            <DetailFact label="Game plan">{member.gamePlan}</DetailFact>
+            <DetailFact label="Team jobs">
               {member.jobExplanation ??
                 "This saved team predates team-job explanations."}
-            </Text>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Evolution
-              </Text>{" "}
+            </DetailFact>
+            <DetailFact label="Evolution">
               {member.availability.evolutionLine}
-            </Text>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Acquisition
-              </Text>{" "}
+            </DetailFact>
+            <DetailFact label="Acquisition">
               {member.availability.guidance}
-            </Text>
-            <Text type="body">
-              <Text type="label" weight="semibold">
-                Practical substitute
-              </Text>{" "}
+            </DetailFact>
+            <DetailFact label="Practical substitute">
               {member.build.practicalSubstitute}
-            </Text>
+            </DetailFact>
             <Text type="supporting" color="secondary">
               Build basis: {member.build.source.kind} ·{" "}
               {member.build.source.format}
             </Text>
           </VStack>
         </Grid>
+      </VStack>
+    </Card>
+  );
+}
+
+function AlternativeCard({
+  alternative,
+  onApply,
+}: {
+  alternative: TeamAlternative;
+  onApply: (alternative: TeamAlternative) => void;
+}) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const tradeoff = alternativeTradeoffPresentation(alternative.tradeoff);
+
+  return (
+    <Card padding={3} variant="muted">
+      <VStack gap={3}>
+        <HStack gap={3} vAlign="center">
+          <PokemonArt member={alternative.replacement} compact />
+          <VStack gap={1}>
+            <Text type="supporting" color="secondary">
+              {alternative.label}
+            </Text>
+            <Heading level={3}>{alternative.replacement.name}</Heading>
+            <Text type="supporting" color="secondary">
+              {alternativeQualitySummary(alternative.scoreDelta)}
+            </Text>
+          </VStack>
+        </HStack>
+        <Text type="body" textWrap="pretty">
+          {tradeoff.summary}
+        </Text>
+        <Collapsible
+          trigger={isExpanded ? "Show less" : "Read more"}
+          isOpen={isExpanded}
+          onOpenChange={setIsExpanded}
+        >
+          <VStack gap={3}>
+            {tradeoff.sections.map((section) => (
+              <VStack key={section.label} gap={1}>
+                <Text type="label" weight="semibold">
+                  {section.label}
+                </Text>
+                <Text
+                  type="supporting"
+                  color="secondary"
+                  textWrap="pretty"
+                >
+                  {section.explanation}
+                </Text>
+              </VStack>
+            ))}
+          </VStack>
+        </Collapsible>
+        <Button
+          label={`Use ${alternative.replacement.name}`}
+          variant="secondary"
+          onClick={() => onApply(alternative)}
+        />
       </VStack>
     </Card>
   );
@@ -354,28 +464,11 @@ function AlternativeTray({
         </Heading>
         <Grid columns={{ minWidth: 230, max: 3, repeat: "fit" }} gap={3}>
           {alternatives.map((alternative) => (
-            <Card key={alternative.kind} padding={3} variant="muted">
-              <VStack gap={3}>
-                <HStack gap={3} vAlign="center">
-                  <PokemonArt member={alternative.replacement} compact />
-                  <VStack gap={1}>
-                    <Text type="supporting" color="secondary">
-                      {alternative.label}
-                    </Text>
-                    <Heading level={3}>{alternative.replacement.name}</Heading>
-                    <Text type="supporting" color="secondary">
-                      {alternativeQualitySummary(alternative.scoreDelta)}
-                    </Text>
-                  </VStack>
-                </HStack>
-                <Text type="supporting">{alternative.tradeoff}</Text>
-                <Button
-                  label={`Use ${alternative.replacement.name}`}
-                  variant="secondary"
-                  onClick={() => onApply(alternative)}
-                />
-              </VStack>
-            </Card>
+            <AlternativeCard
+              key={alternative.kind}
+              alternative={alternative}
+              onApply={onApply}
+            />
           ))}
         </Grid>
       </VStack>
@@ -452,13 +545,15 @@ export function TeamGenerator() {
     });
   };
 
-  const showAlternatives = async () => {
+  const showAlternatives = async (slot = selectedSlot) => {
     if (!result) return;
+    setSelectedSlot(slot);
+    setAlternatives([]);
     setAlternativesBusy(true);
     setError("");
     try {
       setAlternatives(
-        await loadAlternatives(selectedSlot, request, result),
+        await loadAlternatives(slot, request, result),
       );
     } catch (caught) {
       setError(
@@ -719,9 +814,7 @@ export function TeamGenerator() {
                         <Text type="label">
                           {section.label} · {section.summary}
                         </Text>
-                        <Text type="supporting" color="secondary">
-                          {section.explanation}
-                        </Text>
+                        <ExpandableText>{section.explanation}</ExpandableText>
                       </VStack>
                     </Card>
                   ))}
@@ -795,6 +888,10 @@ export function TeamGenerator() {
                           setSelectedSlot(index);
                           setAlternatives([]);
                         }}
+                        onAlternatives={() => void showAlternatives(index)}
+                        alternativesBusy={
+                          alternativesBusy && selectedSlot === index
+                        }
                       />
                     ))}
                   </Grid>
@@ -802,7 +899,7 @@ export function TeamGenerator() {
                   {selectedMember ? (
                     <MemberDetail
                       member={selectedMember}
-                      onAlternatives={() => void showAlternatives()}
+                      onAlternatives={() => void showAlternatives(selectedSlot)}
                       alternativesBusy={alternativesBusy}
                     />
                   ) : null}

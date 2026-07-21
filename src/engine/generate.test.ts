@@ -642,6 +642,8 @@ describe("deterministic generator", () => {
         absorptions: [],
         weather: ["rain"],
         weatherDetriments: [],
+        weatherSetters: ["rain"],
+        weatherBenefits: ["rain"],
       }),
     );
     const sunRequest = {
@@ -680,10 +682,8 @@ describe("deterministic generator", () => {
     expect(rainSupport.battleQuality.ability.explanation).toContain(
       "rain interaction",
     );
-    expect(sunDrawback.score.battleScore).toBeLessThan(
-      sunNeutral.score.battleScore,
-    );
-    expect(sunDrawback.battleQuality.ability.explanation).toContain(
+    expect(sunDrawback.score.battleScore).toBe(sunNeutral.score.battleScore);
+    expect(sunDrawback.battleQuality.ability.explanation).not.toContain(
       "sun drawback",
     );
   });

@@ -11,6 +11,24 @@ export type BattleQualityPresentation = {
   }>;
 };
 
+export type AlternativeTradeoffPresentation = {
+  summary: string;
+  sections: Array<{
+    label: string;
+    explanation: string;
+  }>;
+};
+
+const alternativeTradeoffLabels = [
+  "Ability fit",
+  "Held-item fit",
+  "Move package",
+  "Team jobs",
+  "Team synergy",
+  "Speed plan",
+  "Acquisition curve",
+] as const;
+
 function completeBattleQuality(
   result: TeamResult,
 ): GeneratedTeamResult["battleQuality"] | null {
@@ -45,6 +63,30 @@ export function alternativeQualitySummary(scoreDelta: number) {
   if (scoreDelta > 0) return "Stronger complete-team quality";
   if (scoreDelta < 0) return "Lower complete-team quality with stated tradeoffs";
   return "Comparable complete-team quality";
+}
+
+export function alternativeTradeoffPresentation(
+  tradeoff: string,
+): AlternativeTradeoffPresentation {
+  const normalized = tradeoff.replace("Team jobs ", "Team jobs: ");
+  const sectionPattern = new RegExp(
+    `(?=${alternativeTradeoffLabels.join("|")}:)`,
+  );
+  const [summary = normalized, ...details] = normalized.split(sectionPattern);
+
+  return {
+    summary: summary.trim(),
+    sections: details.flatMap((detail) => {
+      const separator = detail.indexOf(":");
+      if (separator < 0) return [];
+      return [
+        {
+          label: detail.slice(0, separator).trim(),
+          explanation: detail.slice(separator + 1).trim(),
+        },
+      ];
+    }),
+  };
 }
 
 export function battleQualityPresentation(

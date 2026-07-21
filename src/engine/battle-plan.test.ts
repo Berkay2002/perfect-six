@@ -13,8 +13,10 @@ import {
   DATA_VERSION,
   ENGINE_VERSION,
   SCHEMA_VERSION,
+  type AbilityRecord,
   type GeneratorRequest,
   type ItemCapabilities,
+  type ItemRecord,
   type MoveBuild,
   type MoveRecord,
   type NormalizedCatalog,
@@ -267,6 +269,306 @@ describe("standard-level stat index", () => {
     expect(
       battlePlanMemberForBuild(slowedMember, slowedCatalog).itemSpeed,
     ).toBe(false);
+  });
+});
+
+describe("source-derived numeric modifiers", () => {
+  function modifierFixture() {
+    const context = getFixtureContext();
+    const member = {
+      ...context.source.members[0],
+      finalEvolution: false,
+      stats: {
+        hp: 100,
+        attack: 100,
+        defense: 100,
+        specialAttack: 100,
+        specialDefense: 100,
+        speed: 100,
+      },
+      build: {
+        ...context.source.members[0].build,
+        nature: "Hardy",
+        evs: {
+          hp: 0,
+          attack: 0,
+          defense: 0,
+          specialAttack: 0,
+          specialDefense: 0,
+          speed: 0,
+        },
+        moves: context.physical.slice(0, 4).map(asBuildMove) as PokemonRecord["build"]["moves"],
+      },
+    };
+    const choiceItem: ItemRecord = {
+      ...context.neutralItem,
+      id: "sourcedchoicephysical",
+      name: "Sourced Choice Physical",
+      capabilities: {
+        ...neutralItemCapabilities(),
+        damageCategory: "physical",
+        choiceLock: true,
+      },
+      modifiers: {
+        statMultipliers: [
+          {
+            stat: "attack",
+            multiplier: 1.5,
+            conditions: [{ kind: "choice-lock-compatible" }],
+          },
+        ],
+        damageTakenMultipliers: [],
+      },
+    };
+    const directDefense: AbilityRecord = {
+      ...context.neutralAbility,
+      id: "sourceddirectdefense",
+      name: "Sourced Direct Defense",
+      modifiers: {
+        statMultipliers: [
+          { stat: "defense", multiplier: 2, conditions: [] },
+        ],
+        damageTakenMultipliers: [],
+      },
+    };
+    return { context, member, choiceItem, directDefense };
+  }
+
+  it("combines compatible item and unconditional ability stat multipliers", () => {
+    const { member, choiceItem, directDefense } = modifierFixture();
+
+    const index = standardStatIndexForBuild(
+      member,
+      choiceItem,
+      directDefense,
+    );
+
+    expect(index.attack).toBe(180);
+    expect(index.defense).toBe(240);
+    expect(index.appliedModifiers).toEqual([
+      "Sourced Choice Physical: sourced 1.5x Attack",
+      "Sourced Direct Defense: sourced 2x Defense",
+    ]);
+  });
+
+  it("requires explicit active weather for weather-conditional modifiers", () => {
+    const { member } = modifierFixture();
+    const weatherSpeed: AbilityRecord = {
+      ...getFixtureContext().neutralAbility,
+      id: "sourcedweatherspeed",
+      name: "Sourced Weather Speed",
+      modifiers: {
+        statMultipliers: [
+          {
+            stat: "speed",
+            multiplier: 2,
+            conditions: [{ kind: "weather", weather: "rain" }],
+          },
+        ],
+        damageTakenMultipliers: [],
+      },
+    };
+
+    expect(
+      standardStatIndexForBuild(member, undefined, weatherSpeed).speed,
+    ).toBe(120);
+    const active = standardStatIndexForBuild(
+      member,
+      undefined,
+      weatherSpeed,
+      { activeWeather: "rain" },
+    );
+    expect(active.speed).toBe(240);
+    expect(active.appliedModifiers).toContain(
+      "Sourced Weather Speed: sourced 2x Speed while rain is active",
+    );
+  });
+
+  it("applies item stats only when move and evolution conditions fit", () => {
+    const { context, member } = modifierFixture();
+    const specialArmor: ItemRecord = {
+      ...context.neutralItem,
+      id: "sourcedspecialarmor",
+      name: "Sourced Special Armor",
+      capabilities: {
+        ...neutralItemCapabilities(),
+        defensiveStats: ["specialDefense"],
+        damagingMovesOnly: true,
+      },
+      modifiers: {
+        statMultipliers: [
+          {
+            stat: "specialDefense",
+            multiplier: 1.5,
+            conditions: [{ kind: "damaging-moves-only" }],
+          },
+        ],
+        damageTakenMultipliers: [],
+      },
+    };
+    const evolutionArmor: ItemRecord = {
+      ...specialArmor,
+      id: "sourcedevolutionarmor",
+      name: "Sourced Evolution Armor",
+      capabilities: {
+        ...neutralItemCapabilities(),
+        defensiveStats: ["defense", "specialDefense"],
+        requiresEvolutionPotential: true,
+      },
+      modifiers: {
+        statMultipliers: [
+          {
+            stat: "defense",
+            multiplier: 1.5,
+            conditions: [{ kind: "can-evolve" }],
+          },
+          {
+            stat: "specialDefense",
+            multiplier: 1.5,
+            conditions: [{ kind: "can-evolve" }],
+          },
+        ],
+        damageTakenMultipliers: [],
+      },
+    };
+    const statusMove = context.recovery;
+    const incompatible = {
+      ...member,
+      build: {
+        ...member.build,
+        moves: [
+          asBuildMove(statusMove),
+          ...member.build.moves.slice(1),
+        ] as PokemonRecord["build"]["moves"],
+      },
+    };
+    const choiceSpeed: ItemRecord = {
+      ...specialArmor,
+      id: "sourcedchoicespeed",
+      name: "Sourced Choice Speed",
+      capabilities: {
+        ...neutralItemCapabilities(),
+        choiceLock: true,
+        speedMultiplier: 1.5,
+      },
+      modifiers: {
+        statMultipliers: [
+          {
+            stat: "speed",
+            multiplier: 1.5,
+            conditions: [{ kind: "choice-lock-compatible" }],
+          },
+        ],
+        damageTakenMultipliers: [],
+      },
+    };
+    const incompatibleSpeedMember = {
+      ...incompatible,
+      stats: { ...incompatible.stats, speed: 40 },
+      build: {
+        ...incompatible.build,
+        heldItemId: choiceSpeed.id,
+        heldItem: choiceSpeed.name,
+      },
+    };
+    const choiceCatalog = {
+      ...context.fixtureCatalog,
+      items: [...context.fixtureCatalog.items, choiceSpeed],
+    };
+
+    expect(
+      standardStatIndexForBuild(member, specialArmor).specialDefense,
+    ).toBe(180);
+    expect(
+      standardStatIndexForBuild(incompatible, specialArmor).specialDefense,
+    ).toBe(120);
+    expect(
+      standardStatIndexForBuild(member, evolutionArmor).defense,
+    ).toBe(180);
+    expect(
+      standardStatIndexForBuild(
+        { ...member, finalEvolution: true },
+        evolutionArmor,
+      ).defense,
+    ).toBe(120);
+    expect(standardStatIndexForBuild(incompatible, choiceSpeed).speed).toBe(120);
+    expect(
+      battlePlanMemberForBuild(incompatibleSpeedMember, choiceCatalog).itemSpeed,
+    ).toBe(false);
+  });
+
+  it("requires offensive item fit and models 0.5 damage taken as mitigation", () => {
+    const { context, member, choiceItem } = modifierFixture();
+    const specialOnly = {
+      ...member,
+      build: {
+        ...member.build,
+        moves: context.special.slice(0, 4).map(asBuildMove) as PokemonRecord["build"]["moves"],
+      },
+    };
+    expect(standardStatIndexForBuild(specialOnly, choiceItem).attack).toBe(120);
+
+    const mitigation: AbilityRecord = {
+      ...context.neutralAbility,
+      id: "sourcedspecialmitigation",
+      name: "Sourced Special Mitigation",
+      modifiers: {
+        statMultipliers: [],
+        damageTakenMultipliers: [
+          { category: "special", multiplier: 0.5, conditions: [] },
+        ],
+      },
+    };
+    const fixtureCatalog = {
+      ...context.fixtureCatalog,
+      abilities: [...context.fixtureCatalog.abilities, mitigation],
+    };
+    const roster = context.source.members.map((sourceMember, index) =>
+      index === 0
+        ? {
+            ...member,
+            build: {
+              ...member.build,
+              abilityId: mitigation.id,
+              ability: mitigation.name,
+            },
+          }
+        : sourceMember,
+    );
+    const baseline = battlePlanQualityForTeam(
+      roster.map((candidate, index) =>
+        index === 0
+          ? {
+              ...candidate,
+              build: {
+                ...candidate.build,
+                abilityId: context.neutralAbility.id,
+                ability: context.neutralAbility.name,
+              },
+            }
+          : candidate,
+      ),
+      request("DAMAGE-MITIGATION-BASELINE"),
+      fixtureCatalog,
+    );
+    const protectedPlan = battlePlanQualityForTeam(
+      roster,
+      request("DAMAGE-MITIGATION-ACTIVE"),
+      fixtureCatalog,
+    );
+
+    expect(
+      protectedPlan.memberIndices[0].stats.specialDefense,
+    ).toBe(120);
+    expect(protectedPlan.specialResilience.effectiveBulk).toBeGreaterThan(
+      baseline.specialResilience.effectiveBulk,
+    );
+    expect(protectedPlan.physicalResilience.effectiveBulk).toBe(
+      baseline.physicalResilience.effectiveBulk,
+    );
+    expect(protectedPlan.specialResilience.explanation).toContain(
+      "Sourced Special Mitigation: sourced 0.5x special damage taken",
+    );
   });
 });
 

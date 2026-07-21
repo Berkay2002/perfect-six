@@ -16,6 +16,7 @@ import {
   isRecoveryMove,
   movePackageQualityForBuild,
 } from "@/engine/move";
+import { weatherPlanForTeam, type TeamWeatherPlan } from "@/engine/weather";
 
 type MemberEvaluation = TeamJobQuality["memberExplanations"][number] & {
   winCondition: string | null;
@@ -141,6 +142,7 @@ function evaluateMember(
   pokemon: PokemonRecord,
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  weatherPlan: TeamWeatherPlan,
 ): MemberEvaluation {
   const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
   const itemById = new Map(catalog.items.map((item) => [item.id, item]));
@@ -171,24 +173,15 @@ function evaluateMember(
     (move) =>
       move.effect.status !== null || move.effect.volatileStatus !== null,
   );
-  const weather = moves.filter((move) => {
-    if (move.effect.weather === null) return false;
-    if (
-      request.style !== "weather" ||
-      !request.weather ||
-      request.weather === "random"
-    ) {
-      return true;
-    }
-    return `${move.effect.weather} ${move.name}`
-      .toLowerCase()
-      .includes(request.weather);
-  });
   const item = itemFor(pokemon, itemById);
   const ability = abilityById.get(pokemon.build.abilityId);
   const moveQuality = movePackageQualityForBuild(pokemon, catalog, request);
   const itemFit = itemCapabilityFitForBuild(pokemon, item);
-  const battlePlan = battlePlanMemberForBuild(pokemon, catalog);
+  const battlePlan = battlePlanMemberForBuild(
+    pokemon,
+    catalog,
+    weatherPlan.context,
+  );
   const jobs: TeamJob[] = [];
   const facts: string[] = [];
 
@@ -267,18 +260,18 @@ function evaluateMember(
     jobs.push("status pressure");
     facts.push(`${status.map((move) => move.name).join("/")} apply status pressure`);
   }
-  const weatherAbility = ability?.capabilities.weather.some(
-    (candidate) =>
-      request.style !== "weather" ||
-      request.weather === "random" ||
-      candidate === request.weather,
+  const weatherSetter = weatherPlan.setters.find(
+    (setter) => setter.memberId === pokemon.id,
   );
-  if (weather.length > 0 || weatherAbility) {
+  const activeBeneficiary =
+    weatherPlan.activeWeather === weatherPlan.requestedWeather &&
+    weatherPlan.beneficiaryMemberIds.includes(pokemon.id);
+  if (weatherSetter || activeBeneficiary) {
     jobs.push("weather support");
     facts.push(
-      weather.length > 0
-        ? `${weather.map((move) => move.name).join("/")} set weather`
-        : `${pokemon.build.ability} supplies sourced weather support`,
+      weatherSetter
+        ? `${weatherSetter.capabilities.join("/")} set ${weatherPlan.requestedWeather}`
+        : `${pokemon.build.ability} benefits from active ${weatherPlan.activeWeather}`,
     );
   }
 
@@ -323,11 +316,17 @@ export function memberJobExplanation(
   pokemon: PokemonRecord,
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  weatherPlan: TeamWeatherPlan = weatherPlanForTeam(
+    [pokemon],
+    request,
+    catalog,
+  ),
 ) {
   const { winCondition, ...explanation } = evaluateMember(
     pokemon,
     request,
     catalog,
+    weatherPlan,
   );
   void winCondition;
   return explanation;
@@ -337,8 +336,11 @@ export function teamQualityForTeam(
   team: PokemonRecord[],
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  weatherPlan: TeamWeatherPlan = weatherPlanForTeam(team, request, catalog),
 ): TeamJobQuality {
-  const evaluated = team.map((pokemon) => evaluateMember(pokemon, request, catalog));
+  const evaluated = team.map((pokemon) =>
+    evaluateMember(pokemon, request, catalog, weatherPlan),
+  );
   if (!evaluated.some((member) => member.winCondition !== null)) {
     const hazardSetter = evaluated.find((member) => member.jobs.includes("hazards"));
     const statusSource = evaluated.find((member) =>

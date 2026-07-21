@@ -8,6 +8,7 @@ import {
 import { moveQualityForTeam } from "@/engine/move";
 import { teamQualityForTeam } from "@/engine/team";
 import { synergyQualityForTeam } from "@/engine/synergy";
+import { weatherPlanForTeam, type TeamWeatherPlan } from "@/engine/weather";
 import type {
   GeneratorRequest,
   MoveRecord,
@@ -124,31 +125,16 @@ function offensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
 }
 
 function weatherScore(
-  team: PokemonRecord[],
   request: GeneratorRequest,
-  catalog: NormalizedCatalog,
+  weatherPlan: TeamWeatherPlan,
 ) {
   if (request.style !== "weather" || !request.weather) return 100;
-  const term = request.weather === "random" ? "" : request.weather;
-  if (!term) return 70;
-  const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
-  const abilityById = new Map(
-    catalog.abilities.map((ability) => [ability.id, ability]),
-  );
-  const matches = team.reduce((sum, pokemon) => {
-    const moveMatch = pokemon.build.moves.some((move) => {
-      const sourced = moveById.get(move.id);
-      return `${sourced?.effect.weather ?? ""} ${sourced?.name ?? ""}`
-        .toLowerCase()
-        .includes(term);
-    });
-    const ability = abilityById.get(pokemon.build.abilityId);
-    const abilityMatch = ability?.capabilities?.weather.includes(term) ?? false;
-    const abilityDetriment =
-      ability?.capabilities?.weatherDetriments?.includes(term) ?? false;
-    const abilityEffect = Number(abilityMatch) - Number(abilityDetriment);
-    return sum + (moveMatch ? Math.max(1, abilityEffect) : abilityEffect);
-  }, 0);
+  if (request.weather === "random") return 70;
+  const active = weatherPlan.activeWeather === request.weather;
+  const matches =
+    weatherPlan.setterMemberIds.length +
+    (active ? weatherPlan.beneficiaryMemberIds.length : 0) -
+    (active ? weatherPlan.detrimentMemberIds.length : 0);
   return clamp(40 + matches * 12);
 }
 
@@ -159,7 +145,8 @@ export function scoreTeam(
   journeyOptions: Pick<JourneyCurveOptions, "influence"> = {},
 ): ScoreBreakdown {
   const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
-  const teamQuality = teamQualityForTeam(team, request, catalog);
+  const weatherPlan = weatherPlanForTeam(team, request, catalog);
+  const teamQuality = teamQualityForTeam(team, request, catalog, weatherPlan);
   const acquisitionCurve = journeyCurveQualityForTeam(
     team,
     request,
@@ -203,12 +190,22 @@ export function scoreTeam(
   const defensiveFit = defensiveScore(team, catalog);
   const offensiveReach = offensiveScore(team, catalog);
   const utility = utilityScore(team, moveById);
-  const weather = weatherScore(team, request, catalog);
-  const abilityQuality = abilityQualityForTeam(team, request, catalog);
+  const weather = weatherScore(request, weatherPlan);
+  const abilityQuality = abilityQualityForTeam(
+    team,
+    request,
+    catalog,
+    weatherPlan,
+  );
   const itemQuality = itemQualityForTeam(team, request, catalog);
   const moveQuality = moveQualityForTeam(team, request, catalog);
-  const battlePlan = battlePlanQualityForTeam(team, request, catalog);
-  const synergy = synergyQualityForTeam(team, request, catalog);
+  const battlePlan = battlePlanQualityForTeam(
+    team,
+    request,
+    catalog,
+    weatherPlan.context,
+  );
+  const synergy = synergyQualityForTeam(team, request, catalog, weatherPlan);
   const battleScore = clamp(
     roleCoverage * 0.23 +
       defensiveFit * 0.25 +

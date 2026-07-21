@@ -6,6 +6,7 @@ import {
 } from "@/engine/generate";
 import { itemFitFactsForBuild } from "@/engine/item";
 import { movePackageQualityForBuild } from "@/engine/move";
+import { weatherPlanForTeam } from "@/engine/weather";
 import type {
   AlternativeKind,
   GeneratorRequest,
@@ -14,6 +15,7 @@ import type {
   NormalizedCatalog,
   PokemonRecord,
   TeamAlternative,
+  BattleMechanicsContext,
   TeamMember,
   TeamResult,
 } from "@/lib/types";
@@ -84,18 +86,20 @@ function abilityTradeoff(
   next: TeamMember,
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  currentContext: BattleMechanicsContext,
+  nextContext: BattleMechanicsContext,
 ) {
   const abilityById = new Map(
     catalog.abilities.map((ability) => [ability.id, ability]),
   );
-  const facts = (member: TeamMember) =>
-    abilityFitFacts(abilityById.get(member.build.abilityId), request).join(
+  const facts = (member: TeamMember, context: BattleMechanicsContext) =>
+    abilityFitFacts(abilityById.get(member.build.abilityId), request, context).join(
       ", ",
     ) || "no supported sourced effect";
   if (current.build.abilityId === next.build.abilityId) {
-    return `Ability fit: preserves ${next.build.ability} (${facts(next)}).`;
+    return `Ability fit: preserves ${next.build.ability} (${facts(next, nextContext)}).`;
   }
-  return `Ability fit: loses ${current.build.ability} (${facts(current)}) and gains ${next.build.ability} (${facts(next)}).`;
+  return `Ability fit: loses ${current.build.ability} (${facts(current, currentContext)}) and gains ${next.build.ability} (${facts(next, nextContext)}).`;
 }
 
 function itemTradeoff(
@@ -316,6 +320,12 @@ function asAlternative(
   catalog: NormalizedCatalog,
 ): TeamAlternative {
   const { replacement, result } = candidate;
+  const currentWeather = weatherPlanForTeam(
+    evaluatedCurrent.members,
+    request,
+    catalog,
+  );
+  const nextWeather = weatherPlanForTeam(result.members, request, catalog);
   return {
     kind,
     label,
@@ -324,7 +334,14 @@ function asAlternative(
     scoreDelta: result.score.total - snapshotCurrent.score.total,
     tradeoff: [
       introduction,
-      abilityTradeoff(original, replacement, request, catalog),
+      abilityTradeoff(
+        original,
+        replacement,
+        request,
+        catalog,
+        currentWeather.context,
+        nextWeather.context,
+      ),
       itemTradeoff(original, replacement, request, catalog),
       moveTradeoff(original, replacement, request, catalog),
       jobsTradeoff(evaluatedCurrent, result),

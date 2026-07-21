@@ -35,12 +35,33 @@
     transform var(--motion-duration-fast, 125ms);
 }
 
+.tileAlternativeAction {
+  position: absolute;
+  z-index: 2;
+  inset-block-start: var(--spacing-2);
+  inset-inline-end: var(--spacing-2);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(calc(-1 * var(--spacing-1)));
+  transition:
+    opacity var(--motion-duration-fast, 125ms),
+    transform var(--motion-duration-fast, 125ms);
+}
+
+.memberTile:hover .tileAlternativeAction,
+.memberTile:focus-within .tileAlternativeAction {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
 .memberTile:hover {
   border-color: var(--color-border-emphasized);
   transform: translateY(calc(-1 * var(--spacing-0-5)));
 }
 
-.memberTile:focus-visible {
+.memberTile:focus-visible,
+.memberTile:focus-within {
   outline: var(--focus-outline-width, 2px) solid var(--color-accent);
   outline-offset: var(--spacing-0-5);
 }
@@ -164,10 +185,20 @@
     width: calc(var(--spacing-10) * 2);
     height: calc(var(--spacing-10) * 2);
   }
+
+  .tileAlternativeAction {
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .memberTile {
+    transition: none;
+  }
+
+  .tileAlternativeAction {
     transition: none;
   }
 

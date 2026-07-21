@@ -160,6 +160,117 @@ export function normalizeNamedRecords(rawRecords, sourceUrl) {
     .sort((left, right) => left.id.localeCompare(right.id));
 }
 
+const MODIFIER_WEATHER_TERMS = [
+  ["rain", /\brain dance\b|\brain is active\b|\bduring rain\b/i],
+  ["sun", /\bsunny day\b|\bsun is active\b|\bharsh sunlight\b/i],
+  ["sand", /\bsandstorm\b/i],
+  ["snow", /\bsnow\b|\bhail\b/i],
+];
+
+function normalizedModifierStats(text) {
+  const stats = [];
+  for (const label of String(text).split(/\s+and\s+/i)) {
+    const normalized = label.toLowerCase().replaceAll(".", "").trim();
+    if (normalized === "attack") stats.push("attack");
+    if (normalized === "sp atk" || normalized === "special attack") {
+      stats.push("specialAttack");
+    }
+    if (normalized === "defense") stats.push("defense");
+    if (normalized === "sp def" || normalized === "special defense") {
+      stats.push("specialDefense");
+    }
+    if (normalized === "speed") stats.push("speed");
+  }
+  return stats;
+}
+
+function numericModifierConditions(clause) {
+  const conditions = [];
+  for (const [weather, pattern] of MODIFIER_WEATHER_TERMS) {
+    if (pattern.test(clause)) {
+      conditions.push({ kind: "weather", weather });
+    }
+  }
+  if (/holder's species can evolve/i.test(clause)) {
+    conditions.push({ kind: "can-evolve" });
+  }
+  if (/only select damaging moves/i.test(clause)) {
+    conditions.push({ kind: "damaging-moves-only" });
+  }
+  if (/only select the first move/i.test(clause)) {
+    conditions.push({ kind: "choice-lock-compatible" });
+  }
+  const hasConditionalLanguage =
+    /\b(?:if|when|after|during|while|as long as|on switch-in)\b/i.test(clause);
+  const hasRepresentedCondition = conditions.length > 0;
+  const hasSpeciesCondition = /\b(?:held by|pokemon is)\b/i.test(clause);
+  const hasTerrainCondition = /\bterrain\b/i.test(clause);
+  return {
+    conditions,
+    supported:
+      !hasSpeciesCondition &&
+      !hasTerrainCondition &&
+      (!hasConditionalLanguage || hasRepresentedCondition),
+  };
+}
+
+function multiplierValue(raw) {
+  if (/doubled/i.test(raw)) return 2;
+  if (/halved/i.test(raw)) return 0.5;
+  return Number.parseFloat(raw);
+}
+
+function normalizeNumericModifiers(description) {
+  const statMultipliers = [];
+  const damageTakenMultipliers = [];
+  const statPattern =
+    /\b((?:(?:Special|Sp\.)\s+(?:Attack|Atk|Defense|Def)|Attack|Defense|Speed)(?:\s+and\s+(?:(?:Special|Sp\.)\s+(?:Attack|Atk|Defense|Def)|Attack|Defense|Speed))*)\s+(?:is|are)\s+(?:(?:multiplied by)\s+)?(\d+(?:\.\d+)?x?|doubled|halved)\b/gi;
+  const fractionDamagePattern =
+    /\breceives?\s+(\d+)\/(\d+)\s+damage from\s+(physical|special)\s+attacks\b/gi;
+  const decimalDamagePattern =
+    /\b(?:receives?|takes?)\s+(\d+(?:\.\d+)?)x\s+damage from\s+(physical|special)\s+attacks\b/gi;
+  for (const clause of String(description).split(/(?<!\bSp)\.(?!\d)/)) {
+    const condition = numericModifierConditions(clause);
+    if (!condition.supported) continue;
+    for (const match of clause.matchAll(statPattern)) {
+      const multiplier = multiplierValue(match[2]);
+      if (!Number.isFinite(multiplier) || multiplier <= 0 || multiplier === 1) {
+        continue;
+      }
+      for (const stat of normalizedModifierStats(match[1])) {
+        statMultipliers.push({
+          stat,
+          multiplier,
+          conditions: condition.conditions,
+        });
+      }
+    }
+    for (const match of clause.matchAll(fractionDamagePattern)) {
+      const multiplier = Number(match[1]) / Number(match[2]);
+      if (!Number.isFinite(multiplier) || multiplier <= 0 || multiplier === 1) {
+        continue;
+      }
+      damageTakenMultipliers.push({
+        category: match[3].toLowerCase(),
+        multiplier,
+        conditions: condition.conditions,
+      });
+    }
+    for (const match of clause.matchAll(decimalDamagePattern)) {
+      const multiplier = Number(match[1]);
+      if (!Number.isFinite(multiplier) || multiplier <= 0 || multiplier === 1) {
+        continue;
+      }
+      damageTakenMultipliers.push({
+        category: match[2].toLowerCase(),
+        multiplier,
+        conditions: condition.conditions,
+      });
+    }
+  }
+  return { statMultipliers, damageTakenMultipliers };
+}
+
 function normalizeAbilityCapabilities(description) {
   const immunities = [
     ...String(description).matchAll(
@@ -224,6 +335,7 @@ export function normalizeAbilityRecords(rawRecords, sourceUrl) {
   return normalizeNamedRecords(rawRecords, sourceUrl).map((record) => ({
     ...record,
     capabilities: normalizeAbilityCapabilities(record.description),
+    modifiers: normalizeNumericModifiers(record.description),
   }));
 }
 
@@ -298,6 +410,7 @@ export function normalizeItemRecords(rawRecords, sourceUrl) {
   return normalizeNamedRecords(rawRecords, sourceUrl).map((record) => ({
     ...record,
     capabilities: normalizeItemCapabilities(record.description),
+    modifiers: normalizeNumericModifiers(record.description),
   }));
 }
 

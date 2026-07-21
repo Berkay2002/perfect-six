@@ -10,6 +10,7 @@ import { moveQualityForTeam } from "@/engine/move";
 import { scoreTeam } from "@/engine/score";
 import { memberJobExplanation, teamQualityForTeam } from "@/engine/team";
 import { synergyQualityForTeam } from "@/engine/synergy";
+import { weatherPlanForTeam } from "@/engine/weather";
 import {
   canonicalSeed,
   createRandom,
@@ -213,32 +214,20 @@ function requestedWeatherSupportIds(
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
 ) {
-  const requestedWeather = request.weather;
   if (
     request.style !== "weather" ||
-    !requestedWeather ||
-    requestedWeather === "random"
+    !request.weather ||
+    request.weather === "random"
   ) {
     return new Set<string>();
   }
-  const abilityById = new Map(
-    catalog.abilities.map((ability) => [ability.id, ability]),
-  );
-  const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
   return new Set(
     candidates
-      .filter((pokemon) => {
-        const ability = abilityById.get(pokemon.build.abilityId);
-        if (ability?.capabilities.weather.includes(requestedWeather)) {
-          return true;
-        }
-        return pokemon.build.moves.some((move) => {
-          const sourced = moveById.get(move.id);
-          return `${sourced?.effect.weather ?? ""} ${sourced?.name ?? ""}`
-            .toLowerCase()
-            .includes(requestedWeather);
-        });
-      })
+      .filter((pokemon) =>
+        weatherPlanForTeam([pokemon], request, catalog).setterMemberIds.includes(
+          pokemon.id,
+        ),
+      )
       .map((pokemon) => pokemon.id),
   );
 }
@@ -429,7 +418,7 @@ function asMembers(
         )[0]
     : undefined;
   const itemById = new Map(catalog.items.map((item) => [item.id, item]));
-  return roster.map((pokemon, index) => {
+  const materializedMembers = roster.map((pokemon, index) => {
     const mega = pokemon.id === megaCandidate?.id;
     let build = pokemon.build;
     if (mega) {
@@ -460,13 +449,28 @@ function asMembers(
       }
     }
     const materialized = { ...pokemon, build };
-    const jobExplanation = memberJobExplanation(materialized, request, catalog);
     return {
       ...materialized,
       slot: index,
       selectedRole: pokemon.roles[0] ?? "Flexible",
       mega,
       gamePlan: createGamePlan(materialized),
+    };
+  });
+  const weatherPlan = weatherPlanForTeam(
+    materializedMembers,
+    request,
+    catalog,
+  );
+  return materializedMembers.map((member) => {
+    const jobExplanation = memberJobExplanation(
+      member,
+      request,
+      catalog,
+      weatherPlan,
+    );
+    return {
+      ...member,
       jobs: jobExplanation.jobs,
       jobExplanation: jobExplanation.explanation,
     };
@@ -494,7 +498,13 @@ export function materializeTeamResult(
   journeyOptions: Pick<JourneyCurveOptions, "influence"> = {},
 ): GeneratedTeamResult {
   const members = asMembers(roster, request, catalog);
-  const teamQuality = teamQualityForTeam(members, request, catalog);
+  const weatherPlan = weatherPlanForTeam(members, request, catalog);
+  const teamQuality = teamQualityForTeam(
+    members,
+    request,
+    catalog,
+    weatherPlan,
+  );
   const resultWarnings = [...warnings];
   if (
     !teamQuality.proactiveWinCondition &&
@@ -511,12 +521,17 @@ export function materializeTeamResult(
     members,
     score: scoreTeam(members, request, catalog, journeyOptions),
     battleQuality: {
-      ability: abilityQualityForTeam(members, request, catalog),
+      ability: abilityQualityForTeam(members, request, catalog, weatherPlan),
       item: itemQualityForTeam(members, request, catalog),
       move: moveQualityForTeam(members, request, catalog),
       team: teamQuality,
-      plan: battlePlanQualityForTeam(members, request, catalog),
-      synergy: synergyQualityForTeam(members, request, catalog),
+      plan: battlePlanQualityForTeam(
+        members,
+        request,
+        catalog,
+        weatherPlan.context,
+      ),
+      synergy: synergyQualityForTeam(members, request, catalog, weatherPlan),
       acquisitionCurve: journeyCurveQualityForTeam(
         members,
         request,

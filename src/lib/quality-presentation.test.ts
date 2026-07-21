@@ -5,6 +5,7 @@ import { generateTeam } from "@/engine/generate";
 import { preV3SharePayloads } from "@/lib/fixtures/pre-v3-snapshots";
 import {
   alternativeQualitySummary,
+  alternativeTradeoffPresentation,
   battleQualityPresentation,
   resultScoringState,
 } from "@/lib/quality-presentation";
@@ -56,6 +57,28 @@ describe("battle-quality presentation", () => {
     expect(alternativeQualitySummary(0)).toBe("Comparable complete-team quality");
     expect(alternativeQualitySummary(-3)).toBe(
       "Lower complete-team quality with stated tradeoffs",
+    );
+  });
+
+  it("splits alternative tradeoffs into a readable summary and labeled details", () => {
+    const presentation = alternativeTradeoffPresentation(
+      "Highest complete-team quality while preserving every invariant. Ability fit: gains Blaze. Held-item fit: loses Berry and gains Specs. Move package: overall move quality improves. Team jobs preserve the same coverage. Team synergy: gains pivoting. Speed plan: gains Delphox (natural speed). Acquisition curve: gains Delphox (Early, Easy).",
+    );
+
+    expect(presentation.summary).toBe(
+      "Highest complete-team quality while preserving every invariant.",
+    );
+    expect(presentation.sections.map(({ label }) => label)).toEqual([
+      "Ability fit",
+      "Held-item fit",
+      "Move package",
+      "Team jobs",
+      "Team synergy",
+      "Speed plan",
+      "Acquisition curve",
+    ]);
+    expect(presentation.sections[1].explanation).toBe(
+      "loses Berry and gains Specs.",
     );
   });
 

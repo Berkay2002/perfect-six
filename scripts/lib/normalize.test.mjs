@@ -572,6 +572,121 @@ test("item capabilities and drawbacks come from source records", () => {
   });
 });
 
+test("numeric stat and damage modifiers retain sourced activation conditions", () => {
+  const abilities = normalizeAbilityRecords(
+    {
+      directAttack: {
+        name: "Direct Attack",
+        desc: "This Pokemon's Attack is doubled.",
+      },
+      directDefense: {
+        name: "Direct Defense",
+        desc: "This Pokemon's Defense is multiplied by 1.5.",
+      },
+      weatherSpeed: {
+        name: "Weather Speed",
+        desc: "If Rain Dance is active, this Pokemon's Speed is doubled.",
+      },
+      specialMitigation: {
+        name: "Special Mitigation",
+        desc: "This Pokemon receives 1/2 damage from special attacks.",
+      },
+      physicalMitigation: {
+        name: "Physical Mitigation",
+        desc: "This Pokemon receives 1/2 damage from physical attacks.",
+      },
+      speciesConditional: {
+        name: "Species Conditional",
+        desc: "If this Pokemon is a Fixturemon, its Attack is doubled.",
+      },
+    },
+    sourcePath,
+  );
+  const items = normalizeItemRecords(
+    {
+      choicePhysical: {
+        name: "Choice Physical",
+        desc: "Holder's Attack is 1.5x, but it can only select the first move it executes.",
+      },
+      specialArmor: {
+        name: "Special Armor",
+        desc: "Holder's Sp. Def is 1.5x, but it can only select damaging moves.",
+      },
+      evolutionArmor: {
+        name: "Evolution Armor",
+        desc: "If holder's species can evolve, its Defense and Sp. Def are 1.5x.",
+      },
+      speciesItem: {
+        name: "Species Item",
+        desc: "If held by a Fixturemon, its Attack is doubled.",
+      },
+    },
+    sourcePath,
+  );
+  const abilityById = new Map(abilities.map((record) => [record.id, record]));
+  const itemById = new Map(items.map((record) => [record.id, record]));
+
+  assert.deepEqual(abilityById.get("directattack").modifiers, {
+    statMultipliers: [
+      { stat: "attack", multiplier: 2, conditions: [] },
+    ],
+    damageTakenMultipliers: [],
+  });
+  assert.deepEqual(abilityById.get("directdefense").modifiers.statMultipliers, [
+    { stat: "defense", multiplier: 1.5, conditions: [] },
+  ]);
+  assert.deepEqual(abilityById.get("weatherspeed").modifiers.statMultipliers, [
+    {
+      stat: "speed",
+      multiplier: 2,
+      conditions: [{ kind: "weather", weather: "rain" }],
+    },
+  ]);
+  assert.deepEqual(
+    abilityById.get("specialmitigation").modifiers.damageTakenMultipliers,
+    [{ category: "special", multiplier: 0.5, conditions: [] }],
+  );
+  assert.deepEqual(
+    abilityById.get("physicalmitigation").modifiers.damageTakenMultipliers,
+    [{ category: "physical", multiplier: 0.5, conditions: [] }],
+  );
+  assert.deepEqual(abilityById.get("speciesconditional").modifiers, {
+    statMultipliers: [],
+    damageTakenMultipliers: [],
+  });
+
+  assert.deepEqual(itemById.get("choicephysical").modifiers.statMultipliers, [
+    {
+      stat: "attack",
+      multiplier: 1.5,
+      conditions: [{ kind: "choice-lock-compatible" }],
+    },
+  ]);
+  assert.deepEqual(itemById.get("specialarmor").modifiers.statMultipliers, [
+    {
+      stat: "specialDefense",
+      multiplier: 1.5,
+      conditions: [{ kind: "damaging-moves-only" }],
+    },
+  ]);
+  assert.deepEqual(itemById.get("evolutionarmor").modifiers.statMultipliers, [
+    {
+      stat: "defense",
+      multiplier: 1.5,
+      conditions: [{ kind: "can-evolve" }],
+    },
+    {
+      stat: "specialDefense",
+      multiplier: 1.5,
+      conditions: [{ kind: "can-evolve" }],
+    },
+  ]);
+  assert.deepEqual(itemById.get("speciesitem").modifiers, {
+    statMultipliers: [],
+    damageTakenMultipliers: [],
+  });
+});
+
 test("starter status follows sourced evolution ancestry", () => {
   const { species } = fixtureSpecies();
   const tree = species.find((record) => record.id === "tree");

@@ -3,7 +3,11 @@ import {
   isRecoveryMove,
   usableSetupStatsForBuild,
 } from "@/engine/move";
+import { weatherPlanForTeam } from "@/engine/weather";
 import type {
+  AbilityRecord,
+  BattleMechanicsContext,
+  BattleStat,
   BattlePlanQuality,
   GeneratorRequest,
   ItemRecord,
@@ -17,7 +21,8 @@ import type {
 /**
  * Planning stats use the standard level 50 comparison point with 31 IVs.
  * They are deterministic team-building indices, not damage-calculator output.
- * Only normalized, unconditional numeric modifiers are applied to the index.
+ * Only normalized numeric modifiers whose explicit conditions are active are
+ * applied to the index. A generator request never activates weather by itself.
  */
 export const STANDARD_BATTLE_LEVEL = 50 as const;
 export const STANDARD_IV = 31 as const;
@@ -124,27 +129,107 @@ function otherIndex(
   return Math.floor(beforeNature * natureMultiplier(nature, stat));
 }
 
+const STAT_LABELS: Record<BattleStat, string> = {
+  attack: "Attack",
+  specialAttack: "Special Attack",
+  defense: "Defense",
+  specialDefense: "Special Defense",
+  speed: "Speed",
+};
+
+type ModifierBuild = Pick<
+  PokemonRecord,
+  "build" | "finalEvolution" | "roles" | "stats" | "types"
+>;
+
+function modifierConditionsFit(
+  pokemon: ModifierBuild,
+  conditions: NonNullable<AbilityRecord["modifiers"]>["statMultipliers"][number]["conditions"],
+  context: BattleMechanicsContext,
+) {
+  const damagingCount = pokemon.build.moves.filter(
+    (move) => move.category !== "Status",
+  ).length;
+  return conditions.every((condition) => {
+    if (condition.kind === "weather") {
+      return context.activeWeather === condition.weather;
+    }
+    if (condition.kind === "can-evolve") return !pokemon.finalEvolution;
+    if (condition.kind === "damaging-moves-only") {
+      return damagingCount === pokemon.build.moves.length;
+    }
+    return damagingCount >= 3 && damagingCount === pokemon.build.moves.length;
+  });
+}
+
+function sourcedStatModifiers(
+  pokemon: ModifierBuild,
+  source: ItemRecord | AbilityRecord | undefined,
+  context: BattleMechanicsContext,
+  itemFit?: ReturnType<typeof itemCapabilityFitForBuild>,
+) {
+  return (source?.modifiers?.statMultipliers ?? []).filter((modifier) => {
+    if (!modifierConditionsFit(pokemon, modifier.conditions, context)) {
+      return false;
+    }
+    if (!itemFit || !("megaStone" in source!)) return true;
+    if (modifier.stat === "attack" && source.capabilities.damageCategory === "physical") {
+      return itemFit.damageAmplification;
+    }
+    if (
+      modifier.stat === "specialAttack" &&
+      source.capabilities.damageCategory === "special"
+    ) {
+      return itemFit.damageAmplification;
+    }
+    return true;
+  });
+}
+
+function modifierConditionExplanation(
+  conditions: NonNullable<AbilityRecord["modifiers"]>["statMultipliers"][number]["conditions"],
+) {
+  const weather = conditions.find((condition) => condition.kind === "weather");
+  return weather && weather.kind === "weather"
+    ? ` while ${weather.weather} is active`
+    : "";
+}
+
 export function standardStatIndexForBuild(
-  pokemon: Pick<PokemonRecord, "stats" | "build">,
+  pokemon: ModifierBuild,
   item: ItemRecord | undefined,
+  ability?: AbilityRecord,
+  context: BattleMechanicsContext = {},
 ): StandardStatIndex {
-  const speedMultiplier = item?.capabilities.speedMultiplier ?? 1;
-  const rawSpeed = otherIndex(
-    pokemon.stats.speed,
-    pokemon.build.evs.speed,
-    pokemon.build.nature,
-    "speed",
+  const itemFit = itemCapabilityFitForBuild(pokemon, item);
+  const itemModifiers = sourcedStatModifiers(
+    pokemon,
+    item,
+    context,
+    itemFit,
   );
-  const appliedModifiers: string[] = [];
-  if (speedMultiplier !== 1) {
-    appliedModifiers.push(
-      `${item?.name ?? pokemon.build.heldItem}: sourced ${speedMultiplier}x Speed`,
-    );
+  const abilityModifiers = sourcedStatModifiers(pokemon, ability, context);
+  const modifiers = [
+    ...itemModifiers.map((modifier) => ({ ...modifier, source: item!.name })),
+    ...abilityModifiers.map((modifier) => ({
+      ...modifier,
+      source: ability!.name,
+    })),
+  ];
+  if (
+    item &&
+    !item.modifiers &&
+    item.capabilities.speedMultiplier !== null &&
+    item.capabilities.speedMultiplier !== 1
+  ) {
+    modifiers.push({
+      stat: "speed",
+      multiplier: item.capabilities.speedMultiplier,
+      conditions: [],
+      source: item.name,
+    });
   }
-  return {
-    level: STANDARD_BATTLE_LEVEL,
-    assumedIvs: STANDARD_IV,
-    hp: hpIndex(pokemon.stats.hp, pokemon.build.evs.hp),
+  const rawStats = {
     attack: otherIndex(
       pokemon.stats.attack,
       pokemon.build.evs.attack,
@@ -169,7 +254,35 @@ export function standardStatIndexForBuild(
       pokemon.build.nature,
       "specialDefense",
     ),
-    speed: Math.floor(rawSpeed * speedMultiplier),
+    speed: otherIndex(
+      pokemon.stats.speed,
+      pokemon.build.evs.speed,
+      pokemon.build.nature,
+      "speed",
+    ),
+  };
+  const appliedModifiers: string[] = [];
+  for (const modifier of modifiers) {
+    appliedModifiers.push(
+      `${modifier.source}: sourced ${modifier.multiplier}x ${STAT_LABELS[modifier.stat]}${modifierConditionExplanation(modifier.conditions)}`,
+    );
+  }
+  const apply = (stat: BattleStat) =>
+    Math.floor(
+      rawStats[stat] *
+        modifiers
+          .filter((modifier) => modifier.stat === stat)
+          .reduce((product, modifier) => product * modifier.multiplier, 1),
+    );
+  return {
+    level: STANDARD_BATTLE_LEVEL,
+    assumedIvs: STANDARD_IV,
+    hp: hpIndex(pokemon.stats.hp, pokemon.build.evs.hp),
+    attack: apply("attack"),
+    defense: apply("defense"),
+    specialAttack: apply("specialAttack"),
+    specialDefense: apply("specialDefense"),
+    speed: apply("speed"),
     appliedModifiers,
   };
 }
@@ -186,6 +299,7 @@ function sourcedMoves(
 export function battlePlanMemberForBuild(
   pokemon: PokemonRecord,
   catalog: NormalizedCatalog,
+  context: BattleMechanicsContext = {},
 ) {
   const { moveById, itemById, abilityById } = lookupsFor(catalog);
   return battlePlanMemberWithLookups(
@@ -194,6 +308,7 @@ export function battlePlanMemberForBuild(
     moveById,
     itemById,
     abilityById,
+    context,
   );
 }
 
@@ -203,6 +318,7 @@ function battlePlanMemberWithLookups(
   moveById: ReadonlyMap<string, MoveRecord>,
   itemById: ReadonlyMap<string, ItemRecord>,
   abilityById: ReadonlyMap<string, NormalizedCatalog["abilities"][number]>,
+  context: BattleMechanicsContext,
 ) {
   const item = itemById.get(pokemon.build.heldItemId);
   const ability = abilityById.get(pokemon.build.abilityId);
@@ -221,9 +337,37 @@ function battlePlanMemberWithLookups(
     : [];
   const recoveryMoves = moves.filter(isRecoveryMove);
   const itemFit = itemCapabilityFitForBuild(pokemon, item);
-  const stats = standardStatIndexForBuild(pokemon, item);
+  const stats = standardStatIndexForBuild(pokemon, item, ability, context);
   const naturallyFast = damaging.length > 0 && stats.speed >= 150;
-  const itemSpeed = itemFit.speedControl && damaging.length >= 2;
+  const compatibleNumericItemSpeed = sourcedStatModifiers(
+    pokemon,
+    item,
+    context,
+    itemFit,
+  ).some(
+    (modifier) => modifier.stat === "speed" && modifier.multiplier > 1,
+  );
+  const legacyItemSpeed = !item?.modifiers && itemFit.speedMultiplier;
+  const itemSpeed =
+    damaging.length >= 2 &&
+    (compatibleNumericItemSpeed ||
+      legacyItemSpeed ||
+      itemFit.speedStages ||
+      itemFit.consumableSpeed);
+  const itemName = item?.name ?? pokemon.build.heldItem;
+  const abilityName = ability?.name ?? pokemon.build.ability;
+  const damageTakenModifiers = [
+    ...(item?.modifiers?.damageTakenMultipliers ?? []).map((modifier) => ({
+      ...modifier,
+      source: itemName,
+    })),
+    ...(ability?.modifiers?.damageTakenMultipliers ?? []).map((modifier) => ({
+      ...modifier,
+      source: abilityName,
+    })),
+  ].filter((modifier) =>
+    modifierConditionsFit(pokemon, modifier.conditions, context),
+  );
   const itemMitigation = {
     defense:
       item?.capabilities.defensiveStats.includes("defense") === true &&
@@ -245,10 +389,11 @@ function battlePlanMemberWithLookups(
     recoveryMoves,
     itemRecovery: itemFit.recovery,
     itemMitigation,
+    damageTakenModifiers,
     immunities: ability?.capabilities.immunities ?? [],
     absorptions: ability?.capabilities.absorptions ?? [],
-    abilityName: ability?.name ?? pokemon.build.ability,
-    itemName: item?.name ?? pokemon.build.heldItem,
+    abilityName,
+    itemName,
   };
 }
 
@@ -285,9 +430,17 @@ function resilienceForTeam(
   defenseStat: "defense" | "specialDefense",
   attackTypes: string[],
 ) {
-  const effectiveBulk = members.map((member) =>
-    Math.round((member.stats.hp * member.stats[defenseStat]) / 100),
-  );
+  const category = defenseStat === "defense" ? "physical" : "special";
+  const effectiveBulk = members.map((member) => {
+    const damageMultiplier = member.damageTakenModifiers
+      .filter((modifier) => modifier.category === category)
+      .reduce((product, modifier) => product * modifier.multiplier, 1);
+    return Math.round(
+      (member.stats.hp * member.stats[defenseStat]) /
+        100 /
+        damageMultiplier,
+    );
+  });
   const strongestBulk = [...effectiveBulk]
     .sort((left, right) => right - left)
     .slice(0, Math.min(3, effectiveBulk.length));
@@ -356,6 +509,13 @@ function resilienceForTeam(
     if (members[index].itemMitigation[defenseStat]) {
       facts.push(`${members[index].itemName} mitigation on ${pokemon.name}`);
     }
+    for (const modifier of members[index].damageTakenModifiers.filter(
+      (candidate) => candidate.category === category,
+    )) {
+      facts.push(
+        `${modifier.source}: sourced ${modifier.multiplier}x ${category} damage taken on ${pokemon.name}`,
+      );
+    }
     return facts;
   });
   return {
@@ -370,9 +530,12 @@ function resilienceForTeam(
 
 export function battlePlanQualityForTeam(
   team: PokemonRecord[],
-  _request: GeneratorRequest,
+  request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  context?: BattleMechanicsContext,
 ): BattlePlanQuality {
+  const mechanicsContext =
+    context ?? weatherPlanForTeam(team, request, catalog).context;
   const { moveById, itemById, abilityById, attackTypes } = lookupsFor(catalog);
   const members = team.map((pokemon) =>
     battlePlanMemberWithLookups(
@@ -381,6 +544,7 @@ export function battlePlanQualityForTeam(
       moveById,
       itemById,
       abilityById,
+      mechanicsContext,
     ),
   );
   const naturalSpeedMembers = team
