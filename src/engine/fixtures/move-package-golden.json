@@ -1,0 +1,83 @@
+{
+  "version": 1,
+  "sources": [
+    "https://play.pokemonshowdown.com/data/moves.json",
+    "https://play.pokemonshowdown.com/data/pokedex.json",
+    "https://data.pkmn.cc/sets/gen9.json",
+    "https://data.pkmn.cc/sets/gen7.json"
+  ],
+  "comparisons": [
+    {
+      "id": "reliable-electric-stab",
+      "context": { "types": ["Electric"], "stats": { "hp": 65, "attack": 65, "defense": 60, "specialAttack": 110, "specialDefense": 95, "speed": 130 }, "evs": { "hp": 0, "attack": 0, "defense": 0, "specialAttack": 252, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["thunderbolt", "icebeam", "voltswitch", "thunderwave"], "rationale": "Reliable Electric STAB, coverage, pivoting, and speed control form a repeatable special-attacking plan." },
+      "inferior": { "moves": ["thunder", "icebeam", "voltswitch", "thunderwave"], "rationale": "Outside rain, Thunder gives up too much accuracy for its extra base power." }
+    },
+    {
+      "id": "physical-stat-alignment",
+      "context": { "types": ["Fighting"], "stats": { "hp": 90, "attack": 130, "defense": 80, "specialAttack": 65, "specialDefense": 85, "speed": 55 }, "evs": { "hp": 0, "attack": 252, "defense": 0, "specialAttack": 0, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["closecombat", "earthquake", "knockoff", "bulletpunch"], "rationale": "The four attacks use the invested Attack stat while adding STAB, coverage, utility, and priority." },
+      "inferior": { "moves": ["aurasphere", "earthpower", "darkpulse", "vacuumwave"], "rationale": "The same jobs are attempted through an uninvested and much weaker Special Attack stat." }
+    },
+    {
+      "id": "setup-needs-payoff",
+      "context": { "types": ["Fighting", "Steel"], "stats": { "hp": 70, "attack": 110, "defense": 70, "specialAttack": 70, "specialDefense": 70, "speed": 90 }, "evs": { "hp": 0, "attack": 252, "defense": 0, "specialAttack": 0, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["swordsdance", "closecombat", "earthquake", "extremespeed"], "rationale": "Swords Dance directly improves three physical attacks, including STAB and priority." },
+      "inferior": { "moves": ["nastyplot", "closecombat", "earthquake", "extremespeed"], "rationale": "Nasty Plot boosts an unused Special Attack stat and has no move payoff." }
+    },
+    {
+      "id": "coverage-over-repeated-stab",
+      "context": { "types": ["Water", "Psychic"], "stats": { "hp": 60, "attack": 75, "defense": 85, "specialAttack": 100, "specialDefense": 85, "speed": 115 }, "evs": { "hp": 0, "attack": 0, "defense": 0, "specialAttack": 252, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["surf", "psychic", "icebeam", "thunderbolt"], "rationale": "Two STAB types plus Ice and Electric coverage reach materially different targets." },
+      "inferior": { "moves": ["surf", "hydropump", "scald", "waterpulse"], "rationale": "Four Water attacks repeat one offensive type without adding useful coverage." }
+    },
+    {
+      "id": "bulky-pivot-package",
+      "context": { "types": ["Flying", "Steel"], "stats": { "hp": 98, "attack": 87, "defense": 105, "specialAttack": 53, "specialDefense": 85, "speed": 67 }, "evs": { "hp": 252, "attack": 4, "defense": 252, "specialAttack": 0, "specialDefense": 0, "speed": 0 } },
+      "preferred": { "moves": ["bravebird", "bodypress", "roost", "uturn"], "rationale": "The package combines STAB pressure, Defense-based coverage, recovery, and pivoting." },
+      "inferior": { "moves": ["bravebird", "roost", "recover", "rest"], "rationale": "Three recovery moves consume slots without adding coverage or a switching plan." }
+    },
+    {
+      "id": "hazards-and-removal-have-separate-jobs",
+      "context": { "types": ["Ground", "Fighting"], "stats": { "hp": 115, "attack": 131, "defense": 131, "specialAttack": 53, "specialDefense": 53, "speed": 87 }, "evs": { "hp": 0, "attack": 252, "defense": 0, "specialAttack": 0, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["earthquake", "knockoff", "rapidspin", "stealthrock"], "rationale": "Pressure, item disruption, hazard removal, and hazard setting are distinct useful jobs." },
+      "inferior": { "moves": ["earthquake", "highhorsepower", "stompingtantrum", "bulldoze"], "rationale": "Four Ground attacks largely repeat the same coverage and provide no team utility." }
+    },
+    {
+      "id": "dual-screens-package",
+      "context": { "types": ["Dark", "Fairy"], "stats": { "hp": 95, "attack": 120, "defense": 65, "specialAttack": 95, "specialDefense": 75, "speed": 60 }, "evs": { "hp": 252, "attack": 4, "defense": 0, "specialAttack": 0, "specialDefense": 252, "speed": 0 } },
+      "preferred": { "moves": ["playrough", "suckerpunch", "reflect", "lightscreen"], "rationale": "Dual screens support the team while Fairy STAB and priority keep the setter active." },
+      "inferior": { "moves": ["playrough", "darkestlariat", "crunch", "knockoff"], "rationale": "Three Dark attacks repeat one coverage type and abandon the support job." }
+    },
+    {
+      "id": "one-weather-plan",
+      "context": { "types": ["Fire"], "stats": { "hp": 73, "attack": 76, "defense": 75, "specialAttack": 81, "specialDefense": 100, "speed": 100 }, "evs": { "hp": 0, "attack": 0, "defense": 0, "specialAttack": 252, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["flamethrower", "solarbeam", "sunnyday", "willowisp"], "rationale": "Sun supports the Fire STAB and Solar Beam plan while Will-O-Wisp adds status pressure." },
+      "inferior": { "moves": ["fireblast", "sunnyday", "raindance", "sandstorm"], "rationale": "Three mutually exclusive weather setters contradict one another and leave one attack." }
+    },
+    {
+      "id": "one-setup-plan",
+      "context": { "types": ["Dragon", "Flying"], "stats": { "hp": 91, "attack": 134, "defense": 95, "specialAttack": 100, "specialDefense": 100, "speed": 80 }, "evs": { "hp": 0, "attack": 252, "defense": 0, "specialAttack": 0, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["dragondance", "outrage", "earthquake", "extremespeed"], "rationale": "One setup move improves a STAB attack, coverage, and priority with a clear sweep payoff." },
+      "inferior": { "moves": ["dragondance", "swordsdance", "agility", "outrage"], "rationale": "Three overlapping setup moves leave only one attack and redundantly boost the same stats." }
+    },
+    {
+      "id": "bulky-status-and-recovery",
+      "context": { "types": ["Poison", "Water"], "stats": { "hp": 50, "attack": 63, "defense": 152, "specialAttack": 53, "specialDefense": 142, "speed": 35 }, "evs": { "hp": 252, "attack": 0, "defense": 252, "specialAttack": 0, "specialDefense": 4, "speed": 0 } },
+      "preferred": { "moves": ["scald", "toxic", "recover", "haze"], "rationale": "A bulky build needs repeatable STAB, status, recovery, and anti-setup utility more than raw coverage." },
+      "inferior": { "moves": ["hydropump", "blizzard", "thunder", "focusblast"], "rationale": "Four inaccurate attacks use a weak uninvested offensive stat and discard the defensive job." }
+    },
+    {
+      "id": "removal-screen-status-package",
+      "context": { "types": ["Fairy", "Flying"], "stats": { "hp": 90, "attack": 60, "defense": 90, "specialAttack": 110, "specialDefense": 105, "speed": 80 }, "evs": { "hp": 252, "attack": 0, "defense": 0, "specialAttack": 4, "specialDefense": 252, "speed": 0 } },
+      "preferred": { "moves": ["moonblast", "defog", "lightscreen", "thunderwave"], "rationale": "STAB, hazard removal, a screen, and paralysis expose four distinct jobs." },
+      "inferior": { "moves": ["moonblast", "dazzlinggleam", "drainingkiss", "disarmingvoice"], "rationale": "Four Fairy attacks repeat the same coverage and provide little utility." }
+    },
+    {
+      "id": "accurate-balanced-coverage",
+      "context": { "types": ["Water", "Psychic"], "stats": { "hp": 60, "attack": 75, "defense": 85, "specialAttack": 100, "specialDefense": 85, "speed": 115 }, "evs": { "hp": 0, "attack": 0, "defense": 0, "specialAttack": 252, "specialDefense": 4, "speed": 252 } },
+      "preferred": { "moves": ["surf", "icebeam", "psychic", "rapidspin"], "rationale": "Accurate dual STAB, useful coverage, and removal make progress consistently." },
+      "inferior": { "moves": ["hydropump", "blizzard", "thunder", "focusblast"], "rationale": "Extra raw power is offset by repeated accuracy risk and no utility capability." }
+    }
+  ]
+}

@@ -1,5 +1,10 @@
 import { assembleCandidates } from "@/engine/catalog";
+import { abilityQualityForTeam } from "@/engine/ability";
+import { battlePlanQualityForTeam } from "@/engine/battle-plan";
+import { itemQualityForTeam } from "@/engine/item";
+import { moveQualityForTeam } from "@/engine/move";
 import { scoreTeam } from "@/engine/score";
+import { memberJobExplanation, teamQualityForTeam } from "@/engine/team";
 import {
   canonicalSeed,
   createRandom,
@@ -7,10 +12,9 @@ import {
 } from "@/lib/random";
 import type {
   GeneratorRequest,
+  GeneratedTeamResult,
   NormalizedCatalog,
   PokemonRecord,
-  TeamMember,
-  TeamResult,
   TeamWarning,
   Weather,
 } from "@/lib/types";
@@ -19,7 +23,7 @@ const BEAM_WIDTH = 120;
 const QUALITY_BEAM_WIDTH = BEAM_WIDTH / 2;
 const CANDIDATE_WIDTH = 220;
 const ELITE_BAND = 3;
-const SEED_AFFINITY_RANGE = 8;
+const SEED_AFFINITY_RANGE = 9;
 
 type BeamState = {
   members: PokemonRecord[];
@@ -124,6 +128,7 @@ function validateLocks(
 function individualScore(
   pokemon: PokemonRecord,
   request: GeneratorRequest,
+  weatherSupportIds: ReadonlySet<string>,
 ) {
   const stats = pokemon.stats;
   const bulk = stats.hp + stats.defense + stats.specialDefense;
@@ -132,7 +137,9 @@ function individualScore(
   if (request.style === "aggressive") style = offense / 5;
   if (request.style === "bulky") style = bulk / 8;
   if (request.style === "balanced") style = (offense + bulk) / 16;
-  if (request.style === "weather") style = 5;
+  if (request.style === "weather") {
+    style = weatherSupportIds.has(pokemon.id) ? 45 : 5;
+  }
   const journey =
     request.availability === "journey" ? pokemon.availability.score * 0.45 : 25;
   return pokemon.battleScore * 0.55 + journey + style;
@@ -141,22 +148,60 @@ function individualScore(
 function candidatePool(
   candidates: PokemonRecord[],
   request: GeneratorRequest,
+  weatherSupportIds: ReadonlySet<string>,
 ) {
   const sorted = [...candidates].sort((left, right) => {
     const difference =
-      individualScore(right, request) - individualScore(left, request);
+      individualScore(right, request, weatherSupportIds) -
+      individualScore(left, request, weatherSupportIds);
     return difference || left.id.localeCompare(right.id);
   });
   const protectedCandidates = [
     ...sorted.slice(0, CANDIDATE_WIDTH),
     ...sorted.filter((pokemon) => pokemon.starter).slice(0, 70),
     ...sorted.filter((pokemon) => pokemon.megaFormIds.length > 0).slice(0, 50),
+    ...sorted.filter((pokemon) => weatherSupportIds.has(pokemon.id)),
   ];
   return [
     ...new Map(
       protectedCandidates.map((pokemon) => [pokemon.id, pokemon]),
     ).values(),
   ];
+}
+
+function requestedWeatherSupportIds(
+  candidates: PokemonRecord[],
+  request: GeneratorRequest,
+  catalog: NormalizedCatalog,
+) {
+  const requestedWeather = request.weather;
+  if (
+    request.style !== "weather" ||
+    !requestedWeather ||
+    requestedWeather === "random"
+  ) {
+    return new Set<string>();
+  }
+  const abilityById = new Map(
+    catalog.abilities.map((ability) => [ability.id, ability]),
+  );
+  const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
+  return new Set(
+    candidates
+      .filter((pokemon) => {
+        const ability = abilityById.get(pokemon.build.abilityId);
+        if (ability?.capabilities.weather.includes(requestedWeather)) {
+          return true;
+        }
+        return pokemon.build.moves.some((move) => {
+          const sourced = moveById.get(move.id);
+          return `${sourced?.effect.weather ?? ""} ${sourced?.name ?? ""}`
+            .toLowerCase()
+            .includes(requestedWeather);
+        });
+      })
+      .map((pokemon) => pokemon.id),
+  );
 }
 
 export function canonicalRosterKey(members: readonly { id: string }[]) {
@@ -257,6 +302,7 @@ function hardValidPartial(
 function partialHeuristic(
   members: PokemonRecord[],
   request: GeneratorRequest,
+  weatherSupportIds: ReadonlySet<string>,
 ) {
   const typeDiversity = new Set(members.flatMap((pokemon) => pokemon.types)).size;
   const roleDiversity = new Set(members.flatMap((pokemon) => pokemon.roles)).size;
@@ -278,6 +324,9 @@ function partialHeuristic(
     (request.requireMega &&
     members.some((pokemon) => pokemon.megaFormIds.length > 0)
       ? 2
+      : 0) +
+    (members.some((pokemon) => weatherSupportIds.has(pokemon.id))
+      ? 25
       : 0)
   );
 }
@@ -286,7 +335,7 @@ function asMembers(
   roster: PokemonRecord[],
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
-): TeamMember[] {
+): GeneratedTeamResult["members"] {
   const megaCandidate = request.requireMega
     ? [...roster]
         .filter((pokemon) => pokemon.megaFormIds.length > 0)
@@ -328,14 +377,17 @@ function asMembers(
       }
     }
     const materialized = { ...pokemon, build };
+    const jobExplanation = memberJobExplanation(materialized, request, catalog);
     return {
       ...materialized,
       slot: index,
       selectedRole: pokemon.roles[0] ?? "Flexible",
       mega,
       gamePlan: createGamePlan(materialized),
+      jobs: jobExplanation.jobs,
+      jobExplanation: jobExplanation.explanation,
     };
-  });
+  }) as GeneratedTeamResult["members"];
 }
 
 function createGamePlan(pokemon: PokemonRecord) {
@@ -356,11 +408,32 @@ export function materializeTeamResult(
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
   warnings: TeamWarning[] = [],
-): TeamResult {
+): GeneratedTeamResult {
+  const members = asMembers(roster, request, catalog);
+  const teamQuality = teamQualityForTeam(members, request, catalog);
+  const resultWarnings = [...warnings];
+  if (
+    !teamQuality.proactiveWinCondition &&
+    !resultWarnings.some((warning) => warning.code === "low-confidence-win-condition")
+  ) {
+    resultWarnings.push({
+      code: "low-confidence-win-condition",
+      severity: "warning",
+      message:
+        "Low confidence: this team has no concrete proactive win condition in its validated builds.",
+    });
+  }
   return {
-    members: asMembers(roster, request, catalog) as TeamResult["members"],
-    score: scoreTeam(roster, request, catalog),
-    warnings,
+    members,
+    score: scoreTeam(members, request, catalog),
+    battleQuality: {
+      ability: abilityQualityForTeam(members, request, catalog),
+      item: itemQualityForTeam(members, request, catalog),
+      move: moveQualityForTeam(members, request, catalog),
+      team: teamQuality,
+      plan: battlePlanQualityForTeam(members, request, catalog),
+    },
+    warnings: resultWarnings,
     provenance: {
       dataVersion: catalog.manifest.dataVersion,
       engineVersion: catalog.manifest.engineVersion,
@@ -374,7 +447,7 @@ export function materializeTeamResult(
 export function generateTeam(
   originalRequest: GeneratorRequest,
   catalog: NormalizedCatalog,
-): TeamResult {
+): GeneratedTeamResult {
   const request = resolveWeather(originalRequest);
   const requestKey = canonicalRequest(request);
   const random = createRandom(requestKey);
@@ -391,7 +464,12 @@ export function generateTeam(
   }
   validateLocks(request, candidates);
   const byId = new Map(candidates.map((candidate) => [candidate.id, candidate]));
-  const pool = candidatePool(candidates, request);
+  const weatherSupportIds = requestedWeatherSupportIds(
+    candidates,
+    request,
+    catalog,
+  );
+  const pool = candidatePool(candidates, request, weatherSupportIds);
   const affinityById = new Map(
     candidates.map((candidate) => [
       candidate.id,
@@ -412,7 +490,7 @@ export function generateTeam(
         if (!hardValidPartial(members, 5 - slot, request)) continue;
         next.push({
           members,
-          heuristic: partialHeuristic(members, request),
+          heuristic: partialHeuristic(members, request, weatherSupportIds),
           seedAffinity:
             state.seedAffinity +
             (lockedId ? 0 : (affinityById.get(pokemon.id) ?? 0.5)),

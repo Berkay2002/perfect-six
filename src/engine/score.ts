@@ -1,3 +1,8 @@
+import { abilityQualityForTeam } from "@/engine/ability";
+import { battlePlanQualityForTeam } from "@/engine/battle-plan";
+import { itemQualityForTeam } from "@/engine/item";
+import { moveQualityForTeam } from "@/engine/move";
+import { teamQualityForTeam } from "@/engine/team";
 import type {
   GeneratorRequest,
   MoveRecord,
@@ -59,23 +64,34 @@ function roleScore(team: PokemonRecord[]) {
 function defensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
   const attackTypes = Object.keys(catalog.typeChart);
   if (attackTypes.length === 0 || team.length === 0) return 50;
+  const abilityById = new Map(
+    catalog.abilities.map((ability) => [ability.id, ability]),
+  );
   let penalty = 0;
   let resistanceBonus = 0;
+  let absorptionBonus = 0;
   for (const attackType of attackTypes) {
-    const matchup = team.map((pokemon) =>
-      pokemon.types.reduce(
+    const matchup = team.map((pokemon) => {
+      const capabilities = abilityById.get(pokemon.build.abilityId)
+        ?.capabilities;
+      if (capabilities?.absorptions.includes(attackType)) {
+        absorptionBonus += 0.75;
+        return 0;
+      }
+      if (capabilities?.immunities.includes(attackType)) return 0;
+      return pokemon.types.reduce(
         (multiplier, defenderType) =>
           multiplier *
           (catalog.typeChart[attackType]?.[defenderType] ?? 1),
         1,
-      ),
-    );
+      );
+    });
     const weak = matchup.filter((value) => value > 1).length;
     const resistant = matchup.filter((value) => value < 1).length;
     if (weak >= 3) penalty += (weak - 2) * 7;
     resistanceBonus += Math.min(weak, resistant) * 1.5;
   }
-  return clamp(88 - penalty + resistanceBonus);
+  return clamp(88 - penalty + resistanceBonus + absorptionBonus);
 }
 
 function offensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
@@ -114,7 +130,7 @@ function weatherScore(
   const abilityById = new Map(
     catalog.abilities.map((ability) => [ability.id, ability]),
   );
-  const matches = team.filter((pokemon) => {
+  const matches = team.reduce((sum, pokemon) => {
     const moveMatch = pokemon.build.moves.some((move) => {
       const sourced = moveById.get(move.id);
       return `${sourced?.effect.weather ?? ""} ${sourced?.name ?? ""}`
@@ -122,11 +138,12 @@ function weatherScore(
         .includes(term);
     });
     const ability = abilityById.get(pokemon.build.abilityId);
-    const abilityMatch = `${ability?.name ?? ""} ${ability?.description ?? ""}`
-      .toLowerCase()
-      .includes(term);
-    return moveMatch || abilityMatch;
-  }).length;
+    const abilityMatch = ability?.capabilities?.weather.includes(term) ?? false;
+    const abilityDetriment =
+      ability?.capabilities?.weatherDetriments?.includes(term) ?? false;
+    const abilityEffect = Number(abilityMatch) - Number(abilityDetriment);
+    return sum + (moveMatch ? Math.max(1, abilityEffect) : abilityEffect);
+  }, 0);
   return clamp(40 + matches * 12);
 }
 
@@ -173,13 +190,23 @@ export function scoreTeam(
   const offensiveReach = offensiveScore(team, catalog);
   const utility = utilityScore(team, moveById);
   const weather = weatherScore(team, request, catalog);
+  const abilityQuality = abilityQualityForTeam(team, request, catalog);
+  const itemQuality = itemQualityForTeam(team, request, catalog);
+  const moveQuality = moveQualityForTeam(team, request, catalog);
+  const teamQuality = teamQualityForTeam(team, request, catalog);
+  const battlePlan = battlePlanQualityForTeam(team, request, catalog);
   const battleScore = clamp(
     roleCoverage * 0.23 +
       defensiveFit * 0.25 +
       offensiveReach * 0.25 +
       utility * 0.17 +
       average(team.map((pokemon) => pokemon.battleScore)) * 0.05 +
-      weather * 0.05,
+      weather * 0.05 +
+      abilityQuality.contribution +
+      itemQuality.contribution +
+      moveQuality.contribution +
+      teamQuality.contribution +
+      battlePlan.contribution,
   );
 
   return {

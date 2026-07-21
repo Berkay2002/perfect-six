@@ -7,11 +7,18 @@ import type {
   TeamStyle,
   Weather,
 } from "@/lib/types";
+import { abilityBuildValue, abilityRatingValue } from "@/engine/ability";
+import { itemBuildValue } from "@/engine/item";
+import { movePackageQualityForBuild } from "@/engine/move";
 
 const clampScore = (value: number) => Math.max(0, Math.min(100, value));
 
 function buildStyleScore(
   build: BuildTemplate,
+  pokemon: Pick<
+    PokemonRecord,
+    "finalEvolution" | "roles" | "stats" | "types"
+  >,
   style: TeamStyle,
   weather: Weather | undefined,
   catalog: NormalizedCatalog,
@@ -35,19 +42,42 @@ function buildStyleScore(
           .includes(weather),
       ).length
     : 0;
+  const ability = catalog.abilities.find(
+    (record) => record.id === build.abilityId,
+  );
+  const abilityWeatherMatch =
+    style === "weather" &&
+    weather !== undefined &&
+    weather !== "random" &&
+    ability?.capabilities.weather.includes(weather)
+      ? 1
+      : 0;
+  const abilityValue = abilityBuildValue(ability, { style, weather });
+  const item = catalog.items.find((record) => record.id === build.heldItemId);
+  const itemValue = itemBuildValue(
+    { ...pokemon, build },
+    item,
+    { style },
+    catalog,
+  );
+  const moveQuality = movePackageQualityForBuild(
+    { ...pokemon, build },
+    catalog,
+    { style, weather },
+  );
 
   switch (style) {
     case "aggressive":
-      return damaging.length * 8 + damaging.reduce((sum, move) => sum + (move.power ?? 0), 0) / 25;
+      return abilityValue + itemValue + moveQuality.score * 0.65 + damaging.length * 8;
     case "bulky":
-      return utility.length * 9 + moves.filter((move) => move.effect.healingFraction).length * 12;
+      return abilityValue + itemValue + moveQuality.score * 0.55 + utility.length * 9 + moves.filter((move) => move.effect.healingFraction).length * 12;
     case "weather":
-      return weatherMatches * 18 + utility.length * 4;
+      return abilityValue + itemValue + moveQuality.score * 0.5 + (weatherMatches + abilityWeatherMatch) * 18 + utility.length * 4;
     case "random":
-      return 0;
+      return abilityValue + itemValue + moveQuality.score * 0.25;
     case "balanced":
     default:
-      return damaging.length * 5 + utility.length * 7;
+      return abilityValue + itemValue + moveQuality.score * 0.6 + damaging.length * 5 + utility.length * 7;
   }
 }
 
@@ -100,6 +130,12 @@ export function assembleCandidates(
     )
     .map((species): PokemonRecord => {
       const role = roles.get(species.id);
+      const pokemonContext = {
+        finalEvolution: species.finalEvolution,
+        roles: role?.roles ?? ["Flexible"],
+        stats: species.stats,
+        types: species.types,
+      };
       const speciesBuilds = builds.get(species.id) ?? [];
       const nonMegaBuilds = speciesBuilds.filter(
         (build) => !itemById.get(build.heldItemId)?.megaStone,
@@ -109,16 +145,26 @@ export function assembleCandidates(
       ].sort(
         (left, right) => {
           const scoreDifference =
-            buildStyleScore(right, style, weather, catalog) -
-            buildStyleScore(left, style, weather, catalog);
+            buildStyleScore(right, pokemonContext, style, weather, catalog) -
+            buildStyleScore(left, pokemonContext, style, weather, catalog);
           return scoreDifference || left.id.localeCompare(right.id);
         },
       )[0];
       const rawBattleScore = role?.battleScore ?? 50;
-      const abilityRating =
-        abilityById.get(selectedBuild.abilityId)?.rating ?? 0;
+      const ability = abilityById.get(selectedBuild.abilityId);
+      const selectedItem = itemById.get(selectedBuild.heldItemId);
       const battleScore = clampScore(
-        rawBattleScore + Math.min(0, abilityRating) * 25,
+        Math.round(
+          rawBattleScore +
+            abilityRatingValue(ability) +
+            itemBuildValue(
+              { ...pokemonContext, build: selectedBuild },
+              selectedItem,
+              { style },
+              catalog,
+            ) *
+              0.25,
+        ),
       );
       return {
         ...species,

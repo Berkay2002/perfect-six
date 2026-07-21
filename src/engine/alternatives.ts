@@ -70,13 +70,58 @@ function asAlternative(
   const replacement = result.members.find(
     (member) => member.id === candidate.replacement.id,
   )!;
+  const currentCapabilities = current.battleQuality?.move?.capabilities;
+  const nextCapabilities = result.battleQuality.move.capabilities;
+  const capabilityLabels = {
+    stab: "STAB pressure",
+    priority: "priority",
+    recovery: "recovery",
+    status: "status pressure",
+    setup: "setup payoff",
+    pivoting: "pivoting",
+    hazards: "hazards",
+    removal: "hazard removal",
+    screens: "screens",
+    weather: "weather support",
+  } as const;
+  const changed = currentCapabilities
+    ? (Object.keys(capabilityLabels) as Array<keyof typeof capabilityLabels>)
+        .filter((capability) => currentCapabilities[capability] !== nextCapabilities[capability])
+        .map(
+          (capability) =>
+            `${nextCapabilities[capability] ? "gains" : "loses"} ${capabilityLabels[capability]}`,
+        )
+    : [];
+  const moveTradeoff = changed.length > 0
+    ? ` Move package ${changed.join(" and ")}.`
+    : ` Move-package quality changes by ${result.battleQuality.move.contribution - (current.battleQuality?.move?.contribution ?? 0)} point(s) without changing its exposed jobs.`;
+  const currentJobs = current.battleQuality?.team?.coveredJobs;
+  const nextJobs = result.battleQuality.team.coveredJobs;
+  const gainedJobs = currentJobs
+    ? nextJobs.filter((job) => !currentJobs.includes(job))
+    : nextJobs;
+  const lostJobs = currentJobs
+    ? currentJobs.filter((job) => !nextJobs.includes(job))
+    : [];
+  const teamTradeoff = !currentJobs
+    ? ` Team jobs gain a current-engine explanation covering ${nextJobs.join(", ") || "no supported jobs"}.`
+    : gainedJobs.length > 0
+      ? ` Team jobs gain ${gainedJobs.join(", ")}${lostJobs.length > 0 ? ` and lose ${lostJobs.join(", ")}` : ""}.`
+      : lostJobs.length > 0
+        ? ` Team jobs lose ${lostJobs.join(", ")}.`
+        : ` Team jobs preserve the same coverage; important gaps remain ${result.battleQuality.team.importantGaps.join(", ") || "none"}.`;
+  const currentPlan = current.battleQuality?.plan;
+  const nextPlan = result.battleQuality.plan;
+  const planTradeoff = currentPlan
+    ? ` Speed plan changes by ${nextPlan.speed.score - currentPlan.speed.score} point(s); physical resilience changes by ${nextPlan.physicalResilience.score - currentPlan.physicalResilience.score} and special resilience by ${nextPlan.specialResilience.score - currentPlan.specialResilience.score}.`
+    : ` Speed plan and physical resilience gain current-engine explanations at ${nextPlan.speed.score}/100 and ${nextPlan.physicalResilience.score}/100; special resilience is ${nextPlan.specialResilience.score}/100.`;
   return {
     kind,
     label,
     replacement,
     result,
-    scoreDelta: candidate.score.total - current.score.total,
-    tradeoff,
+    scoreDelta: result.score.total - current.score.total,
+    tradeoff: `${tradeoff}${moveTradeoff}${teamTradeoff}${planTradeoff}`,
   };
 }
 
@@ -98,12 +143,16 @@ export function generateAlternatives(
       selectedRole,
       mega,
       gamePlan,
+      jobs,
+      jobExplanation,
       ...pokemon
     } = member;
     void slot;
     void selectedRole;
     void mega;
     void gamePlan;
+    void jobs;
+    void jobExplanation;
     return pokemon;
   });
   const original = team[slot];

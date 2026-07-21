@@ -1,0 +1,72 @@
+{
+  "standardLevel": 50,
+  "assumedIvs": 31,
+  "scenarios": [
+    {
+      "id": "fast-offense",
+      "label": "Fast offense",
+      "speeds": [130, 120, 110, 100, 90, 80],
+      "hp": [75, 80, 80, 85, 90, 90],
+      "defense": [75, 80, 80, 85, 90, 90],
+      "specialDefense": [75, 80, 80, 85, 90, 90],
+      "prioritySlots": [],
+      "speedSetupSlots": [5],
+      "recoverySlots": [],
+      "expected": {
+        "minimumSpeed": 75,
+        "speedFact": "natural Speed",
+        "maximumDefenseGap": 15
+      }
+    },
+    {
+      "id": "priority-control",
+      "label": "Priority-based control",
+      "speeds": [45, 50, 55, 60, 65, 70],
+      "hp": [85, 85, 90, 90, 95, 95],
+      "defense": [85, 90, 85, 90, 95, 95],
+      "specialDefense": [85, 90, 85, 90, 95, 95],
+      "prioritySlots": [0, 1, 2],
+      "speedSetupSlots": [],
+      "recoverySlots": [],
+      "expected": {
+        "minimumSpeed": 55,
+        "speedFact": "priority",
+        "maximumDefenseGap": 15
+      }
+    },
+    {
+      "id": "bulky-team",
+      "label": "Bulky team",
+      "speeds": [35, 40, 45, 50, 55, 60],
+      "hp": [110, 105, 100, 105, 100, 110],
+      "defense": [115, 105, 110, 100, 115, 105],
+      "specialDefense": [105, 115, 100, 110, 105, 115],
+      "prioritySlots": [5],
+      "speedSetupSlots": [],
+      "recoverySlots": [0, 1, 2, 3],
+      "expected": {
+        "minimumPhysicalDefense": 65,
+        "minimumSpecialDefense": 65,
+        "speedFact": "priority",
+        "maximumDefenseGap": 15
+      }
+    },
+    {
+      "id": "one-sided-defense",
+      "label": "Asymmetric defensive weakness",
+      "speeds": [45, 50, 55, 60, 65, 70],
+      "hp": [105, 105, 105, 105, 105, 105],
+      "defense": [145, 140, 150, 145, 140, 150],
+      "specialDefense": [40, 45, 40, 45, 40, 45],
+      "prioritySlots": [],
+      "speedSetupSlots": [],
+      "recoverySlots": [0, 1],
+      "expected": {
+        "minimumDefenseGap": 25,
+        "maximumContribution": -1,
+        "speedFact": "missing",
+        "concern": "one-sided"
+      }
+    }
+  ]
+}

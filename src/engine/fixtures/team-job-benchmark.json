@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "minimumProfiles": {
+    "balanced": {
+      "expectations": [
+        "physical pressure",
+        "special pressure",
+        "speed control",
+        "defensive switch-in",
+        "proactive win condition"
+      ],
+      "minimumMet": 4,
+      "requiredConditions": ["proactive win condition"]
+    },
+    "aggressive": {
+      "expectations": [
+        "physical pressure",
+        "special pressure",
+        "speed control",
+        "proactive win condition"
+      ],
+      "minimumMet": 3,
+      "requiredConditions": ["proactive win condition"]
+    },
+    "bulky": {
+      "expectations": [
+        "defensive switch-in",
+        "sustain",
+        "hazards or status pressure",
+        "pivoting or hazard removal",
+        "proactive win condition"
+      ],
+      "minimumMet": 4,
+      "requiredConditions": [
+        "defensive switch-in",
+        "proactive win condition"
+      ]
+    },
+    "weather": {
+      "expectations": [
+        "weather support",
+        "physical or special pressure",
+        "speed control or pivoting",
+        "proactive win condition"
+      ],
+      "minimumMet": 4,
+      "requiredConditions": ["proactive win condition"]
+    }
+  },
+  "requests": [
+    { "label": "balanced", "seed": "JOBS-BAL-01", "style": "balanced", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "balanced", "seed": "JOBS-BAL-02", "style": "balanced", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "balanced", "seed": "JOBS-BAL-03", "style": "balanced", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "balanced", "seed": "JOBS-BAL-04", "style": "balanced", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "balanced", "seed": "JOBS-BAL-05", "style": "balanced", "availability": "journey", "allowSpecial": false, "requireMega": true },
+
+    { "label": "aggressive", "seed": "JOBS-AGG-01", "style": "aggressive", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "aggressive", "seed": "JOBS-AGG-02", "style": "aggressive", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "aggressive", "seed": "JOBS-AGG-03", "style": "aggressive", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "aggressive", "seed": "JOBS-AGG-04", "style": "aggressive", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "aggressive", "seed": "JOBS-AGG-05", "style": "aggressive", "availability": "journey", "allowSpecial": false, "requireMega": true },
+
+    { "label": "bulky", "seed": "JOBS-BUL-01", "style": "bulky", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "bulky", "seed": "JOBS-BUL-02", "style": "bulky", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "bulky", "seed": "JOBS-BUL-03", "style": "bulky", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "bulky", "seed": "JOBS-BUL-04", "style": "bulky", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "bulky", "seed": "JOBS-BUL-05", "style": "bulky", "availability": "journey", "allowSpecial": false, "requireMega": true },
+
+    { "label": "rain", "seed": "JOBS-RAIN-01", "style": "weather", "weather": "rain", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "rain", "seed": "JOBS-RAIN-02", "style": "weather", "weather": "rain", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "rain", "seed": "JOBS-RAIN-03", "style": "weather", "weather": "rain", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "rain", "seed": "JOBS-RAIN-04", "style": "weather", "weather": "rain", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "rain", "seed": "JOBS-RAIN-05", "style": "weather", "weather": "rain", "availability": "journey", "allowSpecial": false, "requireMega": true },
+
+    { "label": "sun", "seed": "JOBS-SUN-01", "style": "weather", "weather": "sun", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "sun", "seed": "JOBS-SUN-02", "style": "weather", "weather": "sun", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "sun", "seed": "JOBS-SUN-03", "style": "weather", "weather": "sun", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "sun", "seed": "JOBS-SUN-04", "style": "weather", "weather": "sun", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "sun", "seed": "JOBS-SUN-05", "style": "weather", "weather": "sun", "availability": "journey", "allowSpecial": false, "requireMega": true },
+
+    { "label": "sand", "seed": "JOBS-SAND-01", "style": "weather", "weather": "sand", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "sand", "seed": "JOBS-SAND-02", "style": "weather", "weather": "sand", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "sand", "seed": "JOBS-SAND-03", "style": "weather", "weather": "sand", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "sand", "seed": "JOBS-SAND-04", "style": "weather", "weather": "sand", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "sand", "seed": "JOBS-SAND-05", "style": "weather", "weather": "sand", "availability": "journey", "allowSpecial": false, "requireMega": true },
+
+    { "label": "snow", "seed": "JOBS-SNOW-01", "style": "weather", "weather": "snow", "availability": "journey", "allowSpecial": false, "requireMega": false },
+    { "label": "snow", "seed": "JOBS-SNOW-02", "style": "weather", "weather": "snow", "availability": "unrestricted", "allowSpecial": false, "requireMega": false },
+    { "label": "snow", "seed": "JOBS-SNOW-03", "style": "weather", "weather": "snow", "availability": "journey", "allowSpecial": true, "requireMega": false },
+    { "label": "snow", "seed": "JOBS-SNOW-04", "style": "weather", "weather": "snow", "availability": "unrestricted", "allowSpecial": true, "requireMega": true },
+    { "label": "snow", "seed": "JOBS-SNOW-05", "style": "weather", "weather": "snow", "availability": "journey", "allowSpecial": false, "requireMega": true }
+  ]
+}
