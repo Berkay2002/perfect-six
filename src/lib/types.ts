@@ -1,5 +1,7 @@
+import { ENGINE_VERSION as CURRENT_ENGINE_VERSION } from "../../data/engine-version.mjs";
+
 export const DATA_VERSION = "cobbleverse-1.7.41b" as const;
-export const ENGINE_VERSION = 1 as const;
+export const ENGINE_VERSION = CURRENT_ENGINE_VERSION;
 export const SCHEMA_VERSION = 1 as const;
 
 export type TeamStyle =

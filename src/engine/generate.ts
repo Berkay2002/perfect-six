@@ -1,6 +1,10 @@
 import { assembleCandidates } from "@/engine/catalog";
 import { scoreTeam } from "@/engine/score";
-import { canonicalSeed, createRandom } from "@/lib/random";
+import {
+  canonicalSeed,
+  createRandom,
+  type SeededRandom,
+} from "@/lib/random";
 import type {
   GeneratorRequest,
   NormalizedCatalog,
@@ -12,12 +16,15 @@ import type {
 } from "@/lib/types";
 
 const BEAM_WIDTH = 120;
+const QUALITY_BEAM_WIDTH = BEAM_WIDTH / 2;
 const CANDIDATE_WIDTH = 220;
 const ELITE_BAND = 3;
+const SEED_AFFINITY_RANGE = 8;
 
 type BeamState = {
   members: PokemonRecord[];
   heuristic: number;
+  seedAffinity: number;
 };
 
 export class GeneratorInputError extends Error {
@@ -117,7 +124,6 @@ function validateLocks(
 function individualScore(
   pokemon: PokemonRecord,
   request: GeneratorRequest,
-  seed: string,
 ) {
   const stats = pokemon.stats;
   const bulk = stats.hp + stats.defense + stats.specialDefense;
@@ -129,19 +135,16 @@ function individualScore(
   if (request.style === "weather") style = 5;
   const journey =
     request.availability === "journey" ? pokemon.availability.score * 0.45 : 25;
-  const tie = createRandom(`${seed}:${pokemon.id}`).next() * 0.001;
-  return pokemon.battleScore * 0.55 + journey + style + tie;
+  return pokemon.battleScore * 0.55 + journey + style;
 }
 
 function candidatePool(
   candidates: PokemonRecord[],
   request: GeneratorRequest,
-  seed: string,
 ) {
   const sorted = [...candidates].sort((left, right) => {
     const difference =
-      individualScore(right, request, seed) -
-      individualScore(left, request, seed);
+      individualScore(right, request) - individualScore(left, request);
     return difference || left.id.localeCompare(right.id);
   });
   const protectedCandidates = [
@@ -154,6 +157,77 @@ function candidatePool(
       protectedCandidates.map((pokemon) => [pokemon.id, pokemon]),
     ).values(),
   ];
+}
+
+export function canonicalRosterKey(members: readonly { id: string }[]) {
+  return members
+    .map((pokemon) => pokemon.id)
+    .sort()
+    .join("|");
+}
+
+export function deduplicateRosterStates<
+  T extends { members: readonly { id: string }[] },
+>(states: readonly T[]) {
+  const byRoster = new Map<string, T>();
+  for (const state of states) {
+    const key = canonicalRosterKey(state.members);
+    if (!byRoster.has(key)) byRoster.set(key, state);
+  }
+  return [...byRoster.values()];
+}
+
+export function selectEliteRoster<T extends { score: { total: number } }>(
+  finals: readonly T[],
+  random: Pick<SeededRandom, "pick">,
+) {
+  if (finals.length === 0) {
+    throw new Error("Cannot select from an empty finalist collection.");
+  }
+  const bestScore = Math.max(...finals.map((entry) => entry.score.total));
+  const elite = finals.filter(
+    (entry) => entry.score.total >= bestScore - ELITE_BAND,
+  );
+  return { selected: random.pick(elite), bestScore };
+}
+
+function compareBeamStates(left: BeamState, right: BeamState) {
+  return (
+    right.heuristic - left.heuristic ||
+    left.members
+      .map((pokemon) => pokemon.id)
+      .join("|")
+      .localeCompare(right.members.map((pokemon) => pokemon.id).join("|"))
+  );
+}
+
+function pruneBeam(
+  states: BeamState[],
+  unlockedCount: number,
+) {
+  states.sort(compareBeamStates);
+  const unique = deduplicateRosterStates(states);
+  const quality = unique.slice(0, QUALITY_BEAM_WIDTH);
+  const qualityKeys = new Set(
+    quality.map((state) => canonicalRosterKey(state.members)),
+  );
+  const exploration = unique
+    .filter((state) => !qualityKeys.has(canonicalRosterKey(state.members)))
+    .sort((left, right) => {
+      const leftAffinity =
+        unlockedCount === 0
+          ? 0
+          : (left.seedAffinity / unlockedCount - 0.5) * SEED_AFFINITY_RANGE;
+      const rightAffinity =
+        unlockedCount === 0
+          ? 0
+          : (right.seedAffinity / unlockedCount - 0.5) * SEED_AFFINITY_RANGE;
+      const seededDifference =
+        right.heuristic + rightAffinity - (left.heuristic + leftAffinity);
+      return seededDifference || compareBeamStates(left, right);
+    })
+    .slice(0, BEAM_WIDTH - quality.length);
+  return [...quality, ...exploration];
 }
 
 function hardValidPartial(
@@ -317,11 +391,19 @@ export function generateTeam(
   }
   validateLocks(request, candidates);
   const byId = new Map(candidates.map((candidate) => [candidate.id, candidate]));
-  const pool = candidatePool(candidates, request, requestKey);
-
-  let beam: BeamState[] = [{ members: [], heuristic: 0 }];
+  const pool = candidatePool(candidates, request);
+  const affinityById = new Map(
+    candidates.map((candidate) => [
+      candidate.id,
+      createRandom(`${requestKey}:affinity:${candidate.id}`).next(),
+    ]),
+  );
+  let beam: BeamState[] = [{ members: [], heuristic: 0, seedAffinity: 0 }];
   for (let slot = 0; slot < 6; slot += 1) {
     const lockedId = request.slots[slot];
+    const unlockedCount = request.slots
+      .slice(0, slot + 1)
+      .filter((id) => id === null).length;
     const options = lockedId ? [byId.get(lockedId)!] : pool;
     const next: BeamState[] = [];
     for (const state of beam) {
@@ -331,18 +413,13 @@ export function generateTeam(
         next.push({
           members,
           heuristic: partialHeuristic(members, request),
+          seedAffinity:
+            state.seedAffinity +
+            (lockedId ? 0 : (affinityById.get(pokemon.id) ?? 0.5)),
         });
       }
     }
-    next.sort(
-      (left, right) =>
-        right.heuristic - left.heuristic ||
-        left.members
-          .map((pokemon) => pokemon.id)
-          .join("|")
-          .localeCompare(right.members.map((pokemon) => pokemon.id).join("|")),
-    );
-    beam = next.slice(0, BEAM_WIDTH);
+    beam = pruneBeam(next, unlockedCount);
     if (beam.length === 0) {
       throw new GeneratorInputError(
         "Locks and toggles produce no legal six-Pokémon team.",
@@ -351,7 +428,7 @@ export function generateTeam(
     }
   }
 
-  const finals = beam
+  const finals = deduplicateRosterStates(beam)
     .map((state) => ({
       roster: state.members,
       score: scoreTeam(state.members, request, catalog),
@@ -364,19 +441,16 @@ export function generateTeam(
           .join("|")
           .localeCompare(right.roster.map((pokemon) => pokemon.id).join("|")),
     );
-  const bestScore = finals[0].score.total;
-  const elite = finals.filter(
-    (entry) =>
-      entry.score.total >= 85 && entry.score.total >= bestScore - ELITE_BAND,
-  );
-  const selected =
-    elite.length > 0 ? random.pick(elite) : finals[0];
+  const { selected, bestScore } = selectEliteRoster(finals, random);
   const warnings: TeamWarning[] = [];
   if (selected.score.total < 85) {
     warnings.push({
       code: "below-target",
       severity: "warning",
-      message: `Best legal result scores ${selected.score.total}/100, below 85 target. Locks or catalog limits prevented stronger result.`,
+      message:
+        selected.score.total === bestScore
+          ? `Best legal result scores ${bestScore}/100, below 85 target. Locks or catalog limits prevented stronger result.`
+          : `Seeded result scores ${selected.score.total}/100, below 85 target; the best searched result scores ${bestScore}/100.`,
     });
   }
 

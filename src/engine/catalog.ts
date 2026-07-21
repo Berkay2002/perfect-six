@@ -8,6 +8,8 @@ import type {
   Weather,
 } from "@/lib/types";
 
+const clampScore = (value: number) => Math.max(0, Math.min(100, value));
+
 function buildStyleScore(
   build: BuildTemplate,
   style: TeamStyle,
@@ -80,6 +82,9 @@ export function assembleCandidates(
   );
   const builds = new Map<SpeciesFormId, BuildTemplate[]>();
   const itemById = new Map(catalog.items.map((item) => [item.id, item]));
+  const abilityById = new Map(
+    catalog.abilities.map((ability) => [ability.id, ability]),
+  );
   for (const build of catalog.builds) {
     const current = builds.get(build.speciesId) ?? [];
     current.push(build);
@@ -109,10 +114,16 @@ export function assembleCandidates(
           return scoreDifference || left.id.localeCompare(right.id);
         },
       )[0];
+      const rawBattleScore = role?.battleScore ?? 50;
+      const abilityRating =
+        abilityById.get(selectedBuild.abilityId)?.rating ?? 0;
+      const battleScore = clampScore(
+        rawBattleScore + Math.min(0, abilityRating) * 25,
+      );
       return {
         ...species,
         roles: role?.roles ?? ["Flexible"],
-        battleScore: role?.battleScore ?? 50,
+        battleScore,
         availability:
           availability.get(species.id) ?? fallbackAvailability(species.id),
         build: selectedBuild,

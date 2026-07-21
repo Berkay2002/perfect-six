@@ -45,6 +45,7 @@ import {
   humanReadableTeam,
   makeSharePayload,
   showdownTeam,
+  toCurrentGeneratorRequest,
 } from "@/lib/share";
 import { saveTeam } from "@/lib/storage";
 import {
@@ -410,7 +411,7 @@ export function TeamGenerator() {
         try {
           const payload = await decodeSharePayload(shared);
           if (!cancelled) {
-            setRequest(payload.request);
+            setRequest(toCurrentGeneratorRequest(payload.request));
             setResult(payload.result);
             setNotice("Shared team loaded from its exact snapshot.");
           }

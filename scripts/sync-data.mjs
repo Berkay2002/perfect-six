@@ -16,6 +16,7 @@ import { pipeline } from "node:stream/promises";
 import { fileURLToPath } from "node:url";
 import vm from "node:vm";
 
+import { ENGINE_VERSION } from "../data/engine-version.mjs";
 import {
   deriveMissingBuilds,
   normalizeNamedRecords,
@@ -712,7 +713,7 @@ const sources = [
 const manifest = {
   schemaVersion: 1,
   dataVersion: lock.dataVersion,
-  engineVersion: 1,
+  engineVersion: ENGINE_VERSION,
   generatedAt,
   speciesCount: species.length,
   moveCount: moves.length,

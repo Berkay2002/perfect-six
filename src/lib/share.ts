@@ -1,7 +1,8 @@
-import type {
-  GeneratorRequest,
-  SharePayload,
-  TeamResult,
+import {
+  ENGINE_VERSION,
+  type GeneratorRequest,
+  type SharePayload,
+  type TeamResult,
 } from "@/lib/types";
 
 const textEncoder = new TextEncoder();
@@ -28,9 +29,17 @@ async function transform(
   stream: CompressionStream | DecompressionStream,
 ) {
   const writer = stream.writable.getWriter();
-  await writer.write(Uint8Array.from(input).buffer);
+  const chunk = new Uint8Array(input.byteLength);
+  chunk.set(input);
+  await writer.write(chunk);
   await writer.close();
   return new Uint8Array(await new Response(stream.readable).arrayBuffer());
+}
+
+export function toCurrentGeneratorRequest(
+  request: GeneratorRequest,
+): GeneratorRequest {
+  return { ...request, engineVersion: ENGINE_VERSION };
 }
 
 export async function encodeSharePayload(payload: SharePayload) {
