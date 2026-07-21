@@ -2,6 +2,20 @@
 
 Project-specific guidance for AI coding agents.
 
+## Agent skills
+
+### Issue tracker
+
+Issues and product specifications are tracked in GitHub Issues. See `docs/agents/issue-tracker.md`.
+
+### Triage labels
+
+Use the default five-label triage vocabulary. See `docs/agents/triage-labels.md`.
+
+### Domain docs
+
+This is a single-context repository. See `docs/agents/domain.md`.
+
 <!-- ASTRYX:START -->
 Astryx v0.1.6 · 149 components
 CLI: run every command as `npx astryx <cmd>` (shown below as `astryx ...`).
