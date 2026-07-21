@@ -1,0 +1,18 @@
+{
+  "cases": [
+    { "seed": "ALT-QUALITY-BALANCED", "slot": 0 },
+    { "seed": "ALT-QUALITY-AGGRESSIVE", "slot": 2 },
+    { "seed": "ALT-QUALITY-JOURNEY", "slot": 4 }
+  ],
+  "requiredSections": [
+    "Ability fit",
+    "Held-item fit",
+    "Move package",
+    "Team jobs",
+    "Team synergy",
+    "Speed plan",
+    "physical resilience",
+    "special resilience",
+    "Acquisition curve"
+  ]
+}

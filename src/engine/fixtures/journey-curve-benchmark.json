@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "notes": "Each comparison uses the same six validated builds. Stage assignments change, but both same-average rosters retain two Early, two Mid, and two Late members. Indexes refer to the deterministic fixture archetypes in journey.test.ts.",
+  "sameAverage": {
+    "progressiveStages": ["Early", "Early", "Mid", "Mid", "Late", "Late"],
+    "clusteredStages": ["Mid", "Late", "Early", "Late", "Early", "Mid"],
+    "expectedWinner": "progressive"
+  },
+  "strongLateAddition": {
+    "memberIndex": 3,
+    "stage": "Late",
+    "expectedJobs": ["special pressure", "pivoting", "hazard removal"]
+  },
+  "unrestrictedParity": {
+    "firstStages": ["Early", "Early", "Early", "Early", "Early", "Early"],
+    "secondStages": ["Late", "Late", "Late", "Late", "Late", "Late"]
+  }
+}

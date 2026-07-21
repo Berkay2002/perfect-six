@@ -2,9 +2,14 @@ import { assembleCandidates } from "@/engine/catalog";
 import { abilityQualityForTeam } from "@/engine/ability";
 import { battlePlanQualityForTeam } from "@/engine/battle-plan";
 import { itemQualityForTeam } from "@/engine/item";
+import {
+  journeyCurveQualityForTeam,
+  type JourneyCurveOptions,
+} from "@/engine/journey";
 import { moveQualityForTeam } from "@/engine/move";
 import { scoreTeam } from "@/engine/score";
 import { memberJobExplanation, teamQualityForTeam } from "@/engine/team";
+import { synergyQualityForTeam } from "@/engine/synergy";
 import {
   canonicalSeed,
   createRandom,
@@ -29,7 +34,41 @@ type BeamState = {
   members: PokemonRecord[];
   heuristic: number;
   seedAffinity: number;
+  jobMask: number;
 };
+
+const searchJobsCache = new WeakMap<
+  NormalizedCatalog,
+  Map<string, readonly string[]>
+>();
+
+function searchJobsForCandidate(
+  candidate: PokemonRecord,
+  request: GeneratorRequest,
+  catalog: NormalizedCatalog,
+) {
+  let catalogCache = searchJobsCache.get(catalog);
+  if (!catalogCache) {
+    catalogCache = new Map();
+    searchJobsCache.set(catalog, catalogCache);
+  }
+  const key = `${request.style}|${request.weather ?? "none"}|${candidate.id}|${candidate.build.id}`;
+  const cached = catalogCache.get(key);
+  if (cached) return cached;
+  const jobs = memberJobExplanation(candidate, request, catalog).jobs;
+  catalogCache.set(key, jobs);
+  return jobs;
+}
+
+function bitCount(value: number) {
+  let remaining = value >>> 0;
+  let count = 0;
+  while (remaining !== 0) {
+    remaining &= remaining - 1;
+    count += 1;
+  }
+  return count;
+}
 
 export class GeneratorInputError extends Error {
   constructor(
@@ -222,7 +261,9 @@ export function deduplicateRosterStates<
   return [...byRoster.values()];
 }
 
-export function selectEliteRoster<T extends { score: { total: number } }>(
+export function selectEliteRoster<
+  T extends { score: { total: number; journeyCurveFit?: number } },
+>(
   finals: readonly T[],
   random: Pick<SeededRandom, "pick">,
 ) {
@@ -233,7 +274,40 @@ export function selectEliteRoster<T extends { score: { total: number } }>(
   const elite = finals.filter(
     (entry) => entry.score.total >= bestScore - ELITE_BAND,
   );
-  return { selected: random.pick(elite), bestScore };
+  const first = random.pick(elite);
+  if (
+    first.score.journeyCurveFit === undefined ||
+    !elite.some((entry) => entry.score.journeyCurveFit !== undefined)
+  ) {
+    return { selected: first, bestScore };
+  }
+  const challengers = elite.filter((entry) => entry !== first);
+  if (challengers.length === 0) return { selected: first, bestScore };
+  const challenger = random.pick(challengers);
+  const selected =
+    challenger.score.total === first.score.total &&
+    (challenger.score.journeyCurveFit ?? 0) >
+      (first.score.journeyCurveFit ?? 0)
+      ? challenger
+      : first;
+  return { selected, bestScore };
+}
+
+export function compareJourneyFinalists<
+  T extends {
+    score: { total: number; journeyCurveFit?: number };
+    roster: readonly { id: string }[];
+  },
+>(left: T, right: T) {
+  return (
+    right.score.total - left.score.total ||
+    (right.score.journeyCurveFit ?? 0) -
+      (left.score.journeyCurveFit ?? 0) ||
+    left.roster
+      .map((pokemon) => pokemon.id)
+      .join("|")
+      .localeCompare(right.roster.map((pokemon) => pokemon.id).join("|"))
+  );
 }
 
 function compareBeamStates(left: BeamState, right: BeamState) {
@@ -303,15 +377,23 @@ function partialHeuristic(
   members: PokemonRecord[],
   request: GeneratorRequest,
   weatherSupportIds: ReadonlySet<string>,
+  journeyInfluence: number,
+  jobMask: number,
 ) {
   const typeDiversity = new Set(members.flatMap((pokemon) => pokemon.types)).size;
   const roleDiversity = new Set(members.flatMap((pokemon) => pokemon.roles)).size;
+  const functionalDiversity =
+    journeyInfluence === 0
+      ? 0
+      : bitCount(jobMask);
   const quality =
     members.reduce(
       (sum, pokemon) =>
         sum +
         pokemon.battleScore * 0.4 +
-        pokemon.availability.score * 0.35 +
+        (journeyInfluence === 0 || request.availability === "journey"
+          ? pokemon.availability.score * 0.35
+          : 0) +
         Math.max(pokemon.stats.attack, pokemon.stats.specialAttack) * 0.08 +
         pokemon.stats.speed * 0.05,
       0,
@@ -320,6 +402,7 @@ function partialHeuristic(
     quality +
     typeDiversity * 1.4 +
     roleDiversity * 1.2 +
+    functionalDiversity * 1.2 +
     (members.some((pokemon) => pokemon.starter) ? 2 : 0) +
     (request.requireMega &&
     members.some((pokemon) => pokemon.megaFormIds.length > 0)
@@ -408,6 +491,7 @@ export function materializeTeamResult(
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
   warnings: TeamWarning[] = [],
+  journeyOptions: Pick<JourneyCurveOptions, "influence"> = {},
 ): GeneratedTeamResult {
   const members = asMembers(roster, request, catalog);
   const teamQuality = teamQualityForTeam(members, request, catalog);
@@ -425,13 +509,23 @@ export function materializeTeamResult(
   }
   return {
     members,
-    score: scoreTeam(members, request, catalog),
+    score: scoreTeam(members, request, catalog, journeyOptions),
     battleQuality: {
       ability: abilityQualityForTeam(members, request, catalog),
       item: itemQualityForTeam(members, request, catalog),
       move: moveQualityForTeam(members, request, catalog),
       team: teamQuality,
       plan: battlePlanQualityForTeam(members, request, catalog),
+      synergy: synergyQualityForTeam(members, request, catalog),
+      acquisitionCurve: journeyCurveQualityForTeam(
+        members,
+        request,
+        catalog,
+        {
+          evaluatedJobs: teamQuality.memberExplanations,
+          influence: journeyOptions.influence,
+        },
+      ),
     },
     warnings: resultWarnings,
     provenance: {
@@ -447,8 +541,10 @@ export function materializeTeamResult(
 export function generateTeam(
   originalRequest: GeneratorRequest,
   catalog: NormalizedCatalog,
+  journeyOptions: Pick<JourneyCurveOptions, "influence"> = {},
 ): GeneratedTeamResult {
   const request = resolveWeather(originalRequest);
+  const journeyInfluence = journeyOptions.influence ?? 1;
   const requestKey = canonicalRequest(request);
   const random = createRandom(requestKey);
   const candidates = assembleCandidates(
@@ -470,13 +566,36 @@ export function generateTeam(
     catalog,
   );
   const pool = candidatePool(candidates, request, weatherSupportIds);
+  const jobsById = new Map(
+    pool.map((candidate) => [
+      candidate.id,
+      searchJobsForCandidate(candidate, request, catalog),
+    ]),
+  );
+  const jobBits = new Map<string, number>();
+  const jobMaskById = new Map(
+    [...jobsById].map(([candidateId, jobs]) => {
+      let mask = 0;
+      for (const job of jobs) {
+        let bit = jobBits.get(job);
+        if (bit === undefined) {
+          bit = jobBits.size;
+          jobBits.set(job, bit);
+        }
+        mask |= 1 << bit;
+      }
+      return [candidateId, mask];
+    }),
+  );
   const affinityById = new Map(
     candidates.map((candidate) => [
       candidate.id,
       createRandom(`${requestKey}:affinity:${candidate.id}`).next(),
     ]),
   );
-  let beam: BeamState[] = [{ members: [], heuristic: 0, seedAffinity: 0 }];
+  let beam: BeamState[] = [
+    { members: [], heuristic: 0, seedAffinity: 0, jobMask: 0 },
+  ];
   for (let slot = 0; slot < 6; slot += 1) {
     const lockedId = request.slots[slot];
     const unlockedCount = request.slots
@@ -488,12 +607,20 @@ export function generateTeam(
       for (const pokemon of options) {
         const members = [...state.members, pokemon];
         if (!hardValidPartial(members, 5 - slot, request)) continue;
+        const jobMask = state.jobMask | (jobMaskById.get(pokemon.id) ?? 0);
         next.push({
           members,
-          heuristic: partialHeuristic(members, request, weatherSupportIds),
+          heuristic: partialHeuristic(
+            members,
+            request,
+            weatherSupportIds,
+            journeyInfluence,
+            jobMask,
+          ),
           seedAffinity:
             state.seedAffinity +
             (lockedId ? 0 : (affinityById.get(pokemon.id) ?? 0.5)),
+          jobMask,
         });
       }
     }
@@ -509,16 +636,9 @@ export function generateTeam(
   const finals = deduplicateRosterStates(beam)
     .map((state) => ({
       roster: state.members,
-      score: scoreTeam(state.members, request, catalog),
+      score: scoreTeam(state.members, request, catalog, journeyOptions),
     }))
-    .sort(
-      (left, right) =>
-        right.score.total - left.score.total ||
-        left.roster
-          .map((pokemon) => pokemon.id)
-          .join("|")
-          .localeCompare(right.roster.map((pokemon) => pokemon.id).join("|")),
-    );
+    .sort(compareJourneyFinalists);
   const { selected, bestScore } = selectEliteRoster(finals, random);
   const warnings: TeamWarning[] = [];
   if (selected.score.total < 85) {
@@ -532,5 +652,11 @@ export function generateTeam(
     });
   }
 
-  return materializeTeamResult(selected.roster, request, catalog, warnings);
+  return materializeTeamResult(
+    selected.roster,
+    request,
+    catalog,
+    warnings,
+    journeyOptions,
+  );
 }

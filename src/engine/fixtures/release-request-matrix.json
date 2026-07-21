@@ -1,0 +1,29 @@
+{
+  "version": 3,
+  "description": "Fixed engine-v3 release matrix. Every request is fully unlocked except the literal representative locks called out in slots.",
+  "expectedProfilePasses": {
+    "balanced": "2/2",
+    "aggressive": "2/2",
+    "bulky": "2/2",
+    "rain": "2/2",
+    "sun": "2/2",
+    "sand": "2/2",
+    "snow": "2/2"
+  },
+  "requests": [
+    { "id": "balanced-journey", "seed": "RELEASE-BAL-JOURNEY", "style": "balanced", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": [null, null, null, null, null, null] },
+    { "id": "balanced-unrestricted-mega-special-lock", "seed": "RELEASE-BAL-LOCK", "style": "balanced", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": ["charizard", "zapdos", null, null, null, null] },
+    { "id": "aggressive-journey-starter-lock", "seed": "RELEASE-AGG-LOCK", "style": "aggressive", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": ["greninja", null, null, null, null, null] },
+    { "id": "aggressive-unrestricted-mega-special", "seed": "RELEASE-AGG-UNRESTRICTED", "style": "aggressive", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": [null, null, null, null, null, null] },
+    { "id": "bulky-journey", "seed": "RELEASE-BUL-JOURNEY", "style": "bulky", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": [null, null, null, null, null, null] },
+    { "id": "bulky-unrestricted-mega-special", "seed": "RELEASE-BUL-UNRESTRICTED", "style": "bulky", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": [null, null, null, null, null, null] },
+    { "id": "rain-journey", "seed": "RELEASE-RAIN-JOURNEY", "style": "weather", "weather": "rain", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": [null, null, null, null, null, null] },
+    { "id": "rain-unrestricted-mega-special", "seed": "RELEASE-RAIN-UNRESTRICTED", "style": "weather", "weather": "rain", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": [null, null, null, null, null, null] },
+    { "id": "sun-journey", "seed": "RELEASE-SUN-JOURNEY", "style": "weather", "weather": "sun", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": [null, null, null, null, null, null] },
+    { "id": "sun-unrestricted-mega-special", "seed": "RELEASE-SUN-UNRESTRICTED", "style": "weather", "weather": "sun", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": [null, null, null, null, null, null] },
+    { "id": "sand-journey", "seed": "RELEASE-SAND-JOURNEY", "style": "weather", "weather": "sand", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": [null, null, null, null, null, null] },
+    { "id": "sand-unrestricted-mega-special", "seed": "RELEASE-SAND-UNRESTRICTED", "style": "weather", "weather": "sand", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": [null, null, null, null, null, null] },
+    { "id": "snow-journey", "seed": "RELEASE-SNOW-JOURNEY", "style": "weather", "weather": "snow", "availability": "journey", "allowSpecial": false, "requireMega": false, "slots": [null, null, null, null, null, null] },
+    { "id": "snow-unrestricted-mega-special", "seed": "RELEASE-SNOW-UNRESTRICTED", "style": "weather", "weather": "snow", "availability": "unrestricted", "allowSpecial": true, "requireMega": true, "slots": [null, null, null, null, null, null] }
+  ]
+}

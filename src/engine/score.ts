@@ -1,8 +1,13 @@
 import { abilityQualityForTeam } from "@/engine/ability";
 import { battlePlanQualityForTeam } from "@/engine/battle-plan";
 import { itemQualityForTeam } from "@/engine/item";
+import {
+  journeyCurveQualityForTeam,
+  type JourneyCurveOptions,
+} from "@/engine/journey";
 import { moveQualityForTeam } from "@/engine/move";
 import { teamQualityForTeam } from "@/engine/team";
+import { synergyQualityForTeam } from "@/engine/synergy";
 import type {
   GeneratorRequest,
   MoveRecord,
@@ -151,11 +156,20 @@ export function scoreTeam(
   team: PokemonRecord[],
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
+  journeyOptions: Pick<JourneyCurveOptions, "influence"> = {},
 ): ScoreBreakdown {
   const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
-  const journeyFit = clamp(
-    average(team.map((pokemon) => pokemon.availability.score)),
+  const teamQuality = teamQualityForTeam(team, request, catalog);
+  const acquisitionCurve = journeyCurveQualityForTeam(
+    team,
+    request,
+    catalog,
+    {
+      evaluatedJobs: teamQuality.memberExplanations,
+      influence: journeyOptions.influence,
+    },
   );
+  const journeyFit = acquisitionCurve.score;
   const accessibility = clamp(
     average(
       team.map((pokemon) => {
@@ -193,8 +207,8 @@ export function scoreTeam(
   const abilityQuality = abilityQualityForTeam(team, request, catalog);
   const itemQuality = itemQualityForTeam(team, request, catalog);
   const moveQuality = moveQualityForTeam(team, request, catalog);
-  const teamQuality = teamQualityForTeam(team, request, catalog);
   const battlePlan = battlePlanQualityForTeam(team, request, catalog);
+  const synergy = synergyQualityForTeam(team, request, catalog);
   const battleScore = clamp(
     roleCoverage * 0.23 +
       defensiveFit * 0.25 +
@@ -206,10 +220,11 @@ export function scoreTeam(
       itemQuality.contribution +
       moveQuality.contribution +
       teamQuality.contribution +
-      battlePlan.contribution,
+      battlePlan.contribution +
+      synergy.contribution,
   );
 
-  return {
+  const score: ScoreBreakdown = {
     total: Math.round(journeyScore * 0.6 + battleScore * 0.4),
     journeyScore: Math.round(journeyScore),
     battleScore: Math.round(battleScore),
@@ -219,4 +234,8 @@ export function scoreTeam(
     journeyFit: Math.round(journeyFit),
     utility: Math.round(utility),
   };
+  if ((journeyOptions.influence ?? 1) !== 0) {
+    score.journeyCurveFit = acquisitionCurve.score;
+  }
+  return score;
 }

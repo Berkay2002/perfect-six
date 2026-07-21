@@ -9,5 +9,9 @@ export default defineConfig({
   },
   test: {
     include: ["src/**/*.test.ts"],
+    // Full-team generation and alternatives share CPU when test files run in
+    // parallel. Correctness tests get scheduling headroom; the release
+    // benchmark keeps its own explicit 1.5-second assertion.
+    testTimeout: 15_000,
   },
 });

@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "description": "Deterministic cross-member prerequisite matrix. Each interaction must disappear when the named prerequisite is removed; unrelated strong builds expose none.",
+  "expectedKinds": [
+    "pivot support",
+    "setup opportunity",
+    "weather support",
+    "hazard control",
+    "complementary offense",
+    "immunity coverage",
+    "switch-in coverage"
+  ],
+  "counterexamples": [
+    { "kind": "pivot support", "remove": "pivot move" },
+    { "kind": "setup opportunity", "remove": "screen move" },
+    { "kind": "weather support", "remove": "weather-setting move" },
+    { "kind": "hazard control", "remove": "hazard-removal move" },
+    { "kind": "complementary offense", "remove": "special pressure" },
+    { "kind": "immunity coverage", "remove": "sourced immunity" },
+    { "kind": "switch-in coverage", "remove": "resistant switch-in" }
+  ]
+}

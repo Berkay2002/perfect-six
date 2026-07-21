@@ -17,6 +17,8 @@ const emptyCapabilities = {
   absorptions: [] as string[],
   weather: [] as string[],
   weatherDetriments: [] as string[],
+  weatherSetters: [] as string[],
+  weatherBenefits: [] as string[],
 };
 
 export function abilityRatingValue(ability: AbilityRecord | undefined) {
@@ -56,6 +58,35 @@ export function abilityBuildValue(
   );
 }
 
+export function abilityFitFacts(
+  ability: AbilityRecord | undefined,
+  request: Pick<GeneratorRequest, "style" | "weather">,
+) {
+  if (!ability) return [];
+  const capabilities = ability.capabilities ?? emptyCapabilities;
+  const facts: string[] = [];
+  if (ability.rating !== null) facts.push(`sourced rating ${ability.rating}`);
+  if (capabilities.immunities.length > 0) {
+    facts.push(`${capabilities.immunities.join("/")} immunity`);
+  }
+  if (capabilities.absorptions.length > 0) {
+    facts.push(`${capabilities.absorptions.join("/")} absorption`);
+  }
+  const relevantWeather = capabilities.weather.filter(
+    (weather) => request.style === "weather" && request.weather === weather,
+  );
+  if (relevantWeather.length > 0) {
+    facts.push(`${relevantWeather.join("/")} interaction`);
+  }
+  const detrimentalWeather = capabilities.weatherDetriments?.filter(
+    (weather) => request.style === "weather" && request.weather === weather,
+  );
+  if (detrimentalWeather?.length) {
+    facts.push(`${detrimentalWeather.join("/")} drawback`);
+  }
+  return facts;
+}
+
 export function abilityQualityForTeam(
   team: PokemonRecord[],
   request: GeneratorRequest,
@@ -74,23 +105,8 @@ export function abilityQualityForTeam(
       TEAM_CONTRIBUTION_WEIGHT,
   );
   const supported = selected.filter(
-    (ability): ability is AbilityRecord => {
-      if (!ability) return false;
-      const capabilities = ability.capabilities ?? emptyCapabilities;
-      return (
-        ability.rating !== null ||
-        capabilities.immunities.length > 0 ||
-        capabilities.absorptions.length > 0 ||
-        capabilities.weather.some(
-          (weather) =>
-            request.style === "weather" && request.weather === weather,
-        ) ||
-        capabilities.weatherDetriments?.some(
-          (weather) =>
-            request.style === "weather" && request.weather === weather,
-        )
-      );
-    },
+    (ability): ability is AbilityRecord =>
+      abilityFitFacts(ability, request).length > 0,
   );
 
   if (supported.length === 0) {
@@ -101,41 +117,12 @@ export function abilityQualityForTeam(
     };
   }
 
-  const details = supported.map((ability) => {
-    const capabilities = ability.capabilities ?? emptyCapabilities;
-    const facts = [];
-    if (ability.rating !== null) facts.push(`sourced rating ${ability.rating}`);
-    if (capabilities.immunities.length > 0) {
-      facts.push(`${capabilities.immunities.join("/")} immunity`);
-    }
-    if (capabilities.absorptions.length > 0) {
-      facts.push(`${capabilities.absorptions.join("/")} absorption`);
-    }
-    const relevantWeather = capabilities.weather.filter(
-      (weather) =>
-        request.style === "weather" && request.weather === weather,
-    );
-    if (relevantWeather.length > 0) {
-      facts.push(`${relevantWeather.join("/")} interaction`);
-    }
-    const detrimentalWeather = capabilities.weatherDetriments?.filter(
-      (weather) =>
-        request.style === "weather" && request.weather === weather,
-    );
-    if (detrimentalWeather?.length) {
-      facts.push(`${detrimentalWeather.join("/")} drawback`);
-    }
-    return `${ability.name}: ${facts.join(", ")}`;
-  });
-  const direction =
-    contribution > 0
-      ? `adds ${contribution}`
-      : contribution < 0
-        ? `subtracts ${Math.abs(contribution)}`
-        : "adds no";
-
+  const details = supported.map(
+    (ability) =>
+      `${ability.name}: ${abilityFitFacts(ability, request).join(", ")}`,
+  );
   return {
     contribution,
-    explanation: `Selected abilities ${direction} battle-quality points. ${details.join("; ")}.`,
+    explanation: `Selected abilities have these sourced battle effects: ${details.join("; ")}.`,
   };
 }

@@ -167,6 +167,8 @@ export type AbilityRecord = {
     absorptions: string[];
     weather: Exclude<Weather, "random">[];
     weatherDetriments: Exclude<Weather, "random">[];
+    weatherSetters?: Exclude<Weather, "random">[];
+    weatherBenefits?: Exclude<Weather, "random">[];
   };
   source: string;
 };
@@ -288,6 +290,46 @@ export type BattlePlanQuality = {
   explanation: string;
 };
 
+export type SynergyInteractionKind =
+  | "pivot support"
+  | "setup opportunity"
+  | "weather support"
+  | "hazard control"
+  | "complementary offense"
+  | "immunity coverage"
+  | "switch-in coverage";
+
+export type SynergyInteraction = {
+  kind: SynergyInteractionKind;
+  memberIds: SpeciesFormId[];
+  explanation: string;
+};
+
+export type TeamSynergyQuality = {
+  score: number;
+  contribution: number;
+  interactions: SynergyInteraction[];
+  explanation: string;
+};
+
+export type AcquisitionMilestone = {
+  stage: AvailabilityRecord["stage"];
+  acquiredCount: number;
+  memberIds: SpeciesFormId[];
+  coveredJobs: TeamJob[];
+  newJobs: TeamJob[];
+};
+
+export type JourneyAcquisitionQuality = {
+  score: number;
+  timingPenalty: number;
+  lateClusterPenalty: number;
+  averageAvailability: number;
+  lateMembers: SpeciesFormId[];
+  milestones: [AcquisitionMilestone, AcquisitionMilestone, AcquisitionMilestone];
+  explanation: string;
+};
+
 export type ItemRecord = {
   id: ItemId;
   name: string;
@@ -361,6 +403,7 @@ export type ScoreBreakdown = {
   defensiveFit: number;
   offensiveReach: number;
   journeyFit: number;
+  journeyCurveFit?: number;
   utility: number;
 };
 
@@ -409,6 +452,8 @@ export type TeamResult = {
     move?: MovePackageQuality;
     team?: TeamJobQuality;
     plan?: BattlePlanQuality;
+    synergy?: TeamSynergyQuality;
+    acquisitionCurve?: JourneyAcquisitionQuality;
   };
   warnings: TeamWarning[];
   provenance: DataProvenance;
@@ -429,6 +474,10 @@ export type GeneratedTeamResult = TeamResult & {
     move: NonNullable<NonNullable<TeamResult["battleQuality"]>["move"]>;
     team: NonNullable<NonNullable<TeamResult["battleQuality"]>["team"]>;
     plan: NonNullable<NonNullable<TeamResult["battleQuality"]>["plan"]>;
+    synergy: NonNullable<NonNullable<TeamResult["battleQuality"]>["synergy"]>;
+    acquisitionCurve: NonNullable<
+      NonNullable<TeamResult["battleQuality"]>["acquisitionCurve"]
+    >;
   };
 };
 

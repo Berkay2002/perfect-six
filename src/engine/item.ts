@@ -295,6 +295,15 @@ function evaluateItemFit(
   return { value, facts };
 }
 
+export function itemFitFactsForBuild(
+  pokemon: BuildContext,
+  item: ItemRecord | undefined,
+  request: Pick<GeneratorRequest, "style">,
+  catalog: NormalizedCatalog,
+) {
+  return evaluateItemFit(pokemon, item, request, catalog).facts;
+}
+
 export function itemBuildValue(
   pokemon: BuildContext,
   item: ItemRecord | undefined,
@@ -335,14 +344,8 @@ export function itemQualityForTeam(
     ({ pokemon, item, facts }) =>
       `${item?.name ?? pokemon.build.heldItem} on ${pokemon.name}: ${facts.join(", ")}`,
   );
-  const direction =
-    contribution > 0
-      ? `adds ${contribution}`
-      : contribution < 0
-        ? `subtracts ${Math.abs(contribution)}`
-        : "adds no";
   return {
     contribution,
-    explanation: `Selected held items ${direction} battle-quality points. ${details.join("; ")}.`,
+    explanation: `Selected held items have these sourced build interactions: ${details.join("; ")}.`,
   };
 }
