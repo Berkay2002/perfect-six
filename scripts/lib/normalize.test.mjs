@@ -264,6 +264,34 @@ test("ability ratings and team capabilities come from source records", () => {
         desc: "This Pokemon is immune to Water-type moves and restores 1/4 of its maximum HP when hit by a Water-type move.",
         rating: 3.5,
       },
+      electricrestorative: {
+        name: "Electric Restorative",
+        desc: "This Pokemon is immune to Electric-type moves and restores 1/4 of its maximum HP when hit by an Electric-type move.",
+      },
+      groundrestorative: {
+        name: "Ground Restorative",
+        desc: "This Pokemon is immune to Ground-type attacks and heals 1/4 of its maximum HP when hit by a Ground-type attack.",
+      },
+      fireboost: {
+        name: "Fire Boost",
+        desc: "This Pokemon is immune to Fire-type moves. When hit by a Fire-type move, the power of its attacks is multiplied by 1.5.",
+      },
+      grassboost: {
+        name: "Grass Boost",
+        desc: "This Pokemon is immune to Grass-type moves and raises its Attack by 1 stage when hit by a Grass-type move.",
+      },
+      electricboost: {
+        name: "Electric Boost",
+        desc: "This Pokemon is immune to Electric-type moves and raises its Speed by 1 stage when hit by an Electric-type move.",
+      },
+      unrelatedhealing: {
+        name: "Unrelated Healing",
+        desc: "This Pokemon is immune to Ground-type moves. At the end of each turn, this Pokemon restores 1/8 of its maximum HP.",
+      },
+      healingwithoutimmunity: {
+        name: "Healing Without Immunity",
+        desc: "When hit by a Water-type move, this Pokemon restores 1/4 of its maximum HP.",
+      },
       grounded: {
         name: "Grounded",
         desc: "This Pokemon is immune to Ground-type attacks.",
@@ -308,6 +336,30 @@ test("ability ratings and team capabilities come from source records", () => {
       weatherSetters: [],
       weatherBenefits: [],
     },
+  );
+  for (const [id, type] of [
+    ["electricrestorative", "Electric"],
+    ["groundrestorative", "Ground"],
+  ]) {
+    assert.deepEqual(
+      abilities.find((ability) => ability.id === id).capabilities.absorptions,
+      [type],
+    );
+  }
+  for (const [id, type] of [
+    ["fireboost", "Fire"],
+    ["grassboost", "Grass"],
+    ["electricboost", "Electric"],
+    ["unrelatedhealing", "Ground"],
+  ]) {
+    const capabilities = abilities.find((ability) => ability.id === id).capabilities;
+    assert.deepEqual(capabilities.immunities, [type]);
+    assert.deepEqual(capabilities.absorptions, []);
+  }
+  assert.deepEqual(
+    abilities.find((ability) => ability.id === "healingwithoutimmunity")
+      .capabilities.absorptions,
+    [],
   );
   assert.deepEqual(
     abilities.find((ability) => ability.id === "rainspeed").capabilities,

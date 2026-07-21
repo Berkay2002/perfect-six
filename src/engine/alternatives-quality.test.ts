@@ -189,7 +189,19 @@ describe("complete-team alternative quality", () => {
       .filter((move) => move.category !== "Status" && (move.power ?? 0) >= 80)
       .slice(0, 4);
     const status = catalog.moves
-      .filter((move) => move.category === "Status")
+      .filter(
+        (move) =>
+          move.category === "Status" &&
+          move.effect.status === null &&
+          move.effect.volatileStatus === null &&
+          move.effect.sideCondition === null &&
+          move.effect.weather === null &&
+          move.effect.terrain === null &&
+          move.effect.boosts === null &&
+          move.capabilities?.hazard !== true &&
+          move.capabilities?.removal !== true &&
+          move.capabilities?.screen !== true,
+      )
       .slice(0, 4);
     expect(attacks).toHaveLength(4);
     expect(status).toHaveLength(4);
@@ -204,8 +216,8 @@ describe("complete-team alternative quality", () => {
         capabilities: {
           ...neutralItemCapabilities(),
           ...(materializedFit
-            ? { damagingMovesOnly: true }
-            : { damageCategory: "all" as const }),
+            ? { choiceLock: true, damagingMovesOnly: true }
+            : { choiceLock: true, damageCategory: "all" as const }),
         },
         source: "fixture://alternative-mega",
       };
@@ -218,8 +230,8 @@ describe("complete-team alternative quality", () => {
         capabilities: {
           ...neutralItemCapabilities(),
           ...(materializedFit
-            ? { damageCategory: "all" as const }
-            : { damagingMovesOnly: true }),
+            ? { choiceLock: true, damageCategory: "all" as const }
+            : { choiceLock: true, damagingMovesOnly: true }),
         },
         source: "fixture://alternative-mega",
       };

@@ -217,21 +217,21 @@ function withStages(
 }
 
 describe("journey acquisition curve", () => {
-  it("reproduces pre-curve scoring and partial search when influence is neutral", () => {
-    const expected = [
+  it("preserves the current non-curve formula and order when acquisition influence is zero", () => {
+    const currentInfluenceZeroFixtures = [
       {
         seed: "JOURNEY-COMPAT-1",
         members: [
           "blaziken",
-          "garchomp",
           "kingambit",
-          "sigilyph",
+          "salamence",
+          "hatterene",
           "basculegion",
-          "kleavor",
+          "golem",
         ],
         score: {
           total: 92,
-          journeyScore: 89,
+          journeyScore: 90,
           battleScore: 96,
           roleCoverage: 90,
           defensiveFit: 100,
@@ -263,7 +263,7 @@ describe("journey acquisition curve", () => {
       },
     ];
 
-    for (const fixture of expected) {
+    for (const fixture of currentInfluenceZeroFixtures) {
       const input = request(fixture.seed);
       const result = generateTeam(input, catalog, { influence: 0 });
       const neutralCurve = journeyCurveQualityForTeam(

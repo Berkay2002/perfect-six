@@ -473,16 +473,24 @@ function resilienceForTeam(
         members[index].absorptions.length > 0,
     )
     .map((pokemon) => pokemon.id);
+  const absorptionSources = team
+    .filter((_, index) => members[index].absorptions.length > 0)
+    .map((pokemon) => pokemon.id);
   const mitigationSources = team.filter(
     (_, index) => members[index].itemMitigation[defenseStat],
   );
   const sustainScore = clamp(
-    recoverySources.length * 16 +
-      immunitySources.length * 10 +
-      mitigationSources.length * 10,
+    recoverySources.length * 16 + absorptionSources.length * 10,
+  );
+  const mitigationScore = clamp(
+    mitigationSources.length * 10,
   );
   const score = Math.round(
-    clamp(bulkScore * 0.55 + switchInCoverage * 0.3 + sustainScore * 0.15),
+    clamp(
+      bulkScore * 0.55 +
+        switchInCoverage * 0.3 +
+        (sustainScore + mitigationScore) * 0.15,
+    ),
   );
   const labels = team.flatMap((pokemon, index) => {
     const facts: string[] = [];

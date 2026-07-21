@@ -294,7 +294,7 @@ describe("cross-member synergy benchmark", () => {
 
   it("states whether sourced defensive coverage is an absorption or immunity", () => {
     const { coherent } = fixtureRosters();
-    const coverage = synergyQualityForTeam(
+    const immunityCoverage = synergyQualityForTeam(
       coherent,
       request("SYNERGY-DEFENSIVE-RELATION"),
       catalog,
@@ -302,8 +302,31 @@ describe("cross-member synergy benchmark", () => {
       (interaction) => interaction.kind === "immunity coverage",
     );
 
-    expect(coverage?.explanation).toContain("absorption");
-    expect(coverage?.explanation).not.toContain("immunity or absorption");
+    expect(immunityCoverage?.explanation).toContain("Flash Fire immunity");
+    expect(immunityCoverage?.explanation).not.toContain("absorption");
+
+    const absorbing = coherent.map((member) => ({
+      ...member,
+      build: { ...member.build },
+    }));
+    absorbing[0].types = ["Fire"];
+    const waterAbsorb = ability("waterabsorb");
+    absorbing[4].build.abilityId = waterAbsorb.id;
+    absorbing[4].build.ability = waterAbsorb.name;
+    const absorptionCoverage = synergyQualityForTeam(
+      absorbing,
+      request("SYNERGY-ABSORPTION-RELATION"),
+      catalog,
+    ).interactions.find(
+      (interaction) => interaction.kind === "immunity coverage",
+    );
+
+    expect(absorptionCoverage?.explanation).toContain(
+      "Water Absorb absorption",
+    );
+    expect(absorptionCoverage?.explanation).not.toContain(
+      "immunity or absorption",
+    );
   });
 
   it("rewards the coherent complete-team plan above unrelated strong builds at the public score seam", () => {

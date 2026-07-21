@@ -272,17 +272,24 @@ function normalizeNumericModifiers(description) {
 }
 
 function normalizeAbilityCapabilities(description) {
+  const text = String(description);
   const immunities = [
-    ...String(description).matchAll(
+    ...text.matchAll(
       /immune to ([a-z]+)-type (?:moves|attacks)/gi,
     ),
   ]
     .map((match) => titleCase(match[1]))
     .sort();
-  const beneficialReaction =
-    /\b(?:restores?|raises?|boosts?|multiplied|heals?|increases?)\b/i.test(
-      description,
+  const absorptions = immunities.filter((type) => {
+    const reactionType = type.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const healing = "(?:restores?|heals?|recovers?|regains?)";
+    const hp = "(?:HP|health)";
+    const trigger = `when hit by (?:an? )?${reactionType}-type (?:move|attack)`;
+    return (
+      new RegExp(`\\b${healing}\\b[^.]{0,240}\\b${hp}\\b[^.]{0,240}\\b${trigger}\\b`, "i").test(text) ||
+      new RegExp(`\\b${trigger}\\b[^.]{0,240}\\b${healing}\\b[^.]{0,240}\\b${hp}\\b`, "i").test(text)
     );
+  });
   const weatherTerms = [
     ["rain", /\brain dance\b|\brain is active\b|\bduring rain\b/i],
     ["sun", /\bsunny day\b|\bsun is active\b|\bharsh sunlight\b/i],
@@ -323,7 +330,7 @@ function normalizeAbilityCapabilities(description) {
 
   return {
     immunities,
-    absorptions: beneficialReaction ? [...immunities] : [],
+    absorptions,
     weather: [...weather],
     weatherDetriments: [...weatherDetriments],
     weatherSetters: [...weatherSetters],
