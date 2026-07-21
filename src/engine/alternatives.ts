@@ -315,7 +315,6 @@ function asAlternative(
   candidate: ReturnType<typeof replacementResult>,
   original: TeamMember,
   evaluatedCurrent: GeneratedTeamResult,
-  snapshotCurrent: TeamResult,
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
 ): TeamAlternative {
@@ -331,7 +330,7 @@ function asAlternative(
     label,
     replacement,
     result,
-    scoreDelta: result.score.total - snapshotCurrent.score.total,
+    scoreDelta: result.score.total - evaluatedCurrent.score.total,
     tradeoff: [
       introduction,
       abilityTradeoff(
@@ -429,7 +428,6 @@ export function generateAlternatives(
       best,
       original,
       evaluatedCurrent,
-      current,
       request,
       catalog,
     ),
@@ -440,7 +438,6 @@ export function generateAlternatives(
       easiest,
       original,
       evaluatedCurrent,
-      current,
       request,
       catalog,
     ),
@@ -451,7 +448,6 @@ export function generateAlternatives(
       different,
       original,
       evaluatedCurrent,
-      current,
       request,
       catalog,
     ),
