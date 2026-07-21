@@ -1,12 +1,35 @@
 import {
   ENGINE_VERSION,
+  SCHEMA_VERSION,
   type GeneratorRequest,
   type SharePayload,
+  type StatBlock,
   type TeamResult,
 } from "@/lib/types";
+import { migrateGeneratorRequest } from "@/lib/request";
 
 const textEncoder = new TextEncoder();
 const textDecoder = new TextDecoder();
+const showdownStats = [
+  ["HP", "hp"],
+  ["Atk", "attack"],
+  ["Def", "defense"],
+  ["SpA", "specialAttack"],
+  ["SpD", "specialDefense"],
+  ["Spe", "speed"],
+] as const;
+
+function showdownSpread(
+  spread: Partial<StatBlock> | undefined,
+  defaultValue: number,
+  include: (value: number) => boolean,
+) {
+  return showdownStats
+    .map(([label, key]) => [label, spread?.[key] ?? defaultValue] as const)
+    .filter(([, value]) => include(value))
+    .map(([label, value]) => `${value} ${label}`)
+    .join(" / ");
+}
 
 function bytesToBase64Url(bytes: Uint8Array) {
   let binary = "";
@@ -39,7 +62,7 @@ async function transform(
 export function toCurrentGeneratorRequest(
   request: GeneratorRequest,
 ): GeneratorRequest {
-  return { ...request, engineVersion: ENGINE_VERSION };
+  return { ...migrateGeneratorRequest(request), engineVersion: ENGINE_VERSION };
 }
 
 export async function encodeSharePayload(payload: SharePayload) {
@@ -68,8 +91,9 @@ function isSharePayload(value: unknown): value is SharePayload {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Partial<SharePayload>;
   return (
-    candidate.schemaVersion === 1 &&
-    candidate.request?.schemaVersion === 1 &&
+    (candidate.schemaVersion === 1 || candidate.schemaVersion === 2) &&
+    (candidate.request?.schemaVersion === 1 ||
+      candidate.request?.schemaVersion === 2) &&
     candidate.result?.members?.length === 6
   );
 }
@@ -95,21 +119,12 @@ Plan: ${member.gamePlan}`;
 export function showdownTeam(result: TeamResult) {
   return result.members
     .map((member) => {
-      const evs = [
-        ["HP", member.build.evs.hp],
-        ["Atk", member.build.evs.attack],
-        ["Def", member.build.evs.defense],
-        ["SpA", member.build.evs.specialAttack],
-        ["SpD", member.build.evs.specialDefense],
-        ["Spe", member.build.evs.speed],
-      ]
-        .filter(([, value]) => Number(value) > 0)
-        .map(([label, value]) => `${value} ${label}`)
-        .join(" / ");
+      const evs = showdownSpread(member.build.evs, 0, (value) => value > 0);
+      const ivs = showdownSpread(member.build.ivs, 31, (value) => value !== 31);
       return `${member.name} @ ${member.build.heldItem}
 Ability: ${member.build.ability}
 EVs: ${evs || "Unspecified"}
-${member.build.nature} Nature
+${ivs ? `IVs: ${ivs}\n` : ""}${member.build.nature} Nature
 ${member.build.moves.map((move) => `- ${move.name}`).join("\n")}`;
     })
     .join("\n\n");
@@ -119,5 +134,5 @@ export function makeSharePayload(
   request: GeneratorRequest,
   result: TeamResult,
 ): SharePayload {
-  return { schemaVersion: 1, request, result };
+  return { schemaVersion: SCHEMA_VERSION, request, result };
 }

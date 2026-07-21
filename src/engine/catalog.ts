@@ -12,6 +12,10 @@ import { itemBuildValue } from "@/engine/item";
 import { movePackageQualityForBuild } from "@/engine/move";
 
 const clampScore = (value: number) => Math.max(0, Math.min(100, value));
+const candidateCache = new WeakMap<
+  NormalizedCatalog,
+  Map<string, PokemonRecord[]>
+>();
 
 function buildStyleScore(
   build: BuildTemplate,
@@ -103,7 +107,22 @@ export function assembleCandidates(
   catalog: NormalizedCatalog,
   style: TeamStyle,
   weather?: Weather,
+  options: {
+    finalOnly?: boolean;
+    speciesIds?: ReadonlySet<SpeciesFormId>;
+  } = {},
 ) {
+  let catalogCache = candidateCache.get(catalog);
+  if (!catalogCache) {
+    catalogCache = new Map();
+    candidateCache.set(catalog, catalogCache);
+  }
+  const speciesKey = options.speciesIds
+    ? [...options.speciesIds].sort().join(",")
+    : "*";
+  const cacheKey = `${style}|${weather ?? "none"}|${options.finalOnly !== false ? "final" : "all"}|${speciesKey}`;
+  const cached = catalogCache.get(cacheKey);
+  if (cached) return cached;
   const availability = new Map(
     catalog.availability.map((record) => [record.speciesId, record]),
   );
@@ -121,10 +140,11 @@ export function assembleCandidates(
     builds.set(build.speciesId, current);
   }
 
-  return catalog.species
+  const candidates = catalog.species
     .filter(
       (species) =>
-        species.finalEvolution &&
+        (!options.speciesIds || options.speciesIds.has(species.id)) &&
+        (options.finalOnly !== false ? species.finalEvolution : true) &&
         !species.battleOnly &&
         (builds.get(species.id)?.length ?? 0) > 0,
     )
@@ -176,4 +196,6 @@ export function assembleCandidates(
       };
     })
     .sort((left, right) => left.id.localeCompare(right.id));
+  catalogCache.set(cacheKey, candidates);
+  return candidates;
 }

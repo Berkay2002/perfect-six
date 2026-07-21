@@ -7,9 +7,10 @@ import {
   canonicalRosterKey,
   deduplicateRosterStates,
   generateTeam,
-  GeneratorInputError,
+  materializeTeamResult,
   selectEliteRoster,
 } from "@/engine/generate";
+import { pokemonRecordFromMember } from "@/engine/member";
 import { scoreTeam } from "@/engine/score";
 import { createRandom } from "@/lib/random";
 import {
@@ -117,9 +118,9 @@ describe("deterministic generator", () => {
     expect(selectedIds).toEqual(new Set(["best", "near"]));
   });
 
-  it("marks newly generated teams as engine version 3", () => {
+  it("marks newly generated teams as engine version 4", () => {
     const result = generateTeam(request("ENGINE-VERSION"), catalog);
-    expect(Number(result.provenance.engineVersion)).toBe(3);
+    expect(Number(result.provenance.engineVersion)).toBe(4);
   });
 
   it("returns byte-identical output for EMBER-042", () => {
@@ -452,6 +453,11 @@ describe("deterministic generator", () => {
       heldItem: megaItem.name,
       moves: asBuildMoves(status),
     };
+    const strongMegaBuild = {
+      ...megaBuild,
+      id: `${target.id}:fixture-mega-strong`,
+      moves: asBuildMoves(attacks),
+    };
     const fixture = {
       ...catalog,
       species: catalog.species
@@ -479,6 +485,7 @@ describe("deterministic generator", () => {
           .map((member) => member.build),
         baseBuild,
         megaBuild,
+        strongMegaBuild,
       ],
       items: [
         ...catalog.items.map((item) => ({
@@ -499,6 +506,7 @@ describe("deterministic generator", () => {
     const visibleMega = result.members.find((member) => member.mega)!;
 
     expect(visibleMega.build.heldItemId).toBe(megaItem.id);
+    expect(visibleMega.build.id).toBe(strongMegaBuild.id);
     expect(result.battleQuality.item.explanation).toContain(megaItem.name);
     expect(result.battleQuality.item.explanation).not.toContain(baseItem.name);
     expect(result.score).toEqual(scoreTeam(result.members, locked, fixture));
@@ -712,23 +720,143 @@ describe("deterministic generator", () => {
     expect(result.members.some((member) => member.mega)).toBe(true);
   });
 
-  it("rejects six fixed non-starters", () => {
-    const generated = generateTeam(request("LOCK-SOURCE"), catalog);
-    const nonStarters = generated.members
-      .filter((member) => !member.starter)
-      .map((member) => member.id);
-    const extra = catalog.species.find(
-      (entry) =>
-        entry.finalEvolution &&
-        !entry.starter &&
-        !nonStarters.includes(entry.id) &&
-        catalog.builds.some((build) => build.speciesId === entry.id),
+  it("preserves a complete owned party even when it violates composition rules", () => {
+    const dittoSlots = Array.from({ length: 6 }, () => ({
+      speciesId: "ditto",
+    })) as NonNullable<GeneratorRequest["ownedSlots"]>;
+    const startedAt = performance.now();
+    const result = generateTeam(
+      {
+        ...request("EXISTING-DITTO-PARTY"),
+        ownedSlots: dittoSlots,
+        slots: ["ditto", "ditto", "ditto", "ditto", "ditto", "ditto"],
+      },
+      catalog,
     );
-    expect(extra).toBeDefined();
-    const locked = {
-      ...request("BAD-LOCK"),
-      slots: [...nonStarters, extra!.id] as GeneratorRequest["slots"],
+    const elapsed = performance.now() - startedAt;
+
+    expect(result.members.map((member) => member.id)).toEqual(
+      Array.from({ length: 6 }, () => "ditto"),
+    );
+    expect(result.members.filter((member) => member.starter)).toHaveLength(0);
+    expect(result.members.every((member) => member.origin === "player")).toBe(true);
+    expect(result.members.every((member) => member.build.moves.length === 1)).toBe(true);
+    expect(result.members.every((member) => member.buildConfidence === "limited")).toBe(true);
+    expect(
+      result.members.every((member) => {
+        const sourced = catalog.builds.find(
+          (build) => build.id === member.build.id,
+        );
+        return sourced?.ivs?.speed === member.build.ivs?.speed;
+      }),
+    ).toBe(true);
+    expect(
+      result.battleQuality.weaknesses.some(
+        (weakness) => weakness.attackType.toLowerCase() === "fighting",
+      ),
+    ).toBe(true);
+    expect(elapsed).toBeLessThan(1_500);
+  });
+
+  it("keeps validated builds in the owned-party beam search", () => {
+    const sourceRequest = request("JOINT-BUILD-SOURCE");
+    const source = generateTeam(sourceRequest, catalog);
+    const roster = source.members.map(pokemonRecordFromMember);
+    const target = roster.find((member) => member.build.moves.length === 4)!;
+    const limitedBuild = {
+      ...target.build,
+      id: `${target.build.id}:limited-search-fixture`,
+      moves: [target.build.moves[0]] as [MoveBuild],
+      confidence: "limited" as const,
     };
-    expect(() => generateTeam(locked, catalog)).toThrowError(GeneratorInputError);
+    const fixture = {
+      ...catalog,
+      builds: [
+        ...roster.map((member) => member.build),
+        limitedBuild,
+      ],
+    } satisfies NormalizedCatalog;
+    const ownedRequest = {
+      ...sourceRequest,
+      ownedSlots: roster.map((member) => ({ speciesId: member.id })),
+      slots: roster.map((member) => member.id),
+    } as GeneratorRequest;
+    const fullBuildResult = materializeTeamResult(roster, ownedRequest, fixture);
+    const limitedRoster = roster.map((member) =>
+      member.id === target.id ? { ...member, build: limitedBuild } : member,
+    );
+    const limitedBuildResult = materializeTeamResult(
+      limitedRoster,
+      ownedRequest,
+      fixture,
+    );
+
+    expect(fullBuildResult.score.total).toBeGreaterThan(
+      limitedBuildResult.score.total,
+    );
+
+    const result = generateTeam(ownedRequest, fixture);
+
+    expect(result.members.find((member) => member.id === target.id)?.build.id).toBe(
+      target.build.id,
+    );
+  });
+
+  it("derives a non-Mega build when the owned species has only Mega templates", () => {
+    const ownedSlots = Array.from({ length: 6 }, () => ({
+      speciesId: "abomasnow",
+    })) as NonNullable<GeneratorRequest["ownedSlots"]>;
+    const result = generateTeam(
+      {
+        ...request("NON-MEGA-OWNED-FALLBACK"),
+        ownedSlots,
+        slots: Array.from({ length: 6 }, () => "abomasnow") as GeneratorRequest["slots"],
+      },
+      catalog,
+    );
+    const itemById = new Map(catalog.items.map((item) => [item.id, item]));
+
+    expect(result.members.every((member) => member.mega === false)).toBe(true);
+    expect(
+      result.members.every(
+        (member) => !itemById.get(member.build.heldItemId)?.megaStone,
+      ),
+    ).toBe(true);
+    expect(result.members.every((member) => member.buildConfidence === "derived")).toBe(
+      true,
+    );
+  });
+
+  it("jointly resolves duplicate owned evolution branches", () => {
+    const result = generateTeam(
+      {
+        ...request("DUPLICATE-OWNED-FAMILY"),
+        ownedSlots: [
+          { speciesId: "bulbasaur" },
+          { speciesId: "bulbasaur" },
+          null,
+          null,
+          null,
+          null,
+        ],
+        slots: ["bulbasaur", "bulbasaur", null, null, null, null],
+      },
+      catalog,
+    );
+
+    expect(result.members[0].id).toBe("venusaur");
+    expect(result.members[1].id).toBe("venusaur");
+    expect(result.members[0].evolutionPath).toEqual([
+      "bulbasaur",
+      "ivysaur",
+      "venusaur",
+    ]);
+    expect(result.members.slice(2).every((member) => member.id !== "venusaur")).toBe(true);
+    const itemById = new Map(catalog.items.map((item) => [item.id, item]));
+    expect(
+      result.members.every(
+        (member) => !itemById.get(member.build.heldItemId)?.megaStone,
+      ),
+    ).toBe(true);
   });
 });

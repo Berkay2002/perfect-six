@@ -1,4 +1,9 @@
-import type { GeneratorRequest, SavedTeam, TeamResult } from "@/lib/types";
+import {
+  SCHEMA_VERSION,
+  type GeneratorRequest,
+  type SavedTeam,
+  type TeamResult,
+} from "@/lib/types";
 
 export const SAVED_TEAMS_KEY = "perfect-six:saved-teams:v1";
 
@@ -8,12 +13,13 @@ function isSavedTeam(value: unknown): value is SavedTeam {
   if (!value || typeof value !== "object") return false;
   const candidate = value as Partial<SavedTeam>;
   return (
-    candidate.schemaVersion === 1 &&
+    (candidate.schemaVersion === 1 || candidate.schemaVersion === 2) &&
     typeof candidate.id === "string" &&
     typeof candidate.name === "string" &&
     typeof candidate.createdAt === "string" &&
     typeof candidate.updatedAt === "string" &&
-    candidate.request?.schemaVersion === 1 &&
+    (candidate.request?.schemaVersion === 1 ||
+      candidate.request?.schemaVersion === 2) &&
     candidate.result?.members?.length === 6
   );
 }
@@ -52,7 +58,7 @@ export function saveTeam(
 ) {
   const now = new Date().toISOString();
   const saved: SavedTeam = {
-    schemaVersion: 1,
+    schemaVersion: SCHEMA_VERSION,
     id: crypto.randomUUID(),
     name: name.trim() || `Team ${request.seed}`,
     createdAt: now,

@@ -783,31 +783,46 @@ function optionValues(value) {
   return value == null ? [] : [value];
 }
 
-function emptyEvs() {
+function statBlock(defaultValue) {
   return {
-    hp: 0,
-    attack: 0,
-    defense: 0,
-    specialAttack: 0,
-    specialDefense: 0,
-    speed: 0,
+    hp: defaultValue,
+    attack: defaultValue,
+    defense: defaultValue,
+    specialAttack: defaultValue,
+    specialDefense: defaultValue,
+    speed: defaultValue,
   };
 }
 
-function normalizeEvs(raw = {}) {
-  const evs = emptyEvs();
-  const keys = {
-    hp: "hp",
-    atk: "attack",
-    def: "defense",
-    spa: "specialAttack",
-    spd: "specialDefense",
-    spe: "speed",
-  };
+const showdownStatKeys = {
+  hp: "hp",
+  atk: "attack",
+  def: "defense",
+  spa: "specialAttack",
+  spd: "specialDefense",
+  spe: "speed",
+};
+
+function normalizeStatBlock(raw, defaultValue, normalizeValue) {
+  const stats = statBlock(defaultValue);
   for (const [key, value] of Object.entries(raw)) {
-    if (keys[key]) evs[keys[key]] = Number(value) || 0;
+    const normalizedKey = showdownStatKeys[key];
+    const numericValue = Number(value);
+    if (normalizedKey && Number.isFinite(numericValue)) {
+      stats[normalizedKey] = normalizeValue(numericValue);
+    }
   }
-  return evs;
+  return stats;
+}
+
+function normalizeEvs(raw = {}) {
+  return normalizeStatBlock(raw, 0, (value) => value);
+}
+
+function normalizeIvs(raw = {}) {
+  return normalizeStatBlock(raw, 31, (value) =>
+    Math.max(0, Math.min(31, value)),
+  );
 }
 
 function movePurpose(move) {
@@ -910,7 +925,18 @@ export function normalizeSmogonBuilds({
         const nature = optionValues(set.nature).map(String).sort()[0];
 
         const invalidReasons = [];
-        if (chosenMoves.length !== 4) invalidReasons.push("not four legal moves");
+        const sourcedMoveCount = Array.isArray(set.moves) ? set.moves.length : 0;
+        if (
+          chosenMoves.length < 1 ||
+          chosenMoves.length > 4 ||
+          chosenMoves.length !== sourcedMoveCount
+        ) {
+          invalidReasons.push(
+            sourcedMoveCount === 4
+              ? "not four legal moves"
+              : "not one to four fully legal sourced moves",
+          );
+        }
         if (!abilityId) invalidReasons.push("illegal or unknown ability");
         if (!heldItemId) invalidReasons.push("unknown item");
         if (!nature) invalidReasons.push("missing nature");
@@ -941,7 +967,9 @@ export function normalizeSmogonBuilds({
           heldItemId,
           heldItem: item.name,
           evs: normalizeEvs(set.evs),
+          ivs: normalizeIvs(set.ivs),
           moves: chosenMoves.map((moveId) => toMoveBuild(moveById.get(moveId))),
+          confidence: chosenMoves.length === 4 ? "source-backed" : "limited",
           practicalSubstitute:
             "Generated later from next-best legal sourced move, ability, or item.",
         });
@@ -1002,7 +1030,6 @@ export function deriveMissingBuilds({
   for (const pokemon of species) {
     if (
       existing.has(pokemon.id) ||
-      !pokemon.finalEvolution ||
       pokemon.battleOnly
     ) {
       continue;
@@ -1070,7 +1097,7 @@ export function deriveMissingBuilds({
     );
     const heldItem = pattern ? itemById.get(pattern.heldItemId) : null;
     if (
-      selected.length !== 4 ||
+      selected.length < 1 ||
       legalAbilities.length === 0 ||
       !pattern ||
       !heldItem
@@ -1079,7 +1106,7 @@ export function deriveMissingBuilds({
         speciesId: pokemon.id,
         source: "derived-policy",
         reason:
-          "Could not derive complete build from sourced legal moves, abilities, and validated set patterns.",
+          "Could not derive a sourced legal build, ability, and validated set pattern.",
       });
       continue;
     }
@@ -1100,7 +1127,9 @@ export function deriveMissingBuilds({
       heldItemId: heldItem.id,
       heldItem: heldItem.name,
       evs: pattern.evs,
+      ivs: normalizeIvs(),
       moves: selected.map(toMoveBuild),
+      confidence: selected.length === 4 ? "derived" : "limited",
       practicalSubstitute: substitute
         ? `${substitute.name} is next-ranked legal sourced move.`
         : "No fifth legal sourced move ranked.",

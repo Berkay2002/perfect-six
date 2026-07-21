@@ -2,17 +2,17 @@
   "manifest": {
     "schemaVersion": 1,
     "dataVersion": "cobbleverse-1.7.41b",
-    "engineVersion": 3,
-    "generatedAt": "2026-07-20T16:12:52.773Z",
+    "engineVersion": 4,
+    "generatedAt": "2026-07-21T19:02:25.175Z",
     "speciesCount": 1484,
     "moveCount": 954,
     "abilityCount": 320,
     "itemCount": 583,
-    "buildCount": 2873,
+    "buildCount": 3328,
     "finalEvolutionCount": 861,
     "starterCount": 30,
     "megaCapableCount": 83,
-    "rejectedCount": 5376,
+    "rejectedCount": 5321,
     "dependencyScan": "all-manifest-archives",
     "sources": [
       {
@@ -33,7 +33,7 @@
       },
       {
         "name": "Pokemon Showdown Pokedex",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://play.pokemonshowdown.com/data/pokedex.json",
         "checksumAlgorithm": "sha256",
         "checksum": "34851aee6a2b20aa68a9113d7ed25bd439d667a5eb60a311cd0824157b0005fb",
@@ -41,7 +41,7 @@
       },
       {
         "name": "Pokemon Showdown Moves",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://play.pokemonshowdown.com/data/moves.json",
         "checksumAlgorithm": "sha256",
         "checksum": "6108492fa49acdf75defbcfbbce8763995207ce60908fb913ed274de72b119ca",
@@ -49,7 +49,7 @@
       },
       {
         "name": "Pokemon Showdown Learnsets",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://play.pokemonshowdown.com/data/learnsets.json",
         "checksumAlgorithm": "sha256",
         "checksum": "27f3866fbc58f633af73e243b144abbd5a0c2392dcf594b1804171676d24bd44",
@@ -57,7 +57,7 @@
       },
       {
         "name": "Pokemon Showdown Abilities",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://play.pokemonshowdown.com/data/abilities.js",
         "checksumAlgorithm": "sha256",
         "checksum": "ecf7ea56e0656d303a7caef375169ffe95834453a5d780175168d6b513673b0c",
@@ -65,7 +65,7 @@
       },
       {
         "name": "Pokemon Showdown Items",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://play.pokemonshowdown.com/data/items.js",
         "checksumAlgorithm": "sha256",
         "checksum": "1cadd51d7b00858820bc50b5e0f66c7719b8e59c185dd2a2b9161bb99c099a0b",
@@ -73,7 +73,7 @@
       },
       {
         "name": "Pokemon Showdown Type Chart",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://play.pokemonshowdown.com/data/typechart.js",
         "checksumAlgorithm": "sha256",
         "checksum": "1f28413cf01f8f52c6ab35b694fafc52a537dfe31e68dcea6b9c97d41c7b9523",
@@ -81,15 +81,15 @@
       },
       {
         "name": "Smogon generation 9 sets",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://data.pkmn.cc/sets/gen9.json",
         "checksumAlgorithm": "sha256",
-        "checksum": "e2fd3a306820f6b419d9910b29fcffe67c2e2c9589f3f0f9eccf4b4afba6e931",
+        "checksum": "6e5271f7fe7de2c6b05739438e3496f1fea2e34507bc6ee03675353321d8263b",
         "authority": "recommendation"
       },
       {
         "name": "Smogon generation 7 sets",
-        "version": "2026-07-20",
+        "version": "2026-07-21",
         "url": "https://data.pkmn.cc/sets/gen7.json",
         "checksumAlgorithm": "sha256",
         "checksum": "0eb66fec628972656431d7fd9b66e4f038b32ddfe32e4b196bb31615235e047d",
@@ -6884,102 +6884,6 @@
         "setName": "Trick Room Sweeper",
         "source": "https://data.pkmn.cc/sets/gen9.json",
         "reason": "illegal or unknown ability"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf Revenge Killer (HP)",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Imposter Pivot (HP)",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Scarf Imposter",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Among Us (Imposter)",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Imposter",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Focus Sash",
-        "source": "https://data.pkmn.cc/sets/gen9.json",
-        "reason": "not four legal moves"
       },
       {
         "speciesId": "ditto",
@@ -22600,54 +22504,6 @@
         "reason": "not four legal moves, illegal or unknown ability"
       },
       {
-        "speciesId": "ditto",
-        "setName": "Imposter!",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Imposter",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Imposter",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Revenge Killer",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "no u (Revenge Killer)",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Imposter",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
-        "speciesId": "ditto",
-        "setName": "Choice Scarf",
-        "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves"
-      },
-      {
         "speciesId": "dodrio",
         "setName": "Swords Dance",
         "source": "https://data.pkmn.cc/sets/gen7.json",
@@ -29419,7 +29275,7 @@
         "speciesId": "unown",
         "setName": "Choice Specs",
         "source": "https://data.pkmn.cc/sets/gen7.json",
-        "reason": "not four legal moves, illegal or unknown ability"
+        "reason": "not one to four fully legal sourced moves, illegal or unknown ability"
       },
       {
         "speciesId": "ursaring",
@@ -30356,161 +30212,6 @@
         "setName": "Physical Setup Check",
         "source": "https://data.pkmn.cc/sets/gen7.json",
         "reason": "not four legal moves, illegal or unknown ability"
-      },
-      {
-        "speciesId": "ditto",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unown",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownalolan",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownb",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownc",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownd",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unowne",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownf",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unowng",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownh",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unowni",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownj",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownk",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownl",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownm",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownn",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unowno",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownp",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownq",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownr",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unowns",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownt",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownu",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownv",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownw",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownx",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unowny",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "unownz",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "smeargle",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "necrozmadawnwings",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
-      },
-      {
-        "speciesId": "necrozmaduskmane",
-        "source": "derived-policy",
-        "reason": "Could not derive complete build from sourced legal moves, abilities, and validated set patterns."
       }
     ]
   },

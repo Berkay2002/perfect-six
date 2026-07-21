@@ -46,6 +46,7 @@ function completeBattleQuality(
   }
   return {
     ability: quality.ability,
+    weaknesses: quality.weaknesses ?? [],
     item: quality.item,
     move: quality.move,
     team: quality.team,

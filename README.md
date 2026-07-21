@@ -1,18 +1,22 @@
 # Perfect Six
 
 Perfect Six is a deterministic, browser-only team generator for Cobbleverse
-1.7.41b. It builds singles teams of six around exactly one fully evolved
-regional starter, then explains the build, score, acquisition path, and
-team-aware alternatives for every slot.
+1.7.41b. It can build a singles team of six from scratch or coach an existing
+adventure party through reachable evolutions, complete builds, and optional
+roster improvements.
 
 ## What it does
 
-- Repeats the exact same result for the same seed, settings, locks, data
+- Repeats the exact same result for the same seed, settings, owned party, data
   version, and engine version.
 - Balances journey usefulness with friend-battle performance.
 - Supports balanced, aggressive, bulky, and weather team styles.
-- Supports locked roster slots, optional special-class Pokémon, and a required
-  Mega-capable slot.
+- Accepts zero to six current Pokémon or forms and preserves the entered party,
+  including duplicates and composition-rule violations.
+- Keeps the build-from-scratch starter, special-class, uniqueness, and Mega
+  invariants when no owned Pokémon are entered.
+- Plans reachable evolutions, one-to-four-move builds, IV targets, team jobs,
+  and qualified optional roster improvements.
 - Shows complete builds, practical substitutions, risks, score details, and
   three rescored alternatives per team member.
 - Copies human-readable and Pokémon Showdown-compatible exports.

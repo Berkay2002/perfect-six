@@ -1,4 +1,8 @@
 import { assembleCandidates } from "@/engine/catalog";
+import {
+  evolutionPath,
+  reachableEvolutionOptions,
+} from "@/engine/evolution";
 import { abilityQualityForTeam } from "@/engine/ability";
 import { battlePlanQualityForTeam } from "@/engine/battle-plan";
 import { itemQualityForTeam } from "@/engine/item";
@@ -7,7 +11,7 @@ import {
   type JourneyCurveOptions,
 } from "@/engine/journey";
 import { moveQualityForTeam } from "@/engine/move";
-import { scoreTeam } from "@/engine/score";
+import { defensiveAnalysis, scoreTeam } from "@/engine/score";
 import { memberJobExplanation, teamQualityForTeam } from "@/engine/team";
 import { synergyQualityForTeam } from "@/engine/synergy";
 import { weatherPlanForTeam } from "@/engine/weather";
@@ -16,10 +20,12 @@ import {
   createRandom,
   type SeededRandom,
 } from "@/lib/random";
+import { hasOwnedPokemon, ownedSlotsForRequest } from "@/lib/request";
 import type {
   GeneratorRequest,
   GeneratedTeamResult,
   NormalizedCatalog,
+  OwnedSlot,
   PokemonRecord,
   TeamWarning,
   Weather,
@@ -92,7 +98,7 @@ function canonicalRequest(request: GeneratorRequest) {
     availability: request.availability,
     allowSpecial: request.allowSpecial,
     requireMega: request.requireMega,
-    slots: request.slots,
+    ownedSlots: ownedSlotsForRequest(request),
   });
 }
 
@@ -103,66 +109,88 @@ function resolveWeather(request: GeneratorRequest): GeneratorRequest {
   return { ...request, weather: random.pick(values) };
 }
 
-function validateLocks(
-  request: GeneratorRequest,
-  candidates: PokemonRecord[],
+function ownedCandidateOptions(
+  slot: OwnedSlot,
+  candidates: Map<string, PokemonRecord>,
+  catalog: NormalizedCatalog,
 ) {
-  const byId = new Map(candidates.map((candidate) => [candidate.id, candidate]));
-  const locked = request.slots
-    .filter((id): id is string => id !== null)
-    .map((id) => {
-      const candidate = byId.get(id);
-      if (!candidate) {
-        throw new GeneratorInputError(
-          `Locked Pokémon "${id}" is unavailable, not a selectable final evolution, or has no validated build.`,
-          "unknown-lock",
-        );
-      }
-      return candidate;
-    });
-  if (new Set(locked.map((pokemon) => pokemon.id)).size !== locked.length) {
+  const options = reachableEvolutionOptions(
+    slot.speciesId,
+    slot.evolutionFacts,
+    catalog,
+  )
+    .map((option) => candidates.get(option.species.id))
+    .filter((candidate): candidate is PokemonRecord => candidate !== undefined);
+  if (options.length === 0) {
     throw new GeneratorInputError(
-      "Locked roster contains duplicate species.",
-      "duplicate-lock",
+      `Owned Pokémon "${slot.speciesId}" has no reachable source-backed build. Check any required evolution facts.`,
+      "unknown-owned-pokemon",
     );
   }
-  if (locked.filter((pokemon) => pokemon.starter).length > 1) {
-    throw new GeneratorInputError(
-      "Only one starter can be locked.",
-      "multiple-starters",
-    );
-  }
-  if (locked.length === 6 && !locked.some((pokemon) => pokemon.starter)) {
-    throw new GeneratorInputError(
-      "Six locked non-starters leave no room for required starter.",
-      "starter-required",
-    );
-  }
-  const specials = locked.filter(
-    (pokemon) => pokemon.specialClasses.length > 0,
+  return options;
+}
+
+function buildVariantsForCandidate(
+  candidate: PokemonRecord,
+  catalog: NormalizedCatalog,
+  limit: number,
+  includeMega: boolean,
+) {
+  const megaItemIds = new Set(
+    catalog.items.filter((item) => item.megaStone).map((item) => item.id),
   );
-  if (!request.allowSpecial && specials.length > 0) {
-    throw new GeneratorInputError(
-      "Special-class Pokémon locked while special-class toggle is off.",
-      "special-disabled",
-    );
-  }
-  if (specials.length > 1) {
-    throw new GeneratorInputError(
-      "At most one special-class Pokémon is permitted.",
-      "too-many-specials",
-    );
-  }
-  if (
-    request.requireMega &&
-    locked.length === 6 &&
-    !locked.some((pokemon) => pokemon.megaFormIds.length > 0)
-  ) {
-    throw new GeneratorInputError(
-      "Six locked Pokémon contain no Mega-capable species.",
-      "mega-required",
-    );
-  }
+  const fallbackItem =
+    catalog.items.find((item) => item.id === "leftovers") ??
+    catalog.items.find((item) => !item.megaStone);
+  const preferredBuild = megaItemIds.has(candidate.build.heldItemId)
+    ? {
+        ...candidate.build,
+        id: `${candidate.build.id}:non-mega`,
+        source: {
+          ...candidate.build.source,
+          kind: "derived" as const,
+          format: `${candidate.build.source.format} non-Mega adaptation`,
+        },
+        heldItemId: fallbackItem?.id ?? candidate.build.heldItemId,
+        heldItem: fallbackItem?.name ?? candidate.build.heldItem,
+        confidence: "derived" as const,
+      }
+    : candidate.build;
+  const speciesBuilds = catalog.builds.filter(
+    (build) => build.speciesId === candidate.id,
+  );
+  const builds = speciesBuilds.filter(
+    (build) => !megaItemIds.has(build.heldItemId),
+  );
+  const megaBuilds = includeMega
+    ? speciesBuilds.filter((build) => megaItemIds.has(build.heldItemId))
+    : [];
+  const compareBuilds = (
+    left: PokemonRecord["build"],
+    right: PokemonRecord["build"],
+  ) =>
+    Number(right.source.kind === "smogon") -
+      Number(left.source.kind === "smogon") ||
+    right.moves.length - left.moves.length ||
+    left.id.localeCompare(right.id);
+  const ordered = [
+    preferredBuild,
+    ...megaBuilds.sort(compareBuilds),
+    ...builds
+      .filter((build) => build.id !== preferredBuild.id)
+      .sort(compareBuilds),
+  ]
+    .filter(
+      (build, index, all) =>
+        all.findIndex((candidateBuild) => candidateBuild.id === build.id) ===
+        index,
+    )
+    .slice(0, limit);
+  return ordered.map((build) => ({ ...candidate, build }));
+}
+
+function searchCandidateKey(candidate: PokemonRecord, includeBuild = true) {
+  return includeBuild ? `${candidate.id}@${candidate.build.id}` : candidate.id;
 }
 
 function individualScore(
@@ -299,28 +327,62 @@ export function compareJourneyFinalists<
   );
 }
 
-function compareBeamStates(left: BeamState, right: BeamState) {
+function compareBeamStates(
+  left: BeamState,
+  right: BeamState,
+  includeBuild: boolean,
+) {
   return (
     right.heuristic - left.heuristic ||
     left.members
-      .map((pokemon) => pokemon.id)
+      .map((pokemon) => searchCandidateKey(pokemon, includeBuild))
       .join("|")
-      .localeCompare(right.members.map((pokemon) => pokemon.id).join("|"))
+      .localeCompare(
+        right.members
+          .map((pokemon) => searchCandidateKey(pokemon, includeBuild))
+          .join("|"),
+      )
   );
+}
+
+function canonicalSearchRosterKey(
+  members: readonly PokemonRecord[],
+  includeBuild: boolean,
+) {
+  return members
+    .map((pokemon) => searchCandidateKey(pokemon, includeBuild))
+    .sort()
+    .join("|");
+}
+
+function deduplicateSearchStates(
+  states: readonly BeamState[],
+  includeBuild: boolean,
+) {
+  const byRoster = new Map<string, BeamState>();
+  for (const state of states) {
+    const key = canonicalSearchRosterKey(state.members, includeBuild);
+    if (!byRoster.has(key)) byRoster.set(key, state);
+  }
+  return [...byRoster.values()];
 }
 
 function pruneBeam(
   states: BeamState[],
   unlockedCount: number,
+  includeBuild: boolean,
 ) {
-  states.sort(compareBeamStates);
-  const unique = deduplicateRosterStates(states);
+  states.sort((left, right) => compareBeamStates(left, right, includeBuild));
+  const unique = deduplicateSearchStates(states, includeBuild);
   const quality = unique.slice(0, QUALITY_BEAM_WIDTH);
   const qualityKeys = new Set(
-    quality.map((state) => canonicalRosterKey(state.members)),
+    quality.map((state) => canonicalSearchRosterKey(state.members, includeBuild)),
   );
   const exploration = unique
-    .filter((state) => !qualityKeys.has(canonicalRosterKey(state.members)))
+    .filter(
+      (state) =>
+        !qualityKeys.has(canonicalSearchRosterKey(state.members, includeBuild)),
+    )
     .sort((left, right) => {
       const leftAffinity =
         unlockedCount === 0
@@ -332,7 +394,7 @@ function pruneBeam(
           : (right.seedAffinity / unlockedCount - 0.5) * SEED_AFFINITY_RANGE;
       const seededDifference =
         right.heuristic + rightAffinity - (left.heuristic + leftAffinity);
-      return seededDifference || compareBeamStates(left, right);
+      return seededDifference || compareBeamStates(left, right, includeBuild);
     })
     .slice(0, BEAM_WIDTH - quality.length);
   return [...quality, ...exploration];
@@ -342,7 +404,41 @@ function hardValidPartial(
   members: PokemonRecord[],
   remaining: number,
   request: GeneratorRequest,
+  ownedFlags: readonly boolean[] = [],
 ) {
+  if (hasOwnedPokemon(request)) {
+    const owned = members.filter((_, index) => ownedFlags[index]);
+    const generated = members.filter((_, index) => !ownedFlags[index]);
+    const ownedIds = new Set(owned.map((pokemon) => pokemon.id));
+    if (
+      new Set(generated.map((pokemon) => pokemon.id)).size !== generated.length ||
+      generated.some((pokemon) => ownedIds.has(pokemon.id))
+    ) {
+      return false;
+    }
+    const openStarterAllowance = Math.max(
+      0,
+      1 - owned.filter((pokemon) => pokemon.starter).length,
+    );
+    if (
+      generated.filter((pokemon) => pokemon.starter).length >
+      openStarterAllowance
+    ) {
+      return false;
+    }
+    const openSpecialAllowance = request.allowSpecial
+      ? Math.max(
+          0,
+          1 -
+            owned.filter((pokemon) => pokemon.specialClasses.length > 0)
+              .length,
+        )
+      : 0;
+    return (
+      generated.filter((pokemon) => pokemon.specialClasses.length > 0)
+        .length <= openSpecialAllowance
+    );
+  }
   if (new Set(members.map((pokemon) => pokemon.id)).size !== members.length) {
     return false;
   }
@@ -384,7 +480,8 @@ function partialHeuristic(
           ? pokemon.availability.score * 0.35
           : 0) +
         Math.max(pokemon.stats.attack, pokemon.stats.specialAttack) * 0.08 +
-        pokemon.stats.speed * 0.05,
+        pokemon.stats.speed * 0.05 +
+        pokemon.build.moves.length * 2,
       0,
     ) / Math.max(1, members.length);
   return (
@@ -408,8 +505,14 @@ function asMembers(
   request: GeneratorRequest,
   catalog: NormalizedCatalog,
 ): GeneratedTeamResult["members"] {
+  const ownedSlots = ownedSlotsForRequest(request);
+  const itemById = new Map(catalog.items.map((item) => [item.id, item]));
+  const selectedMegaCandidate = roster.find((pokemon) => {
+    const item = itemById.get(pokemon.build.heldItemId);
+    return item?.megaEvolves === pokemon.id && item.megaStone !== null;
+  });
   const megaCandidate = request.requireMega
-    ? [...roster]
+    ? selectedMegaCandidate ?? [...roster]
         .filter((pokemon) => pokemon.megaFormIds.length > 0)
         .sort(
           (left, right) =>
@@ -417,11 +520,14 @@ function asMembers(
             left.id.localeCompare(right.id),
         )[0]
     : undefined;
-  const itemById = new Map(catalog.items.map((item) => [item.id, item]));
   const materializedMembers = roster.map((pokemon, index) => {
     const mega = pokemon.id === megaCandidate?.id;
     let build = pokemon.build;
     if (mega) {
+      const selectedItem = itemById.get(build.heldItemId);
+      const selectedMegaBuild =
+        selectedItem?.megaEvolves === pokemon.id &&
+        selectedItem.megaStone !== null;
       const megaItems = catalog.items
         .filter(
           (item) =>
@@ -437,7 +543,9 @@ function asMembers(
             megaItems.some((item) => item.id === candidate.heldItemId),
         )
         .sort((left, right) => left.id.localeCompare(right.id))[0];
-      if (sourcedMegaBuild) {
+      if (selectedMegaBuild) {
+        build = pokemon.build;
+      } else if (sourcedMegaBuild) {
         build = sourcedMegaBuild;
       } else if (megaItems[0]) {
         build = {
@@ -448,13 +556,47 @@ function asMembers(
         };
       }
     }
-    const materialized = { ...pokemon, build };
+    const confidence =
+      build.confidence ??
+      (build.source.kind === "smogon" ? "source-backed" : "derived");
+    const materialized = {
+      ...pokemon,
+      build: {
+        ...build,
+        ivs: {
+          hp: 31,
+          attack: 31,
+          defense: 31,
+          specialAttack: 31,
+          specialDefense: 31,
+          speed: 31,
+          ...build.ivs,
+        },
+        confidence,
+      },
+    };
+    const owned = ownedSlots[index];
     return {
       ...materialized,
       slot: index,
       selectedRole: pokemon.roles[0] ?? "Flexible",
       mega,
       gamePlan: createGamePlan(materialized),
+      origin: owned ? "player" : "generated",
+      ...(owned
+        ? {
+            enteredSpeciesId: owned.speciesId,
+            selectedEvolutionId: pokemon.id,
+            evolutionPath:
+              evolutionPath(
+                owned.speciesId,
+                pokemon.id,
+                owned.evolutionFacts,
+                catalog,
+              ) ?? [owned.speciesId, pokemon.id],
+          }
+        : {}),
+      buildConfidence: confidence,
     };
   });
   const weatherPlan = weatherPlanForTeam(
@@ -522,6 +664,7 @@ export function materializeTeamResult(
     score: scoreTeam(members, request, catalog, journeyOptions),
     battleQuality: {
       ability: abilityQualityForTeam(members, request, catalog, weatherPlan),
+      weaknesses: defensiveAnalysis(members, catalog).weaknesses,
       item: itemQualityForTeam(members, request, catalog),
       move: moveQualityForTeam(members, request, catalog),
       team: teamQuality,
@@ -562,28 +705,79 @@ export function generateTeam(
   const journeyInfluence = journeyOptions.influence ?? 1;
   const requestKey = canonicalRequest(request);
   const random = createRandom(requestKey);
-  const candidates = assembleCandidates(
-    catalog,
-    request.style,
-    request.weather,
-  );
-  if (candidates.length < 6) {
+  const ownedSlots = ownedSlotsForRequest(request);
+  const existingAdventure = ownedSlots.some(Boolean);
+  const hasOpenSlots = ownedSlots.some((slot) => slot === null);
+  const candidates = hasOpenSlots
+    ? assembleCandidates(catalog, request.style, request.weather)
+    : [];
+  if (hasOpenSlots && candidates.length < 6) {
     throw new GeneratorInputError(
       "Fewer than six selectable Pokémon have validated source-backed builds.",
       "insufficient-catalog",
     );
   }
-  validateLocks(request, candidates);
-  const byId = new Map(candidates.map((candidate) => [candidate.id, candidate]));
+  const ownedSpeciesIds = new Set(
+    ownedSlots.flatMap((slot) =>
+      slot
+        ? reachableEvolutionOptions(
+            slot.speciesId,
+            slot.evolutionFacts,
+            catalog,
+          ).map((option) => option.species.id)
+        : [],
+    ),
+  );
+  const allCandidates = existingAdventure
+    ? assembleCandidates(catalog, request.style, request.weather, {
+        finalOnly: false,
+        speciesIds: ownedSpeciesIds,
+      })
+    : candidates;
+  const allCandidatesById = new Map(
+    allCandidates.map((candidate) => [candidate.id, candidate]),
+  );
+  const ownedOptions = ownedSlots.map((slot) =>
+    slot
+      ? ownedCandidateOptions(slot, allCandidatesById, catalog).flatMap(
+          (candidate) =>
+            buildVariantsForCandidate(
+              candidate,
+              catalog,
+              4,
+              request.requireMega,
+            ),
+        )
+      : null,
+  );
   const weatherSupportIds = requestedWeatherSupportIds(
     candidates,
     request,
     catalog,
   );
   const pool = candidatePool(candidates, request, weatherSupportIds);
+  const searchPool = !hasOpenSlots
+    ? []
+    : existingAdventure
+      ? pool.flatMap((candidate) =>
+          buildVariantsForCandidate(
+            candidate,
+            catalog,
+            2,
+            request.requireMega,
+          ),
+        )
+      : pool;
+  const searchCandidates = [
+    ...new Map(
+      [...searchPool, ...ownedOptions.flatMap((options) => options ?? [])].map(
+        (candidate) => [searchCandidateKey(candidate, existingAdventure), candidate],
+      ),
+    ).values(),
+  ];
   const jobsById = new Map(
-    pool.map((candidate) => [
-      candidate.id,
+    searchCandidates.map((candidate) => [
+      searchCandidateKey(candidate, existingAdventure),
       searchJobsForCandidate(candidate, request, catalog),
     ]),
   );
@@ -603,26 +797,30 @@ export function generateTeam(
     }),
   );
   const affinityById = new Map(
-    candidates.map((candidate) => [
-      candidate.id,
-      createRandom(`${requestKey}:affinity:${candidate.id}`).next(),
+    searchCandidates.map((candidate) => [
+      searchCandidateKey(candidate, existingAdventure),
+      createRandom(
+        `${requestKey}:affinity:${searchCandidateKey(candidate, existingAdventure)}`,
+      ).next(),
     ]),
   );
   let beam: BeamState[] = [
     { members: [], heuristic: 0, seedAffinity: 0, jobMask: 0 },
   ];
+  const ownedFlags = ownedSlots.map(Boolean);
   for (let slot = 0; slot < 6; slot += 1) {
-    const lockedId = request.slots[slot];
-    const unlockedCount = request.slots
+    const fixedOptions = ownedOptions[slot];
+    const unlockedCount = ownedOptions
       .slice(0, slot + 1)
-      .filter((id) => id === null).length;
-    const options = lockedId ? [byId.get(lockedId)!] : pool;
+      .filter((options) => options === null).length;
+    const options = fixedOptions ?? searchPool;
     const next: BeamState[] = [];
     for (const state of beam) {
       for (const pokemon of options) {
         const members = [...state.members, pokemon];
-        if (!hardValidPartial(members, 5 - slot, request)) continue;
-        const jobMask = state.jobMask | (jobMaskById.get(pokemon.id) ?? 0);
+        if (!hardValidPartial(members, 5 - slot, request, ownedFlags)) continue;
+        const candidateKey = searchCandidateKey(pokemon, existingAdventure);
+        const jobMask = state.jobMask | (jobMaskById.get(candidateKey) ?? 0);
         next.push({
           members,
           heuristic: partialHeuristic(
@@ -634,28 +832,71 @@ export function generateTeam(
           ),
           seedAffinity:
             state.seedAffinity +
-            (lockedId ? 0 : (affinityById.get(pokemon.id) ?? 0.5)),
+            (fixedOptions ? 0 : (affinityById.get(candidateKey) ?? 0.5)),
           jobMask,
         });
       }
     }
-    beam = pruneBeam(next, unlockedCount);
+    beam = pruneBeam(next, unlockedCount, existingAdventure);
     if (beam.length === 0) {
       throw new GeneratorInputError(
-        "Locks and toggles produce no legal six-Pokémon team.",
+        "The owned party and current preferences produce no legal six-Pokémon team.",
         "impossible-request",
       );
     }
   }
 
-  const finals = deduplicateRosterStates(beam)
+  const buildFinals = deduplicateSearchStates(beam, existingAdventure)
     .map((state) => ({
       roster: state.members,
       score: scoreTeam(state.members, request, catalog, journeyOptions),
     }))
     .sort(compareJourneyFinalists);
-  const { selected, bestScore } = selectEliteRoster(finals, random);
+  const megaItemIds = new Set(
+    catalog.items.filter((item) => item.megaStone).map((item) => item.id),
+  );
+  const requiredMegaBuildFinals =
+    existingAdventure && request.requireMega
+      ? buildFinals.filter(
+          (entry) =>
+            entry.roster.filter((pokemon) =>
+              megaItemIds.has(pokemon.build.heldItemId),
+            ).length === 1,
+        )
+      : buildFinals;
+  const finalistBuilds =
+    requiredMegaBuildFinals.length > 0 ? requiredMegaBuildFinals : buildFinals;
+  const bestBuildByRoster = new Map<string, (typeof buildFinals)[number]>();
+  if (existingAdventure) {
+    for (const entry of finalistBuilds) {
+      const key = canonicalRosterKey(entry.roster);
+      if (!bestBuildByRoster.has(key)) bestBuildByRoster.set(key, entry);
+    }
+  }
+  const finals = existingAdventure
+    ? [...bestBuildByRoster.values()]
+    : finalistBuilds;
+  const megaFinals =
+    existingAdventure && request.requireMega
+      ? requiredMegaBuildFinals.length > 0
+        ? finals
+        : []
+      : finals;
+  const selectableFinals = megaFinals.length > 0 ? megaFinals : finals;
+  const { selected, bestScore } = selectEliteRoster(selectableFinals, random);
   const warnings: TeamWarning[] = [];
+  if (
+    existingAdventure &&
+    request.requireMega &&
+    megaFinals.length === 0
+  ) {
+    warnings.push({
+      code: "mega-preference-unmet",
+      severity: "warning",
+      message:
+        "The fixed owned party leaves no legal Mega-capable member, so the Mega preference could not be met.",
+    });
+  }
   if (selected.score.total < 85) {
     warnings.push({
       code: "below-target",

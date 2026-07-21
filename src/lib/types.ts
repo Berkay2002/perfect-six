@@ -2,7 +2,8 @@ import { ENGINE_VERSION as CURRENT_ENGINE_VERSION } from "../../data/engine-vers
 
 export const DATA_VERSION = "cobbleverse-1.7.41b" as const;
 export const ENGINE_VERSION = CURRENT_ENGINE_VERSION;
-export const SCHEMA_VERSION = 1 as const;
+export const SCHEMA_VERSION = 2 as const;
+export const LEGACY_SCHEMA_VERSION = 1 as const;
 
 export type TeamStyle =
   | "balanced"
@@ -76,6 +77,9 @@ export type EVSpread = {
   speed: number;
 };
 
+export type IVTargets = StatBlock;
+export type BuildConfidence = "source-backed" | "derived" | "limited";
+
 export type MoveBuild = {
   id: MoveId;
   name: string;
@@ -101,7 +105,13 @@ export type BuildTemplate = {
   heldItemId: ItemId;
   heldItem: string;
   evs: EVSpread;
-  moves: [MoveBuild, MoveBuild, MoveBuild, MoveBuild];
+  ivs?: IVTargets;
+  moves:
+    | [MoveBuild]
+    | [MoveBuild, MoveBuild]
+    | [MoveBuild, MoveBuild, MoveBuild]
+    | [MoveBuild, MoveBuild, MoveBuild, MoveBuild];
+  confidence?: BuildConfidence;
   practicalSubstitute: string;
 };
 
@@ -402,8 +412,35 @@ export type PokemonRecord = SpeciesRecord & {
   build: BuildTemplate;
 };
 
+export type OwnedEvolutionFacts = {
+  gender?: "female" | "male";
+};
+
+export type OwnedSlot = {
+  speciesId: SpeciesFormId;
+  evolutionFacts?: OwnedEvolutionFacts;
+};
+
+export type OwnedSlots = [
+  OwnedSlot | null,
+  OwnedSlot | null,
+  OwnedSlot | null,
+  OwnedSlot | null,
+  OwnedSlot | null,
+  OwnedSlot | null,
+];
+
+export type LegacySlots = [
+  SpeciesFormId | null,
+  SpeciesFormId | null,
+  SpeciesFormId | null,
+  SpeciesFormId | null,
+  SpeciesFormId | null,
+  SpeciesFormId | null,
+];
+
 export type GeneratorRequest = {
-  schemaVersion: typeof SCHEMA_VERSION;
+  schemaVersion: typeof LEGACY_SCHEMA_VERSION | typeof SCHEMA_VERSION;
   dataVersion: typeof DATA_VERSION;
   engineVersion: typeof ENGINE_VERSION;
   seed: string;
@@ -412,14 +449,9 @@ export type GeneratorRequest = {
   availability: AvailabilityMode;
   allowSpecial: boolean;
   requireMega: boolean;
-  slots: [
-    SpeciesFormId | null,
-    SpeciesFormId | null,
-    SpeciesFormId | null,
-    SpeciesFormId | null,
-    SpeciesFormId | null,
-    SpeciesFormId | null,
-  ];
+  ownedSlots?: OwnedSlots;
+  /** Schema-v1 compatibility. Migrated to ownedSlots when regenerated. */
+  slots: LegacySlots;
 };
 
 export type ScoreBreakdown = {
@@ -434,6 +466,12 @@ export type ScoreBreakdown = {
   utility: number;
 };
 
+export type TeamWeakness = {
+  attackType: string;
+  weakMembers: number;
+  protectedMembers: number;
+};
+
 export type TeamMember = PokemonRecord & {
   slot: number;
   selectedRole: string;
@@ -441,6 +479,11 @@ export type TeamMember = PokemonRecord & {
   gamePlan: string;
   jobs?: TeamJob[];
   jobExplanation?: string;
+  origin?: "player" | "generated" | "recommended";
+  enteredSpeciesId?: SpeciesFormId;
+  selectedEvolutionId?: SpeciesFormId;
+  evolutionPath?: SpeciesFormId[];
+  buildConfidence?: BuildConfidence;
 };
 
 export type TeamWarning = {
@@ -472,6 +515,7 @@ export type TeamResult = {
       contribution: number;
       explanation: string;
     };
+    weaknesses?: TeamWeakness[];
     item?: {
       contribution: number;
       explanation: string;
@@ -497,6 +541,7 @@ export type GeneratedTeamResult = TeamResult & {
   ];
   battleQuality: {
     ability: NonNullable<TeamResult["battleQuality"]>["ability"];
+    weaknesses: TeamWeakness[];
     item: NonNullable<NonNullable<TeamResult["battleQuality"]>["item"]>;
     move: NonNullable<NonNullable<TeamResult["battleQuality"]>["move"]>;
     team: NonNullable<NonNullable<TeamResult["battleQuality"]>["team"]>;
@@ -519,8 +564,26 @@ export type TeamAlternative = {
   tradeoff: string;
 };
 
+export type RecommendationChange = {
+  slot: number;
+  from: TeamMember;
+  to: TeamMember;
+};
+
+export type TeamRecommendation = {
+  id: string;
+  kind: "single" | "coordinated";
+  label: string;
+  changedSlots: number[];
+  changes: RecommendationChange[];
+  scoreDelta: number;
+  closedGaps: TeamJob[];
+  tradeoffs: string[];
+  preview: GeneratedTeamResult;
+};
+
 export type SavedTeam = {
-  schemaVersion: typeof SCHEMA_VERSION;
+  schemaVersion: typeof LEGACY_SCHEMA_VERSION | typeof SCHEMA_VERSION;
   id: string;
   name: string;
   createdAt: string;
@@ -530,13 +593,13 @@ export type SavedTeam = {
 };
 
 export type SharePayload = {
-  schemaVersion: typeof SCHEMA_VERSION;
+  schemaVersion: typeof LEGACY_SCHEMA_VERSION | typeof SCHEMA_VERSION;
   request: GeneratorRequest;
   result: TeamResult;
 };
 
 export type DataManifest = {
-  schemaVersion: typeof SCHEMA_VERSION;
+  schemaVersion: number;
   dataVersion: typeof DATA_VERSION;
   engineVersion: typeof ENGINE_VERSION;
   generatedAt: string;

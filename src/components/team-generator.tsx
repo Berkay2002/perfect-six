@@ -6,12 +6,19 @@ import { Card } from "@astryxdesign/core/Card";
 import { ClickableCard } from "@astryxdesign/core/ClickableCard";
 import { Collapsible } from "@astryxdesign/core/Collapsible";
 import { Divider } from "@astryxdesign/core/Divider";
+import { Dialog, DialogHeader } from "@astryxdesign/core/Dialog";
 import { Grid } from "@astryxdesign/core/Grid";
 import { Heading } from "@astryxdesign/core/Heading";
+import { List, ListItem } from "@astryxdesign/core/List";
+import {
+  MetadataList,
+  MetadataListItem,
+} from "@astryxdesign/core/MetadataList";
 import {
   HStack,
   Layout,
   LayoutContent,
+  LayoutFooter,
   LayoutPanel,
   StackItem,
   VStack,
@@ -34,13 +41,15 @@ import {
   Save,
   Share2,
   Shuffle,
+  Undo2,
 } from "lucide-react";
-import type { ReactNode } from "react";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import speciesData from "@/data/generated/species.json";
+import { evolutionNeedsGender } from "@/engine/evolution";
 import { useTeamWorker } from "@/hooks/use-team-worker";
 import { randomDisplaySeed } from "@/lib/random";
+import { ownedSlotsForRequest } from "@/lib/request";
 import {
   alternativeQualitySummary,
   alternativeTradeoffPresentation,
@@ -63,6 +72,7 @@ import {
   type SpeciesRecord,
   type TeamAlternative,
   type TeamMember,
+  type TeamRecommendation,
   type TeamResult,
 } from "@/lib/types";
 import styles from "./team-generator.module.css";
@@ -73,7 +83,7 @@ type SpeciesItem = SearchableItem<{
 }>;
 
 const species = (speciesData as unknown as SpeciesRecord[])
-  .filter((entry) => entry.finalEvolution && !entry.battleOnly)
+  .filter((entry) => !entry.battleOnly)
   .sort(
     (left, right) =>
       left.dexNumber - right.dexNumber || left.name.localeCompare(right.name),
@@ -86,6 +96,7 @@ const speciesItems: SpeciesItem[] = species.map((entry) => ({
 }));
 
 const speciesById = new Map(speciesItems.map((entry) => [entry.id, entry]));
+const speciesRecordById = new Map(species.map((entry) => [entry.id, entry]));
 
 const speciesSource: SearchSource<SpeciesItem> = {
   search(query) {
@@ -119,6 +130,7 @@ const defaultRequest: GeneratorRequest = {
   availability: "journey",
   allowSpecial: false,
   requireMega: false,
+  ownedSlots: [null, null, null, null, null, null],
   slots: [null, null, null, null, null, null],
 };
 
@@ -139,6 +151,11 @@ const weatherOptions = [
 const availabilityOptions = [
   { value: "journey", label: "Journey-friendly" },
   { value: "unrestricted", label: "Unrestricted" },
+];
+const genderOptions = [
+  { value: "unknown", label: "Choose gender" },
+  { value: "female", label: "Female" },
+  { value: "male", label: "Male" },
 ];
 
 const evStatLabels = {
@@ -162,17 +179,22 @@ function formatEvSpread(evs: TeamMember["build"]["evs"]) {
   );
 }
 
-function DetailFact({ label, children }: { label: string; children: ReactNode }) {
-  return (
-    <VStack gap={1}>
-      <Text type="supporting" color="secondary">
-        {label}
-      </Text>
-      <Text type="body" textWrap="pretty">
-        {children}
-      </Text>
-    </VStack>
-  );
+function formatIvTargets(ivs: TeamMember["build"]["ivs"]) {
+  const targets = {
+    hp: 31,
+    attack: 31,
+    defense: 31,
+    specialAttack: 31,
+    specialDefense: 31,
+    speed: 31,
+    ...ivs,
+  };
+  return Object.entries(targets)
+    .map(
+      ([stat, value]) =>
+        `${value} ${evStatLabels[stat as keyof typeof evStatLabels]}`,
+    )
+    .join(" · ");
 }
 
 function ExpandableText({ children }: { children: string }) {
@@ -246,12 +268,14 @@ function MemberTile({
   onSelect,
   onAlternatives,
   alternativesBusy,
+  canFindAlternatives,
 }: {
   member: TeamMember;
   selected: boolean;
   onSelect: () => void;
   onAlternatives: () => void;
   alternativesBusy: boolean;
+  canFindAlternatives: boolean;
 }) {
   return (
     <ClickableCard
@@ -261,16 +285,18 @@ function MemberTile({
       padding={0}
     >
       <PokemonArt member={member} compact />
-      <Button
-        className={styles.tileAlternativeAction}
-        label="Find alternatives"
-        aria-label={`Find alternatives for ${member.name}`}
-        variant="secondary"
-        size="sm"
-        icon={<Shuffle />}
-        isLoading={alternativesBusy}
-        onClick={onAlternatives}
-      />
+      {canFindAlternatives ? (
+        <Button
+          className={styles.tileAlternativeAction}
+          label="Find alternatives"
+          aria-label={`Find alternatives for ${member.name}`}
+          variant="secondary"
+          size="sm"
+          icon={<Shuffle />}
+          isLoading={alternativesBusy}
+          onClick={onAlternatives}
+        />
+      ) : null}
       <span className={styles.tileOverlay}>
         <span className={styles.tileCopy}>
           <Text type="label" weight="bold" maxLines={1}>
@@ -295,10 +321,12 @@ function MemberDetail({
   member,
   onAlternatives,
   alternativesBusy,
+  canFindAlternatives,
 }: {
   member: TeamMember;
   onAlternatives: () => void;
   alternativesBusy: boolean;
+  canFindAlternatives: boolean;
 }) {
   return (
     <Card padding={4}>
@@ -319,26 +347,40 @@ function MemberDetail({
             </Text>
           </VStack>
           <StackItem size="fill" />
-          <Button
-            label="Find alternatives"
-            variant="secondary"
-            icon={<Shuffle />}
-            isLoading={alternativesBusy}
-            onClick={onAlternatives}
-          />
+          {canFindAlternatives ? (
+            <Button
+              label="Find alternatives"
+              variant="secondary"
+              icon={<Shuffle />}
+              isLoading={alternativesBusy}
+              onClick={onAlternatives}
+            />
+          ) : null}
         </HStack>
         <Divider />
         <Grid columns={{ minWidth: 220, max: 2, repeat: "fit" }} gap={4}>
           <VStack gap={3}>
             <Heading level={3}>Ideal build</Heading>
-            <Grid columns={{ minWidth: 120, max: 3, repeat: "fit" }} gap={3}>
-              <DetailFact label="Ability">{member.build.ability}</DetailFact>
-              <DetailFact label="Held item">{member.build.heldItem}</DetailFact>
-              <DetailFact label="Nature">{member.build.nature}</DetailFact>
-            </Grid>
-            <DetailFact label="EV spread">
-              {formatEvSpread(member.build.evs)}
-            </DetailFact>
+            <MetadataList columns="multi" label={{ position: "top" }}>
+              <MetadataListItem label="Ability">
+                {member.build.ability}
+              </MetadataListItem>
+              <MetadataListItem label="Held item">
+                {member.build.heldItem}
+              </MetadataListItem>
+              <MetadataListItem label="Nature">
+                {member.build.nature}
+              </MetadataListItem>
+              <MetadataListItem label="EV spread">
+                {formatEvSpread(member.build.evs)}
+              </MetadataListItem>
+              <MetadataListItem label="IV targets">
+                {formatIvTargets(member.build.ivs)}
+              </MetadataListItem>
+              <MetadataListItem label="Build confidence">
+                {member.buildConfidence ?? "Legacy snapshot"}
+              </MetadataListItem>
+            </MetadataList>
             <VStack gap={2}>
               <Text type="supporting" color="secondary">
                 Moves
@@ -363,20 +405,36 @@ function MemberDetail({
           </VStack>
           <VStack gap={3}>
             <Heading level={3}>Field notes</Heading>
-            <DetailFact label="Game plan">{member.gamePlan}</DetailFact>
-            <DetailFact label="Team jobs">
-              {member.jobExplanation ??
-                "This saved team predates team-job explanations."}
-            </DetailFact>
-            <DetailFact label="Evolution">
-              {member.availability.evolutionLine}
-            </DetailFact>
-            <DetailFact label="Acquisition">
-              {member.availability.guidance}
-            </DetailFact>
-            <DetailFact label="Practical substitute">
-              {member.build.practicalSubstitute}
-            </DetailFact>
+            <MetadataList label={{ position: "top" }}>
+              <MetadataListItem label="Origin">
+                {member.origin ?? "Legacy snapshot"}
+              </MetadataListItem>
+              <MetadataListItem label="Planned evolution">
+                {member.evolutionPath?.length
+                  ? member.evolutionPath
+                      .map(
+                        (id) => speciesRecordById.get(id)?.name ?? id,
+                      )
+                      .join(" → ")
+                  : member.availability.evolutionLine}
+              </MetadataListItem>
+              <MetadataListItem label="Battle role">
+                {member.selectedRole}
+              </MetadataListItem>
+              <MetadataListItem label="Game plan">
+                {member.gamePlan}
+              </MetadataListItem>
+              <MetadataListItem label="Team jobs">
+                {member.jobExplanation ??
+                  "This saved team predates team-job explanations."}
+              </MetadataListItem>
+              <MetadataListItem label="Acquisition">
+                {member.availability.guidance}
+              </MetadataListItem>
+              <MetadataListItem label="Practical substitute">
+                {member.build.practicalSubstitute}
+              </MetadataListItem>
+            </MetadataList>
             <Text type="supporting" color="secondary">
               Build basis: {member.build.source.kind} ·{" "}
               {member.build.source.format}
@@ -476,34 +534,179 @@ function AlternativeTray({
   );
 }
 
+function RecommendationRow({
+  recommendation,
+  onReview,
+}: {
+  recommendation: TeamRecommendation;
+  onReview: (recommendation: TeamRecommendation) => void;
+}) {
+  return (
+    <ListItem
+      label={recommendation.label}
+      startContent={
+        <Badge
+          variant={recommendation.kind === "coordinated" ? "purple" : "teal"}
+          label={recommendation.kind === "coordinated" ? "Plan" : "Single swap"}
+        />
+      }
+      endContent={
+        <Button
+          label="Review change"
+          variant="secondary"
+          onClick={() => onReview(recommendation)}
+        />
+      }
+      description={
+        <VStack gap={2}>
+          <Text type="supporting" color="secondary">
+            {recommendation.scoreDelta >= 0 ? "+" : ""}
+            {recommendation.scoreDelta} team score
+          </Text>
+        <MetadataList label={{ position: "start" }}>
+          {recommendation.changes.map((change) => (
+            <MetadataListItem
+              key={change.slot}
+              label={`Slot ${change.slot + 1}`}
+            >
+              {change.from.name} → {change.to.name}
+            </MetadataListItem>
+          ))}
+          <MetadataListItem label="Closed gaps">
+            {recommendation.closedGaps.join(", ") || "None"}
+          </MetadataListItem>
+          <MetadataListItem label="Tradeoff">
+            {recommendation.tradeoffs.join(" ")}
+          </MetadataListItem>
+        </MetadataList>
+        </VStack>
+      }
+    />
+  );
+}
+
+function RecommendationSection({
+  recommendations,
+  isLoading,
+  onReview,
+}: {
+  recommendations: TeamRecommendation[];
+  isLoading: boolean;
+  onReview: (recommendation: TeamRecommendation) => void;
+}) {
+  if (!isLoading && recommendations.length === 0) return null;
+  return (
+    <section aria-labelledby="recommendations-heading">
+      <VStack gap={3}>
+        <VStack gap={1}>
+          <Heading id="recommendations-heading" level={2}>
+            Possible improvements
+          </Heading>
+          <Text type="body" color="secondary">
+            Your entered party stays primary. These optional changes are scored
+            after its evaluation.
+          </Text>
+        </VStack>
+        {isLoading ? (
+          <ProgressBar label="Checking roster improvements" isIndeterminate />
+        ) : (
+          <List
+            density="spacious"
+            hasDividers
+            header={<Text type="label">Ranked optional changes</Text>}
+          >
+            {recommendations.map((recommendation) => (
+              <RecommendationRow
+                key={recommendation.id}
+                recommendation={recommendation}
+                onReview={onReview}
+              />
+            ))}
+          </List>
+        )}
+      </VStack>
+    </section>
+  );
+}
+
 export function TeamGenerator() {
-  const { generate, alternatives: loadAlternatives, busy } = useTeamWorker();
+  const {
+    generate,
+    alternatives: loadAlternatives,
+    recommendations: loadRecommendations,
+    busy,
+  } = useTeamWorker();
   const [request, setRequest] = useState(defaultRequest);
   const [result, setResult] = useState<TeamResult | null>(null);
   const [selectedSlot, setSelectedSlot] = useState(0);
   const [alternatives, setAlternatives] = useState<TeamAlternative[]>([]);
   const [alternativesBusy, setAlternativesBusy] = useState(false);
+  const [recommendations, setRecommendations] = useState<TeamRecommendation[]>([]);
+  const [recommendationsBusy, setRecommendationsBusy] = useState(false);
+  const [pendingRecommendation, setPendingRecommendation] =
+    useState<TeamRecommendation | null>(null);
+  const [undoResult, setUndoResult] = useState<TeamResult | null>(null);
+  const recommendationRunRef = useRef(0);
   const [error, setError] = useState("");
   const [notice, setNotice] = useState("");
   const qualityPresentation = result
     ? battleQualityPresentation(result)
     : null;
+  const requestOwnedSlots = ownedSlotsForRequest(request);
+  const existingAdventure = requestOwnedSlots.some(Boolean);
 
   const runGenerate = useCallback(
     async (nextRequest: GeneratorRequest) => {
       setError("");
       setNotice("");
       setAlternatives([]);
+      setRecommendations([]);
+      setRecommendationsBusy(false);
+      setUndoResult(null);
+      const recommendationRun = recommendationRunRef.current + 1;
+      recommendationRunRef.current = recommendationRun;
+      const missingGender = ownedSlotsForRequest(nextRequest).find(
+        (slot) =>
+          slot &&
+          evolutionNeedsGender(slot.speciesId, { species }) &&
+          !slot.evolutionFacts?.gender,
+      );
+      if (missingGender) {
+        setError(
+          `Choose a gender for ${speciesRecordById.get(missingGender.speciesId)?.name ?? missingGender.speciesId} so its legal evolution branches can be evaluated.`,
+        );
+        return;
+      }
       try {
         const nextResult = await generate(nextRequest);
         setRequest(nextRequest);
         setResult(nextResult);
         setSelectedSlot(0);
+        const ownedCount = ownedSlotsForRequest(nextRequest).filter(Boolean).length;
+        if (ownedCount >= 4) {
+          setRecommendationsBusy(true);
+          void loadRecommendations(nextRequest, nextResult)
+            .then((nextRecommendations) => {
+              if (recommendationRunRef.current === recommendationRun) {
+                setRecommendations(nextRecommendations);
+              }
+            })
+            .catch(() => {
+              if (recommendationRunRef.current === recommendationRun) {
+                setRecommendations([]);
+              }
+            })
+            .finally(() => {
+              if (recommendationRunRef.current === recommendationRun) {
+                setRecommendationsBusy(false);
+              }
+            });
+        }
       } catch (caught) {
         setError(caught instanceof Error ? caught.message : "Generation failed.");
       }
     },
-    [generate],
+    [generate, loadRecommendations],
   );
 
   useEffect(() => {
@@ -532,16 +735,35 @@ export function TeamGenerator() {
   }, [runGenerate]);
 
   const selectedMember = result?.members[selectedSlot] ?? null;
-  const selectedItems = useMemo(
-    () => request.slots.map((id) => (id ? speciesById.get(id) ?? null : null)),
-    [request.slots],
+  const selectedItems = requestOwnedSlots.map((slot) =>
+    slot ? speciesById.get(slot.speciesId) ?? null : null,
   );
 
   const updateSlot = (index: number, item: SpeciesItem | null) => {
     setRequest((current) => {
+      const ownedSlots = [...ownedSlotsForRequest(current)] as NonNullable<
+        GeneratorRequest["ownedSlots"]
+      >;
       const slots = [...current.slots] as GeneratorRequest["slots"];
       slots[index] = item?.id ?? null;
-      return { ...current, slots };
+      ownedSlots[index] = item ? { speciesId: item.id } : null;
+      return { ...current, ownedSlots, slots };
+    });
+  };
+
+  const updateGender = (index: number, gender: string) => {
+    setRequest((current) => {
+      const ownedSlots = [...ownedSlotsForRequest(current)] as NonNullable<
+        GeneratorRequest["ownedSlots"]
+      >;
+      const slot = ownedSlots[index];
+      if (!slot) return current;
+      ownedSlots[index] = {
+        ...slot,
+        evolutionFacts:
+          gender === "female" || gender === "male" ? { gender } : undefined,
+      };
+      return { ...current, ownedSlots };
     });
   };
 
@@ -581,7 +803,7 @@ export function TeamGenerator() {
   const applyAlternative = (alternative: TeamAlternative) => {
     const slots = [...request.slots] as GeneratorRequest["slots"];
     slots[selectedSlot] = alternative.replacement.id;
-    setRequest((current) => ({ ...current, slots }));
+    setRequest((current) => ({ ...current, ownedSlots: undefined, slots }));
     setResult(alternative.result);
     setAlternatives([]);
     setNotice(
@@ -702,38 +924,61 @@ export function TeamGenerator() {
                 }
               />
             ) : null}
-            <Collapsible
-              defaultIsOpen={false}
-              trigger={`Roster locks · ${request.slots.filter(Boolean).length} fixed`}
-            >
+            <Divider />
+            <VStack gap={3}>
+              <VStack gap={1}>
+                <Heading level={2}>Pokémon I already have</Heading>
+                <Text type="body" color="secondary">
+                  Leave every slot empty to build from scratch. Add one to six
+                  current Pokémon to plan their evolutions and complete the party
+                  around them.
+                </Text>
+              </VStack>
               <Grid
                 columns={{ minWidth: 230, max: 3, repeat: "fit" }}
                 gap={3}
               >
-                {selectedItems.map((item, index) => (
-                  <Typeahead
-                    key={index}
-                    label={`Slot ${index + 1}`}
-                    placeholder="Search final evolutions…"
-                    searchSource={speciesSource}
-                    value={item}
-                    onChange={(value) => updateSlot(index, value)}
-                    renderItem={(option) => (
-                      <HStack gap={2}>
-                        <Text type="label">{option.label}</Text>
-                        <StackItem size="fill" />
-                        {option.auxiliaryData?.starter ? (
-                          <Badge variant="orange" label="Starter" />
-                        ) : null}
-                      </HStack>
-                    )}
-                    hasEntriesOnFocus
-                    debounceMs={0}
-                    size="sm"
-                  />
-                ))}
+                {selectedItems.map((item, index) => {
+                  const owned = requestOwnedSlots[index];
+                  const needsGender = owned
+                    ? evolutionNeedsGender(owned.speciesId, { species })
+                    : false;
+                  return (
+                    <VStack key={index} gap={2}>
+                      <Typeahead
+                        label={`Owned slot ${index + 1}`}
+                        placeholder="Search any Pokémon or form…"
+                        description="Enter the species and form you have now."
+                        searchSource={speciesSource}
+                        value={item}
+                        onChange={(value) => updateSlot(index, value)}
+                        renderItem={(option) => (
+                          <HStack gap={2}>
+                            <Text type="label">{option.label}</Text>
+                            <StackItem size="fill" />
+                            {option.auxiliaryData?.starter ? (
+                              <Badge variant="orange" label="Starter" />
+                            ) : null}
+                          </HStack>
+                        )}
+                        hasEntriesOnFocus
+                        debounceMs={0}
+                        size="sm"
+                      />
+                      {needsGender ? (
+                        <Selector
+                          label={`Gender for slot ${index + 1}`}
+                          options={genderOptions}
+                          value={owned?.evolutionFacts?.gender ?? "unknown"}
+                          width="100%"
+                          onChange={(gender) => updateGender(index, gender)}
+                        />
+                      ) : null}
+                    </VStack>
+                  );
+                })}
               </Grid>
-            </Collapsible>
+            </VStack>
           </VStack>
         </Card>
       </section>
@@ -747,7 +992,22 @@ export function TeamGenerator() {
       ) : null}
       {notice ? (
         <Card variant="green" padding={3}>
-          <Text type="body">{notice}</Text>
+          <HStack gap={3} vAlign="center">
+            <Text type="body">{notice}</Text>
+            <StackItem size="fill" />
+            {undoResult ? (
+              <Button
+                label="Undo recommendation"
+                variant="secondary"
+                icon={<Undo2 />}
+                onClick={() => {
+                  setResult(undoResult);
+                  setUndoResult(null);
+                  setNotice("Returned to your entered party evaluation.");
+                }}
+              />
+            ) : null}
+          </HStack>
         </Card>
       ) : null}
 
@@ -800,6 +1060,25 @@ export function TeamGenerator() {
                     label="Defensive fit"
                     value={result.score.defensiveFit}
                   />
+                  {result.battleQuality?.weaknesses?.length ? (
+                    <List
+                      density="compact"
+                      hasDividers
+                      header={<Text type="label">Shared weaknesses</Text>}
+                    >
+                      {result.battleQuality.weaknesses.map((weakness) => (
+                        <ListItem
+                          key={weakness.attackType}
+                          label={weakness.attackType}
+                          description={`${weakness.weakMembers} members weak; ${weakness.protectedMembers} resist or ignore it.`}
+                        />
+                      ))}
+                    </List>
+                  ) : (
+                    <Text type="supporting" color="secondary">
+                      No attack type threatens two or more members.
+                    </Text>
+                  )}
                   <ScoreMetric
                     label="Offensive reach"
                     value={result.score.offensiveReach}
@@ -881,7 +1160,7 @@ export function TeamGenerator() {
                   >
                     {result.members.map((member, index) => (
                       <MemberTile
-                        key={member.id}
+                        key={`${index}:${member.id}`}
                         member={member}
                         selected={selectedSlot === index}
                         onSelect={() => {
@@ -892,6 +1171,7 @@ export function TeamGenerator() {
                         alternativesBusy={
                           alternativesBusy && selectedSlot === index
                         }
+                        canFindAlternatives={!existingAdventure}
                       />
                     ))}
                   </Grid>
@@ -901,8 +1181,15 @@ export function TeamGenerator() {
                       member={selectedMember}
                       onAlternatives={() => void showAlternatives(selectedSlot)}
                       alternativesBusy={alternativesBusy}
+                      canFindAlternatives={!existingAdventure}
                     />
                   ) : null}
+
+                  <RecommendationSection
+                    recommendations={recommendations}
+                    isLoading={recommendationsBusy}
+                    onReview={setPendingRecommendation}
+                  />
 
                 </>
               ) : (
@@ -917,6 +1204,69 @@ export function TeamGenerator() {
           </LayoutContent>
         }
       />
+      <Dialog
+        isOpen={pendingRecommendation !== null}
+        onOpenChange={(open) => {
+          if (!open) setPendingRecommendation(null);
+        }}
+        width={520}
+        purpose="required"
+      >
+        <Layout
+          height="auto"
+          header={
+            <DialogHeader
+              title="Apply this roster recommendation?"
+              subtitle="Your entered party evaluation remains available through Undo."
+            />
+          }
+          content={
+            <LayoutContent>
+              <VStack gap={3}>
+                <Text type="body">
+                  The replacement members will be labeled as recommended, not
+                  as Pokémon you entered.
+                </Text>
+                <MetadataList label={{ position: "start" }}>
+                  {pendingRecommendation?.changes.map((change) => (
+                    <MetadataListItem
+                      key={change.slot}
+                      label={`Slot ${change.slot + 1}`}
+                    >
+                      {change.from.name} → {change.to.name}
+                    </MetadataListItem>
+                  ))}
+                </MetadataList>
+              </VStack>
+            </LayoutContent>
+          }
+          footer={
+            <LayoutFooter>
+              <HStack gap={2} hAlign="end">
+                <Button
+                  label="Keep entered party"
+                  variant="secondary"
+                  onClick={() => setPendingRecommendation(null)}
+                />
+                <Button
+                  label="Apply recommendation"
+                  variant="primary"
+                  onClick={() => {
+                    if (!pendingRecommendation || !result) return;
+                    setUndoResult(result);
+                    setResult(pendingRecommendation.preview);
+                    setRecommendations([]);
+                    setNotice(
+                      "Recommendation applied. Replacements are labeled recommended.",
+                    );
+                    setPendingRecommendation(null);
+                  }}
+                />
+              </HStack>
+            </LayoutFooter>
+          }
+        />
+      </Dialog>
     </main>
   );
 }

@@ -15,6 +15,7 @@ import type {
   NormalizedCatalog,
   PokemonRecord,
   ScoreBreakdown,
+  TeamWeakness,
 } from "@/lib/types";
 
 const clamp = (value: number) => Math.max(0, Math.min(100, value));
@@ -67,15 +68,21 @@ function roleScore(team: PokemonRecord[]) {
   return clamp(roles.size * 14 + balance * 30);
 }
 
-function defensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
+export function defensiveAnalysis(
+  team: PokemonRecord[],
+  catalog: NormalizedCatalog,
+): { score: number; weaknesses: TeamWeakness[] } {
   const attackTypes = Object.keys(catalog.typeChart);
-  if (attackTypes.length === 0 || team.length === 0) return 50;
+  if (attackTypes.length === 0 || team.length === 0) {
+    return { score: 50, weaknesses: [] };
+  }
   const abilityById = new Map(
     catalog.abilities.map((ability) => [ability.id, ability]),
   );
   let penalty = 0;
   let resistanceBonus = 0;
   let absorptionBonus = 0;
+  const weaknesses: TeamWeakness[] = [];
   for (const attackType of attackTypes) {
     const matchup = team.map((pokemon) => {
       const capabilities = abilityById.get(pokemon.build.abilityId)
@@ -96,8 +103,24 @@ function defensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
     const resistant = matchup.filter((value) => value < 1).length;
     if (weak >= 3) penalty += (weak - 2) * 7;
     resistanceBonus += Math.min(weak, resistant) * 1.5;
+    if (weak >= 2) {
+      weaknesses.push({
+        attackType,
+        weakMembers: weak,
+        protectedMembers: resistant,
+      });
+    }
   }
-  return clamp(88 - penalty + resistanceBonus + absorptionBonus);
+  weaknesses.sort(
+    (left, right) =>
+      right.weakMembers - left.weakMembers ||
+      left.protectedMembers - right.protectedMembers ||
+      left.attackType.localeCompare(right.attackType),
+  );
+  return {
+    score: clamp(88 - penalty + resistanceBonus + absorptionBonus),
+    weaknesses,
+  };
 }
 
 function offensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
@@ -187,7 +210,7 @@ export function scoreTeam(
   );
 
   const roleCoverage = roleScore(team);
-  const defensiveFit = defensiveScore(team, catalog);
+  const defensiveFit = defensiveAnalysis(team, catalog).score;
   const offensiveReach = offensiveScore(team, catalog);
   const utility = utilityScore(team, moveById);
   const weather = weatherScore(request, weatherPlan);

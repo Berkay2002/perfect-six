@@ -58,6 +58,28 @@ describe("shared team compatibility", () => {
     expect(decoded.result.battleQuality?.synergy).toBeUndefined();
     expect(decoded.result.battleQuality?.acquisitionCurve).toBeUndefined();
     expect(decoded.result.members[0].jobs).toBeUndefined();
-    expect(toCurrentGeneratorRequest(decoded.request).engineVersion).toBe(3);
+    const migrated = toCurrentGeneratorRequest(decoded.request);
+    expect(migrated.engineVersion).toBe(4);
+    expect(migrated.schemaVersion).toBe(2);
+    expect(migrated.ownedSlots).toEqual(
+      Array.from({ length: 6 }, () => null),
+    );
+  });
+
+  it("exports non-default IV targets and omits default IVs", () => {
+    const result = structuredClone(preV3SharePayloads[0].result);
+    result.members[0].build.ivs = {
+      hp: 31,
+      attack: 31,
+      defense: 31,
+      specialAttack: 31,
+      specialDefense: 31,
+      speed: 0,
+    };
+
+    const exported = showdownTeam(result);
+
+    expect(exported).toContain("IVs: 0 Spe");
+    expect(exported).not.toContain("31 HP");
   });
 });

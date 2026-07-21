@@ -761,6 +761,7 @@ test("curated sets are rejected when a move is not in sourced learnset", () => {
             item: "Seed",
             nature: "Careful",
             evs: { hp: 252, def: 4, spd: 252 },
+            ivs: { atk: 0, spe: 30 },
           },
           Illegal: {
             moves: ["Leaf Hit", "Water Hit", "Recover Move", "Illegal Move"],
@@ -781,10 +782,42 @@ test("curated sets are rejected when a move is not in sourced learnset", () => {
   });
   assert.equal(builds.length, 1);
   assert.match(rejected.at(-1).reason, /not four legal moves/);
+  assert.deepEqual(builds[0].ivs, {
+    hp: 31,
+    attack: 0,
+    defense: 31,
+    specialAttack: 31,
+    specialDefense: 31,
+    speed: 30,
+  });
+  assert.equal(builds[0].confidence, "source-backed");
   assert.deepEqual(
     validateCatalog({ species, moves, abilities, items, builds }),
     [],
   );
+
+  const limited = normalizeSmogonBuilds({
+    rawSets: {
+      gen9fixture: {
+        Tree: {
+          Limited: {
+            moves: ["Leaf Hit"],
+            ability: "Grow",
+            item: "Seed",
+            nature: "Careful",
+          },
+        },
+      },
+    },
+    species,
+    moves,
+    abilities,
+    items,
+    sourceUrl: sourcePath,
+    rejected,
+  });
+  assert.equal(limited[0].moves.length, 1);
+  assert.equal(limited[0].confidence, "limited");
 });
 
 test("species additions rewrite fields but append forms and evolutions", () => {

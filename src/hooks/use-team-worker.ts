@@ -5,19 +5,23 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type {
   GeneratorRequest,
   TeamAlternative,
+  TeamRecommendation,
   TeamResult,
 } from "@/lib/types";
 
 type PendingRequest = {
-  resolve: (value: TeamResult | TeamAlternative[]) => void;
+  resolve: (
+    value: TeamResult | TeamAlternative[] | TeamRecommendation[],
+  ) => void;
   reject: (error: Error) => void;
+  affectsBusy: boolean;
 };
 
 type WorkerResponse =
   | {
       id: string;
       ok: true;
-      value: TeamResult | TeamAlternative[];
+      value: TeamResult | TeamAlternative[] | TeamRecommendation[];
     }
   | {
       id: string;
@@ -42,7 +46,7 @@ export function useTeamWorker() {
       const pending = pendingRequests.get(response.id);
       if (!pending) return;
       pendingRequests.delete(response.id);
-      setBusy(pendingRequests.size > 0);
+      setBusy([...pendingRequests.values()].some((request) => request.affectsBusy));
       if (response.ok) {
         pending.resolve(response.value);
       } else {
@@ -69,7 +73,7 @@ export function useTeamWorker() {
   }, []);
 
   const send = useCallback(
-    <T extends TeamResult | TeamAlternative[]>(
+    <T extends TeamResult | TeamAlternative[] | TeamRecommendation[]>(
       message:
         | { kind: "generate"; request: GeneratorRequest }
         | {
@@ -77,7 +81,13 @@ export function useTeamWorker() {
             slot: number;
             request: GeneratorRequest;
             result: TeamResult;
+          }
+        | {
+            kind: "recommendations";
+            request: GeneratorRequest;
+            result: TeamResult;
           },
+      affectsBusy = true,
     ) =>
       new Promise<T>((resolve, reject) => {
         const worker = workerRef.current;
@@ -89,8 +99,9 @@ export function useTeamWorker() {
         pendingRef.current.set(id, {
           resolve: resolve as PendingRequest["resolve"],
           reject,
+          affectsBusy,
         });
-        setBusy(true);
+        if (affectsBusy) setBusy(true);
         worker.postMessage({ id, ...message });
       }),
     [],
@@ -112,5 +123,14 @@ export function useTeamWorker() {
     [send],
   );
 
-  return { generate, alternatives, busy };
+  const recommendations = useCallback(
+    (request: GeneratorRequest, result: TeamResult) =>
+      send<TeamRecommendation[]>(
+        { kind: "recommendations", request, result },
+        false,
+      ),
+    [send],
+  );
+
+  return { generate, alternatives, recommendations, busy };
 }

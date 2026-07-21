@@ -16,6 +16,7 @@ import { synergyQualityForTeam } from "@/engine/synergy";
 import { teamQualityForTeam } from "@/engine/team";
 import { preV3SharePayloads } from "@/lib/fixtures/pre-v3-snapshots";
 import { resultScoringState } from "@/lib/quality-presentation";
+import { hasOwnedPokemon } from "@/lib/request";
 import {
   DATA_VERSION,
   ENGINE_VERSION,
@@ -64,7 +65,15 @@ function assertLegalResult(
   });
   for (const member of result.members) {
     expect(member.finalEvolution).toBe(true);
-    expect(member.build.moves).toHaveLength(4);
+    if (hasOwnedPokemon(request)) {
+      expect(member.build.moves.length).toBeGreaterThanOrEqual(1);
+      expect(member.build.moves.length).toBeLessThanOrEqual(4);
+    } else {
+      expect(
+        member.build.moves,
+        `${request.seed}:${member.id}:${member.build.id}`,
+      ).toHaveLength(4);
+    }
     expect(member.jobs.length).toBeGreaterThan(0);
     expect(member.jobExplanation.length).toBeGreaterThan(0);
   }
@@ -457,7 +466,7 @@ describe.sequential("engine-v3 release calibration", () => {
   }, 30_000);
 
   it("keeps engine, manifest, provenance, and legacy compatibility aligned", () => {
-    expect(ENGINE_VERSION).toBe(3);
+    expect(ENGINE_VERSION).toBe(4);
     expect(catalog.manifest.engineVersion).toBe(ENGINE_VERSION);
     expect(provenance.manifest.engineVersion).toBe(ENGINE_VERSION);
     expect(provenance.manifest.dataVersion).toBe(catalog.manifest.dataVersion);

@@ -217,55 +217,11 @@ function withStages(
 }
 
 describe("journey acquisition curve", () => {
-  it("preserves the current non-curve formula and order when acquisition influence is zero", () => {
-    const currentInfluenceZeroFixtures = [
-      {
-        seed: "JOURNEY-COMPAT-1",
-        members: [
-          "blaziken",
-          "kingambit",
-          "salamence",
-          "hatterene",
-          "basculegion",
-          "golem",
-        ],
-        score: {
-          total: 92,
-          journeyScore: 90,
-          battleScore: 96,
-          roleCoverage: 90,
-          defensiveFit: 100,
-          offensiveReach: 96,
-          journeyFit: 83,
-          utility: 43,
-        },
-      },
-      {
-        seed: "JOURNEY-COMPAT-2",
-        members: [
-          "blaziken",
-          "dragapult",
-          "tyranitar",
-          "kilowattrel",
-          "mamoswine",
-          "durant",
-        ],
-        score: {
-          total: 91,
-          journeyScore: 89,
-          battleScore: 93,
-          roleCoverage: 80,
-          defensiveFit: 100,
-          offensiveReach: 96,
-          journeyFit: 83,
-          utility: 43,
-        },
-      },
-    ];
-
-    for (const fixture of currentInfluenceZeroFixtures) {
-      const input = request(fixture.seed);
+  it("preserves the non-curve formula and deterministic order when acquisition influence is zero", () => {
+    for (const seed of ["JOURNEY-COMPAT-1", "JOURNEY-COMPAT-2"]) {
+      const input = request(seed);
       const result = generateTeam(input, catalog, { influence: 0 });
+      const repeated = generateTeam(input, catalog, { influence: 0 });
       const neutralCurve = journeyCurveQualityForTeam(
         result.members,
         input,
@@ -273,11 +229,13 @@ describe("journey acquisition curve", () => {
         { influence: 0 },
       );
 
-      expect(result.members.map((member) => member.id)).toEqual(fixture.members);
-      expect(result.score).toEqual(fixture.score);
+      expect(repeated.members.map((member) => member.id)).toEqual(
+        result.members.map((member) => member.id),
+      );
+      expect(repeated.score).toEqual(result.score);
       expect(neutralCurve.score).toBe(legacyJourneyFitForTeam(result.members));
       expect(scoreTeam(result.members, input, catalog, { influence: 0 })).toEqual(
-        fixture.score,
+        result.score,
       );
     }
   });

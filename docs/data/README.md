@@ -49,9 +49,10 @@ Cobbleverse belong to their respective owners and contributors.
 
 ## Battle engine release
 
-Engine 3 is the authoritative battle-aware generator for the current data
-snapshot. Its calibration matrix, comparison corpus, stat assumptions,
-performance method, and compatibility boundary are recorded in
+Engine 4 is the authoritative existing-adventure generator for the current data
+snapshot. Its owned-party, evolution, build, recommendation, and compatibility
+contracts are recorded in [`battle-engine-v4.md`](battle-engine-v4.md). The
+engine-3 calibration record remains in
 [`battle-engine-v3.md`](battle-engine-v3.md).
 
 Normalized descriptions are deliberately conservative. Mechanics that cannot

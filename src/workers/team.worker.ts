@@ -2,9 +2,11 @@
 
 import { generateAlternatives } from "@/engine/alternatives";
 import { generateTeam } from "@/engine/generate";
+import { generateRecommendations } from "@/engine/recommendations";
 import { catalog } from "@/data/catalog";
 import type {
   GeneratorRequest,
+  TeamRecommendation,
   TeamResult,
 } from "@/lib/types";
 
@@ -20,10 +22,20 @@ type WorkerRequest =
       slot: number;
       request: GeneratorRequest;
       result: TeamResult;
+    }
+  | {
+      id: string;
+      kind: "recommendations";
+      request: GeneratorRequest;
+      result: TeamResult;
     };
 
 type WorkerResponse =
-  | { id: string; ok: true; value: TeamResult | ReturnType<typeof generateAlternatives> }
+  | {
+      id: string;
+      ok: true;
+      value: TeamResult | TeamRecommendation[] | ReturnType<typeof generateAlternatives>;
+    }
   | {
       id: string;
       ok: false;
@@ -36,12 +48,18 @@ self.onmessage = (event: MessageEvent<WorkerRequest>) => {
     const value =
       message.kind === "generate"
         ? generateTeam(message.request, catalog)
-        : generateAlternatives(
+        : message.kind === "alternatives"
+          ? generateAlternatives(
             message.slot,
             message.request,
             message.result,
             catalog,
-          );
+            )
+          : generateRecommendations(
+              message.request,
+              message.result,
+              catalog,
+            );
     self.postMessage({ id: message.id, ok: true, value } satisfies WorkerResponse);
   } catch (error) {
     const caught = error as Error & { code?: string };

@@ -4,6 +4,7 @@ import {
   compareJourneyFinalists,
   materializeTeamResult,
 } from "@/engine/generate";
+import { pokemonRecordFromMember } from "@/engine/member";
 import { itemFitFactsForBuild } from "@/engine/item";
 import { movePackageQualityForBuild } from "@/engine/move";
 import { weatherPlanForTeam } from "@/engine/weather";
@@ -363,24 +364,7 @@ export function generateAlternatives(
     request.style,
     request.weather,
   );
-  const team = current.members.map((member) => {
-    const {
-      slot: memberSlot,
-      selectedRole,
-      mega,
-      gamePlan,
-      jobs,
-      jobExplanation,
-      ...pokemon
-    } = member;
-    void memberSlot;
-    void selectedRole;
-    void mega;
-    void gamePlan;
-    void jobs;
-    void jobExplanation;
-    return pokemon;
-  });
+  const team = current.members.map(pokemonRecordFromMember);
   const evaluatedCurrent = materializeTeamResult(team, request, catalog);
   const original = evaluatedCurrent.members[slot];
   const replacements = candidates
