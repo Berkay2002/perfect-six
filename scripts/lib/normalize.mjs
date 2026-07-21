@@ -180,18 +180,32 @@ function normalizeAbilityCapabilities(description) {
   ];
   const weather = new Set();
   const weatherDetriments = new Set();
-  const positiveEffect =
-    /\b(?:restores?|heals?|raises?|boosts?|doubled|multiplied|increases?|summons?|immune|takes? no damage)\b/i;
+  const weatherSetters = new Set();
+  const weatherBenefits = new Set();
+  const setterEffect =
+    /\b(?:summons?|sets? (?:the )?weather|weather becomes)\b/i;
+  const beneficialEffect =
+    /\b(?:restores?|heals?|raises?|boosts?|doubled|multiplied|increases?|immune|takes? no damage)\b/i;
   const detrimentalEffect =
     /\b(?:loses?|takes?(?!\s+no\b)|damaged|halved|reduced|lowered|weakened)\b/i;
   for (const clause of String(description).split(
     /\.(?!\d)|;|,\s+and\s+(?=(?:this|it|loses?|restores?|takes?|has|is)\b)/i,
   )) {
-    const positive = positiveEffect.test(clause);
-    const detrimental = detrimentalEffect.test(clause);
+    const setter = setterEffect.test(clause);
+    const numericMultipliers = [
+      ...clause.matchAll(/\bis (\d+(?:\.\d+)?)x\b/gi),
+    ].map((match) => Number(match[1]));
+    const beneficial =
+      beneficialEffect.test(clause) ||
+      numericMultipliers.some((multiplier) => multiplier > 1);
+    const detrimental =
+      detrimentalEffect.test(clause) ||
+      numericMultipliers.some((multiplier) => multiplier < 1);
     for (const [condition, pattern] of weatherTerms) {
       if (!pattern.test(clause)) continue;
-      if (positive) weather.add(condition);
+      if (setter) weatherSetters.add(condition);
+      if (beneficial) weatherBenefits.add(condition);
+      if (setter || beneficial) weather.add(condition);
       if (detrimental) weatherDetriments.add(condition);
     }
   }
@@ -201,6 +215,8 @@ function normalizeAbilityCapabilities(description) {
     absorptions: beneficialReaction ? [...immunities] : [],
     weather: [...weather],
     weatherDetriments: [...weatherDetriments],
+    weatherSetters: [...weatherSetters],
+    weatherBenefits: [...weatherBenefits],
   };
 }
 

@@ -294,6 +294,8 @@ test("ability ratings and team capabilities come from source records", () => {
       absorptions: ["Water"],
       weather: [],
       weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: [],
     },
   );
   assert.deepEqual(
@@ -303,6 +305,8 @@ test("ability ratings and team capabilities come from source records", () => {
       absorptions: [],
       weather: [],
       weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: [],
     },
   );
   assert.deepEqual(
@@ -312,6 +316,8 @@ test("ability ratings and team capabilities come from source records", () => {
       absorptions: [],
       weather: ["rain"],
       weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: ["rain"],
     },
   );
   assert.equal(
@@ -325,6 +331,8 @@ test("ability ratings and team capabilities come from source records", () => {
       absorptions: [],
       weather: [],
       weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: [],
     },
   );
 });
@@ -355,6 +363,8 @@ test("ability weather capabilities preserve sourced direction", () => {
       absorptions: [],
       weather: ["rain"],
       weatherDetriments: ["sun"],
+      weatherSetters: [],
+      weatherBenefits: ["rain"],
     },
   );
   assert.deepEqual(
@@ -364,6 +374,8 @@ test("ability weather capabilities preserve sourced direction", () => {
       absorptions: [],
       weather: ["sun"],
       weatherDetriments: ["sun"],
+      weatherSetters: [],
+      weatherBenefits: ["sun"],
     },
   );
   assert.deepEqual(
@@ -373,6 +385,92 @@ test("ability weather capabilities preserve sourced direction", () => {
       absorptions: [],
       weather: ["sand"],
       weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: ["sand"],
+    },
+  );
+});
+
+test("ability weather setters and beneficiaries remain distinct source facts", () => {
+  const abilities = normalizeAbilityRecords(
+    {
+      setter: {
+        name: "Generic Setter",
+        desc: "On switch-in, this Pokemon summons Rain Dance.",
+      },
+      beneficiary: {
+        name: "Generic Beneficiary",
+        desc: "If Rain Dance is active, this Pokemon's Speed is doubled.",
+      },
+      combined: {
+        name: "Generic Combined Effect",
+        desc: "On switch-in, this Pokemon summons Sunny Day. During Sunny Day, its Attack is 1.3333x.",
+      },
+      reduced: {
+        name: "Generic Reduced Effect",
+        desc: "During Rain Dance, this Pokemon's Speed is 0.5x.",
+      },
+      neutral: {
+        name: "Generic Neutral Effect",
+        desc: "During Sandstorm, this Pokemon's Defense is 1x.",
+      },
+    },
+    sourcePath,
+  );
+
+  assert.deepEqual(
+    abilities.find((ability) => ability.id === "genericsetter").capabilities,
+    {
+      immunities: [],
+      absorptions: [],
+      weather: ["rain"],
+      weatherDetriments: [],
+      weatherSetters: ["rain"],
+      weatherBenefits: [],
+    },
+  );
+  assert.deepEqual(
+    abilities.find((ability) => ability.id === "genericbeneficiary").capabilities,
+    {
+      immunities: [],
+      absorptions: [],
+      weather: ["rain"],
+      weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: ["rain"],
+    },
+  );
+  assert.deepEqual(
+    abilities.find((ability) => ability.id === "genericcombinedeffect").capabilities,
+    {
+      immunities: [],
+      absorptions: [],
+      weather: ["sun"],
+      weatherDetriments: [],
+      weatherSetters: ["sun"],
+      weatherBenefits: ["sun"],
+    },
+  );
+  assert.deepEqual(
+    abilities.find((ability) => ability.id === "genericreducedeffect").capabilities,
+    {
+      immunities: [],
+      absorptions: [],
+      weather: [],
+      weatherDetriments: ["rain"],
+      weatherSetters: [],
+      weatherBenefits: [],
+    },
+  );
+  assert.deepEqual(
+    abilities.find((ability) => ability.id === "genericneutraleffect").capabilities,
+    {
+      immunities: [],
+      absorptions: [],
+      weather: [],
+      weatherDetriments: [],
+      weatherSetters: [],
+      weatherBenefits: [],
     },
   );
 });
