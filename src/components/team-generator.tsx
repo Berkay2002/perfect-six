@@ -300,6 +300,13 @@ function MemberDetail({
             <Text type="body">{member.gamePlan}</Text>
             <Text type="body">
               <Text type="label" weight="semibold">
+                Team jobs
+              </Text>{" "}
+              {member.jobExplanation ??
+                "This saved team predates team-job explanations."}
+            </Text>
+            <Text type="body">
+              <Text type="label" weight="semibold">
                 Evolution
               </Text>{" "}
               {member.availability.evolutionLine}
@@ -693,6 +700,76 @@ export function TeamGenerator() {
                     label="Journey fit"
                     value={result.score.journeyFit}
                   />
+                  <Card variant="muted" padding={3}>
+                    <VStack gap={1}>
+                      <Text type="label">
+                        Ability quality
+                        {result.battleQuality
+                          ? ` ${result.battleQuality.ability.contribution >= 0 ? "+" : ""}${result.battleQuality.ability.contribution}`
+                          : " (legacy scoring)"}
+                      </Text>
+                      <Text type="supporting" color="secondary">
+                        {result.battleQuality?.ability.explanation ??
+                          "This saved team predates ability-quality explanations."}
+                      </Text>
+                    </VStack>
+                  </Card>
+                  <Card variant="muted" padding={3}>
+                    <VStack gap={1}>
+                      <Text type="label">
+                        Held-item fit
+                        {result.battleQuality?.item
+                          ? ` ${result.battleQuality.item.contribution >= 0 ? "+" : ""}${result.battleQuality.item.contribution}`
+                          : " (legacy scoring)"}
+                      </Text>
+                      <Text type="supporting" color="secondary">
+                        {result.battleQuality?.item?.explanation ??
+                          "This saved team predates held-item fit explanations."}
+                      </Text>
+                    </VStack>
+                  </Card>
+                  <Card variant="muted" padding={3}>
+                    <VStack gap={1}>
+                      <Text type="label">
+                        Move-package quality
+                        {result.battleQuality?.move
+                          ? ` ${result.battleQuality.move.score}/100 (${result.battleQuality.move.contribution >= 0 ? "+" : ""}${result.battleQuality.move.contribution})`
+                          : " (legacy scoring)"}
+                      </Text>
+                      <Text type="supporting" color="secondary">
+                        {result.battleQuality?.move?.explanation ??
+                          "This saved team predates move-package explanations."}
+                      </Text>
+                    </VStack>
+                  </Card>
+                  <Card variant="muted" padding={3}>
+                    <VStack gap={1}>
+                      <Text type="label">
+                        Team jobs
+                        {result.battleQuality?.team
+                          ? ` ${result.battleQuality.team.score}/100 (${result.battleQuality.team.contribution >= 0 ? "+" : ""}${result.battleQuality.team.contribution})`
+                          : " (legacy scoring)"}
+                      </Text>
+                      <Text type="supporting" color="secondary">
+                        {result.battleQuality?.team?.explanation ??
+                          "This saved team predates team-job and win-condition explanations."}
+                      </Text>
+                    </VStack>
+                  </Card>
+                  <Card variant="muted" padding={3}>
+                    <VStack gap={1}>
+                      <Text type="label">
+                        Speed and resilience
+                        {result.battleQuality?.plan
+                          ? ` ${result.battleQuality.plan.score}/100 (${result.battleQuality.plan.contribution >= 0 ? "+" : ""}${result.battleQuality.plan.contribution})`
+                          : " (legacy scoring)"}
+                      </Text>
+                      <Text type="supporting" color="secondary">
+                        {result.battleQuality?.plan?.explanation ??
+                          "This saved team predates speed-plan and resilience explanations."}
+                      </Text>
+                    </VStack>
+                  </Card>
                   {result.warnings.map((warning) => (
                     <Card key={warning.code} variant="yellow" padding={3}>
                       <Text type="body">{warning.message}</Text>

@@ -34,6 +34,8 @@ describe("shared team compatibility", () => {
 
     expect(Number(decoded.request.engineVersion)).toBe(1);
     expect(Number(decoded.result.provenance.engineVersion)).toBe(1);
-    expect(toCurrentGeneratorRequest(decoded.request).engineVersion).toBe(2);
+    expect(decoded.result.battleQuality?.team).toBeUndefined();
+    expect(decoded.result.members[0].jobs).toBeUndefined();
+    expect(toCurrentGeneratorRequest(decoded.request).engineVersion).toBe(3);
   });
 });
