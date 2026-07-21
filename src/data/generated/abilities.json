@@ -6,7 +6,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "aerilate",
@@ -15,7 +21,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "aftermath",
@@ -24,7 +36,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "airlock",
@@ -33,7 +51,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "analytic",
@@ -42,7 +66,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "angerpoint",
@@ -51,7 +81,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "angershell",
@@ -60,7 +96,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "anticipation",
@@ -69,7 +111,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "arenatrap",
@@ -78,7 +126,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "armortail",
@@ -87,7 +141,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "aromaveil",
@@ -96,7 +156,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "asoneglastrier",
@@ -105,7 +171,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "asonespectrier",
@@ -114,7 +186,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "aurabreak",
@@ -123,7 +201,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "baddreams",
@@ -132,7 +216,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "ballfetch",
@@ -141,7 +231,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "battery",
@@ -150,7 +246,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "battlearmor",
@@ -159,7 +261,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "battlebond",
@@ -168,7 +276,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "beadsofruin",
@@ -177,7 +291,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "beastboost",
@@ -186,7 +306,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "berserk",
@@ -195,7 +321,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "bigpecks",
@@ -204,7 +336,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "blaze",
@@ -213,7 +351,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "bulletproof",
@@ -222,7 +366,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "cheekpouch",
@@ -231,7 +381,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "chillingneigh",
@@ -240,7 +396,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "chlorophyll",
@@ -249,7 +411,15 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sun"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "clearbody",
@@ -258,7 +428,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "cloudnine",
@@ -267,7 +443,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "colorchange",
@@ -276,7 +458,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "comatose",
@@ -285,7 +473,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "commander",
@@ -294,7 +488,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "competitive",
@@ -303,7 +503,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "compoundeyes",
@@ -312,7 +518,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "contrary",
@@ -321,7 +533,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "corrosion",
@@ -330,7 +548,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "costar",
@@ -339,7 +563,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "cottondown",
@@ -348,7 +578,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "cudchew",
@@ -357,7 +593,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "curiousmedicine",
@@ -366,7 +608,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "cursedbody",
@@ -375,7 +623,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "cutecharm",
@@ -384,7 +638,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "damp",
@@ -393,7 +653,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "dancer",
@@ -402,7 +668,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "darkaura",
@@ -411,7 +683,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "dauntlessshield",
@@ -420,7 +698,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "dazzling",
@@ -429,7 +713,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "defeatist",
@@ -438,7 +728,13 @@
     "rating": -1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "defiant",
@@ -447,7 +743,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "deltastream",
@@ -456,7 +758,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "desolateland",
@@ -465,7 +773,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "disguise",
@@ -474,7 +788,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "download",
@@ -483,7 +803,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "dragonize",
@@ -492,7 +818,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "dragonsmaw",
@@ -501,7 +833,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "drizzle",
@@ -510,7 +848,15 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "rain"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "drought",
@@ -519,7 +865,15 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sun"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "dryskin",
@@ -528,7 +882,21 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Water"
+      ],
+      "absorptions": [
+        "Water"
+      ],
+      "weather": [
+        "rain"
+      ],
+      "weatherDetriments": [
+        "sun"
+      ]
+    }
   },
   {
     "id": "earlybird",
@@ -537,7 +905,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "eartheater",
@@ -546,7 +920,17 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Ground"
+      ],
+      "absorptions": [
+        "Ground"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "eelevate",
@@ -555,7 +939,15 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Ground"
+      ],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "effectspore",
@@ -564,7 +956,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "electricsurge",
@@ -573,7 +971,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "electromorphosis",
@@ -582,7 +986,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "embodyaspectcornerstone",
@@ -591,7 +1001,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "embodyaspecthearthflame",
@@ -600,7 +1016,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "embodyaspectteal",
@@ -609,7 +1031,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "embodyaspectwellspring",
@@ -618,7 +1046,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "emergencyexit",
@@ -627,7 +1061,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "fairyaura",
@@ -636,7 +1076,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "filter",
@@ -645,7 +1091,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "firemane",
@@ -654,7 +1106,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "flamebody",
@@ -663,7 +1121,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "flareboost",
@@ -672,7 +1136,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "flashfire",
@@ -681,7 +1151,17 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Fire"
+      ],
+      "absorptions": [
+        "Fire"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "flowergift",
@@ -690,7 +1170,15 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sun"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "flowerveil",
@@ -699,7 +1187,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "fluffy",
@@ -708,7 +1202,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "forecast",
@@ -717,7 +1217,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "forewarn",
@@ -726,7 +1232,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "friendguard",
@@ -735,7 +1247,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "frisk",
@@ -744,7 +1262,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "fullmetalbody",
@@ -753,7 +1277,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "furcoat",
@@ -762,7 +1292,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "galewings",
@@ -771,7 +1307,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "galvanize",
@@ -780,7 +1322,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "gluttony",
@@ -789,7 +1337,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "goodasgold",
@@ -798,7 +1352,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "gooey",
@@ -807,7 +1367,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "gorillatactics",
@@ -816,7 +1382,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "grasspelt",
@@ -825,7 +1397,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "grassysurge",
@@ -834,7 +1412,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "grimneigh",
@@ -843,7 +1427,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "guarddog",
@@ -852,7 +1442,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "gulpmissile",
@@ -861,7 +1457,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "guts",
@@ -870,7 +1472,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hadronengine",
@@ -879,7 +1487,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "harvest",
@@ -888,7 +1502,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "healer",
@@ -897,7 +1517,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "heatproof",
@@ -906,7 +1532,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "heavymetal",
@@ -915,7 +1547,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "honeygather",
@@ -924,7 +1562,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hospitality",
@@ -933,7 +1577,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hugepower",
@@ -942,7 +1592,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hungerswitch",
@@ -951,7 +1607,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hustle",
@@ -960,7 +1622,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hydration",
@@ -969,7 +1637,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "hypercutter",
@@ -978,7 +1652,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "icebody",
@@ -987,7 +1667,15 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "snow"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "iceface",
@@ -996,7 +1684,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "icescales",
@@ -1005,7 +1699,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "illuminate",
@@ -1014,7 +1714,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "illusion",
@@ -1023,7 +1729,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "immunity",
@@ -1032,7 +1744,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "imposter",
@@ -1041,7 +1759,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "infiltrator",
@@ -1050,7 +1774,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "innardsout",
@@ -1059,7 +1789,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "innerfocus",
@@ -1068,7 +1804,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "insomnia",
@@ -1077,7 +1819,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "intimidate",
@@ -1086,7 +1834,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "intrepidsword",
@@ -1095,7 +1849,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "ironbarbs",
@@ -1104,7 +1864,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "ironfist",
@@ -1113,7 +1879,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "justified",
@@ -1122,7 +1894,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "keeneye",
@@ -1131,7 +1909,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "klutz",
@@ -1140,7 +1924,13 @@
     "rating": -1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "leafguard",
@@ -1149,7 +1939,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "levitate",
@@ -1158,7 +1954,15 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Ground"
+      ],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "libero",
@@ -1167,7 +1971,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "lightmetal",
@@ -1176,7 +1986,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "lightningrod",
@@ -1185,7 +2001,17 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Electric"
+      ],
+      "absorptions": [
+        "Electric"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "limber",
@@ -1194,7 +2020,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "lingeringaroma",
@@ -1203,7 +2035,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "liquidooze",
@@ -1212,7 +2050,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "liquidvoice",
@@ -1221,7 +2065,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "longreach",
@@ -1230,7 +2080,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "magicbounce",
@@ -1239,7 +2095,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "magicguard",
@@ -1248,7 +2110,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "magician",
@@ -1257,7 +2125,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "magmaarmor",
@@ -1266,7 +2140,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "magnetpull",
@@ -1275,7 +2155,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "marvelscale",
@@ -1284,7 +2170,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "megalauncher",
@@ -1293,7 +2185,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "megasol",
@@ -1302,7 +2200,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "merciless",
@@ -1311,7 +2215,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "mimicry",
@@ -1320,7 +2230,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "mindseye",
@@ -1329,7 +2245,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "minus",
@@ -1338,7 +2260,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "mirrorarmor",
@@ -1347,7 +2275,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "mistysurge",
@@ -1356,7 +2290,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "moldbreaker",
@@ -1365,7 +2305,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "moody",
@@ -1374,7 +2320,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "motordrive",
@@ -1383,7 +2335,17 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Electric"
+      ],
+      "absorptions": [
+        "Electric"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "mountaineer",
@@ -1392,7 +2354,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "moxie",
@@ -1401,7 +2369,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "multiscale",
@@ -1410,7 +2384,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "multitype",
@@ -1419,7 +2399,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "mummy",
@@ -1428,7 +2414,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "myceliummight",
@@ -1437,7 +2429,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "naturalcure",
@@ -1446,7 +2444,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "neuroforce",
@@ -1455,7 +2459,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "neutralizinggas",
@@ -1464,7 +2474,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "noability",
@@ -1473,7 +2489,13 @@
     "rating": 0.1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "noguard",
@@ -1482,7 +2504,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "normalize",
@@ -1491,7 +2519,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "oblivious",
@@ -1500,7 +2534,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "opportunist",
@@ -1509,7 +2549,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "orichalcumpulse",
@@ -1518,7 +2564,15 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sun"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "overcoat",
@@ -1527,7 +2581,15 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sand"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "overgrow",
@@ -1536,7 +2598,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "owntempo",
@@ -1545,7 +2613,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "parentalbond",
@@ -1554,7 +2628,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "pastelveil",
@@ -1563,7 +2643,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "perishbody",
@@ -1572,7 +2658,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "persistent",
@@ -1581,7 +2673,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "pickpocket",
@@ -1590,7 +2688,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "pickup",
@@ -1599,7 +2703,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "piercingdrill",
@@ -1608,7 +2718,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "pixilate",
@@ -1617,7 +2733,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "plus",
@@ -1626,7 +2748,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "poisonheal",
@@ -1635,7 +2763,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "poisonpoint",
@@ -1644,7 +2778,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "poisonpuppeteer",
@@ -1653,7 +2793,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "poisontouch",
@@ -1662,7 +2808,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "powerconstruct",
@@ -1671,7 +2823,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "powerofalchemy",
@@ -1680,7 +2838,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "powerspot",
@@ -1689,7 +2853,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "prankster",
@@ -1698,7 +2868,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "pressure",
@@ -1707,7 +2883,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "primordialsea",
@@ -1716,7 +2898,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "prismarmor",
@@ -1725,7 +2913,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "propellertail",
@@ -1734,7 +2928,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "protean",
@@ -1743,7 +2943,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "protosynthesis",
@@ -1752,7 +2958,15 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sun"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "psychicsurge",
@@ -1761,7 +2975,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "punkrock",
@@ -1770,7 +2990,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "purepower",
@@ -1779,7 +3005,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "purifyingsalt",
@@ -1788,7 +3020,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "quarkdrive",
@@ -1797,7 +3035,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "queenlymajesty",
@@ -1806,7 +3050,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "quickdraw",
@@ -1815,7 +3065,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "quickfeet",
@@ -1824,7 +3080,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "raindish",
@@ -1833,7 +3095,15 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "rain"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "rattled",
@@ -1842,7 +3112,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "rebound",
@@ -1851,7 +3127,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "receiver",
@@ -1860,7 +3142,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "reckless",
@@ -1869,7 +3157,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "refrigerate",
@@ -1878,7 +3172,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "regenerator",
@@ -1887,7 +3187,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "ripen",
@@ -1896,7 +3202,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "rivalry",
@@ -1905,7 +3217,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "rkssystem",
@@ -1914,7 +3232,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "rockhead",
@@ -1923,7 +3247,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "rockypayload",
@@ -1932,7 +3262,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "roughskin",
@@ -1941,7 +3277,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "runaway",
@@ -1950,7 +3292,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sandforce",
@@ -1959,7 +3307,15 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sand"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sandrush",
@@ -1968,7 +3324,15 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sand"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sandspit",
@@ -1977,7 +3341,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sandstream",
@@ -1986,7 +3356,15 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sand"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sandveil",
@@ -1995,7 +3373,15 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sand"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sapsipper",
@@ -2004,7 +3390,17 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Grass"
+      ],
+      "absorptions": [
+        "Grass"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "schooling",
@@ -2013,7 +3409,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "scrappy",
@@ -2022,7 +3424,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "screencleaner",
@@ -2031,7 +3439,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "seedsower",
@@ -2040,7 +3454,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "serenegrace",
@@ -2049,7 +3469,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "shadowshield",
@@ -2058,7 +3484,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "shadowtag",
@@ -2067,7 +3499,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sharpness",
@@ -2076,7 +3514,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "shedskin",
@@ -2085,7 +3529,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sheerforce",
@@ -2094,7 +3544,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "shellarmor",
@@ -2103,7 +3559,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "shielddust",
@@ -2112,7 +3574,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "shieldsdown",
@@ -2121,7 +3589,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "simple",
@@ -2130,7 +3604,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "skilllink",
@@ -2139,7 +3619,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "slowstart",
@@ -2148,7 +3634,13 @@
     "rating": -1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "slushrush",
@@ -2157,7 +3649,15 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "snow"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sniper",
@@ -2166,7 +3666,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "snowcloak",
@@ -2175,7 +3681,15 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "snow"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "snowwarning",
@@ -2184,7 +3698,15 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "snow"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "solarpower",
@@ -2193,7 +3715,17 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "sun"
+      ],
+      "weatherDetriments": [
+        "sun"
+      ]
+    }
   },
   {
     "id": "solidrock",
@@ -2202,7 +3734,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "soulheart",
@@ -2211,7 +3749,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "soundproof",
@@ -2220,7 +3764,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "speedboost",
@@ -2229,7 +3779,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "spicyspray",
@@ -2238,7 +3794,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stakeout",
@@ -2247,7 +3809,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stall",
@@ -2256,7 +3824,13 @@
     "rating": -1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stalwart",
@@ -2265,7 +3839,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stamina",
@@ -2274,7 +3854,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stancechange",
@@ -2283,7 +3869,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "static",
@@ -2292,7 +3884,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "steadfast",
@@ -2301,7 +3899,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "steamengine",
@@ -2310,7 +3914,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "steelworker",
@@ -2319,7 +3929,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "steelyspirit",
@@ -2328,7 +3944,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stench",
@@ -2337,7 +3959,13 @@
     "rating": 0.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stickyhold",
@@ -2346,7 +3974,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "stormdrain",
@@ -2355,7 +3989,17 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Water"
+      ],
+      "absorptions": [
+        "Water"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "strongjaw",
@@ -2364,7 +4008,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sturdy",
@@ -2373,7 +4023,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "suctioncups",
@@ -2382,7 +4038,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "superluck",
@@ -2391,7 +4053,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "supersweetsyrup",
@@ -2400,7 +4068,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "supremeoverlord",
@@ -2409,7 +4083,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "surgesurfer",
@@ -2418,7 +4098,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "swarm",
@@ -2427,7 +4113,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "sweetveil",
@@ -2436,7 +4128,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "swiftswim",
@@ -2445,7 +4143,15 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [
+        "rain"
+      ],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "swordofruin",
@@ -2454,7 +4160,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "symbiosis",
@@ -2463,7 +4175,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "synchronize",
@@ -2472,7 +4190,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "tabletsofruin",
@@ -2481,7 +4205,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "tangledfeet",
@@ -2490,7 +4220,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "tanglinghair",
@@ -2499,7 +4235,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "technician",
@@ -2508,7 +4250,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "telepathy",
@@ -2517,7 +4265,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "teraformzero",
@@ -2526,7 +4280,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "terashell",
@@ -2535,7 +4295,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "terashift",
@@ -2544,7 +4310,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "teravolt",
@@ -2553,7 +4325,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "thermalexchange",
@@ -2562,7 +4340,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "thickfat",
@@ -2571,7 +4355,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "tintedlens",
@@ -2580,7 +4370,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "torrent",
@@ -2589,7 +4385,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "toughclaws",
@@ -2598,7 +4400,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "toxicboost",
@@ -2607,7 +4415,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "toxicchain",
@@ -2616,7 +4430,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "toxicdebris",
@@ -2625,7 +4445,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "trace",
@@ -2634,7 +4460,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "transistor",
@@ -2643,7 +4475,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "triage",
@@ -2652,7 +4490,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "truant",
@@ -2661,7 +4505,13 @@
     "rating": -1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "turboblaze",
@@ -2670,7 +4520,13 @@
     "rating": 3,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "unaware",
@@ -2679,7 +4535,13 @@
     "rating": 4,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "unburden",
@@ -2688,7 +4550,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "unnerve",
@@ -2697,7 +4565,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "unseenfist",
@@ -2706,7 +4580,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "vesselofruin",
@@ -2715,7 +4595,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "victorystar",
@@ -2724,7 +4610,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "vitalspirit",
@@ -2733,7 +4625,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "voltabsorb",
@@ -2742,7 +4640,17 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Electric"
+      ],
+      "absorptions": [
+        "Electric"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "wanderingspirit",
@@ -2751,7 +4659,13 @@
     "rating": 2.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "waterabsorb",
@@ -2760,7 +4674,17 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Water"
+      ],
+      "absorptions": [
+        "Water"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "waterbubble",
@@ -2769,7 +4693,13 @@
     "rating": 4.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "watercompaction",
@@ -2778,7 +4708,13 @@
     "rating": 1.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "waterveil",
@@ -2787,7 +4723,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "weakarmor",
@@ -2796,7 +4738,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "wellbakedbody",
@@ -2805,7 +4753,17 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [
+        "Fire"
+      ],
+      "absorptions": [
+        "Fire"
+      ],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "whitesmoke",
@@ -2814,7 +4772,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "wimpout",
@@ -2823,7 +4787,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "windpower",
@@ -2832,7 +4802,13 @@
     "rating": 1,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "windrider",
@@ -2841,7 +4817,13 @@
     "rating": 3.5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "wonderguard",
@@ -2850,7 +4832,13 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "wonderskin",
@@ -2859,7 +4847,13 @@
     "rating": 2,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "zenmode",
@@ -2868,7 +4862,13 @@
     "rating": 0,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   },
   {
     "id": "zerotohero",
@@ -2877,6 +4877,12 @@
     "rating": 5,
     "megaStone": null,
     "megaEvolves": null,
-    "source": "https://play.pokemonshowdown.com/data/abilities.js"
+    "source": "https://play.pokemonshowdown.com/data/abilities.js",
+    "capabilities": {
+      "immunities": [],
+      "absorptions": [],
+      "weather": [],
+      "weatherDetriments": []
+    }
   }
 ]

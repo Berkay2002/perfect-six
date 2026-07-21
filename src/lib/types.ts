@@ -141,6 +141,7 @@ export type MoveRecord = {
   priority: number;
   target: string;
   flags: string[];
+  capabilities?: MoveCapabilities;
   effect: {
     status: string | null;
     volatileStatus: string | null;
@@ -161,7 +162,130 @@ export type AbilityRecord = {
   name: string;
   description: string;
   rating: number | null;
+  capabilities: {
+    immunities: string[];
+    absorptions: string[];
+    weather: Exclude<Weather, "random">[];
+    weatherDetriments: Exclude<Weather, "random">[];
+  };
   source: string;
+};
+
+export type MoveCapabilities = {
+  hazard: boolean;
+  removal: boolean;
+  screen: boolean;
+  offensiveStat:
+    | "attack"
+    | "specialAttack"
+    | "defense"
+    | "specialDefense"
+    | null;
+  selfBoosts: Record<string, number> | null;
+};
+
+export type MovePackageCapabilities = {
+  stab: boolean;
+  priority: boolean;
+  recovery: boolean;
+  status: boolean;
+  setup: boolean;
+  pivoting: boolean;
+  hazards: boolean;
+  removal: boolean;
+  screens: boolean;
+  weather: boolean;
+};
+
+export type MovePackageQuality = {
+  score: number;
+  contribution: number;
+  capabilities: MovePackageCapabilities;
+  strengths: string[];
+  concerns: string[];
+  explanation: string;
+};
+
+export type TeamJob =
+  | "physical pressure"
+  | "special pressure"
+  | "speed control"
+  | "defensive switch-in"
+  | "sustain"
+  | "pivoting"
+  | "hazards"
+  | "hazard removal"
+  | "status pressure"
+  | "weather support"
+  | "proactive win condition";
+
+export type MemberJobExplanation = {
+  speciesId: SpeciesFormId;
+  speciesName: string;
+  jobs: TeamJob[];
+  explanation: string;
+};
+
+export type TeamJobQuality = {
+  score: number;
+  contribution: number;
+  coveredJobs: TeamJob[];
+  importantGaps: TeamJob[];
+  memberExplanations: MemberJobExplanation[];
+  proactiveWinCondition: {
+    speciesId: SpeciesFormId;
+    explanation: string;
+  } | null;
+  minimumProfile: {
+    style: TeamStyle;
+    expectations: string[];
+    minimumMet: number;
+    requiredConditions: string[];
+    met: string[];
+    missing: string[];
+    satisfied: boolean;
+  };
+  explanation: string;
+};
+
+export type StandardStatIndex = StatBlock & {
+  level: 50;
+  assumedIvs: 31;
+  appliedModifiers: string[];
+};
+
+export type SpeedPlanQuality = {
+  score: number;
+  missing: boolean;
+  naturalSpeedMembers: SpeciesFormId[];
+  priorityMembers: SpeciesFormId[];
+  setupMembers: SpeciesFormId[];
+  itemMembers: SpeciesFormId[];
+  explanation: string;
+};
+
+export type ResiliencePlanQuality = {
+  score: number;
+  effectiveBulk: number;
+  switchInCoverage: number;
+  recoverySources: SpeciesFormId[];
+  immunitySources: SpeciesFormId[];
+  explanation: string;
+};
+
+export type BattlePlanQuality = {
+  score: number;
+  contribution: number;
+  speed: SpeedPlanQuality;
+  physicalResilience: ResiliencePlanQuality;
+  specialResilience: ResiliencePlanQuality;
+  memberIndices: Array<{
+    speciesId: SpeciesFormId;
+    speciesName: string;
+    stats: StandardStatIndex;
+  }>;
+  concerns: string[];
+  explanation: string;
 };
 
 export type ItemRecord = {
@@ -170,7 +294,29 @@ export type ItemRecord = {
   description: string;
   megaStone: SpeciesFormId | null;
   megaEvolves: SpeciesFormId | null;
+  capabilities: ItemCapabilities;
   source: string;
+};
+
+export type ItemCapabilities = {
+  damageCategory: "all" | "physical" | "special" | null;
+  choiceLock: boolean;
+  recovery: boolean;
+  requiredType: string | null;
+  defensiveStats: Array<"defense" | "specialDefense">;
+  hazardProtection: boolean;
+  survival: boolean;
+  speedMultiplier: number | null;
+  speedStages: number;
+  movesLast: boolean;
+  recoil: boolean;
+  consumable: boolean;
+  boostedStats: Array<
+    "attack" | "specialAttack" | "defense" | "specialDefense" | "speed"
+  >;
+  requiresInaccurateMove: boolean;
+  damagingMovesOnly: boolean;
+  requiresEvolutionPotential: boolean;
 };
 
 export type RoleProfile = {
@@ -223,6 +369,8 @@ export type TeamMember = PokemonRecord & {
   selectedRole: string;
   mega: boolean;
   gamePlan: string;
+  jobs?: TeamJob[];
+  jobExplanation?: string;
 };
 
 export type TeamWarning = {
@@ -249,8 +397,39 @@ export type TeamResult = {
     TeamMember,
   ];
   score: ScoreBreakdown;
+  battleQuality?: {
+    ability: {
+      contribution: number;
+      explanation: string;
+    };
+    item?: {
+      contribution: number;
+      explanation: string;
+    };
+    move?: MovePackageQuality;
+    team?: TeamJobQuality;
+    plan?: BattlePlanQuality;
+  };
   warnings: TeamWarning[];
   provenance: DataProvenance;
+};
+
+export type GeneratedTeamResult = TeamResult & {
+  members: [
+    TeamMember & Required<Pick<TeamMember, "jobs" | "jobExplanation">>,
+    TeamMember & Required<Pick<TeamMember, "jobs" | "jobExplanation">>,
+    TeamMember & Required<Pick<TeamMember, "jobs" | "jobExplanation">>,
+    TeamMember & Required<Pick<TeamMember, "jobs" | "jobExplanation">>,
+    TeamMember & Required<Pick<TeamMember, "jobs" | "jobExplanation">>,
+    TeamMember & Required<Pick<TeamMember, "jobs" | "jobExplanation">>,
+  ];
+  battleQuality: {
+    ability: NonNullable<TeamResult["battleQuality"]>["ability"];
+    item: NonNullable<NonNullable<TeamResult["battleQuality"]>["item"]>;
+    move: NonNullable<NonNullable<TeamResult["battleQuality"]>["move"]>;
+    team: NonNullable<NonNullable<TeamResult["battleQuality"]>["team"]>;
+    plan: NonNullable<NonNullable<TeamResult["battleQuality"]>["plan"]>;
+  };
 };
 
 export type AlternativeKind = "best" | "easiest" | "different";
@@ -259,7 +438,7 @@ export type TeamAlternative = {
   kind: AlternativeKind;
   label: string;
   replacement: TeamMember;
-  result: TeamResult;
+  result: GeneratedTeamResult;
   scoreDelta: number;
   tradeoff: string;
 };

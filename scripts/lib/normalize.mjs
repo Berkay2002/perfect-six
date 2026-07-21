@@ -56,6 +56,63 @@ function normalizeCategory(value) {
   return "Status";
 }
 
+function mergeBoosts(...boostMaps) {
+  const merged = {};
+  for (const boosts of boostMaps) {
+    if (!boosts || typeof boosts !== "object") continue;
+    for (const [stat, stages] of Object.entries(boosts)) {
+      if (typeof stages === "number") {
+        merged[stat] = (merged[stat] ?? 0) + stages;
+      }
+    }
+  }
+  return Object.keys(merged).length > 0 ? merged : null;
+}
+
+function normalizeMoveCapabilities(move) {
+  const description = `${move.desc ?? ""} ${move.shortDesc ?? ""}`;
+  const guaranteedSecondarySelfBoosts =
+    Number(move.secondary?.chance) === 100
+      ? move.secondary?.self?.boosts
+      : null;
+  return {
+    hazard: Boolean(move.sideCondition && move.target === "foeSide"),
+    removal:
+      /\b(?:clear|clears|cleared|remove|removed|removes)\b[^.]{0,100}\bhazards?\b/i.test(
+        description,
+      ) ||
+      /\bhazards?\b[^.]{0,60}\b(?:cleared|removed)\b/i.test(
+        description,
+      ) ||
+      /\bends? the effects? of\b[^.]*\b(?:spikes|stealth rock|sticky web|toxic spikes)\b/i.test(
+        description,
+      ) ||
+      /\bends? the effects? of\b[^.]*\bhazards?\b/i.test(description) ||
+      /\bthe effects? of\b[^.]{0,300}\b(?:spikes|stealth rock|sticky web|toxic spikes)\b[^.]{0,100}\bend\b/i.test(
+        description,
+      ),
+    screen:
+      Boolean(move.sideCondition && move.target === "allySide") &&
+      /\bdamage\b[^.]*\b(?:half|halved|reduce|reduced|reduces)\b/i.test(
+        description,
+      ),
+    offensiveStat: /\b(?:user|holder)(?:'s)?\s+(?:defense|def)\s+(?:stat\s+)?as\s+(?:its\s+)?(?:attack|atk)\b/i.test(
+      description,
+    )
+      ? "defense"
+      : /\b(?:user|holder)(?:'s)?\s+(?:special defense|sp\. def)\s+(?:stat\s+)?as\s+(?:its\s+)?(?:special attack|sp\. atk)\b/i.test(
+            description,
+          )
+        ? "specialDefense"
+        : null,
+    selfBoosts: mergeBoosts(
+      move.target === "self" ? move.boosts : null,
+      move.self?.boosts,
+      guaranteedSecondarySelfBoosts,
+    ),
+  };
+}
+
 export function normalizeShowdownMoves(rawMoves, sourceUrl) {
   return Object.entries(rawMoves)
     .map(([key, move]) => ({
@@ -68,6 +125,7 @@ export function normalizeShowdownMoves(rawMoves, sourceUrl) {
       priority: Number(move.priority) || 0,
       target: move.target || "normal",
       flags: Object.keys(move.flags || {}).sort(),
+      capabilities: normalizeMoveCapabilities(move),
       effect: {
         status: move.status || null,
         volatileStatus: move.volatileStatus || null,
@@ -100,6 +158,131 @@ export function normalizeNamedRecords(rawRecords, sourceUrl) {
     }))
     .filter((record) => record.id)
     .sort((left, right) => left.id.localeCompare(right.id));
+}
+
+function normalizeAbilityCapabilities(description) {
+  const immunities = [
+    ...String(description).matchAll(
+      /immune to ([a-z]+)-type (?:moves|attacks)/gi,
+    ),
+  ]
+    .map((match) => titleCase(match[1]))
+    .sort();
+  const beneficialReaction =
+    /\b(?:restores?|raises?|boosts?|multiplied|heals?|increases?)\b/i.test(
+      description,
+    );
+  const weatherTerms = [
+    ["rain", /\brain dance\b|\brain is active\b|\bduring rain\b/i],
+    ["sun", /\bsunny day\b|\bsun is active\b|\bharsh sunlight\b/i],
+    ["sand", /\bsandstorm\b/i],
+    ["snow", /\bsnow\b|\bhail\b/i],
+  ];
+  const weather = new Set();
+  const weatherDetriments = new Set();
+  const positiveEffect =
+    /\b(?:restores?|heals?|raises?|boosts?|doubled|multiplied|increases?|summons?|immune|takes? no damage)\b/i;
+  const detrimentalEffect =
+    /\b(?:loses?|takes?(?!\s+no\b)|damaged|halved|reduced|lowered|weakened)\b/i;
+  for (const clause of String(description).split(
+    /\.(?!\d)|;|,\s+and\s+(?=(?:this|it|loses?|restores?|takes?|has|is)\b)/i,
+  )) {
+    const positive = positiveEffect.test(clause);
+    const detrimental = detrimentalEffect.test(clause);
+    for (const [condition, pattern] of weatherTerms) {
+      if (!pattern.test(clause)) continue;
+      if (positive) weather.add(condition);
+      if (detrimental) weatherDetriments.add(condition);
+    }
+  }
+
+  return {
+    immunities,
+    absorptions: beneficialReaction ? [...immunities] : [],
+    weather: [...weather],
+    weatherDetriments: [...weatherDetriments],
+  };
+}
+
+export function normalizeAbilityRecords(rawRecords, sourceUrl) {
+  return normalizeNamedRecords(rawRecords, sourceUrl).map((record) => ({
+    ...record,
+    capabilities: normalizeAbilityCapabilities(record.description),
+  }));
+}
+
+function normalizeItemCapabilities(description) {
+  const text = String(description);
+  const damageCategory = /\bphysical attacks?\b|holder's Attack is \d/i.test(
+    text,
+  )
+    ? "physical"
+    : /\bspecial attacks?\b|holder's Sp\. Atk is \d/i.test(text)
+      ? "special"
+      : /holder's attacks.*(?:damage|power)/i.test(text)
+        ? "all"
+        : null;
+  const defensiveStats = [];
+  if (/\bDefense(?: and| is| are)/i.test(text)) {
+    defensiveStats.push("defense");
+  }
+  if (/\bSp\. Def(?: is| are)?\b/i.test(text)) {
+    defensiveStats.push("specialDefense");
+  }
+  const speedMultiplierMatch = text.match(/\bSpeed is (\d+(?:\.\d+)?)x\b/i);
+  const speedStagesMatch = text.match(
+    /\bSpeed is (?:raised|boosted) by (\d+) stages?\b/i,
+  );
+  const requiredTypeMatch = text.match(
+    /\bif holder is (?:an? )?([a-z]+) type\b/i,
+  );
+  const boostedStatsMatch = text.match(
+    /\braises? (.+?) by \d+ stages?\b/i,
+  );
+  const boostedStats = [];
+  if (boostedStatsMatch) {
+    const boostText = boostedStatsMatch[1];
+    if (/\bAttack\b/i.test(boostText)) boostedStats.push("attack");
+    if (/\bSp\. Atk\b/i.test(boostText)) boostedStats.push("specialAttack");
+    if (/\bDefense\b/i.test(boostText)) boostedStats.push("defense");
+    if (/\bSp\. Def\b/i.test(boostText)) {
+      boostedStats.push("specialDefense");
+    }
+    if (/\bSpeed\b/i.test(boostText)) boostedStats.push("speed");
+  }
+
+  return {
+    damageCategory,
+    choiceLock: /only select the first move (?:it|the holder) executes/i.test(
+      text,
+    ),
+    recovery: /\b(?:restores?|gains?)\b[^.]*\bHP\b/i.test(text),
+    requiredType: requiredTypeMatch ? titleCase(requiredTypeMatch[1]) : null,
+    defensiveStats,
+    hazardProtection: /unaffected by hazards/i.test(text),
+    survival: /survive an attack that would KO/i.test(text),
+    speedMultiplier: speedMultiplierMatch
+      ? Number(speedMultiplierMatch[1])
+      : /\bSpeed (?:is )?halved\b/i.test(text)
+        ? 0.5
+        : null,
+    speedStages: speedStagesMatch ? Number(speedStagesMatch[1]) : 0,
+    movesLast: /\bmoves last\b/i.test(text),
+    recoil:
+      /(?:holder|\bit\b) loses [^.]*HP after (?:an|the) attack/i.test(text),
+    consumable: /\bSingle use\b/i.test(text),
+    boostedStats,
+    requiresInaccurateMove: /misses due to accuracy/i.test(text),
+    damagingMovesOnly: /only select damaging moves/i.test(text),
+    requiresEvolutionPotential: /holder's species can evolve/i.test(text),
+  };
+}
+
+export function normalizeItemRecords(rawRecords, sourceUrl) {
+  return normalizeNamedRecords(rawRecords, sourceUrl).map((record) => ({
+    ...record,
+    capabilities: normalizeItemCapabilities(record.description),
+  }));
 }
 
 function parseLearnMethod(raw) {

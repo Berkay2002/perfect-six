@@ -19,7 +19,8 @@ import vm from "node:vm";
 import { ENGINE_VERSION } from "../data/engine-version.mjs";
 import {
   deriveMissingBuilds,
-  normalizeNamedRecords,
+  normalizeAbilityRecords,
+  normalizeItemRecords,
   normalizeShowdownMoves,
   normalizeSmogonBuilds,
   normalizeSpecies,
@@ -564,11 +565,11 @@ const moves = normalizeShowdownMoves(
   rawMoves,
   lock.sources.showdown.movesUrl,
 );
-const abilities = normalizeNamedRecords(
+const abilities = normalizeAbilityRecords(
   rawAbilities,
   lock.sources.showdown.abilitiesUrl,
 );
-const items = normalizeNamedRecords(
+const items = normalizeItemRecords(
   rawItems,
   lock.sources.showdown.itemsUrl,
 );
