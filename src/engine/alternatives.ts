@@ -47,6 +47,140 @@ function roleDistance(left: PokemonRecord, right: PokemonRecord) {
   return union.size === 0 ? 0 : 1 - shared / union.size;
 }
 
+function setDistance<T>(left: readonly T[], right: readonly T[]) {
+  const leftSet = new Set(left);
+  const rightSet = new Set(right);
+  const union = new Set([...leftSet, ...rightSet]);
+  if (union.size === 0) return 0;
+  let shared = 0;
+  for (const value of leftSet) {
+    if (rightSet.has(value)) shared += 1;
+  }
+  return 1 - shared / union.size;
+}
+
+function introducedCount<T>(current: readonly T[], next: readonly T[]) {
+  const currentSet = new Set(current);
+  return new Set(next.filter((value) => !currentSet.has(value))).size;
+}
+
+function lostCount<T>(current: readonly T[], next: readonly T[]) {
+  return introducedCount(next, current);
+}
+
+function capabilityNames(
+  member: TeamMember,
+  request: GeneratorRequest,
+  catalog: NormalizedCatalog,
+) {
+  const quality = movePackageQualityForBuild(member, catalog, request);
+  return (
+    Object.keys(quality.capabilities) as Array<
+      keyof MovePackageCapabilities
+    >
+  ).filter((capability) => quality.capabilities[capability]);
+}
+
+function attackCategories(member: TeamMember) {
+  return [
+    ...new Set(
+      member.build.moves.flatMap((move) =>
+        move.category === "Status" ? [] : [move.category],
+      ),
+    ),
+  ];
+}
+
+function statProfileDistance(
+  left: TeamMember["stats"],
+  right: TeamMember["stats"],
+) {
+  const keys = [
+    "hp",
+    "attack",
+    "defense",
+    "specialAttack",
+    "specialDefense",
+    "speed",
+  ] as const;
+  const leftTotal = keys.reduce((sum, key) => sum + left[key], 0);
+  const rightTotal = keys.reduce((sum, key) => sum + right[key], 0);
+  if (leftTotal === 0 || rightTotal === 0) return 0;
+  return (
+    keys.reduce(
+      (distance, key) =>
+        distance +
+        Math.abs(left[key] / leftTotal - right[key] / rightTotal),
+      0,
+    ) / 2
+  );
+}
+
+function normalizedMemberId(memberId: string, selectedId: string) {
+  return memberId === selectedId ? "selected-slot" : memberId;
+}
+
+function synergyInteractions(
+  result: GeneratedTeamResult,
+  selectedId: string,
+) {
+  return result.battleQuality.synergy.interactions.map(
+    (interaction) =>
+      `${interaction.kind}:${interaction.memberIds
+        .map((memberId) => normalizedMemberId(memberId, selectedId))
+        .sort()
+        .join("+")}`,
+  );
+}
+
+function battlePlanFeatures(
+  result: GeneratedTeamResult,
+  selectedId: string,
+) {
+  const plan = result.battleQuality.plan;
+  const sources = (
+    label: string,
+    memberIds: readonly string[],
+  ) =>
+    memberIds.map(
+      (memberId) =>
+        `${label}:${normalizedMemberId(memberId, selectedId)}`,
+    );
+  return [
+    ...sources("natural-speed", plan.speed.naturalSpeedMembers),
+    ...sources("priority", plan.speed.priorityMembers),
+    ...sources("speed-setup", plan.speed.setupMembers),
+    ...sources("speed-item", plan.speed.itemMembers),
+    ...sources(
+      "physical-recovery",
+      plan.physicalResilience.recoverySources,
+    ),
+    ...sources(
+      "physical-immunity",
+      plan.physicalResilience.immunitySources,
+    ),
+    ...sources(
+      "special-recovery",
+      plan.specialResilience.recoverySources,
+    ),
+    ...sources(
+      "special-immunity",
+      plan.specialResilience.immunitySources,
+    ),
+    ...plan.concerns.map((concern) => `concern:${concern}`),
+  ];
+}
+
+function defensiveGapTypes(result: GeneratedTeamResult) {
+  return [
+    ...new Set(
+      result.battleQuality.roleCoverage.uncoveredWeaknesses.map(
+        (weakness) => weakness.attackType,
+      ),
+    ),
+  ];
+}
+
 function replacementResult(
   team: PokemonRecord[],
   slot: number,
@@ -351,6 +485,187 @@ function compareReplacementResults(
   );
 }
 
+type PreservationCriteria = {
+  introducedImportantGaps: number;
+  lostTeamJobs: number;
+  introducedOffensiveGaps: number;
+  introducedDefensiveGaps: number;
+  memberRoleDistance: number;
+  memberJobDistance: number;
+  moveCapabilityDistance: number;
+  attackCategoryDistance: number;
+  teamJobDistance: number;
+  importantGapDistance: number;
+  roleSetDistance: number;
+  roleCoverageScoreDelta: number;
+  roleScoreDelta: number;
+  offensiveScoreDelta: number;
+  defensiveScoreDelta: number;
+  synergyInteractionDistance: number;
+  battlePlanFeatureDistance: number;
+  speedPlanScoreDelta: number;
+  physicalResilienceScoreDelta: number;
+  specialResilienceScoreDelta: number;
+  physicalSwitchInDelta: number;
+  specialSwitchInDelta: number;
+  battleStatProfileDistance: number;
+  baseStatProfileDistance: number;
+  typeDistance: number;
+  totalScoreDelta: number;
+};
+
+const PRESERVATION_PRIORITY: Array<keyof PreservationCriteria> = [
+  "introducedImportantGaps",
+  "lostTeamJobs",
+  "introducedOffensiveGaps",
+  "introducedDefensiveGaps",
+  "memberRoleDistance",
+  "memberJobDistance",
+  "moveCapabilityDistance",
+  "attackCategoryDistance",
+  "teamJobDistance",
+  "importantGapDistance",
+  "roleSetDistance",
+  "roleCoverageScoreDelta",
+  "roleScoreDelta",
+  "offensiveScoreDelta",
+  "defensiveScoreDelta",
+  "synergyInteractionDistance",
+  "battlePlanFeatureDistance",
+  "speedPlanScoreDelta",
+  "physicalResilienceScoreDelta",
+  "specialResilienceScoreDelta",
+  "physicalSwitchInDelta",
+  "specialSwitchInDelta",
+  "battleStatProfileDistance",
+  "baseStatProfileDistance",
+  "typeDistance",
+  "totalScoreDelta",
+];
+
+function preservationCriteria(
+  candidate: ReturnType<typeof replacementResult>,
+  original: TeamMember,
+  current: GeneratedTeamResult,
+  request: GeneratorRequest,
+  catalog: NormalizedCatalog,
+) {
+  const next = candidate.result;
+  const replacement = candidate.replacement;
+  const currentCoverage = current.battleQuality.roleCoverage;
+  const nextCoverage = next.battleQuality.roleCoverage;
+  const currentTeam = current.battleQuality.team;
+  const nextTeam = next.battleQuality.team;
+  const currentDefensiveGaps = defensiveGapTypes(current);
+  const nextDefensiveGaps = defensiveGapTypes(next);
+  const currentPlan = current.battleQuality.plan;
+  const nextPlan = next.battleQuality.plan;
+  const currentBattleStats = currentPlan.memberIndices.find(
+    (member) => member.speciesId === original.id,
+  )?.stats;
+  const nextBattleStats = nextPlan.memberIndices.find(
+    (member) => member.speciesId === replacement.id,
+  )?.stats;
+
+  return {
+    introducedImportantGaps: introducedCount(
+      currentTeam.importantGaps,
+      nextTeam.importantGaps,
+    ),
+    lostTeamJobs: lostCount(currentTeam.coveredJobs, nextTeam.coveredJobs),
+    introducedOffensiveGaps: introducedCount(
+      currentCoverage.uncoveredDefendingTypes,
+      nextCoverage.uncoveredDefendingTypes,
+    ),
+    introducedDefensiveGaps: introducedCount(
+      currentDefensiveGaps,
+      nextDefensiveGaps,
+    ),
+    memberRoleDistance: roleDistance(original, replacement),
+    memberJobDistance: setDistance(
+      original.jobs ?? [],
+      replacement.jobs ?? [],
+    ),
+    moveCapabilityDistance: setDistance(
+      capabilityNames(original, request, catalog),
+      capabilityNames(replacement, request, catalog),
+    ),
+    attackCategoryDistance: setDistance(
+      attackCategories(original),
+      attackCategories(replacement),
+    ),
+    teamJobDistance: setDistance(
+      currentTeam.coveredJobs,
+      nextTeam.coveredJobs,
+    ),
+    importantGapDistance: setDistance(
+      currentTeam.importantGaps,
+      nextTeam.importantGaps,
+    ),
+    roleSetDistance: setDistance(currentCoverage.roles, nextCoverage.roles),
+    roleCoverageScoreDelta: Math.abs(
+      currentCoverage.score - nextCoverage.score,
+    ),
+    roleScoreDelta: Math.abs(
+      currentCoverage.roleScore - nextCoverage.roleScore,
+    ),
+    offensiveScoreDelta: Math.abs(
+      currentCoverage.offensiveScore - nextCoverage.offensiveScore,
+    ),
+    defensiveScoreDelta: Math.abs(
+      currentCoverage.defensiveScore - nextCoverage.defensiveScore,
+    ),
+    synergyInteractionDistance: setDistance(
+      synergyInteractions(current, original.id),
+      synergyInteractions(next, replacement.id),
+    ),
+    battlePlanFeatureDistance: setDistance(
+      battlePlanFeatures(current, original.id),
+      battlePlanFeatures(next, replacement.id),
+    ),
+    speedPlanScoreDelta: Math.abs(
+      currentPlan.speed.score - nextPlan.speed.score,
+    ),
+    physicalResilienceScoreDelta: Math.abs(
+      currentPlan.physicalResilience.score -
+        nextPlan.physicalResilience.score,
+    ),
+    specialResilienceScoreDelta: Math.abs(
+      currentPlan.specialResilience.score -
+        nextPlan.specialResilience.score,
+    ),
+    physicalSwitchInDelta: Math.abs(
+      currentPlan.physicalResilience.switchInCoverage -
+        nextPlan.physicalResilience.switchInCoverage,
+    ),
+    specialSwitchInDelta: Math.abs(
+      currentPlan.specialResilience.switchInCoverage -
+        nextPlan.specialResilience.switchInCoverage,
+    ),
+    battleStatProfileDistance:
+      currentBattleStats && nextBattleStats
+        ? statProfileDistance(currentBattleStats, nextBattleStats)
+        : 1,
+    baseStatProfileDistance: statProfileDistance(
+      original.stats,
+      replacement.stats,
+    ),
+    typeDistance: setDistance(original.types, replacement.types),
+    totalScoreDelta: Math.abs(current.score.total - next.score.total),
+  };
+}
+
+function comparePreservationCriteria(
+  left: PreservationCriteria,
+  right: PreservationCriteria,
+) {
+  for (const criterion of PRESERVATION_PRIORITY) {
+    const difference = left[criterion] - right[criterion];
+    if (difference !== 0) return difference;
+  }
+  return 0;
+}
+
 function asAlternative(
   kind: AlternativeKind,
   label: string,
@@ -422,61 +737,45 @@ export function generateAlternatives(
       replacementResult(team, slot, candidate, request, catalog),
     );
   if (replacements.length === 0) return [];
+  if (replacements.length < 3) {
+    throw new Error("Could not find three unique legal similar replacements.");
+  }
 
-  const best = [...replacements].sort(compareReplacementResults)[0];
-  const easiest =
-    [...replacements]
-      .filter((candidate) => candidate.replacement.id !== best.replacement.id)
-      .sort(
-        (left, right) =>
-          right.replacement.availability.score -
-            left.replacement.availability.score ||
-          compareReplacementResults(left, right),
-      )[0] ?? best;
-  const different =
-    [...replacements]
-      .filter(
-        (candidate) =>
-          candidate.replacement.id !== best.replacement.id &&
-          candidate.replacement.id !== easiest.replacement.id,
-      )
-      .sort(
-        (left, right) =>
-          roleDistance(original, right.replacement) -
-            roleDistance(original, left.replacement) ||
-          compareReplacementResults(left, right),
-      )[0] ?? best;
-
-  return [
-    asAlternative(
-      "best",
-      "Best team fit",
-      "Highest complete-team quality while preserving every invariant.",
-      best,
-      original,
-      evaluatedCurrent,
-      request,
-      catalog,
-    ),
-    asAlternative(
-      "easiest",
-      "Easiest to obtain",
-      "Prioritizes sourced acquisition timing, then complete-team quality.",
-      easiest,
-      original,
-      evaluatedCurrent,
-      request,
-      catalog,
-    ),
-    asAlternative(
-      "different",
-      "Different tactical style",
-      "Prioritizes a different supported role while preserving team constraints.",
-      different,
-      original,
-      evaluatedCurrent,
-      request,
-      catalog,
-    ),
+  const kinds: AlternativeKind[] = [
+    "similar-1",
+    "similar-2",
+    "similar-3",
   ];
+  return replacements
+    .map((candidate) => ({
+      candidate,
+      preservation: preservationCriteria(
+        candidate,
+        original,
+        evaluatedCurrent,
+        request,
+        catalog,
+      ),
+    }))
+    .sort(
+      (left, right) =>
+        comparePreservationCriteria(left.preservation, right.preservation) ||
+        compareReplacementResults(left.candidate, right.candidate) ||
+        left.candidate.replacement.id.localeCompare(
+          right.candidate.replacement.id,
+        ),
+    )
+    .slice(0, 3)
+    .map(({ candidate }, index) =>
+      asAlternative(
+        kinds[index],
+        "Similar replacement",
+        `Selected for similarity to ${original.name} while minimizing changes to team jobs, role coverage, and the battle plan.`,
+        candidate,
+        original,
+        evaluatedCurrent,
+        request,
+        catalog,
+      ),
+    );
 }

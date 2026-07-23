@@ -73,6 +73,20 @@ describe("complete-team alternative quality", () => {
       const alternatives = generateAlternatives(slot, input, current, catalog);
 
       expect(alternatives).toHaveLength(3);
+      expect(alternatives.map((alternative) => alternative.kind)).toEqual([
+        "similar-1",
+        "similar-2",
+        "similar-3",
+      ]);
+      expect(
+        alternatives.every(
+          (alternative) => alternative.label === "Similar replacement",
+        ),
+      ).toBe(true);
+      expect(
+        new Set(alternatives.map((alternative) => alternative.replacement.id))
+          .size,
+      ).toBe(3);
       for (const alternative of alternatives) {
         expect(alternative.result.score).toEqual(
           scoreTeam(alternative.result.members, input, catalog),
@@ -90,6 +104,87 @@ describe("complete-team alternative quality", () => {
     },
     20_000,
   );
+
+  it("returns the three closest substitutes instead of a deliberately different style", () => {
+    const input = request("ALT-SIMILAR-SUBSTITUTES");
+    const current = generateTeam(input, catalog);
+    const slot = current.members.findIndex((member) => !member.starter);
+    const source = current.members[slot];
+    const clone = (id: string, roles: string[], availabilityScore: number) => ({
+      species: {
+        ...source,
+        id,
+        name: id,
+        baseSpecies: id,
+        dexNumber: 11000 + availabilityScore,
+        starter: false,
+        megaFormIds: [],
+        specialClasses: [],
+      },
+      build: {
+        ...source.build,
+        id: `${id}-build`,
+        speciesId: id,
+      },
+      role: {
+        speciesId: id,
+        roles,
+        battleScore: availabilityScore === 100 ? 100 : source.battleScore,
+        rationale: ["Alternative similarity fixture."],
+      },
+      availability: {
+        ...source.availability,
+        speciesId: id,
+        score: availabilityScore,
+      },
+    });
+    const similar = [
+      clone("similar-substitute-a", source.roles, 41),
+      clone("similar-substitute-b", source.roles, 42),
+      clone("similar-substitute-c", source.roles, 43),
+    ];
+    const different = clone("different-style-bait", ["Fixture specialist"], 100);
+    const fixtureCandidates = [...similar, different];
+    const fixture = {
+      ...catalog,
+      species: [
+        ...current.members.map((member) => ({
+          ...member,
+          megaFormIds: [],
+        })),
+        ...fixtureCandidates.map((candidate) => candidate.species),
+      ],
+      builds: [
+        ...current.members.map((member) => member.build),
+        ...fixtureCandidates.map((candidate) => candidate.build),
+      ],
+      roles: [
+        ...current.members.map((member) => ({
+          speciesId: member.id,
+          roles: member.roles,
+          battleScore: member.battleScore,
+          rationale: ["Current fixture member."],
+        })),
+        ...fixtureCandidates.map((candidate) => candidate.role),
+      ],
+      availability: [
+        ...current.members.map((member) => member.availability),
+        ...fixtureCandidates.map((candidate) => candidate.availability),
+      ],
+    } satisfies NormalizedCatalog;
+
+    const alternatives = generateAlternatives(slot, input, current, fixture);
+
+    expect(
+      new Set(alternatives.map((alternative) => alternative.replacement.id)),
+    ).toEqual(new Set(similar.map((candidate) => candidate.species.id)));
+    expect(
+      alternatives.every(
+        (alternative) =>
+          alternative.replacement.roles.join("|") === source.roles.join("|"),
+      ),
+    ).toBe(true);
+  }, 20_000);
 
   it("uses full-roster journey quality to break an equal-total best-alternative tie", () => {
     const input = request("ALT-JOURNEY-TIE");
@@ -126,6 +221,7 @@ describe("complete-team alternative quality", () => {
       },
     });
     const late = clone("aaa-late-tie", "Late");
+    const middle = clone("mmm-late-tie", "Late");
     const early = clone("zzz-early-tie", "Early");
     const fixture = {
       ...catalog,
@@ -135,11 +231,13 @@ describe("complete-team alternative quality", () => {
           megaFormIds: [],
         })),
         late.species,
+        middle.species,
         early.species,
       ],
       builds: [
         ...current.members.map((member) => member.build),
         late.build,
+        middle.build,
         early.build,
       ],
       roles: [
@@ -150,11 +248,13 @@ describe("complete-team alternative quality", () => {
           rationale: ["Current fixture member."],
         })),
         late.role,
+        middle.role,
         early.role,
       ],
       availability: [
         ...current.members.map((member) => member.availability),
         late.availability,
+        middle.availability,
         early.availability,
       ],
     } satisfies NormalizedCatalog;
@@ -170,7 +270,7 @@ describe("complete-team alternative quality", () => {
     expect(earlyResult.score.journeyCurveFit).toBeGreaterThan(
       lateResult.score.journeyCurveFit!,
     );
-    expect(alternatives[0].kind).toBe("best");
+    expect(alternatives[0].kind).toBe("similar-1");
     expect(alternatives[0].replacement.id).toBe(early.species.id);
     expect(byId.get(late.species.id)!.tradeoff).toMatch(
       /Early changes|Late additions change/,
@@ -279,6 +379,7 @@ describe("complete-team alternative quality", () => {
       };
     };
     const bait = makeClone("aaa-base-bait", false);
+    const backup = makeClone("mmm-base-bait", false);
     const fit = makeClone("zzz-mega-fit", true);
     const fixture = {
       ...catalog,
@@ -288,12 +389,15 @@ describe("complete-team alternative quality", () => {
           megaFormIds: [],
         })),
         bait.species,
+        backup.species,
         fit.species,
       ],
       builds: [
         ...current.members.map((member) => member.build),
         bait.baseBuild,
         bait.megaBuild,
+        backup.baseBuild,
+        backup.megaBuild,
         fit.baseBuild,
         fit.megaBuild,
       ],
@@ -305,14 +409,21 @@ describe("complete-team alternative quality", () => {
           rationale: ["Current fixture member."],
         })),
         bait.role,
+        backup.role,
         fit.role,
       ],
       availability: [
         ...current.members.map((member) => member.availability),
         bait.availability,
+        backup.availability,
         fit.availability,
       ],
-      items: [...catalog.items, ...bait.items, ...fit.items],
+      items: [
+        ...catalog.items,
+        ...bait.items,
+        ...backup.items,
+        ...fit.items,
+      ],
     } satisfies NormalizedCatalog;
     const candidateById = new Map(
       assembleCandidates(fixture, input.style, input.weather).map((candidate) => [

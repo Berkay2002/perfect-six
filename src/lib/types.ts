@@ -599,7 +599,7 @@ export type GeneratedTeamResult = TeamResult & {
   };
 };
 
-export type AlternativeKind = "best" | "easiest" | "different";
+export type AlternativeKind = "similar-1" | "similar-2" | "similar-3";
 
 export type TeamAlternative = {
   kind: AlternativeKind;
