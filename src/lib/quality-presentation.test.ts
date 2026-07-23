@@ -41,6 +41,7 @@ describe("battle-quality presentation", () => {
       "Team jobs",
       "Speed and resilience",
       "Team synergy",
+      "Role coverage",
       "Acquisition curve",
     ]);
     expect(presentation.sections.every((section) => section.explanation.length > 0)).toBe(true);

@@ -9,7 +9,7 @@ import {
 } from "@/lib/share";
 import { preV3SharePayloads } from "@/lib/fixtures/pre-v3-snapshots";
 import { resultScoringState } from "@/lib/quality-presentation";
-import type { SharePayload } from "@/lib/types";
+import { ENGINE_VERSION, type SharePayload } from "@/lib/types";
 
 describe("shared team compatibility", () => {
   it.each(preV3SharePayloads)(
@@ -59,7 +59,7 @@ describe("shared team compatibility", () => {
     expect(decoded.result.battleQuality?.acquisitionCurve).toBeUndefined();
     expect(decoded.result.members[0].jobs).toBeUndefined();
     const migrated = toCurrentGeneratorRequest(decoded.request);
-    expect(migrated.engineVersion).toBe(4);
+    expect(migrated.engineVersion).toBe(ENGINE_VERSION);
     expect(migrated.schemaVersion).toBe(2);
     expect(migrated.ownedSlots).toEqual(
       Array.from({ length: 6 }, () => null),

@@ -192,6 +192,48 @@ function synergyTradeoff(
   return `Team synergy: ${changedFacts(currentKinds, nextKinds, `preserves ${nextKinds.join(", ") || "no supported cross-member interaction"}`)}.`;
 }
 
+function coverageTradeoff(
+  current: GeneratedTeamResult,
+  next: GeneratedTeamResult,
+) {
+  const currentCoverage = current.battleQuality.roleCoverage;
+  const nextCoverage = next.battleQuality.roleCoverage;
+  const gainedOffense = difference(
+    currentCoverage.uncoveredDefendingTypes,
+    nextCoverage.uncoveredDefendingTypes,
+  );
+  const lostOffense = difference(
+    nextCoverage.uncoveredDefendingTypes,
+    currentCoverage.uncoveredDefendingTypes,
+  );
+  const direction =
+    nextCoverage.score > currentCoverage.score
+      ? "improves"
+      : nextCoverage.score < currentCoverage.score
+        ? "declines"
+        : "remains comparable";
+  const changes = [];
+  if (gainedOffense.length > 0) {
+    changes.push(`gains offensive answers for ${gainedOffense.join(", ")}`);
+  }
+  if (lostOffense.length > 0) {
+    changes.push(`loses offensive answers for ${lostOffense.join(", ")}`);
+  }
+  if (
+    nextCoverage.uncoveredWeaknesses.length <
+    currentCoverage.uncoveredWeaknesses.length
+  ) {
+    changes.push("gains teammate answers for uncovered weaknesses");
+  }
+  if (
+    nextCoverage.uncoveredWeaknesses.length >
+    currentCoverage.uncoveredWeaknesses.length
+  ) {
+    changes.push("loses teammate answers for some weaknesses");
+  }
+  return `Role coverage: ${direction}${changes.length > 0 ? `; ${changes.join("; ")}` : "; preserves the same offensive answers and teammate protection gaps"}.`;
+}
+
 function memberName(result: GeneratedTeamResult, id: string) {
   return result.members.find((member) => member.id === id)?.name ?? id;
 }
@@ -346,6 +388,7 @@ function asAlternative(
       moveTradeoff(original, replacement, request, catalog),
       jobsTradeoff(evaluatedCurrent, result),
       synergyTradeoff(evaluatedCurrent, result),
+      coverageTradeoff(evaluatedCurrent, result),
       planTradeoff(evaluatedCurrent, result),
       acquisitionTradeoff(original, replacement, evaluatedCurrent, result),
     ].join(" "),

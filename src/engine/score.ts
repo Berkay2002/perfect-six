@@ -1,5 +1,9 @@
 import { abilityQualityForTeam } from "@/engine/ability";
 import { battlePlanQualityForTeam } from "@/engine/battle-plan";
+import {
+  incomingTypeMultiplier,
+  roleCoverageQualityForTeam,
+} from "@/engine/coverage";
 import { itemQualityForTeam } from "@/engine/item";
 import {
   journeyCurveQualityForTeam,
@@ -24,17 +28,6 @@ const average = (values: number[]) =>
     ? 0
     : values.reduce((sum, value) => sum + value, 0) / values.length;
 
-function damagingMoves(team: PokemonRecord[], moveById: Map<string, MoveRecord>) {
-  return team.flatMap((pokemon) =>
-    pokemon.build.moves
-      .map((move) => moveById.get(move.id))
-      .filter(
-        (move): move is MoveRecord =>
-          move !== undefined && move.category !== "Status",
-      ),
-  );
-}
-
 function utilityScore(
   team: PokemonRecord[],
   moveById: Map<string, MoveRecord>,
@@ -54,18 +47,6 @@ function utilityScore(
     moves.some((move) => move.priority > 0),
   ];
   return (capabilities.filter(Boolean).length / capabilities.length) * 100;
-}
-
-function roleScore(team: PokemonRecord[]) {
-  const roles = new Set(team.flatMap((pokemon) => pokemon.roles));
-  const physical = team.filter((pokemon) =>
-    pokemon.build.moves.some((move) => move.category === "Physical"),
-  ).length;
-  const special = team.filter((pokemon) =>
-    pokemon.build.moves.some((move) => move.category === "Special"),
-  ).length;
-  const balance = Math.min(physical, special) / Math.max(1, team.length / 2);
-  return clamp(roles.size * 14 + balance * 30);
 }
 
 export function defensiveAnalysis(
@@ -89,14 +70,12 @@ export function defensiveAnalysis(
         ?.capabilities;
       if (capabilities?.absorptions.includes(attackType)) {
         absorptionBonus += 0.75;
-        return 0;
       }
-      if (capabilities?.immunities.includes(attackType)) return 0;
-      return pokemon.types.reduce(
-        (multiplier, defenderType) =>
-          multiplier *
-          (catalog.typeChart[attackType]?.[defenderType] ?? 1),
-        1,
+      return incomingTypeMultiplier(
+        pokemon,
+        attackType,
+        catalog,
+        abilityById.get(pokemon.build.abilityId),
       );
     });
     const weak = matchup.filter((value) => value > 1).length;
@@ -121,30 +100,6 @@ export function defensiveAnalysis(
     score: clamp(88 - penalty + resistanceBonus + absorptionBonus),
     weaknesses,
   };
-}
-
-function offensiveScore(team: PokemonRecord[], catalog: NormalizedCatalog) {
-  const moveById = new Map(catalog.moves.map((move) => [move.id, move]));
-  const attacks = damagingMoves(team, moveById);
-  const defendingTypes = [
-    ...new Set(
-      Object.values(catalog.typeChart).flatMap((matchups) =>
-        Object.keys(matchups),
-      ),
-    ),
-  ];
-  if (defendingTypes.length === 0 || attacks.length === 0) return 50;
-  const covered = defendingTypes.filter((defenderType) =>
-    attacks.some(
-      (move) =>
-        (catalog.typeChart[move.type]?.[defenderType] ?? 1) > 1,
-    ),
-  ).length;
-  const uniqueAttackTypes = new Set(attacks.map((move) => move.type)).size;
-  return clamp(
-    (covered / defendingTypes.length) * 75 +
-      Math.min(25, uniqueAttackTypes * 3),
-  );
 }
 
 function weatherScore(
@@ -209,9 +164,10 @@ export function scoreTeam(
     journeyFit * 0.55 + accessibility * 0.3 + simplicity * 0.15,
   );
 
-  const roleCoverage = roleScore(team);
+  const roleCoverageQuality = roleCoverageQualityForTeam(team, catalog);
+  const roleCoverage = roleCoverageQuality.score;
   const defensiveFit = defensiveAnalysis(team, catalog).score;
-  const offensiveReach = offensiveScore(team, catalog);
+  const offensiveReach = roleCoverageQuality.offensiveScore;
   const utility = utilityScore(team, moveById);
   const weather = weatherScore(request, weatherPlan);
   const abilityQuality = abilityQualityForTeam(

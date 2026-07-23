@@ -278,13 +278,31 @@ function MemberTile({
   canFindAlternatives: boolean;
 }) {
   return (
-    <ClickableCard
-      label={`View ${member.name} details`}
-      className={`${styles.memberTile} ${selected ? styles.memberTileSelected : ""}`}
-      onClick={onSelect}
-      padding={0}
-    >
-      <PokemonArt member={member} compact />
+    <span className={styles.memberTileFrame}>
+      <ClickableCard
+        label={`View ${member.name} details`}
+        className={`${styles.memberTile} ${selected ? styles.memberTileSelected : ""}`}
+        onClick={onSelect}
+        padding={0}
+      >
+        <PokemonArt member={member} compact />
+        <span className={styles.tileOverlay}>
+          <span className={styles.tileCopy}>
+            <Text type="label" weight="bold" maxLines={1}>
+              {member.name}
+            </Text>
+            <Text type="supporting" color="secondary" maxLines={1}>
+              {member.selectedRole}
+            </Text>
+          </span>
+          <span className={styles.typeRow}>
+            {member.starter ? <Badge variant="orange" label="Starter" /> : null}
+            {member.types.map((type) => (
+              <Badge key={type} variant="green" label={type} />
+            ))}
+          </span>
+        </span>
+      </ClickableCard>
       {canFindAlternatives ? (
         <Button
           className={styles.tileAlternativeAction}
@@ -297,23 +315,7 @@ function MemberTile({
           onClick={onAlternatives}
         />
       ) : null}
-      <span className={styles.tileOverlay}>
-        <span className={styles.tileCopy}>
-          <Text type="label" weight="bold" maxLines={1}>
-            {member.name}
-          </Text>
-          <Text type="supporting" color="secondary" maxLines={1}>
-            {member.selectedRole}
-          </Text>
-        </span>
-        <span className={styles.typeRow}>
-          {member.starter ? <Badge variant="orange" label="Starter" /> : null}
-          {member.types.map((type) => (
-            <Badge key={type} variant="green" label={type} />
-          ))}
-        </span>
-      </span>
-    </ClickableCard>
+    </span>
   );
 }
 
@@ -801,13 +803,17 @@ export function TeamGenerator() {
   };
 
   const applyAlternative = (alternative: TeamAlternative) => {
-    const slots = [...request.slots] as GeneratorRequest["slots"];
-    slots[selectedSlot] = alternative.replacement.id;
-    setRequest((current) => ({ ...current, ownedSlots: undefined, slots }));
+    if (!existingAdventure) {
+      const slots = [...request.slots] as GeneratorRequest["slots"];
+      slots[selectedSlot] = alternative.replacement.id;
+      setRequest((current) => ({ ...current, ownedSlots: undefined, slots }));
+    }
     setResult(alternative.result);
     setAlternatives([]);
     setNotice(
-      `${alternative.replacement.name} applied and fixed in slot ${selectedSlot + 1}.`,
+      existingAdventure
+        ? `${alternative.replacement.name} applied to generated slot ${selectedSlot + 1}. Your entered party is unchanged.`
+        : `${alternative.replacement.name} applied and fixed in slot ${selectedSlot + 1}.`,
     );
   };
 
@@ -1171,7 +1177,7 @@ export function TeamGenerator() {
                         alternativesBusy={
                           alternativesBusy && selectedSlot === index
                         }
-                        canFindAlternatives={!existingAdventure}
+                        canFindAlternatives={requestOwnedSlots[index] === null}
                       />
                     ))}
                   </Grid>
@@ -1181,7 +1187,9 @@ export function TeamGenerator() {
                       member={selectedMember}
                       onAlternatives={() => void showAlternatives(selectedSlot)}
                       alternativesBusy={alternativesBusy}
-                      canFindAlternatives={!existingAdventure}
+                      canFindAlternatives={
+                        requestOwnedSlots[selectedSlot] === null
+                      }
                     />
                   ) : null}
 

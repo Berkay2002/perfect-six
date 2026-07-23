@@ -2,7 +2,7 @@
   "manifest": {
     "schemaVersion": 1,
     "dataVersion": "cobbleverse-1.7.41b",
-    "engineVersion": 4,
+    "engineVersion": 5,
     "generatedAt": "2026-07-21T19:02:25.175Z",
     "speciesCount": 1484,
     "moveCount": 954,

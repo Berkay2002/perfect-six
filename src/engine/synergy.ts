@@ -2,6 +2,7 @@ import {
   movePackageQualityForBuild,
   usableSetupStatsForBuild,
 } from "@/engine/move";
+import { incomingTypeMultiplier } from "@/engine/coverage";
 import { weatherPlanForTeam, type TeamWeatherPlan } from "@/engine/weather";
 import type {
   GeneratorRequest,
@@ -30,25 +31,6 @@ type MemberFacts = {
   ability: AbilityRecord | undefined;
   movePackage: ReturnType<typeof movePackageQualityForBuild>;
 };
-
-function typeMultiplier(
-  pokemon: PokemonRecord,
-  attackType: string,
-  catalog: NormalizedCatalog,
-  ability: AbilityRecord | undefined,
-) {
-  if (
-    ability?.capabilities.immunities.includes(attackType) ||
-    ability?.capabilities.absorptions.includes(attackType)
-  ) {
-    return 0;
-  }
-  return pokemon.types.reduce(
-    (multiplier, defenderType) =>
-      multiplier * (catalog.typeChart[attackType]?.[defenderType] ?? 1),
-    1,
-  );
-}
 
 function firstDistinct(
   left: MemberFacts[],
@@ -239,7 +221,7 @@ export function synergyQualityForTeam(
   const attackTypes = Object.keys(catalog.typeChart).sort();
   outerImmunity: for (const attackType of attackTypes) {
     for (const vulnerable of members) {
-      if (typeMultiplier(vulnerable.pokemon, attackType, catalog, vulnerable.ability) <= 1) {
+      if (incomingTypeMultiplier(vulnerable.pokemon, attackType, catalog, vulnerable.ability) <= 1) {
         continue;
       }
       const provider = members.find(
@@ -264,12 +246,12 @@ export function synergyQualityForTeam(
 
   outerResistance: for (const attackType of attackTypes) {
     for (const vulnerable of members) {
-      if (typeMultiplier(vulnerable.pokemon, attackType, catalog, vulnerable.ability) <= 1) {
+      if (incomingTypeMultiplier(vulnerable.pokemon, attackType, catalog, vulnerable.ability) <= 1) {
         continue;
       }
       const provider = members.find((member) => {
         if (member.pokemon.id === vulnerable.pokemon.id) return false;
-        const multiplier = typeMultiplier(
+        const multiplier = incomingTypeMultiplier(
           member.pokemon,
           attackType,
           catalog,

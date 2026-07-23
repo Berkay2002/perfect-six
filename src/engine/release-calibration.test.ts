@@ -466,7 +466,7 @@ describe.sequential("engine-v3 release calibration", () => {
   }, 30_000);
 
   it("keeps engine, manifest, provenance, and legacy compatibility aligned", () => {
-    expect(ENGINE_VERSION).toBe(4);
+    expect(ENGINE_VERSION).toBe(5);
     expect(catalog.manifest.engineVersion).toBe(ENGINE_VERSION);
     expect(provenance.manifest.engineVersion).toBe(ENGINE_VERSION);
     expect(provenance.manifest.dataVersion).toBe(catalog.manifest.dataVersion);

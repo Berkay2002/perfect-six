@@ -1,4 +1,5 @@
 import { itemCapabilityFitForBuild } from "@/engine/item";
+import { sourcedTypeMultiplier } from "@/engine/coverage";
 import {
   isRecoveryMove,
   usableSetupStatsForBuild,
@@ -397,23 +398,6 @@ function battlePlanMemberWithLookups(
   };
 }
 
-function typeMultiplier(
-  pokemon: PokemonRecord,
-  attackType: string,
-  catalog: NormalizedCatalog,
-  immunities: string[],
-  absorptions: string[],
-) {
-  if (immunities.includes(attackType) || absorptions.includes(attackType)) {
-    return 0;
-  }
-  return pokemon.types.reduce(
-    (multiplier, defenderType) =>
-      multiplier * (catalog.typeChart[attackType]?.[defenderType] ?? 1),
-    1,
-  );
-}
-
 function switchInValue(multiplier: number) {
   if (multiplier === 0) return 100;
   if (multiplier <= 0.5) return 85;
@@ -448,7 +432,7 @@ function resilienceForTeam(
   const coverageValues = attackTypes.map((attackType) => {
     const best = Math.min(
       ...team.map((pokemon, index) =>
-        typeMultiplier(
+        sourcedTypeMultiplier(
           pokemon,
           attackType,
           catalog,

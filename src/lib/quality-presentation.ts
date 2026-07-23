@@ -25,6 +25,7 @@ const alternativeTradeoffLabels = [
   "Move package",
   "Team jobs",
   "Team synergy",
+  "Role coverage",
   "Speed plan",
   "Acquisition curve",
 ] as const;
@@ -40,6 +41,7 @@ function completeBattleQuality(
     !quality.team ||
     !quality.plan ||
     !quality.synergy ||
+    !quality.roleCoverage ||
     !quality.acquisitionCurve
   ) {
     return null;
@@ -52,6 +54,7 @@ function completeBattleQuality(
     team: quality.team,
     plan: quality.plan,
     synergy: quality.synergy,
+    roleCoverage: quality.roleCoverage,
     acquisitionCurve: quality.acquisitionCurve,
   };
 }
@@ -108,7 +111,7 @@ export function battleQualityPresentation(
     state: "current",
     label: "Complete battle-quality scoring",
     explanation:
-      "This team includes the current ability, item, move, team-plan, synergy, and journey evaluation.",
+      "This team includes the current ability, item, move, role coverage, team-plan, synergy, and journey evaluation.",
     sections: [
       {
         label: "Ability quality",
@@ -139,6 +142,11 @@ export function battleQualityPresentation(
         label: "Team synergy",
         summary: `${quality.synergy.score}/100 coherence`,
         explanation: quality.synergy.explanation,
+      },
+      {
+        label: "Role coverage",
+        summary: `${quality.roleCoverage.score}/100 coverage`,
+        explanation: quality.roleCoverage.explanation,
       },
       {
         label: "Acquisition curve",

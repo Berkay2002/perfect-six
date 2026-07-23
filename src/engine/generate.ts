@@ -10,6 +10,7 @@ import {
   journeyCurveQualityForTeam,
   type JourneyCurveOptions,
 } from "@/engine/journey";
+import { roleCoverageQualityForTeam } from "@/engine/coverage";
 import { moveQualityForTeam } from "@/engine/move";
 import { defensiveAnalysis, scoreTeam } from "@/engine/score";
 import { memberJobExplanation, teamQualityForTeam } from "@/engine/team";
@@ -675,6 +676,7 @@ export function materializeTeamResult(
         weatherPlan.context,
       ),
       synergy: synergyQualityForTeam(members, request, catalog, weatherPlan),
+      roleCoverage: roleCoverageQualityForTeam(members, catalog),
       acquisitionCurve: journeyCurveQualityForTeam(
         members,
         request,

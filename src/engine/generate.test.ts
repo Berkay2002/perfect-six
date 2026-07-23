@@ -118,9 +118,9 @@ describe("deterministic generator", () => {
     expect(selectedIds).toEqual(new Set(["best", "near"]));
   });
 
-  it("marks newly generated teams as engine version 4", () => {
+  it("marks newly generated teams with the current engine version", () => {
     const result = generateTeam(request("ENGINE-VERSION"), catalog);
-    expect(Number(result.provenance.engineVersion)).toBe(4);
+    expect(Number(result.provenance.engineVersion)).toBe(ENGINE_VERSION);
   });
 
   it("returns byte-identical output for EMBER-042", () => {

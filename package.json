@@ -12,6 +12,7 @@
     "data:smoke": "node scripts/sync-data.mjs --skip-pack-dependencies",
     "test:data": "node --test scripts/lib/normalize.test.mjs",
     "test:unit": "vitest run",
+    "test:e2e": "playwright test",
     "test": "npm run test:data && npm run test:unit",
     "verify": "npm run typecheck && npm run lint && npm test && npm run build"
   },

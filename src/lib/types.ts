@@ -348,6 +348,48 @@ export type TeamSynergyQuality = {
   explanation: string;
 };
 
+export type OffensiveTypeAnswer = {
+  defendingType: string;
+  memberId: SpeciesFormId;
+  memberName: string;
+  moveId: string;
+  moveName: string;
+  moveType: string;
+  effectiveness: number;
+};
+
+export type DefensiveTypeAnswer = {
+  attackType: string;
+  vulnerableMemberId: SpeciesFormId;
+  vulnerableMemberName: string;
+  coveringMemberId: SpeciesFormId;
+  coveringMemberName: string;
+  relation: "resistance" | "immunity" | "absorption";
+  sourceKind: "type" | "ability";
+  sourceName: string;
+  incomingMultiplier: number;
+};
+
+export type UncoveredTypeWeakness = {
+  attackType: string;
+  memberId: SpeciesFormId;
+  memberName: string;
+  incomingMultiplier: number;
+};
+
+export type RoleCoverageQuality = {
+  score: number;
+  roleScore: number;
+  offensiveScore: number;
+  defensiveScore: number;
+  roles: string[];
+  offensiveAnswers: OffensiveTypeAnswer[];
+  defensiveAnswers: DefensiveTypeAnswer[];
+  uncoveredDefendingTypes: string[];
+  uncoveredWeaknesses: UncoveredTypeWeakness[];
+  explanation: string;
+};
+
 export type AcquisitionMilestone = {
   stage: AvailabilityRecord["stage"];
   acquiredCount: number;
@@ -524,6 +566,7 @@ export type TeamResult = {
     team?: TeamJobQuality;
     plan?: BattlePlanQuality;
     synergy?: TeamSynergyQuality;
+    roleCoverage?: RoleCoverageQuality;
     acquisitionCurve?: JourneyAcquisitionQuality;
   };
   warnings: TeamWarning[];
@@ -547,6 +590,9 @@ export type GeneratedTeamResult = TeamResult & {
     team: NonNullable<NonNullable<TeamResult["battleQuality"]>["team"]>;
     plan: NonNullable<NonNullable<TeamResult["battleQuality"]>["plan"]>;
     synergy: NonNullable<NonNullable<TeamResult["battleQuality"]>["synergy"]>;
+    roleCoverage: NonNullable<
+      NonNullable<TeamResult["battleQuality"]>["roleCoverage"]
+    >;
     acquisitionCurve: NonNullable<
       NonNullable<TeamResult["battleQuality"]>["acquisitionCurve"]
     >;
